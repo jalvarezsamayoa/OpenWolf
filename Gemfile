@@ -5,23 +5,35 @@ gem 'rails', '3.0.3'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
+# BASE DE DATOS
 gem 'pg'
 
-# Use unicorn as the web server
-# gem 'unicorn'
+# DEPLOYMENT
+gem 'capistrano'
 
-# Deploy with Capistrano
-# gem 'capistrano'
+# AUTENTICACION
+gem 'authlogic'
+gem 'acl9'
 
-# To use debugger (ruby-debug for Ruby 1.8.7+, ruby-debug19 for Ruby 1.9.2+)
-# gem 'ruby-debug'
-# gem 'ruby-debug19'
+# HELPERS
+gem 'formtastic' # modulo para ayuda en formularios
+gem 'sunspot' #indexamiento via solr
+gem 'paperclip' # modulo para hacer upload a archivos
+gem 'tiny_mce' # editor html 
+gem 'pdfkit' # generacion de pdf's
+gem 'jquery-rails', '>= 0.2.6' #jquery para rails
 
-# Bundle the extra gems:
-# gem 'bj'
-# gem 'nokogiri'
-# gem 'sqlite3-ruby', :require => 'sqlite3'
-# gem 'aws-s3', :require => 'aws/s3'
+# HERRAMIENTAS
+gem 'faker' # herramienta para generacion de datos de prueba
+gem 'admin_data', :require => nil # modulo para administracion de base de datos
+gem 'whenever' # manejo de cronjobs
+gem 'activerecord-import', :require => nil # herramienta para importacion de data
+gem 'serenity-odt' #generacion de templates ODT
+gem 'fastercsv' #manejo de archivos CSV
+
+# MONITOREO
+gem 'newrelic_rpm'
+gem 'hoptoad_notifier' #notificacion de errores via http://hoptoadapp.com/
 
 # Bundle gems for the local environment. Make sure to
 # put test-only gems in this group so their generators

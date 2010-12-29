@@ -22,6 +22,7 @@ gem 'paperclip' # modulo para hacer upload a archivos
 gem 'tiny_mce' # editor html 
 gem 'pdfkit' # generacion de pdf's
 gem 'jquery-rails', '>= 0.2.6' #jquery para rails
+gem 'will_paginate' # pagineo de resultados
 
 # HERRAMIENTAS
 gem 'faker' # herramienta para generacion de datos de prueba

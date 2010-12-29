@@ -144,3 +144,4 @@ DEPENDENCIES
   sunspot
   tiny_mce
   whenever
+  will_paginate

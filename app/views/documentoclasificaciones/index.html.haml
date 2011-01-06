@@ -1,0 +1,18 @@
+.listing
+  %h2= Documentoclasificacion.human_name.pluralize
+  #options
+    = button_new(new_documentoclasificacion_path)
+    = render :partial => 'shared/findbox', :locals => {:url => documentoclasificaciones_path}
+  %table.minimalist-b
+    %thead
+      %tr
+        %th= Documentoclasificacion.human_attribute_name(:nombre)
+        %th= Documentoclasificacion.human_attribute_name(:documentocategoria_id)
+    %tbody
+      - for documentoclasificacion in @documentoclasificaciones  do
+        %tr
+          %td
+            = link_to documentoclasificacion.nombre, documentoclasificacion_path(documentoclasificacion)
+          %td
+            = documentoclasificacion.documentocategoria.nombre
+  = will_paginate @documentoclasificaciones

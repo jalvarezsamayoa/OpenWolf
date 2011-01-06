@@ -1,0 +1,9 @@
+- if @solicitud.seguimientos.size > 0
+  %table#minimalist-b
+    %thead
+      %th.col{:width => "10%"} &nbsp;
+      %th.col{:width => "10%"} &nbsp;
+      %th.col{:width => "15%"}= t("seguimientos.label_fecha_creacion")
+      %th.col= t("seguimientos.label_textoseguimiento")
+    %tbody= render :partial => ac
+    %tfoot

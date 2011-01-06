@@ -1,0 +1,29 @@
+- @forview = "SHOW"
+= render :partial=>"breadcrums"
+.show
+  %h2= Institucion.human_name
+  #options
+    = button_new(new_institucion_path)
+    = button_edit(edit_institucion_path(@institucion))
+    = button_delete(institucion_path(@institucion))
+    = button_cancel(instituciones_path)
+    %br/
+  .box
+    %table
+      %colgroup.show-table-header
+      %colgroup.show-table-data
+      %tr
+        %th= label :nombre, Institucion.human_attribute_name(:nombre)
+        %td= @institucion.nombre
+      %tr
+        %th= label :parent_id, Institucion.human_attribute_name(:parent_id)
+        %td= @institucion.parent.nombre unless @institucion.root? or @institucion.parent.nil?
+      %tr
+        %th= label :tipoinstitucion_id, Institucion.human_attribute_name(:tipoinstitucion_id)
+        %td= @institucion.tipo_nombre
+      %tr
+        %th= label :usasolicitudesprivadas, Institucion.human_attribute_name(:usasolicitudesprivadas)
+        %td= si_no(@institucion.usasolicitudesprivadas)
+      %tr
+        %th= label :logo, Institucion.human_attribute_name(:logo)
+        %td= image_tag @institucion.logo.url(:medium), :alt => 'Logo Institucion'

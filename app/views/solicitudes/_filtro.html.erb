@@ -1,0 +1,85 @@
+<% if @desde.nil? or @hasta.nil?
+     @desde = @hasta = Date.today
+   end
+   if usuario_actual.nil? 
+     @url = usuario_actual.nil? ? buscar_portal_index_url : buscar_url
+     @method = usuario_actual.nil? ? :get : :post
+   end %>
+
+  <!-- Inicia formas de filtro -->
+  <div class="mantform">
+    <div id="filtros">
+      <div id="tabs-filtros">
+        <ul>
+          <li><%= link_to "Solicitudes de Información Pública", "#tab-solicitudes" %></li>
+          <li><%= link_to "Documentos", "#tab-documentos" %></li>
+        </ul>
+      </div>
+      <div id="tab-solicitudes">
+        <h2>Filtrar Solicitudes</h2>
+        
+        <% form_tag @url, :method => @method do -%>
+          <table width="100%" cellspacing="0" cellpadding="0" border="0">
+            <tr>
+              <th>Instituciones</th>
+              <td>
+                <% if usuario_actual.nil? %>
+
+                  <%= select_tag :institucion_id, options_from_collection_for_select(Institucion.instituciones,'id','nombre'), :style => "width: 450px;" %>
+
+                <% else %>
+
+                  <%= select_tag :institucion_id, options_for_select([[usuario_actual.institucion.nombre,usuario_actual.institucion_id],
+                                                                      ['Todas','ALL']]), :html => {:style => "width: 450px"}  %>
+                  
+                <% end %>
+              </td>
+            </tr>
+            <tr>
+              <th width="30%">Fechas:</th>
+              <td><%= text_field_tag :fecha_desde, l(@desde)  %> al<%= text_field_tag :fecha_hasta, l(@hasta)  %></td>
+            </tr>
+            <tr>
+              <th>Solicitado Por</th>
+              <td><%= text_field_tag :solicitante_nombre, '', :size => 60 %></td>
+            </tr>
+            <tr>
+              <th>Texto Solicitud</th>
+              <td><%= text_field_tag :solicitud_texto, '', :size => 60 %></td>
+            </tr>
+            <tr>
+              <th>Código Solicitud</th>
+              <td><%= text_field_tag :solicitud_codigo, '', :size => 60 %></td>
+            </tr>
+            <tr>
+              <th>Vía Solicitud</th>
+              <td><%= select_tag :solicitud_via, options_for_select(Via.all.collect {|c| [c.nombre, c.id] }.insert(0, 'Todos'))  %></td>
+            </tr>
+            <tr>
+              <th>Estado</th>
+              <td><%= select_tag :solicitud_estado, options_for_select(Estado.all.collect {|c| [c.nombre, c.id]}.insert(0,'Todos'))  %></td>
+            </tr>   
+            <tr>
+              <th>Dias Restantes</th>
+              <td><%= select_tag :solicitud_tiempo, options_for_select(Solicitud::TIEMPOS) %></td>
+            </tr>
+            <tr>
+              <th>&nbsp;</th>
+              <td>
+                <%= submit_popup('Filtrar Solicitudes') %>
+                <%= close_popup('filtro') %>
+              </td>
+            </tr>
+          </table>
+
+          <%= hidden_field_tag 'filtrar', true %>
+
+        <% end -%>    
+      </div> <!-- end - tab-solicitudes -->
+      <div id="tab-documentos">
+        <h2>Fitrar Documentos</h2>
+      </div> <!-- end - tab-documentos -->     
+    </div> <!-- end - filtros -->
+
+  </div> <!-- end - mantform -->
+

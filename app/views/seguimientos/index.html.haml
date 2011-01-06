@@ -1,0 +1,20 @@
+%h1 Listing seguimientos
+%table
+  %tr
+    %th Actividad
+    %th Institucion
+    %th Usuario
+    %th Fecha creacion
+    %th Textoseguimiento
+  - @seguimientos.each do |seguimiento|
+    %tr
+      %td= h seguimiento.actividad_id
+      %td= h seguimiento.institucion_id
+      %td= h seguimiento.usuario_id
+      %td= h seguimiento.fecha_creacion
+      %td= h seguimiento.textoseguimiento
+      %td= link_to 'Show', seguimiento
+      %td= link_to 'Edit', edit_seguimiento_path(seguimiento)
+      %td= link_to 'Destroy', seguimiento, :confirm => 'Are you sure?', :method => :delete
+%br/
+= link_to 'New seguimiento', new_seguimiento_path

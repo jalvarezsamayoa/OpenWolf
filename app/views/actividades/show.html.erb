@@ -1,0 +1,33 @@
+<p>
+  <b>Institucion:</b>
+  <%=h @actividad.institucion_id %>
+</p>
+
+<p>
+  <b>Usuario:</b>
+  <%=h @actividad.usuario_id %>
+</p>
+
+<p>
+  <b>Fecha asignacion:</b>
+  <%=h @actividad.fecha_asignacion %>
+</p>
+
+<p>
+  <b>Textoactividad:</b>
+  <%=h @actividad.textoactividad %>
+</p>
+
+<p>
+  <b>Estado:</b>
+  <%=h @actividad.estado_id %>
+</p>
+
+<p>
+  <b>Fecha resolucion:</b>
+  <%=h @actividad.fecha_resolucion %>
+</p>
+
+
+<%= link_to 'Edit', edit_actividad_path(@actividad) %> |
+<%= link_to 'Back', actividades_path %>

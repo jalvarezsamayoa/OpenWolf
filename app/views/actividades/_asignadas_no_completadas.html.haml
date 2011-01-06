@@ -1,0 +1,34 @@
+- for actividad in @asignaciones do
+- solicitud = actividad.solicitud
+  %fieldset
+    - div_for actividad do
+      %h2.alt
+        Asignacion No. #{actividad.id}
+      %table
+        %tr
+          %th{:width => "20%"}= label_tag t("solicitudes.label_codigo")
+          %td= link_to solicitud.codigo, institucion_solicitud_path(solicitud.institucion_id, solicitud)
+        %tr
+          %th= label_tag t("solicitudes.label_fecha_creacion")
+          %td= l(solicitud.fecha_creacion)
+        %tr
+          %th= label_tag t("solicitudes.label_estado_id")
+          %td
+            = solicitud.estado.nombre
+        %tr
+          %th
+            = label_tag t("solicitudes.label_dias_restantes")
+          %td= solicitud.dias_restantes
+      = label_tag t("solicitudes.label_forma_entrega")
+      %br/
+      = solicitud.forma_entrega
+      %br/
+      = label_tag t("actividades.label_textoactividad")
+      %br/
+      = actividad.textoactividad
+      %br/
+    %hr.space/
+    %div{:id => "seguimientos_actividad_#{actividad.id}"}
+      = render :partial => 'actividades/actividad_seguimientos', :locals => {:actividad => actividad}
+    / <hr class="space" />
+    / <hr />

@@ -1,0 +1,32 @@
+<div id="no-asignadas">
+  <% if @noasignadas.size > 0 %>
+    <h3><%= image_tag("accept22.png") %>Pendientes de Asignar a Enlaces</h3>
+
+    <table class='minimalist-b' width="100%">
+      <thead>
+        <th class="col"><%= t("solicitudes.label_codigo") %></th>
+        <th class="col"><%= t("solicitudes.label_institucion_id") %></th>
+        <th class="col"><%= t("solicitudes.label_fecha_creacion") %></th>
+        <th class="col"><%= t("solicitudes.label_estado_id") %></th>
+        <th class="col"><%= t("solicitudes.label_dias_restantes") %></th>
+      </thead>
+      <tbody>
+        <% for solicitud in @noasignadas do %>
+          <tr>
+            <td><%= link_to solicitud.codigo, institucion_solicitud_path(solicitud.institucion_id, solicitud) %></td>
+            <td><%= solicitud.institucion.nombre %></td>
+            <td><%= l(solicitud.fecha_creacion) %></td>
+            <td><%= solicitud.estado.nombre %></td>
+            <td><%= solicitud.dias_restantes %></td>
+          </tr>
+        <% end %>
+      </tbody>
+      <tfoot>
+        <td colspan="10">
+          *Solicitudes pendiente de ser asignadas a enlaces.
+        </td>
+      </tfoot>
+    </table>
+  <% end %>  
+</div>
+

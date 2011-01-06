@@ -1,0 +1,15 @@
+.listing
+  %h2= Fuente.human_name.pluralize
+  #options
+    = button_new(new_fuente_path)
+    = render :partial => 'shared/findbox', :locals => {:url => fuentes_path}
+  %table.minimalist-b
+    %thead
+      %tr
+        %th= Fuente.human_attribute_name(:nombre)
+    %tbody
+      - for fuente in @fuentes  do
+        %tr
+          %td
+            = link_to fuente.nombre, fuente_path(fuente)
+  = will_paginate @fuentes

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    Buen día <b><%= @actividad.usuario.nombre %></b>:<br />
+
+    Por este medio se le informa que se le ha asignado una nueva tarea con los siguientes datos: <br />
+
+    <b>Institución:</b> <%= @actividad.solicitud.institucion.nombre %> <br />
+    <b>Número Solicitud:</b> <%= @actividad.solicitud.codigo  %> ( <%= @url_solicitud %> ) <br />
+    <b>Fecha programa de entrega:</b> <%= l(@actividad.solicitud.fecha_programada) %> <br />
+
+    <p>
+      <b>Texto Asignación:</b> <br />
+      <%=h @actividad.textoactividad %>
+    </p>
+  </body>
+</html>
+
+

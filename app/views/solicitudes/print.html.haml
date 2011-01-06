@@ -1,0 +1,58 @@
+.container
+  .span-24.last.center.bold
+    = @solicitud.institucion.nombre
+    %br/
+    Unidad de Información Pública
+    %br/
+    = @solicitud.institucion.direccion
+    %br/
+    = @solicitud.institucion.telefono
+    %br/
+  %hr.space/
+  .span-12.bold
+    %h3 SOLICITUD DE INFORMACIÓN PÚBLICA
+  .span-12.last.right.bold
+    %h3
+      Correlativo -
+      %span.red= @solicitud.codigo
+  #solicitud.span-24.last
+    .span-12.left
+      = label :fecha_creacion, Solicitud.human_attribute_name(:fecha_creacion)
+      = @solicitud.fecha_creacion
+    .span-12.last.right
+      = label :solicitud, t("solicitudes.label_fecha_entregada")
+      = @solicitud.fecha_entregada
+    %hr.space/
+    %h3 Información Solicitante
+    %hr/
+    .span-8
+      = label :solicitante_direccion, Solicitud.human_attribute_name(:solicitante_direccion)
+    .span-16.last
+      = @solicitud.solicitante_direccion.empty? ? 'No Disponible' : @solicitud.solicitante_direccion
+    .span-8
+      = label :email, Solicitud.human_attribute_name(:email)
+    .span-16.last
+      = @solicitud.email.empty? ? 'No Disponible' : @solicitud.email
+    .span-8
+      = label :departamento, Solicitud.human_attribute_name(:departamento)
+    .span-16.last
+      = @solicitud.departamento.nil? ? 'No Disponible' : @solicitud.departamento.nombre
+    .span-8
+      = label :municipio, Solicitud.human_attribute_name(:municipio)
+    .span-16.last
+      = @solicitud.municipio.nil? ? 'No Disponible' : @solicitud.municipio.nombre
+    .span-8
+      = label :solicitante_telefonos, Solicitud.human_attribute_name(:solicitante_telefonos)
+    .span-16.last
+      = @solicitud.solicitante_telefonos.empty? ? 'No Disponible' : @solicitud.solicitante_telefonos
+    %hr.space/
+    %h3 Solicitud de Información
+    %hr/
+    .span-24.last
+      %p
+        = @solicitud.textosolicitud
+    %hr.space/
+    %h3 Firma del Solicitante
+    f:_______________________________________________________
+  / end - solcitud
+/ end - container

@@ -1,0 +1,16 @@
+= render :partial => "breadcrums"
+.listing
+  %h2= Departamento.human_name.pluralize
+  #options
+    = button_new(new_departamento_path)
+    = render :partial => 'shared/findbox', :locals => {:url => departamentos_path}
+  %table.minimalist-b
+    %thead
+      %tr
+        %th= Departamento.human_attribute_name(:nombre)
+    %tbody
+      - for departamento in @departamentos  do
+        %tr
+          %td
+            = link_to departamento.nombre, departamento_path(departamento)
+  = will_paginate @departamentos

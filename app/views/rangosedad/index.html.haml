@@ -1,0 +1,12 @@
+%h1 Listing rangosedad
+%table
+  %tr
+    %th Nombre
+  - @rangosedad.each do |rangoedad|
+    %tr
+      %td= h rangoedad.nombre
+      %td= link_to 'Show', rangoedad
+      %td= link_to 'Edit', edit_rangoedad_path(rangoedad)
+      %td= link_to 'Destroy', rangoedad, :confirm => 'Are you sure?', :method => :delete
+%br/
+= link_to 'New rangoedad', new_rangoedad_path

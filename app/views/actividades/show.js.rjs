@@ -1,0 +1,2 @@
+page.replace_html 'showactividad', :partial => 'show'
+page.show 'showactividad'

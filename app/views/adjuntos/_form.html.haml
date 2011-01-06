@@ -1,0 +1,25 @@
+%table{:border => "0", :cellpadding => "0"}
+  %tr
+    %td= f.label :numero, t("adjuntos.label_numero")
+    %td= f.text_field :numero, :size=>60, :limit=>60
+  %tr
+    %td
+      = f.label :observaciones, t('adjuntos.label_observaciones')
+    %td= f.text_area(:observaciones, :cols => 68, :rows => 4)
+  %tr
+    %td
+      = f.label :archivo, t('adjuntos.label_archivo')
+    %td= f.file_field :archivo
+  - if @usa_solicitudes_privadas == true
+    %tr
+      %td &nbsp
+      %td
+        = f.check_box :informacion_publica
+        = f.label :informacion_publica, Adjunto.human_attribute_name(:informacion_publica)
+  %tr
+    %td &nbsp;
+    %td
+      = submit_popup(submittext)
+      = close_popup('newadjunto')
+%script{:charset => "utf-8", :type => "text/javascript"}
+  setfocus('adjunto_numero');

@@ -1,0 +1,2 @@
+module SentidosresolucionHelper
+end

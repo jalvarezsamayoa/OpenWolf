@@ -1,0 +1,19 @@
+%h4 Seguimiento
+- hay_seguimientos = (actividad.seguimientos.count != 0)
+- unless hay_seguimientos
+  .error
+    No se ha dado seguimiento a esta asignacion.
+= link_to_remote image_tag("addfile16.png")+' Agregar Seguimiento',                                                                  |
+      :url => new_institucion_solicitud_actividad_seguimiento_path(actividad.institucion_id, actividad.solicitud_id,  actividad.id), |
+  :method => :get,                                                                                                                   |
+  :html => {:class => 'button'}                                                                                                      |
+- if hay_seguimientos
+  = link_to image_tag("accept16.png")+' Marcar Asignacion como COMPLETADA.', marcar_como_completada_actividad_path(actividad.id), :method => :put, :title=>'Marca Asignacion como Completa', :class => 'button'
+%table#minimalist-b
+  %thead
+    %th.col{:width => "10%"} &nbsp;
+    %th.col{:width => "10%"} &nbsp;
+    %th.col{:width => "15%"}= t("seguimientos.label_fecha_creacion")
+    %th.col= t("seguimientos.label_textoseguimiento")
+  %tbody= render :partial => actividad.seguimientos
+#newseguimiento.popup{:style => "display: none; height: 350px;"}

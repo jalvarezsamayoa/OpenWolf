@@ -1,0 +1,11 @@
+.mantform.addpadding
+  %h2
+    Nuevo #{Recursorevision.human_name}
+  - semantic_form_for [@solicitud.institucion,@solicitud, @recursorevision]  do |form|
+    = form.semantic_errors
+    = render :partial => 'form', :locals => {:form => form}
+    = buttons_create(solicitud_path(@solicitud))
+:javascript
+  $("#recursorevision_fecha_presentacion").datepicker();
+  $("#recursorevision_fecha_notificacion").datepicker();
+  $("#recursorevision_fecha_resolucion").datepicker();

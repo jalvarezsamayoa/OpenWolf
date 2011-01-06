@@ -1,0 +1,34 @@
+%fieldset
+  %legend
+    %h2.alt
+      = image_tag("infoabout22.png")
+      Asignacion
+  %table
+    %tr
+      %th{:width => "20%"}= label :actividad, t("actividades.label_numero")
+      %td= @actividad.id
+    %tr
+      %th= label :actividad, t("actividades.label_fecha_asignacion")
+      %td= @actividad.fecha_asignacion
+    %tr
+      %th= label :actividad, t("actividades.label_estado")
+      %td= @actividad.estado.nombre
+    %tr
+      %th= label :actividad, t("actividades.label_fecha_resolucion")
+      %td= @actividad.fecha_resolucion
+    %tr
+      %th= label :actividad, t("actividades.label_textoactividad")
+      %td= @actividad.textoactividad
+  %table.minimalist-a
+    %thead
+      %tr
+        %th{:width => "20%"}= Seguimiento.human_attribute_name(:fecha_creacion)
+        %th= Seguimiento.human_attribute_name(:texto_seguimiento)
+    %tbody
+      - for seguimiento in @actividad.seguimientos  do
+        %tr
+          %td
+            = seguimiento.fecha_creacion
+          %td= seguimiento.textoseguimiento
+  %br/
+  = close_popup('showactividad')

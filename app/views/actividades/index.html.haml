@@ -1,0 +1,25 @@
+= render :partial => "breadcrums"
+%h1.alt
+  = t("actividades.title")
+%fieldset
+  %legend
+    = image_tag('textfile22.png')
+    = t("actividades.title")
+  %table#minimalist-a{:width => "100%"}
+    %thead
+      %th.col= t("solicitudes.label_estado_id")
+      %th.col= t("solicitudes.label_codigo")
+      %th.col= t("solicitudes.label_institucion_id")
+      %th.col= t("solicitudes.label_fecha_creacion")
+      %th.col= t("solicitudes.label_dias_restantes")
+    %tbody
+      - for asignacion in @asignaciones do
+        %tr
+          %td= asignacion.solicitud.estado.nombre
+          %td= link_to asignacion.solicitud.codigo, institucion_solicitud_path(asignacion.solicitud.institucion_id, asignacion.solicitud)
+          %td= asignacion.solicitud.institucion.nombre
+          %td= asignacion.solicitud.fecha_creacion
+          %td= asignacion.solicitud.dias_restantes
+    %tfoot
+      %td{:colspan => "10"}
+        *Solicitudes pendiente de ser entregada a solicitantes.

@@ -1,0 +1,2 @@
+page.replace_html :updateestado, :partial => 'estado'
+page.show :updateestado

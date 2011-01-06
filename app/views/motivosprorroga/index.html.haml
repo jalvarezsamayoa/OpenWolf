@@ -1,0 +1,12 @@
+%h1 Listing motivosprorroga
+%table
+  %tr
+    %th Nombre
+  - @motivosprorroga.each do |motivoprorroga|
+    %tr
+      %td= h motivoprorroga.nombre
+      %td= link_to 'Show', motivoprorroga
+      %td= link_to 'Edit', edit_motivoprorroga_path(motivoprorroga)
+      %td= link_to 'Destroy', motivoprorroga, :confirm => 'Are you sure?', :method => :delete
+%br/
+= link_to 'New motivoprorroga', new_motivoprorroga_path

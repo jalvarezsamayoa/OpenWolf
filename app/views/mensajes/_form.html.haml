@@ -1,0 +1,10 @@
+- form.inputs do
+  = form.input :tipomensaje, :include_blank => false, :input_html => {:tab_index => 1}
+  = form.input :fecha_recepcion, :as => :string, :input_html => {:size => 20 }
+  = form.input :numero
+  = form.input :fecha_documento, :as => :string, :input_html => {:size => 20 }
+  = form.input :remitente
+  = form.input :telefonos
+  = form.input :direccion
+  = form.input :asunto, :input_html => {:rows => 5}
+  = form.input :observaciones, :input_html => {:rows => 5}

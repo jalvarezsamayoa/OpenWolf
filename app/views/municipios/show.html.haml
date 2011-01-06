@@ -1,0 +1,20 @@
+- @forview = "SHOW"
+= render :partial=>"breadcrums"
+.show
+  %h2= Municipio.human_name
+  #options
+    = button_new(new_municipio_path)
+    = button_edit(edit_municipio_path(@municipio))
+    = button_delete(municipio_path(@municipio))
+    = button_cancel(municipios_path)
+    %br/
+  .box
+    %table
+      %colgroup.show-table-header
+      %colgroup.show-table-data
+      %tr
+        %th= label :nombre, Municipio.human_attribute_name(:nombre)
+        %td= @municipio.nombre
+      %tr
+        %th= label :departamento_id, Municipio.human_attribute_name(:departamento_id)
+        %td= @municipio.departamento.nombre

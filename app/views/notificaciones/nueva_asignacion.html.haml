@@ -1,0 +1,25 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+  %body
+    Buen día
+    = succeed ":" do
+      %b= @actividad.usuario.nombre
+    %br/
+    Por este medio se le informa que se le ha asignado una nueva tarea con los siguientes datos:
+    %br/
+    %b Institución:
+    = @actividad.solicitud.institucion.nombre
+    %br/
+    %b Número Solicitud:
+    = @actividad.solicitud.codigo
+    ( #{@url_solicitud} )
+    %br/
+    %b Fecha programa de entrega:
+    = l(@actividad.solicitud.fecha_programada)
+    %br/
+    %p
+      %b Texto Asignación:
+      %br/
+      = h @actividad.textoactividad

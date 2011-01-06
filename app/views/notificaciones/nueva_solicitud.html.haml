@@ -1,0 +1,23 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+  %body
+    Buen día
+    = succeed ":" do
+      %b= @solicitud.solicitante_nombre
+    %br/
+    Por este medio se le informa que se ha creado una nueva solicitud de información pública con los siguientes datos:
+    %br/
+    %b Institución:
+    = @solicitud.institucion.nombre
+    %br/
+    %b Número Solicitud:
+    = @solicitud.codigo
+    ( #{@url_solicitud} )
+    %br/
+    %b Fecha programa de entrega:
+    = l(@solicitud.fecha_programada)
+    %br/
+    %p
+      Texto Solicitud: #{h @solicitud.textosolicitud}

@@ -1,0 +1,43 @@
+<p>
+  <b>Solicitud:</b>
+  <%=h @recursorevision.solicitud_id %>
+</p>
+
+<p>
+  <b>Fecha presentacion:</b>
+  <%=h @recursorevision.fecha_presentacion %>
+</p>
+
+<p>
+  <b>Fecha notificacion:</b>
+  <%=h @recursorevision.fecha_notificacion %>
+</p>
+
+<p>
+  <b>Fecha resolucion:</b>
+  <%=h @recursorevision.fecha_resolucion %>
+</p>
+
+<p>
+  <b>Descripcion:</b>
+  <%=h @recursorevision.descripcion %>
+</p>
+
+<p>
+  <b>Sentidoresolucion:</b>
+  <%=h @recursorevision.sentidoresolucion_id %>
+</p>
+
+<p>
+  <b>Institucion:</b>
+  <%=h @recursorevision.institucion_id %>
+</p>
+
+<p>
+  <b>Usuario:</b>
+  <%=h @recursorevision.usuario_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_recursorevision_path(@recursorevision) %> |
+<%= link_to 'Back', recursosrevision_path %>

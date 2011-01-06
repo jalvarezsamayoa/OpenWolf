@@ -1,0 +1,13 @@
+#header
+  #logo
+  #options-wraper
+    #user
+      = usuario_actual.nombre
+      , #{usuario_actual.cargo}
+    #menu
+      #b5= link_to '', logout_url, :title => "Cerrar Sesion"
+      #b4
+        %a{:href => "#", :target => "_self"}
+      #b3= link_to '', buscar_url, :title => "Busqueda de Solicitudes"
+      #b2= link_to '', perfil_url, :title => "Administrar Perfil"
+      #b1= link_to '', main_index_url, :title => "Pagina de Inicio"

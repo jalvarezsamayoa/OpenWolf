@@ -1,0 +1,6 @@
+if @asignaciones.size > 0
+page.replace_html 'asignaciones', :partial => 'actividades/asignadas_no_completadas'
+else
+page.replace_html 'asignaciones', "<div class='success'>No Tiene tareas asignadas.</div>"
+end
+page.ajax_flash

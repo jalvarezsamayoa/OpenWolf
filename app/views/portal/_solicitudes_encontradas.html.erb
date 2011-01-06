@@ -1,0 +1,39 @@
+<% unless @solicitudes.nil? %>
+  <h3><%= @solicitudes.total %> Solicitudes Encontradas</h3>
+
+  <table class="minimalist-b" width="100%">
+    <thead>
+      <tr>
+        <th><%= Solicitud.human_attribute_name(:codigo) %></th>
+        <th><%= Solicitud.human_attribute_name(:fecha_creacion) %></th>
+        <th><%= Solicitud.human_attribute_name(:solicitante_nombre) %></th>
+        <th><%= Solicitud.human_attribute_name(:estado) %></th>
+        <th><%= Solicitud.human_attribute_name(:avance) %></th>
+        <th><%= Solicitud.human_attribute_name(:textosolicitud) %></th>
+        <th><%= Solicitud.human_attribute_name(:institucion_id) %></th>
+      </tr>
+    </thead>
+    <tbody>
+        <% @solicitudes.each_hit_with_result do |hit, solicitud| -%>
+        <tr>
+          <td>
+	    <%= link_to solicitud.codigo, solicitud_portal_path(:id => solicitud.id), :title => "Haga click para ver contendido de Solicitud." %>
+          </td>
+          <td>
+            <%= l(solicitud.fecha_creacion) %>
+          </td>
+          <td>
+            <%= solicitud.solicitante_nombre %>
+          </td>
+          <td><%= solicitud.estado_actual %></td>
+          <td><%= solicitud.avance %></td>
+          <td><%= solicitud.extracto %></td>
+          <td><%= link_to solicitud.institucion.abreviatura, institucion_portal_path(solicitud.institucion), :title => solicitud.institucion.nombre %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <br />
+  <%= will_paginate @solicitudes.results %>
+  <br /><br />
+<% end %>

@@ -1,0 +1,15 @@
+.show
+  %h2= Estado.human_name
+  #options
+    = button_new(new_estado_path)
+    = button_edit(edit_estado_path(@estado))
+    = button_delete(estado_path(@estado))
+    = button_cancel(estados_path)
+    %br/
+  .box
+    %table
+      %colgroup.show-table-header
+      %colgroup.show-table-data
+      %tr
+        %th= label :nombre, Estado.human_attribute_name(:nombre)
+        %td= @estado.nombre

@@ -1,0 +1,11 @@
+%table{:border => "0", :cellpadding => "0"}
+  %tr
+    %td= f.label :textoseguimiento, t("seguimientos.label_textoseguimiento")
+    %td= f.text_area(:textoseguimiento, :cols => 60, :rows => 10)
+  %tr
+    %td &nbsp;
+    %td
+      = submit_popup(submittext)
+      = close_popup('newseguimiento')
+%script{:charset => "utf-8", :type => "text/javascript"}
+  setfocus('seguimiento_textoseguimiento');

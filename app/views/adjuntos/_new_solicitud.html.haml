@@ -1,0 +1,9 @@
+%h1.alt
+  = t("adjuntos.title")
+%fieldset
+  %legend
+    = image_tag('add22.png')
+    = t("adjuntos.title_new")
+  = error_messages_for :adjunto
+  - remote_form_for [@solicitud, @adjunto], :html=>{:class=>"mantform"} do |f|
+    = render :partial=>'form', :locals=>{:f => f, :submittext => t("data.submit_new")}

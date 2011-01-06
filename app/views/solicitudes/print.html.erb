@@ -1,0 +1,77 @@
+<div class="container">
+<div class="span-24 last center bold">
+      <%= @solicitud.institucion.nombre %> <br />
+      Unidad de Información Pública <br />
+      <%= @solicitud.institucion.direccion %> <br />
+      <%= @solicitud.institucion.telefono %> <br /> 
+</div>
+<hr class="space" />
+<div class="span-12 bold">
+  <h3>SOLICITUD DE INFORMACIÓN PÚBLICA</h3>
+</div>
+<div class="span-12 last right bold">
+  <h3>Correlativo - <span class="red"><%= @solicitud.codigo %></span></h3>
+</div>
+<div id="solicitud" class="span-24 last">
+  <div class="span-12 left">
+    <%= label :fecha_creacion, Solicitud.human_attribute_name(:fecha_creacion) %>
+    <%= @solicitud.fecha_creacion %>
+  </div>
+  <div class="span-12 last right">
+    <%= label :solicitud, t("solicitudes.label_fecha_entregada") %>
+    <%= @solicitud.fecha_entregada %>
+  </div>
+  <hr class="space"/>
+  <h3>Información Solicitante</h3>
+  <hr />
+
+  <div class="span-8">
+    <%= label :solicitante_direccion, Solicitud.human_attribute_name(:solicitante_direccion) %>
+  </div>
+  <div class="span-16 last">
+    <%= @solicitud.solicitante_direccion.empty? ? 'No Disponible' : @solicitud.solicitante_direccion  %>
+  </div>
+  <div class="span-8">
+    <%= label :email, Solicitud.human_attribute_name(:email) %>
+  </div>
+  <div class="span-16 last">
+    <%= @solicitud.email.empty? ? 'No Disponible' : @solicitud.email %>
+  </div>
+  <div class="span-8">
+    <%= label :departamento, Solicitud.human_attribute_name(:departamento) %>
+  </div>
+  <div class="span-16 last">
+    <%= @solicitud.departamento.nil? ? 'No Disponible' : @solicitud.departamento.nombre %>
+  </div>
+  <div class="span-8">
+    <%= label :municipio, Solicitud.human_attribute_name(:municipio) %>
+  </div>
+  <div class="span-16 last">
+    <%= @solicitud.municipio.nil? ? 'No Disponible' : @solicitud.municipio.nombre %>
+  </div>
+    <div class="span-8">
+    <%= label :solicitante_telefonos, Solicitud.human_attribute_name(:solicitante_telefonos) %>
+  </div>
+  <div class="span-16 last">
+    <%= @solicitud.solicitante_telefonos.empty? ? 'No Disponible' : @solicitud.solicitante_telefonos %>
+  </div>
+
+  <hr class="space" />
+  <h3>Solicitud de Información</h3>
+  <hr />
+  <div class="span-24 last">
+    <p>
+      <%= @solicitud.textosolicitud %>
+    </p>
+  </div>
+
+  <hr class="space" />
+  <h3>Firma del Solicitante</h3>
+  f:_______________________________________________________
+
+
+</div>
+<!-- end - solcitud -->
+  
+</div>
+<!-- end - container -->

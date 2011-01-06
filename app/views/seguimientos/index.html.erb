@@ -1,0 +1,28 @@
+<h1>Listing seguimientos</h1>
+
+<table>
+  <tr>
+    <th>Actividad</th>
+    <th>Institucion</th>
+    <th>Usuario</th>
+    <th>Fecha creacion</th>
+    <th>Textoseguimiento</th>
+  </tr>
+
+<% @seguimientos.each do |seguimiento| %>
+  <tr>
+    <td><%=h seguimiento.actividad_id %></td>
+    <td><%=h seguimiento.institucion_id %></td>
+    <td><%=h seguimiento.usuario_id %></td>
+    <td><%=h seguimiento.fecha_creacion %></td>
+    <td><%=h seguimiento.textoseguimiento %></td>
+    <td><%= link_to 'Show', seguimiento %></td>
+    <td><%= link_to 'Edit', edit_seguimiento_path(seguimiento) %></td>
+    <td><%= link_to 'Destroy', seguimiento, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New seguimiento', new_seguimiento_path %>

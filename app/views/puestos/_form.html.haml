@@ -1,0 +1,15 @@
+%table{:border => "0", :cellpadding => "0"}
+  %tr
+    %td= f.label :nombre, t("puestos.label_nombre")
+    %td= f.text_field :nombre, :size=>60, :limit=>60
+  %tr
+    %td
+      = f.label :institucion_id, t('puestos.label_institucion_id')
+    %td= f.collection_select(:institucion_id, @instituciones, :id, :nombre)
+  %tr
+    %td &nbsp;
+    %td
+      = f.submit submittext
+      | #{image_tag('icon_cancel.png')}#{link_to( t("data.cancel"), puestos_path )}
+%script{:charset => "utf-8", :type => "text/javascript"}
+  setfocus('puestos_nombre');

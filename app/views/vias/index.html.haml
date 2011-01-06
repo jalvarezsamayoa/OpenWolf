@@ -1,0 +1,16 @@
+= render :partial => "breadcrums"
+.listing
+  %h2= Via.human_name.pluralize
+  #options
+    = button_new(new_via_path)
+    = render :partial => 'shared/findbox', :locals => {:url => vias_path}
+  %table.minimalist-b
+    %thead
+      %tr
+        %th= Via.human_attribute_name(:nombre)
+    %tbody
+      - for via in @vias  do
+        %tr
+          %td
+            = link_to via.nombre, via_path(via)
+  = will_paginate @vias

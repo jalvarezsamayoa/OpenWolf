@@ -1,0 +1,10 @@
+= render :partial => 'find_box'
+%h2.alt{:style => "text-align:center;"}
+  Portal de #{@institucion.nombre}
+%hr/
+- if @institucion.webpage.nil?
+  .notice
+    Esta Institucion aun no tiene contendido asignado.
+- else
+  <object data=#{@institucion.webpage} width="100%" height="800"> <embed src=#{@institucion.webpage} width="100%" height="800">
+  Error: Embedded data could not be displayed.

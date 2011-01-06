@@ -1,0 +1,10 @@
+#tareas
+  %h3
+    = image_tag("foldermove22.png")
+    = t("actividades.label_mistareas")
+  #asignaciones
+    - if @asignaciones.size > 0
+      = render :partial => 'actividades/asignadas_no_completadas'
+    - else
+      .success
+        No tiene tareas asignadas.

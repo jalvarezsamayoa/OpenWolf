@@ -1,0 +1,33 @@
+<%= render :partial => "breadcrums" %>
+
+<div class="listing">
+  <h2><%= Usuario.human_name.pluralize %></h2>
+  
+  <div id="options">
+    <%= button_new(new_usuario_path) %>
+    <%= render :partial => 'shared/findbox', :locals => {:url => usuarios_path} %>
+  </div>
+  
+  <table class="minimalist-b">
+    <thead>
+      <tr>
+        <th><%= Usuario.human_attribute_name(:nombre) %></th>
+        <th><%= Usuario.human_attribute_name(:cargo) %></th>
+        <th><%= Usuario.human_attribute_name(:institucion_id) %></th>       
+      </tr>
+    </thead> 
+    <tbody>
+      <% for usuario in @usuarios  do%>
+        <tr>
+          <td>
+	    <%= link_to usuario.username, usuario_path(usuario) %>
+          </td>
+          <td><%= usuario.cargo %></td>
+          <td><%= usuario.institucion.nombre %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= will_paginate @usuarios %>
+  
+</div>

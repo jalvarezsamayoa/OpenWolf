@@ -1,0 +1,2 @@
+module TipomensajesHelper
+end

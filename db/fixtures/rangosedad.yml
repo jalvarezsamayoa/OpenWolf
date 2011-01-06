@@ -1,0 +1,30 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+menor:
+  id: 1
+  nombre: Menor de 18
+
+r1825:
+  id: 2
+  nombre: 18-25
+
+r2635:
+  id: 3
+  nombre: 26-35
+
+r3645:
+  id: 4
+  nombre: 36-45
+
+r4655:
+  id: 5
+  nombre: 46-55
+
+rmayor56:
+  id: 6
+  nombre: Mayor de 56
+
+rna:
+  id: 7
+  nombre: N/A
+

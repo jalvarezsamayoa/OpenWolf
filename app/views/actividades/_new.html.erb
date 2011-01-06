@@ -1,0 +1,8 @@
+<div class="mantform">
+  <h2> <%= t("actividades.title") %></h2>
+  <% semantic_form_remote_for [@institucion, @solicitud, @actividad], :loading => "$('#newactividad').block({message: '<h2><img src=\"/images/ajax-loader.gif\"/> Procesando...</h2>'});", :html=>{:class=>"solicitud"} do |f| %>
+  <%= f.semantic_errors  %>
+  <%= render :partial=>'form', :locals=>{:f => f, :submittext => t("data.submit_new")} %>
+<% end %>
+</div>
+

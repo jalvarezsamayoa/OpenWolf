@@ -1,0 +1,27 @@
+<div class="listing">
+  <h2><%= Tipomensaje.human_name.pluralize %></h2>
+  
+  <div id="options">
+    <%= button_new(new_tipomensaje_path) %>
+    <%= render :partial => 'shared/findbox', :locals => {:url => tipomensajes_path} %>
+  </div>
+  
+  <table class="minimalist-b">
+    <thead>
+      <tr>
+        <th><%= Tipomensaje.human_attribute_name(:nombre) %></th>
+      </tr>
+    </thead> 
+    <tbody>
+      <% for tipomensaje in @tipomensajes  do%>
+        <tr>
+          <td>
+	    <%= link_to tipomensaje.nombre, tipomensaje_path(tipomensaje) %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= will_paginate @tipomensajes %>
+  
+</div>

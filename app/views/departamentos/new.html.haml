@@ -1,0 +1,10 @@
+- @forview = "NEW"
+= render :partial => "breadcrums"
+.mantform
+  %h2
+    Nuevo #{Departamento.human_name}
+  %fieldset
+    - semantic_form_for @departamento do |form|
+      = form.semantic_errors
+      = render :partial => 'form', :locals => {:form => form}
+      = buttons_create(departamentos_path)

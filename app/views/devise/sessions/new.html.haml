@@ -1,0 +1,21 @@
+#options
+  #modules-menu.hlist
+    %ul
+      %li
+        %b Opciones:
+      %li= link_to "Portal Ciudadano", portal_index_url
+#loginlogo
+#logintable
+  = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+    = devise_error_messages!
+    #usuario
+      %img.iconoslogin{:alt => "iconusuario", :height => "35", :src => "../images/iconusuario.gif", :width => "35"}/
+      = f.text_field :login, :class => "textfieldlogin", :title => 'Nombre de Usuario'
+    #password
+      %img.iconoslogin{:alt => "iconusuario", :height => "40", :src => "../images/iconpass.gif", :width => "40"}/
+      = f.password_field :password, :class => "textfieldlogin", :title => 'Contraseña'
+    #ingreso
+      %button.submitlogin{:onfocus => "this.blur();", :title => "Ingresar", :type => "submit"}
+.version
+  OpenWolf Ver. 1.0 Plataforma para la Transparencia
+.logotipos

@@ -1,0 +1,12 @@
+%h1 Editing motivonegativa
+- form_for(@motivonegativa) do |f|
+  = f.error_messages
+  %p
+    = f.label :nombre
+    %br/
+    = f.text_field :nombre
+  %p
+    = f.submit 'Update'
+= link_to 'Show', @motivonegativa
+|
+\#{link_to 'Back', motivosnegativa_path}

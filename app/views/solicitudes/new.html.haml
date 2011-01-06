@@ -1,0 +1,11 @@
+- content_for :head do
+  = javascript_include_tag 'solicitudes', 'jquery.ui.datepicker-es.js'
+- @forview = "NEW"
+= render :partial => "breadcrums"
+.mantform
+  %h2
+    Nueva #{Solicitud.human_name}
+  - semantic_form_for @solicitud do |form|
+    = form.semantic_errors
+    = render :partial => 'form', :locals => {:form => form}
+    = buttons_create(solicitudes_path)

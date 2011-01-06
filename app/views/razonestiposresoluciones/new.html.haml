@@ -1,0 +1,7 @@
+.mantform
+  %h2
+    Nuevo #{Razontiporesolucion.human_name}
+  - semantic_form_for @razontiporesolucion do |form|
+    = form.semantic_errors
+    = render :partial => 'form', :locals => {:form => form}
+    = buttons_create(razonestiposresoluciones_path)

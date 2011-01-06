@@ -1,0 +1,80 @@
+<div class="show">
+  <h2><%= Documento.human_name %></h2>
+  
+  <div id="options">
+    <%= button_new(new_documento_path) %>
+    <%= button_edit(edit_documento_path(@documento)) %>
+    <%= button_delete(documento_path(@documento)) %>
+    <%= button_cancel(documentos_path) %>
+    <%= button_export(plantilla_documento_path(@documento)) %>
+    <br />
+  </div>
+  
+  <div class="box">
+    <table>
+      <colgroup class="show-table-header"></colgroup>
+      <colgroup class="show-table-data"></colgroup>
+      <tr>
+        <th><%= label :numero, Documento.human_attribute_name(:numero) %></th>
+        <td><%= @documento.numero %></td>
+      </tr>
+      <tr>
+        <th><%= label :original, Documento.human_attribute_name(:original) %></th>
+        <td><%= si_no(@documento.original) %></td>
+      </tr>
+      <tr>
+        <th><%= label :origen_id, Documento.human_attribute_name(:origen_id) %></th>
+        <td><%= @documento.origen_nombre %></td>
+      </tr>
+      <tr>
+        <th><%= label :documentoclasificacion_id, Documento.human_attribute_name(:documentoclasificacion_id) %></th>
+        <td><%= @documento.clasificacion_nombre %></td>
+      </tr>
+      <tr>
+        <th><%= label :documentocategoria, Documento.human_attribute_name(:documentocategoria) %></th>
+        <td><%= @documento.categoria_nombre %></td>
+      </tr>
+      <tr>
+        <th><%= label :fecha_documento, Documento.human_attribute_name(:fecha_documento) %></th>
+        <td><%= l(@documento.fecha_documento) %></td>
+      </tr>
+      <tr>
+        <th><%= label :autor_id, Documento.human_attribute_name(:autor_id) %></th>
+        <td><%= @documento.autor_datos %></td>
+      </tr>
+      <tr>
+        <th><%= label :asunto, Documento.human_attribute_name(:asunto) %></th>
+        <td><%= @documento.asunto %></td>
+      </tr>
+      <tr>
+        <th><%= label :fecha_recepcion, Documento.human_attribute_name(:fecha_recepcion) %></th>
+        <td><%= l(@documento.fecha_recepcion) %></td>
+      </tr>
+      <tr>
+        <th><%= label :remitente_nombre, Documento.human_attribute_name(:remitente_nombre) %></th>
+        <td><%= @documento.remitente_nombre %></td>
+      </tr>
+      <tr>
+        <th><%= label :remitente_direccion, Documento.human_attribute_name(:remitente_direccion) %></th>
+        <td><%= @documento.remitente_direccion %></td>
+      </tr>
+      <tr>
+        <th><%= label :remitente_telefonos, Documento.human_attribute_name(:remitente_telefonos) %></th>
+        <td><%= @documento.remitente_telefonos %></td>
+      </tr>
+      <tr>
+        <th><%= label :remitente_email, Documento.human_attribute_name(:remitente_email) %></th>
+        <td><%= @documento.remitente_email %></td>
+      </tr>
+      <tr>
+        <th><%= label :estado_envio_id, Documento.human_attribute_name(:estado_envio_id) %></th>
+        <td><%= @documento.estado_nombre %></td>
+      </tr>
+      <tr>
+        <th><%= label :texto, Documento.human_attribute_name(:texto) %></th>
+        <td><%= raw(@documento.texto) %></td>
+      </tr>
+    </table>     
+  </div>
+  
+</div>

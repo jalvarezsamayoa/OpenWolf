@@ -1,0 +1,15 @@
+.show
+  %h2= Tipomensaje.human_name
+  #options
+    = button_new(new_tipomensaje_path)
+    = button_edit(edit_tipomensaje_path(@tipomensaje))
+    = button_delete(tipomensaje_path(@tipomensaje))
+    = button_cancel(tipomensajes_path)
+    %br/
+  .box
+    %table
+      %colgroup.show-table-header
+      %colgroup.show-table-data
+      %tr
+        %th= label :nombre, Tipomensaje.human_attribute_name(:nombre)
+        %td= @tipomensaje.nombre

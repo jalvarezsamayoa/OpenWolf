@@ -1,0 +1,23 @@
+#no-asignadas
+  - if @noasignadas.size > 0
+    %h3
+      = image_tag("accept22.png")
+      Pendientes de Asignar a Enlaces
+    %table.minimalist-b{:width => "100%"}
+      %thead
+        %th.col= t("solicitudes.label_codigo")
+        %th.col= t("solicitudes.label_institucion_id")
+        %th.col= t("solicitudes.label_fecha_creacion")
+        %th.col= t("solicitudes.label_estado_id")
+        %th.col= t("solicitudes.label_dias_restantes")
+      %tbody
+        - for solicitud in @noasignadas do
+          %tr
+            %td= link_to solicitud.codigo, institucion_solicitud_path(solicitud.institucion_id, solicitud)
+            %td= solicitud.institucion.nombre
+            %td= l(solicitud.fecha_creacion)
+            %td= solicitud.estado.nombre
+            %td= solicitud.dias_restantes
+      %tfoot
+        %td{:colspan => "10"}
+          *Solicitudes pendiente de ser asignadas a enlaces.

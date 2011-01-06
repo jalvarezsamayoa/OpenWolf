@@ -1,0 +1,60 @@
+class Resolucion < ActiveRecord::Base
+  versioned
+  
+  TIPO_ENTREGA = 1
+  
+  validates_presence_of :numero
+  validates_uniqueness_of :numero
+
+  belongs_to :solicitud
+  belongs_to :usuario
+  belongs_to :institucion
+  belongs_to :tiporesolucion
+  belongs_to :razontiporesolucion
+
+  before_validation :cleanup
+  after_save :actualizar_solicitud
+  after_create :notificar_creacion
+
+  attr_accessor :dont_send_email
+
+  scope :negativas, :conditions => ["resoluciones.tiporesolucion_id = 3"]
+  scope :prorrogas, :conditions => ["resoluciones.tiporesolucion_id = 4"]
+
+
+  
+  def nuevo_numero
+    i = Resolucion.count(:conditions => ["institucion_id = ? and date_part(\'year\',created_at) = ?", self.institucion_id, Date.today.year ] ).to_i + 1
+    
+    self.numero = self.institucion.codigo + '-02-' +  Date.today.year.to_s + '-' + i.to_s.rjust(6,'0')
+  end
+
+  def cleanup
+    unless self.nueva_fecha.nil?
+      if self.nueva_fecha < self.solicitud.fecha_programada
+        logger.debug { "Nueva fecha no es valida." }
+      end
+    end
+    self.numero = self.nuevo_numero if (self.numero.nil? or self.numero.empty?)
+    return true
+  end
+
+  def actualizar_solicitud
+    unless self.nueva_fecha.nil?
+      if self.nueva_fecha > self.solicitud.fecha_programada
+        self.solicitud.fecha_prorroga = self.nueva_fecha
+        self.solicitud.fecha_programada = self.nueva_fecha
+      end      
+    end
+
+    self.solicitud.estado_id = self.tiporesolucion.estado_id
+    self.solicitud.fecha_resolucion = self.created_at.to_date
+    self.solicitud.save
+  end
+
+  def notificar_creacion
+    return true if self.solicitud.email.empty?
+    Notificaciones.deliver_nueva_resolucion(self) unless (self.dont_send_email == true)
+    return true
+  end
+end

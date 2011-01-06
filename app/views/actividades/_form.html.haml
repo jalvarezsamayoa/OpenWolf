@@ -1,0 +1,11 @@
+- f.inputs do
+  = f.input :institucion, :as => :select, :collection => @instituciones, :include_blank => false, :input_html => {:style => 'width: 450px;'}
+  = f.input :usuario_id, :as => :select, :collection => @usuarios, :include_blank => false, :input_html => {:style => 'width: 450px;'}
+  = f.input :textoactividad, :input_html => {:cols => 50, :rows => 15}
+- f.buttons do
+  = submit_popup(submittext)
+  = close_popup('newactividad')
+%script{:charset => "utf-8", :type => "text/javascript"}
+  setfocus('actividad_usuario_id');
+= observe_field(:actividad_institucion_id, :url => actualizar_usuarios_actividades_path, :with => "institucion_id", :method => :get)
+2

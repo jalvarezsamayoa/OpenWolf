@@ -1,0 +1,9 @@
+.mantform.addpadding
+  %h2
+    Nueva #{Resolucion.human_name}
+  - semantic_form_for [@solicitud.institucion,@solicitud, @resolucion]  do |form|
+    = form.semantic_errors
+    = render :partial => 'form', :locals => {:form => form}
+    = buttons_create(solicitud_path(@solicitud))
+:javascript
+  $("#resolucion_nueva_fecha").datepicker();

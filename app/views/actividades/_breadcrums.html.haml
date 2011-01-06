@@ -1,0 +1,14 @@
+#breadcrumbs.span-24.last
+  %ul#crumbs
+    %li
+      = link_to t("breadcrums.homepage"), main_index_path
+    %li
+      = link_to t("breadcrums.actividades"), actividades_path
+    - if @forview
+      - if @forview == "NEW"
+        %li= t("actividades.title_new")
+      - elsif @forview == "EDIT"
+        %li= t("actividades.title_edit")
+      - else
+        %li= t("actividades.title_show")
+.clear &nbsp;

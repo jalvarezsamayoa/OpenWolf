@@ -1,0 +1,7 @@
+.mantform
+  %h2
+    Editar #{Tipomensaje.human_name}
+  - semantic_form_for @tipomensaje do |form|
+    = form.semantic_errors
+    = render :partial => 'form', :locals => {:form => form}
+    = buttons_update(tipomensajes_path)

@@ -1,0 +1,2 @@
+page.replace_html :newadjunto, :partial => 'new'
+page.show :newadjunto

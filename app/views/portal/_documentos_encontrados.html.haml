@@ -1,0 +1,26 @@
+- unless @documentos.nil?
+  %h3
+    = @documentos.total
+    Documentos Encontrados
+  %table.minimalist-b{:width => "100%"}
+    %thead
+      %tr
+        %th= Documento.human_attribute_name(:numero)
+        %th= Documento.human_attribute_name(:fecha_documento)
+        %th= Documento.human_attribute_name(:documentoclasificacion_id)
+        %th= Documento.human_attribute_name(:asunto)
+        %th= Documento.human_attribute_name(:estado_envio_id)
+        %th= Documento.human_attribute_name(:institucion_id)
+    %tbody
+      - @documentos.each_hit_with_result do |hit, documento|
+        %tr
+          %td
+            = link_to documento.numero, documento_portal_path(:id => documento.id), :title => "Haga click para ver contendido del Documento"
+          %td= l(documento.fecha_recepcion)
+          %td= documento.clasificacion_nombre
+          %td= documento.asunto
+          %td= documento.estado_nombre
+          %td= link_to documento.institucion.abreviatura, institucion_portal_path(documento.institucion), :title => documento.institucion.nombre
+  = will_paginate @documentos.results
+  %br/
+  %br/

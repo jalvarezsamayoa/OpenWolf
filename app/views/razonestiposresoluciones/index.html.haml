@@ -1,0 +1,18 @@
+.listing
+  %h2= Razontiporesolucion.human_name.pluralize
+  #options
+    = button_new(new_razontiporesolucion_path)
+    = render :partial => 'shared/findbox', :locals => {:url => razonestiposresoluciones_path}
+  %table.minimalist-b
+    %thead
+      %tr
+        %th= Razontiporesolucion.human_attribute_name(:nombre)
+        %th= Razontiporesolucion.human_attribute_name(:tiporesolucion_id)
+    %tbody
+      - for razontiporesolucion in @razonestiposresoluciones  do
+        %tr
+          %td
+            = link_to razontiporesolucion.nombre, razontiporesolucion_path(razontiporesolucion)
+          %td
+            = razontiporesolucion.tiporesolucion.nombre
+  = will_paginate @razonestiposresoluciones

@@ -1,0 +1,30 @@
+%h1 New actividad
+- form_for(@actividad) do |f|
+  = f.error_messages
+  %p
+    = f.label :institucion_id
+    %br/
+    = f.text_field :institucion_id
+  %p
+    = f.label :usuario_id
+    %br/
+    = f.text_field :usuario_id
+  %p
+    = f.label :fecha_asignacion
+    %br/
+    = f.date_select :fecha_asignacion
+  %p
+    = f.label :textoactividad
+    %br/
+    = f.text_area :textoactividad
+  %p
+    = f.label :estado_id
+    %br/
+    = f.text_field :estado_id
+  %p
+    = f.label :fecha_resolucion
+    %br/
+    = f.date_select :fecha_resolucion
+  %p
+    = f.submit 'Create'
+= link_to 'Back', actividades_path

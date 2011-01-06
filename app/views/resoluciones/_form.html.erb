@@ -1,0 +1,10 @@
+<% form.inputs do %>
+  <%= form.input :numero %>
+  <%= form.input :tiporesolucion, :include_blank => false %>
+  <%= form.input :razontiporesolucion, :as => :select, :collection => @razones, :include_blank => false %>
+  <%= form.input :nueva_fecha, :as => :string, :input_html => {:size => 20} %>
+  <%= form.input :descripcion %>
+<% end %>
+
+
+<%= observe_field(:resolucion_tiporesolucion_id, :url => actualizar_razones_resoluciones_path, :with => "tiporesolucion_id", :method => :get) %>

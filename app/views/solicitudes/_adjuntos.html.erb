@@ -1,0 +1,18 @@
+<h4>Documentos Adjuntos</h4>
+<table id="minimalist-a">
+  <thead>
+    <tr>
+      <th scope="col">Numero Adjunto</th>
+      <th scope="col">Comentario</th>
+      <th scope="col">&nbsp;</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render :partial => 'solicitudes/adjunto', :collection => @adjuntos %>
+  </tbody>
+  <tfoot>
+    <td colspan="2">
+      *Documentos de Referencia sobre solicitud
+    </td>
+  </tfoot>
+</table>

@@ -1,0 +1,15 @@
+.listing
+  %h2= Tipomensaje.human_name.pluralize
+  #options
+    = button_new(new_tipomensaje_path)
+    = render :partial => 'shared/findbox', :locals => {:url => tipomensajes_path}
+  %table.minimalist-b
+    %thead
+      %tr
+        %th= Tipomensaje.human_attribute_name(:nombre)
+    %tbody
+      - for tipomensaje in @tipomensajes  do
+        %tr
+          %td
+            = link_to tipomensaje.nombre, tipomensaje_path(tipomensaje)
+  = will_paginate @tipomensajes

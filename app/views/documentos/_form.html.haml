@@ -1,0 +1,12 @@
+- form.inputs do
+  = form.input :origen_id, :as => :select, :collection => [["Interno",1], ["Externo",2]], :hint => "De donde provino el documento.", :include_blank => false
+  = form.input :documentoclasificacion, :include_blank => false, :input_html => {:class => "combobox"}, :hint => "Tipo de documento a generar."
+  = form.input :fecha_recepcion, :as => :string, :input_html => {:size => 20 }, :hint => "Fecha de recepcion - documento externo"
+  = form.input :asunto, :hint => "Resumen contenido - mostrado como asunto en mensaje"
+  = form.input :numero, :hint => "Numero de documento. Al dejar en blanco el sistema genera numeracion."
+  = form.input :fecha_documento, :as => :string, :input_html => {:size => 20 }, :hint => "Fecha de documento"
+  = form.input :remitente_nombre, :hint => "Nombre, siglas o alias de quien envia el documento - documento externo"
+  = form.input :remitente_telefonos, :hint => "Telefonos para contacto de remitente - documento externo"
+  = form.input :remitente_email, :hint => "Correo Electronico para contacto de remitente - documento externo"
+  = form.input :remitente_direccion, :input_html => {:rows => 3, :cols => 200}, :hint => "Dirección Correspondencia de remitente - documento externo"
+  = form.input :texto, :input_html => {:rows => 30, :cols => 200, :class => 'mceEditor'}, :hint => "Texto de documento"

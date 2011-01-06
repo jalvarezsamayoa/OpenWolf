@@ -1,0 +1,2 @@
+module SolicitudInformacionHelper
+end

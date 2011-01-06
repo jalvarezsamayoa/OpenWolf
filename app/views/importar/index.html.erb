@@ -1,0 +1,99 @@
+<% content_for :head do %>
+  <%= javascript_include_tag 'combobox.js', 'importar.js' %>
+<% end %>
+
+<div class="mantform">
+  <h1>Importar Solicitudes de Informacion</h1>
+  <p>Descargar <%= link_to "Aqui", root_url + 'formato_importar.csv' %> el formato para importar datos.</p>
+
+  <% form_tag importar_index_path,  :multipart => true, :class => 'formtastic'  do %>
+  <%= label_tag 'institucion_id', 'Institucion' %><br />
+  <%= select_tag "institucion_id", options_from_collection_for_select(@instituciones, 'id', 'nombre'), :class => "combobox"   %><br /><br />
+  <%= label_tag 'archivo', 'Archivo a Importar (CSV)' %><br />
+  <%= file_field_tag :archivo %><br /><br />
+
+  <hr />
+  <h2>Nombres de campos</h2>
+  <table width="100%" cellspacing="0" cellpadding="0" border="0">
+    <tr>
+      <th>Via Solicitud</th>
+      <td><%= text_field_tag "campos[via]", 'via' %></td>
+    </tr>
+    <tr>
+      <th width="20%">Fecha Solicitud</th>
+      <td><%= text_field_tag "campos[fecha]", 'fecha' %></td>
+    </tr>
+    <tr>
+      <th>Fecha Limite</th>
+      <td><%= text_field_tag "campos[fecha_limite]", 'fecha_limite' %></td>
+    </tr>
+    <tr>
+      <th>Fecha Resolucion</th>
+      <td><%= text_field_tag "campos[fecha_resolucion]", 'fecha_resolucion' %></td>
+    </tr>
+    <tr>
+      <th>Fecha Prorroga</th>
+      <td><%= text_field_tag "campos[fecha_prorroga]", 'fecha_prorroga' %></td>
+    </tr>
+    <tr>
+      <th>Fecha Completada</th>
+      <td><%= text_field_tag "campos[fecha_completada]", 'fecha_resolucion' %></td>
+    </tr>
+    <tr>
+      <th>Nombre Solicitante</th>
+      <td><%= text_field_tag "campos[solicitante]", 'solicitante' %></td>
+    </tr>
+    <tr>
+      <th>Direccion Solicitante</th>
+      <td><%= text_field_tag "campos[direccion]", 'direccion' %></td>
+    </tr>
+    <tr>
+      <th>Cédula Solicitante</th>
+      <td><%= text_field_tag "campos[cedula]", 'cedula' %></td>
+    </tr>
+    <tr>
+      <th>Telefono Solicitante</th>
+      <td><%= text_field_tag "campos[telefono]", 'telefono' %></td>
+    </tr>
+        <tr>
+      <th>Codigo Departamento</th>
+      <td><%= text_field_tag "campos[departamento]", 'departamento' %></td>
+    </tr>
+    <tr>
+      <th>Nombre Municipio</th>
+      <td><%= text_field_tag "campos[municipio]", 'municipio' %></td>
+    </tr>
+    <tr>
+      <th>Texto Solicitud</th>
+      <td><%= text_field_tag "campos[solicitud]", 'solicitud' %></td>
+    </tr>
+    <tr>
+      <th>Dias Respuesta</th>
+      <td><%= text_field_tag "campos[dias_repuesta]", 'dias_repuesta' %></td>
+    </tr>
+    <tr>
+      <th>Dias Prorroga</th>
+      <td><%= text_field_tag "campos[dias_prorroga]", 'dias_prorroga' %></td>
+    </tr>
+    <tr>
+      <th>Razon negativa</th>
+      <td><%= text_field_tag "campos[razon_negativa]", 'razon_negativa' %></td>
+    </tr>
+    <tr>
+      <th>Razon prorroga</th>
+      <td><%= text_field_tag "campos[razon_prorroga]", 'razon_prorroga' %></td>
+    </tr>
+    <tr>
+      <th>Numero de Resoluciones</th>
+      <td><%= text_field_tag "campos[numero_resoluciones]", 'numero_resoluciones' %></td>
+    </tr>
+    <tr>
+      <th>Estado</th>
+      <td><%= text_field_tag "campos[estatus]", 'estatus' %></td></td>
+    </tr>
+  </table>
+  
+  <%= submit_tag "Importar" %>
+<% end -%>
+</div>
+

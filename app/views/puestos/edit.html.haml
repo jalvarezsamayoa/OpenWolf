@@ -1,0 +1,11 @@
+- @forview = "EDIT"
+= render :partial => "breadcrums"
+%h1.alt
+  = t("puestos.title")
+%fieldset
+  %legend
+    = image_tag('edit22.png')
+    = t("puestos.title_edit")
+  = error_messages_for :puesto
+  - form_for @puesto, :html=>{:class=>"mantform"} do |f|
+    = render :partial=>'form', :locals=>{:f => f, :submittext => t("data.submit_edit")}

@@ -1,0 +1,6 @@
+<% image = "next.png" unless image %>
+<li class=" cssMenui"><a class="  cssMenui" href="#" title="<%= title %>"><span><%= image_tag(image) %><%= text %></span><![if gt IE 6]></a><![endif]><!--[if lte IE 6]><table><tr><td><![endif]-->
+  <ul class=" cssMenum">
+    <%= yield %>
+  </ul>
+  <!--[if lte IE 6]></td></tr></table></a><![endif]--></li>

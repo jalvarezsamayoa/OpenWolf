@@ -1,0 +1,21 @@
+.show
+  %h2= Tiporesolucion.human_name
+  #options
+    = button_new(new_tiporesolucion_path)
+    = button_edit(edit_tiporesolucion_path(@tiporesolucion))
+    = button_delete(tiporesolucion_path(@tiporesolucion))
+    = button_cancel(tiposresoluciones_path)
+    %br/
+  .box
+    %table
+      %colgroup.show-table-header
+      %colgroup.show-table-data
+      %tr
+        %th= label :nombre, Tiporesolucion.human_attribute_name(:nombre)
+        %td= @tiporesolucion.nombre
+      %tr
+        %th= label :actualiza_fecha, Tiporesolucion.human_attribute_name(:actualiza_fecha)
+        %td= @tiporesolucion.actualiza_fecha
+      %tr
+        %th= label :estado_id, Tiporesolucion.human_attribute_name(:estado_id)
+        %td= @tiporesolucion.estado.nombre

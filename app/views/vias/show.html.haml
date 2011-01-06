@@ -1,0 +1,17 @@
+- @forview = "SHOW"
+= render :partial=>"breadcrums"
+.show
+  %h2= Via.human_name
+  #options
+    = button_new(new_via_path)
+    = button_edit(edit_via_path(@via))
+    = button_delete(via_path(@via))
+    = button_cancel(vias_path)
+    %br/
+  .box
+    %table
+      %colgroup.show-table-header
+      %colgroup.show-table-data
+      %tr
+        %th= label :nombre, Via.human_attribute_name(:nombre)
+        %td= @via.nombre

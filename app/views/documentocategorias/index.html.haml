@@ -1,0 +1,15 @@
+.listing
+  %h2= Documentocategoria.human_name.pluralize
+  #options
+    = button_new(new_documentocategoria_path)
+    = render :partial => 'shared/findbox', :locals => {:url => documentocategorias_path}
+  %table.minimalist-b
+    %thead
+      %tr
+        %th= Documentocategoria.human_attribute_name(:nombre)
+    %tbody
+      - for documentocategoria in @documentocategorias  do
+        %tr
+          %td
+            = link_to documentocategoria.nombre, documentocategoria_path(documentocategoria)
+  = will_paginate @documentocategorias

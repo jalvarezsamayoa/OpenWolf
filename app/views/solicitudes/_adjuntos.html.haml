@@ -1,0 +1,12 @@
+%h4 Documentos Adjuntos
+%table#minimalist-a
+  %thead
+    %tr
+      %th{:scope => "col"} Numero Adjunto
+      %th{:scope => "col"} Comentario
+      %th{:scope => "col"} &nbsp;
+  %tbody
+    = render :partial => 'solicitudes/adjunto', :collection => @adjuntos
+  %tfoot
+    %td{:colspan => "2"}
+      *Documentos de Referencia sobre solicitud

@@ -1,0 +1,26 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+uno:
+  id: 1
+  nombre: Ninguno
+
+dos:
+  id: 2
+  nombre: Falta aclaración
+
+tres:
+  id: 3
+  nombre: Omisión del solicitante
+
+cuatro:
+  id: 4
+  nombre: Información inexistente
+
+cinco:
+  id: 5
+  nombre: Información reservada
+
+seis:
+  id: 6
+  nombre: Información clasificada
+

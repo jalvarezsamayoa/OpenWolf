@@ -1,0 +1,3 @@
+page.hide 'newseguimiento'
+page.replace_html "seguimientos_actividad_#{@seguimiento.actividad_id}", :partial =>  'actividades/actividad_seguimientos', :locals => {:actividad =>  @actividad}
+page.ajax_flash

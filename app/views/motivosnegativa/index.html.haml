@@ -1,0 +1,12 @@
+%h1 Listing motivosnegativa
+%table
+  %tr
+    %th Nombre
+  - @motivosnegativa.each do |motivonegativa|
+    %tr
+      %td= h motivonegativa.nombre
+      %td= link_to 'Show', motivonegativa
+      %td= link_to 'Edit', edit_motivonegativa_path(motivonegativa)
+      %td= link_to 'Destroy', motivonegativa, :confirm => 'Are you sure?', :method => :delete
+%br/
+= link_to 'New motivonegativa', new_motivonegativa_path

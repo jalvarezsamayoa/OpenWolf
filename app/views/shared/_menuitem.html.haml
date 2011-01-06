@@ -1,0 +1,12 @@
+- image = "next.png" unless image
+%li.cssMenui
+  %a.cssMenui{:href => "#", :title => title}>
+    %span>
+      = image_tag(image)
+      = text
+    <![if gt IE 6]>
+  <![endif]>
+  /[if lte IE 6] <table><tr><td>
+  %ul.cssMenum
+    = yield
+  /[if lte IE 6] </td></tr></table></a>

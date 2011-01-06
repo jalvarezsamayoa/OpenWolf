@@ -1,0 +1,245 @@
+html,body{
+	height:100%;
+	background-color: #061731;
+	margin: 0px;
+        color: #fff;
+	font-family: Arial, Helvetica, sans-serif;
+}
+#loginlogo {
+	float: left;
+	height: 100px;
+	width: 409px;
+	margin-top: -215px;
+	margin-left: -200px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	background-image: url(../images/logopenwolf.png);
+	background-repeat: no-repeat;
+	background-position: center top;
+}
+#logo {
+	float: left;
+	height: 95px;
+	width: 244px;
+	background-image: url(../images/logopenwolf.png);
+	background-repeat: no-repeat;
+	background-position: center top;
+	margin-top: 0px;
+	margin-left: 50px;
+}
+#menu {
+	float: right;
+	height: 30px;
+	width: 300px;
+	margin-top: 70px;
+}
+#logintable {
+	float: left;
+	height: 222px;
+	width: 400px;
+	margin-top: -111px;
+	margin-left: -200px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	background-color: #082243;
+	border: 2px solid #153f65;
+}
+#usuario {
+	float: left;
+	height: 30px;
+	width: 300px;
+	margin-top: 55px;
+	padding-right: 50px;
+	padding-left: 55px;
+}
+#password {
+	float: left;
+	height: 30px;
+	width: 300px;
+	margin-top: 5px;
+	padding-right: 50px;
+	padding-left: 55px;
+}
+#openid {
+	float: left;
+	height: 30px;
+	width: 300px;
+	margin-top: 5px;
+	padding-right: 50px;
+	padding-left: 55px;
+}
+#ingreso {
+	float: left;
+	height: 40px;
+	width: 300px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	padding-right: 50px;
+	padding-left: 55px;
+}
+.iconoslogin {
+	float: left;
+	height: 30px;
+	width: 30px;
+	margin-right: 5px;
+}
+.iconouser {
+	float: left;
+	height: 30px;
+	width: 30px;
+	background-image: url(../images/iconusuario.gif);
+	margin-right: 5px;
+	background-position: -2px 0px;
+	background-attachment: scroll;
+	background-repeat: no-repeat;
+}
+.textfieldlogin {
+	background-color: #CCC;
+	height: 23px;
+	width: 255px;
+	border: 1px solid #999;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #000;
+	vertical-align: middle;
+	padding-top: 4px;
+}
+.submitlogin {
+	margin-top: 5pt;
+	margin-left: 130px;
+	background-image: url(../images/ingresar.gif);
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+	border-right-style: none;
+	border-left-style: none;
+	border-top-style: none;
+	border-bottom-style: none;
+	width: 30px;
+	height: 30px;
+	padding-top: 0px;
+	padding-right: 28px;
+	padding-bottom: 0px;
+	padding-left: 0px;
+}
+.submitlogin:hover{
+	background-color: transparent;
+	background-image: url(../images/ingresar.gif);
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+	background-position: 0px 0pt;
+	cursor: pointer;
+}
+.version {
+	float: left;
+	height: 20px;
+	width: 409px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-top: 125px;
+	margin-left: -200px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: normal;
+	color: #FFF;
+	text-align: center;
+}
+.logotipos {
+	float: left;
+	height: 80px;
+	width: 409px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-top: 150px;
+	margin-left: -200px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: normal;
+	color: #FFF;
+	text-align: center;
+}
+#header {
+	float: left;
+	height: 100px;
+	width: 100%;
+	margin-top: 0px;
+}
+#contenido {
+	height: 400px;
+	width: 100%;
+	left: 0px;
+	background-color: #153f65;
+	margin-top: 100px;
+	padding-top: 20px;
+}
+#footer {
+	height: 100px;
+	width: 100%;
+	background-color: #153f65;
+	margin: auto;
+	position: absolute;
+	bottom: 0px;
+}
+#contenedor {
+	display: table;
+	height: auto;
+	position: relative;
+	width:100%;
+	min-height: 100%;
+	height: auto !important;
+	height: 100%;
+	margin: auto;
+}
+#submenu {
+	height: 100%;
+	width: 200px;
+	margin-left: 40px;
+}
+
+
+
+/* Top menu */
+#options { width: 100%;
+           height: 1.5em;         
+           color: #fff;
+           font-size: 12px;
+}
+
+#modules-menu { float: left;
+                width: auto;             
+                }
+
+#account-menu { float: right;
+                width: auto;
+                padding-right: 10px;
+                }
+
+.hlist ul {
+              list-style-type: none;              
+              margin: auto;
+}
+
+.hlist li { float: left; }
+
+.hlist ul a {
+display: block;
+text-decoration: underline;
+padding-left: 5px;
+padding-right: 5px;
+color: #fff;
+}
+
+.hlist li a:link,
+.hlist li a:visited {
+	color:#fff;
+	text-decoration:underline;
+	}
+
+
+.hlist li a:hover { color:#fff; }
+.hlist li a:focus {
+	color:#fff;
+	}

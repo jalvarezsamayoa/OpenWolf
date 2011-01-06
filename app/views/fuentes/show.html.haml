@@ -1,0 +1,15 @@
+.show
+  %h2= Fuente.human_name
+  #options
+    = button_new(new_fuente_path)
+    = button_edit(edit_fuente_path(@fuente))
+    = button_delete(fuente_path(@fuente))
+    = button_cancel(fuentes_path)
+    %br/
+  .box
+    %table
+      %colgroup.show-table-header
+      %colgroup.show-table-data
+      %tr
+        %th= label :nombre, Fuente.human_attribute_name(:nombre)
+        %td= @fuente.nombre

@@ -1,0 +1,34 @@
+%h3
+  = image_tag("clock22.png")
+  Asingadas Pendientes Entrega a Ciudadano
+- if @asignadas.size > 0
+  %table.minimalist-b{:width => "100%"}
+    %thead
+      %th.col= t("solicitudes.label_codigo")
+      %th.col= t("solicitudes.label_fecha_creacion")
+      %th.col= t("solicitudes.label_institucion_id")
+      %th.col= t("solicitudes.label_estado_id")
+      %th.col= t("solicitudes.label_dias_restantes")
+      %th.col= t("solicitudes.label_avance")
+      %th{:scope => "col"}= t("solicitudes.label_accion")
+    %tbody
+      - for solicitud in @asignadas do
+        <tr #{class_estado_asignacion(solicitud)}>
+        %td= link_to solicitud.codigo, institucion_solicitud_path(solicitud.institucion_id, solicitud)
+        %td= l(solicitud.fecha_creacion)
+        %td= solicitud.institucion.nombre
+        %td
+          = solicitud.estado.nombre
+          = "[COMPLETA]" if solicitud.terminada?
+        %td= solicitud.dias_restantes
+        %td= solicitud.avance
+        %td
+          = image_tag("refresh16.png")
+          = link_to_if( solicitud.terminada?, t("solicitudes.label_entregar"), marcar_entregada_solicitud_path(solicitud), :method=>'put', :confirm => t("data.rusure"))
+    %tfoot
+      %td{:colspan => "10"}
+        *Solicitudes asignadas a enlaces pendientes de ser entregadas a solicitantes.
+- else
+  .success
+    No hay solicitudes pendientes de entregar.
+%br/

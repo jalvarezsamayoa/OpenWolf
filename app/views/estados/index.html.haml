@@ -1,0 +1,21 @@
+.listing
+  %h2= Estado.human_name.pluralize
+  #options
+    = button_new(new_estado_path)
+    = render :partial => 'shared/findbox', :locals => {:url => estados_path}
+  %table.minimalist-b
+    %thead
+      %tr
+        %th= Estado.human_attribute_name(:nombre)
+        %th= 'Estado Final'
+        %th= Estado.human_attribute_name(:modulo)
+    %tbody
+      - for estado in @estados  do
+        %tr
+          %td
+            = link_to estado.nombre, estado_path(estado)
+          %td
+            = estado.final ? 'Si' : 'No'
+          %td
+            = estado.nombre_modulo
+  = will_paginate @estados

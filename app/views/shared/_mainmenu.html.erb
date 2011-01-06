@@ -1,0 +1,29 @@
+<% if usuario_actual %>
+<div id="mainmenu" class="span-24 last">
+
+  <ul class="cssMenu cssMenum">    
+    <%= menu_item("Inicio", root_path, "Menu Principal Sistema de Proyectos", "home32.png") %>
+
+  <% render(:layout => 'shared/menuitem', :locals=>{:text => "Actividades", :title => "Opciones", :image=>"folder.png"}) do %>
+    <%= menu_item("Agregar Soli. Informacion", new_institucion_solicitud_path(usuario_actual.institucion), "Ingresar Nueva Solicitud de Informacion", "infoabout32.png") %>
+    <%= menu_item("Documentos", institucion_mensajes_path(usuario_actual.institucion), "Documentos de Correspondencia", "mail32.png") %>
+    <%= menu_item("Agregar Denuncia", root_path, "Ingresar Nueva Denuncia", "bug32.png") %>
+    <%= menu_item("Ver Rutas de Trabajo", root_path, "Ingresar Nueva Solicitud de Informacion", "infoabout32.png") %>
+    <%= menu_item("Mis Asignaciones", institucion_actividades_path(usuario_actual.institucion), "Mostrar Tareas / Asignaciones", "foldermove32.png") %>
+ <% end %>
+
+  <%= menu_item("Busqueda", root_path, "Filtros de Busqueda", "find32.png") %>
+
+  <% render(:layout => 'shared/menuitem', :locals=>{:text => "Utilitarios", :title => "Opciones Administrativas", :image=>"configure.png"}) do %>
+    <%= menu_item("Usuarios", usuarios_path, "Administracion de Usuarios.", "groupofusers32.png") %>
+    <%= menu_item("Instituciones", instituciones_path, "Administacion de Instituciones") %>
+    <%= menu_item("Puestos", puestos_path, "Administacion de Puestos por Institucion") %>
+    <%= menu_item("Vias de Solicitud", vias_path, "Administracion de Vias de Solicitud") %>
+    <%= menu_item("Departamentos", departamentos_path, "Administracion de Departamentos Republica") %>
+    <%= menu_item("Municpios", municipios_path, "Administracion de Municipios Republica") %>
+  <% end %>
+
+    <%= menu_item("Cerrar Sesion", logout_path, "Cierra sesion del usuario actual.", "close32.png") %>
+  </ul>
+</div>
+<% end %>

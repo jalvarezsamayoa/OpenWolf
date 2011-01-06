@@ -1,0 +1,20 @@
+= render :partial => "breadcrums"
+.listing
+  %h2= Usuario.human_name.pluralize
+  #options
+    = button_new(new_usuario_path)
+    = render :partial => 'shared/findbox', :locals => {:url => usuarios_path}
+  %table.minimalist-b
+    %thead
+      %tr
+        %th= Usuario.human_attribute_name(:nombre)
+        %th= Usuario.human_attribute_name(:cargo)
+        %th= Usuario.human_attribute_name(:institucion_id)
+    %tbody
+      - for usuario in @usuarios  do
+        %tr
+          %td
+            = link_to usuario.username, usuario_path(usuario)
+          %td= usuario.cargo
+          %td= usuario.institucion.nombre
+  = will_paginate @usuarios

@@ -1,0 +1,27 @@
+%p
+  %b Numero:
+  = h @resolucion.numero
+%p
+  %b Solicitud:
+  = h @resolucion.solicitud_id
+%p
+  %b Usuario:
+  = h @resolucion.usuario_id
+%p
+  %b Institucion:
+  = h @resolucion.institucion_id
+%p
+  %b Descripcion:
+  = h @resolucion.descripcion
+%p
+  %b Tiporesolucion:
+  = h @resolucion.tiporesolucion_id
+%p
+  %b Razonresolucion:
+  = h @resolucion.razonresolucion_id
+%p
+  %b Nueva fecha:
+  = h @resolucion.nueva_fecha
+= link_to 'Edit', edit_resolucion_path(@resolucion)
+|
+\#{link_to 'Back', resoluciones_path}

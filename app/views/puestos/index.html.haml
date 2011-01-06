@@ -1,0 +1,25 @@
+= render :partial => "breadcrums"
+%h1.alt
+  = t("puestos.title")
+%fieldset
+  %legend
+    = image_tag("textfile22.png")
+    = t("puestos.title")
+  = image_tag('add16.png')
+  = link_to(t("data.new"), new_puesto_path, {:title=>t("data.linktitle_new")})
+  %table#minimalist-a
+    %thead
+      %tr
+        %th= t("puestos.label_nombre")
+        %th= t("puestos.label_institucion_id")
+        %th{:width => "10%"} &nbsp;
+        %th{:width => "10%"} &nbsp;
+    %tbody
+      - for puesto in @puestos  do
+        %tr
+          %td
+            = link_to puesto.nombre, puesto_path(puesto)
+          %td
+            = puesto.institucion.nombre
+  %hr/
+  = will_paginate @puestos

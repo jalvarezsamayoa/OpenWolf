@@ -1,0 +1,23 @@
+<table width="100%" cellspacing="0" cellpadding="0" border="0">
+  <tr>
+    <td><h2>Panel de Control: <%= usuario_actual.institucion.nombre %></h2></td>
+    <td width="30%" style="text-align: right;"><%= image_tag usuario_actual.institucion.logo.url(:medium) %></td>
+  </tr>
+</table>
+<hr />
+
+<table width="100%" cellspacing="10" cellpadding="10" border="0">
+  <tr>
+    <th>Datos Globales</th>
+    <th>Datos Institucion</th>
+  </tr>
+  <tr>
+    <td width="50%"><%= image_tag(solicitudes_por_mes()) %></td>
+    <td><%= image_tag(solicitudes_por_mes(usuario_actual)) %></td>
+  </tr>
+  <tr>
+    <td><%= image_tag(solicitudes_por_estado()) %></td>
+    <td><%= image_tag(solicitudes_por_estado(usuario_actual)) %></td>
+  </tr>
+</table>
+

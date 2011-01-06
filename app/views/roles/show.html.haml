@@ -1,0 +1,15 @@
+.show
+  %h2= Role.human_name
+  #options
+    = button_new(new_role_path)
+    = button_edit(edit_role_path(@role))
+    = button_delete(role_path(@role))
+    = button_cancel(roles_path)
+    %br/
+  .box
+    %table
+      %colgroup.show-table-header
+      %colgroup.show-table-data
+      %tr
+        %th= label :name, Role.human_attribute_name(:name)
+        %td= @role.name

@@ -1,0 +1,19 @@
+= render :partial => "breadcrums"
+.listing
+  %h2= Municipio.human_name.pluralize
+  #options
+    = button_new(new_municipio_path)
+    = render :partial => 'shared/findbox', :locals => {:url => municipios_path}
+  %table.minimalist-b
+    %thead
+      %tr
+        %th= Municipio.human_attribute_name(:nombre)
+        %th= Municipio.human_attribute_name(:departamento_id)
+    %tbody
+      - for municipio in @municipios  do
+        %tr
+          %td
+            = link_to municipio.nombre, municipio_path(municipio)
+          %td
+            = municipio.departamento.nombre
+  = will_paginate @municipios

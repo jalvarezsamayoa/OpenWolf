@@ -1,0 +1,4 @@
+page.replace_html :newresolucion, :partial => 'new'
+page.hide :resolucion_nueva_fecha_input
+page.show :newresolucion
+page['resolucion_numero'].focus

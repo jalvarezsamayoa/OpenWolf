@@ -1,0 +1,23 @@
+<div class="show">
+  <h2><%= Estado.human_name %></h2>
+  
+  <div id="options">
+    <%= button_new(new_estado_path) %>
+    <%= button_edit(edit_estado_path(@estado)) %>
+    <%= button_delete(estado_path(@estado)) %>
+    <%= button_cancel(estados_path) %>
+    <br />
+  </div>
+  
+  <div class="box">
+    <table>
+      <colgroup class="show-table-header"></colgroup>
+      <colgroup class="show-table-data"></colgroup>
+      <tr>
+        <th><%= label :nombre, Estado.human_attribute_name(:nombre) %></th>
+        <td><%= @estado.nombre %></td>
+      </tr>
+    </table>     
+  </div>
+  
+</div>

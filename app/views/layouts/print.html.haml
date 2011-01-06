@@ -1,0 +1,12 @@
+!!!
+%html{:lang => "en", "xml:lang" => "en", :xmlns => "http://www.w3.org/1999/xhtml"}
+  %head
+    %meta{:content => "text/html;charset=UTF-8", "http-equiv" => "content-type"}/
+    %link{:href => "/favicon.ico", :rel => "icon", :type => "image/ico"}/
+    %link{:href => "/favicon.ico", :rel => "shortcut icon", :type => "image/ico"}/
+    %title
+      OpenWolf 0.1 - #{@page_title || "Plataforma Virtual para la Transparencia"}
+    = stylesheet_link_tag 'bp.css', 'print.css', :media => 'all'
+    %link{:href => "http://fonts.googleapis.com/css?family=Josefin+Sans+Std+Light&subset=latin", :rel => "stylesheet", :type => "text/css"}
+  %body
+    = yield

@@ -1,0 +1,23 @@
+- @forview = "SHOW"
+= render :partial=>"breadcrums"
+.show
+  %h2= Usuario.human_name
+  #options
+    = button_new(new_usuario_path)
+    = button_edit(edit_usuario_path(@usuario))
+    = button_delete(usuario_path(@usuario))
+    = button_cancel(usuarios_path)
+    %br/
+  .box
+    %table
+      %colgroup.show-table-header
+      %colgroup.show-table-data
+      %tr
+        %th= label :nombre, Usuario.human_attribute_name(:nombre)
+        %td= @usuario.nombre
+      %tr
+        %th= label :institucion_id, Usuario.human_attribute_name(:institucion_id)
+        %td= @usuario.institucion.nombre
+      %tr
+        %th= label :cargo, Usuario.human_attribute_name(:cargo)
+        %td= @usuario.cargo

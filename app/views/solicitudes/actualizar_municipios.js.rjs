@@ -1,0 +1,2 @@
+page.replace_html 'solicitud_municipio_id', options_from_collection_for_select(@municipios, 'id', 'nombre')
+page.visual_effect :highlight, 'solicitud'

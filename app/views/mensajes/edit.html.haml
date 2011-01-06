@@ -1,0 +1,9 @@
+- content_for :head do
+  = javascript_include_tag 'mensajes', 'jquery.ui.datepicker-es.js'
+.mantform
+  %h2
+    Editar #{Mensaje.human_name}
+  - semantic_form_for @mensaje, :url => institucion_mensajes_path(@institucion) do |form|
+    = form.semantic_errors
+    = render :partial => 'form', :locals => {:form => form}
+    = buttons_update(institucion_mensajes_path(@institucion))

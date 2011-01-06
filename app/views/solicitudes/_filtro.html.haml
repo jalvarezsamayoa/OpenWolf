@@ -1,0 +1,61 @@
+- if @desde.nil? or @hasta.nil?
+- @desde = @hasta = Date.today
+- end
+- if usuario_actual.nil?
+- @url = usuario_actual.nil? ? buscar_portal_index_url : buscar_url
+- @method = usuario_actual.nil? ? :get : :post
+- end
+/ Inicia formas de filtro
+.mantform
+  #filtros
+    #tabs-filtros
+      %ul
+        %li= link_to "Solicitudes de Información Pública", "#tab-solicitudes"
+        %li= link_to "Documentos", "#tab-documentos"
+    #tab-solicitudes
+      %h2 Filtrar Solicitudes
+      - form_tag @url, :method => @method do
+        %table{:border => "0", :cellpadding => "0", :cellspacing => "0", :width => "100%"}
+          %tr
+            %th Instituciones
+            %td
+              - if usuario_actual.nil?
+                = select_tag :institucion_id, options_from_collection_for_select(Institucion.instituciones,'id','nombre'), :style => "width: 450px;"
+              - else
+                = select_tag :institucion_id, options_for_select([[usuario_actual.institucion.nombre,usuario_actual.institucion_id], |
+                  ['Todas','ALL']]), :html => {:style => "width: 450px"}                                                             |
+          %tr
+            %th{:width => "30%"} Fechas:
+            %td
+              = text_field_tag :fecha_desde, l(@desde)
+              al#{text_field_tag :fecha_hasta, l(@hasta)}
+          %tr
+            %th Solicitado Por
+            %td= text_field_tag :solicitante_nombre, '', :size => 60
+          %tr
+            %th Texto Solicitud
+            %td= text_field_tag :solicitud_texto, '', :size => 60
+          %tr
+            %th Código Solicitud
+            %td= text_field_tag :solicitud_codigo, '', :size => 60
+          %tr
+            %th Vía Solicitud
+            %td= select_tag :solicitud_via, options_for_select(Via.all.collect {|c| [c.nombre, c.id] }.insert(0, 'Todos'))
+          %tr
+            %th Estado
+            %td= select_tag :solicitud_estado, options_for_select(Estado.all.collect {|c| [c.nombre, c.id]}.insert(0,'Todos'))
+          %tr
+            %th Dias Restantes
+            %td= select_tag :solicitud_tiempo, options_for_select(Solicitud::TIEMPOS)
+          %tr
+            %th &nbsp;
+            %td
+              = submit_popup('Filtrar Solicitudes')
+              = close_popup('filtro')
+        = hidden_field_tag 'filtrar', true
+    / end - tab-solicitudes
+    #tab-documentos
+      %h2 Fitrar Documentos
+    / end - tab-documentos
+  / end - filtros
+/ end - mantform

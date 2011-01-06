@@ -1,0 +1,27 @@
+%p
+  %b Solicitud:
+  = h @recursorevision.solicitud_id
+%p
+  %b Fecha presentacion:
+  = h @recursorevision.fecha_presentacion
+%p
+  %b Fecha notificacion:
+  = h @recursorevision.fecha_notificacion
+%p
+  %b Fecha resolucion:
+  = h @recursorevision.fecha_resolucion
+%p
+  %b Descripcion:
+  = h @recursorevision.descripcion
+%p
+  %b Sentidoresolucion:
+  = h @recursorevision.sentidoresolucion_id
+%p
+  %b Institucion:
+  = h @recursorevision.institucion_id
+%p
+  %b Usuario:
+  = h @recursorevision.usuario_id
+= link_to 'Edit', edit_recursorevision_path(@recursorevision)
+|
+\#{link_to 'Back', recursosrevision_path}

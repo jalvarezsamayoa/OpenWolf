@@ -1,0 +1,40 @@
+%h1 Editing resolucion
+- form_for(@resolucion) do |f|
+  = f.error_messages
+  %p
+    = f.label :numero
+    %br/
+    = f.text_field :numero
+  %p
+    = f.label :solicitud_id
+    %br/
+    = f.text_field :solicitud_id
+  %p
+    = f.label :usuario_id
+    %br/
+    = f.text_field :usuario_id
+  %p
+    = f.label :institucion_id
+    %br/
+    = f.text_field :institucion_id
+  %p
+    = f.label :descripcion
+    %br/
+    = f.text_area :descripcion
+  %p
+    = f.label :tiporesolucion_id
+    %br/
+    = f.text_field :tiporesolucion_id
+  %p
+    = f.label :razonresolucion_id
+    %br/
+    = f.text_field :razonresolucion_id
+  %p
+    = f.label :nueva_fecha
+    %br/
+    = f.date_select :nueva_fecha
+  %p
+    = f.submit 'Update'
+= link_to 'Show', @resolucion
+|
+\#{link_to 'Back', resoluciones_path}

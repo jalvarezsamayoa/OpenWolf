@@ -1,0 +1,61 @@
+- if !current_page?(:action => 'print_documento')
+  = render :partial => "find_box"
+  .document-options
+    #share.option
+      = add_this
+    .option
+      | #{link_to "Imprimir", print_documento_portal_url(@documento, :format => 'pdf'), :popup => true}
+.view-document
+  .content
+    .page-pane
+      .document
+        %h1#title Documento
+        %fieldset
+          %legend= @documento.clasificacion_nombre
+          %table
+            %colgroup.show-table-header
+            %colgroup.show-table-data
+            %tr
+              %th= label :numero, Documento.human_attribute_name(:numero)
+              %td= @documento.numero
+            %tr
+              %th= label :original, Documento.human_attribute_name(:original)
+              %td= si_no(@documento.original)
+            %tr
+              %th= label :origen_id, Documento.human_attribute_name(:origen_id)
+              %td= @documento.origen_nombre
+            %tr
+              %th= label :documentoclasificacion_id, Documento.human_attribute_name(:documentoclasificacion_id)
+              %td= @documento.clasificacion_nombre
+            %tr
+              %th= label :documentocategoria, Documento.human_attribute_name(:documentocategoria)
+              %td= @documento.categoria_nombre
+            %tr
+              %th= label :fecha_documento, Documento.human_attribute_name(:fecha_documento)
+              %td= l(@documento.fecha_documento)
+            %tr
+              %th= label :autor_id, Documento.human_attribute_name(:autor_id)
+              %td= @documento.autor_datos
+            %tr
+              %th= label :asunto, Documento.human_attribute_name(:asunto)
+              %td= @documento.asunto
+            %tr
+              %th= label :fecha_recepcion, Documento.human_attribute_name(:fecha_recepcion)
+              %td= l(@documento.fecha_recepcion)
+            %tr
+              %th= label :remitente_nombre, Documento.human_attribute_name(:remitente_nombre)
+              %td= @documento.remitente_nombre
+            %tr
+              %th= label :remitente_direccion, Documento.human_attribute_name(:remitente_direccion)
+              %td= @documento.remitente_direccion
+            %tr
+              %th= label :remitente_telefonos, Documento.human_attribute_name(:remitente_telefonos)
+              %td= @documento.remitente_telefonos
+            %tr
+              %th= label :remitente_email, Documento.human_attribute_name(:remitente_email)
+              %td= @documento.remitente_email
+            %tr
+              %th= label :estado_envio_id, Documento.human_attribute_name(:estado_envio_id)
+              %td= @documento.estado_nombre
+          %h2 Texto Documento
+          = raw(@documento.texto)

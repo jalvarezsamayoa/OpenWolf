@@ -1,0 +1,15 @@
+<% if @solicitud.seguimientos.size > 0 %>
+
+  <table id='minimalist-b'>
+    <thead>
+      <th class="col" width="10%">&nbsp;</th>
+      <th class="col" width="10%">&nbsp;</th>
+      <th class="col" width="15%"><%= t("seguimientos.label_fecha_creacion") %></th>
+      <th class="col"><%= t("seguimientos.label_textoseguimiento") %></th>
+    </thead>
+    <tbody><%= render :partial => ac %></tbody>
+    <tfoot>
+    </tfoot>        
+  </table>
+
+<% end %>

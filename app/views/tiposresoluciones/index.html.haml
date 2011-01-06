@@ -1,0 +1,15 @@
+.listing
+  %h2= Tiporesolucion.human_name.pluralize
+  #options
+    = button_new(new_tiporesolucion_path)
+    = render :partial => 'shared/findbox', :locals => {:url => tiposresoluciones_path}
+  %table.minimalist-b
+    %thead
+      %tr
+        %th= Tiporesolucion.human_attribute_name(:nombre)
+    %tbody
+      - for tiporesolucion in @tiposresoluciones  do
+        %tr
+          %td
+            = link_to tiporesolucion.nombre, tiporesolucion_path(tiporesolucion)
+  = will_paginate @tiposresoluciones

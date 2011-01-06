@@ -1,0 +1,21 @@
+.show
+  %h2= Razontiporesolucion.human_name
+  #options
+    = button_new(new_razontiporesolucion_path)
+    = button_edit(edit_razontiporesolucion_path(@razontiporesolucion))
+    = button_delete(razontiporesolucion_path(@razontiporesolucion))
+    = button_cancel(razonestiposresoluciones_path)
+    %br/
+  .box
+    %table
+      %colgroup.show-table-header
+      %colgroup.show-table-data
+      %tr
+        %th= label :nombre, Razontiporesolucion.human_attribute_name(:nombre)
+        %td= @razontiporesolucion.nombre
+      %tr
+        %th= label :tiporesolucion_id, Razontiporesolucion.human_attribute_name(:tiporesolucion_id)
+        %td= @razontiporesolucion.tiporesolucion.nombre
+      %tr
+        %th= label :informacion_publica, Razontiporesolucion.human_attribute_name(:informacion_publica)
+        %td= @razontiporesolucion.informacion_publica

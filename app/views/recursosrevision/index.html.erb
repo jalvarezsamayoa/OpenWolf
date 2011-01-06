@@ -1,0 +1,34 @@
+<h1>Listing recursosrevision</h1>
+
+<table>
+  <tr>
+    <th>Solicitud</th>
+    <th>Fecha presentacion</th>
+    <th>Fecha notificacion</th>
+    <th>Fecha resolucion</th>
+    <th>Descripcion</th>
+    <th>Sentidoresolucion</th>
+    <th>Institucion</th>
+    <th>Usuario</th>
+  </tr>
+
+<% @recursosrevision.each do |recursorevision| %>
+  <tr>
+    <td><%=h recursorevision.solicitud_id %></td>
+    <td><%=h recursorevision.fecha_presentacion %></td>
+    <td><%=h recursorevision.fecha_notificacion %></td>
+    <td><%=h recursorevision.fecha_resolucion %></td>
+    <td><%=h recursorevision.descripcion %></td>
+    <td><%=h recursorevision.sentidoresolucion_id %></td>
+    <td><%=h recursorevision.institucion_id %></td>
+    <td><%=h recursorevision.usuario_id %></td>
+    <td><%= link_to 'Show', recursorevision %></td>
+    <td><%= link_to 'Edit', edit_recursorevision_path(recursorevision) %></td>
+    <td><%= link_to 'Destroy', recursorevision, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New recursorevision', new_recursorevision_path %>

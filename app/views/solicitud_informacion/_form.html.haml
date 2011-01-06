@@ -1,0 +1,7 @@
+- form.inputs do
+  %h2 Información Obligatoria
+  = form.input :institucion, :collection => Institucion.activas, :hint => "Institucion a la que se requiere informacion", :prompt => "Seleccione una Institucion"
+  = form.input :solicitante_nombre, :input_html => {:size => 60, :maxsize => 254}, :hint => "Nombre, siglas o sinónimo como se identifica el solicitante."
+  = form.input :email, :input_html => {:size => 60, :maxsize => 254}, :hint => "Correo electrónico del solicitante. Para seguimiento y notificaciones.", :required => true
+  = form.input :solicitante_telefonos, :input_html => {:size => 60, :maxsize => 254}, :hint => "Teléfonos para contactar a solicitante."
+  = form.input :textosolicitud, :input_html => {:rows => 5}, :hint => "Descripción de información solicitada"

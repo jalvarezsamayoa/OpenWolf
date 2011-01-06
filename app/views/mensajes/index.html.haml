@@ -1,0 +1,30 @@
+= render :partial => "breadcrums"
+%h1.alt
+  = image_tag("mail32.png")
+  = t("mensajes.title")
+%fieldset
+  %legend
+    = image_tag('textfile22.png')
+    = t("mensajes.title")
+  = image_tag('add16.png')
+  = link_to(t("data.new"), new_institucion_mensaje_path(@institucion), {:title=>t("data.linktitle_new")})
+  %table#minimalist-a
+    %thead
+      %tr
+        %th= t("mensajes.label_numero")
+        %th= t("mensajes.label_fecha_recepcion")
+        %th= t("mensajes.label_tipomensaje_id")
+        %th= t("mensajes.label_remitente")
+        %th= t("mensajes.label_fuente_id")
+        %th{:width => "10%"} &nbsp;
+        %th{:width => "10%"} &nbsp;
+    %tbody
+      - for mensaje in @mensajes  do
+        %tr
+          %td
+            = link_to mensaje.numero, institucion_mensaje_path(@institucion,mensaje)
+          %td
+            = mensaje.fecha_recepcion
+          %td= mensaje.tipomensaje.nombre
+          %td= mensaje.remitente
+          %td= mensaje.fuente.nombre

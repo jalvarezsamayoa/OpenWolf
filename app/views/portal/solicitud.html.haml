@@ -1,0 +1,97 @@
+- if !current_page?(:action => 'print')
+  = render :partial => "find_box"
+  .document-options
+    #share.option
+      = add_this
+    .option
+      | #{link_to "Imprimir", print_portal_url(@solicitud, :format => 'pdf'), :popup => true}
+.view-document
+  .content
+    .page-pane
+      .document
+        %h1#title Solicitud de Información Pública
+        - if @solicitud.informacion_publica == false
+          %h3#info-not-public
+            = image_tag('lock24.png')
+            La información de esta solicitud no es pública.
+        %fieldset
+          %legend Solicitud
+          #estado_solicitud.notice.span-24.last
+            %strong Estado Solicitud:
+            %span#estado_solicitud_nombre= @solicitud.estado_actual
+          %table
+            %tr
+              %th{:width => "20%"}= label :codigo, Solicitud.human_attribute_name(:codigo)
+              %td{:width => "80%"}= @solicitud.codigo
+            %tr
+              %th= label :fecha_creacion, Solicitud.human_attribute_name(:fecha_creacion)
+              %td= l(@solicitud.fecha_creacion)
+            %tr
+              %th= label :institucion_id, Solicitud.human_attribute_name(:institucion_id)
+              %td= @solicitud.usuario.nombre_institucion
+            %tr
+              %th= label :via_id, Solicitud.human_attribute_name(:via_id)
+              %td= @solicitud.via.nombre
+          %hr/
+          %h4 Asignado a
+          #solicitud_no_asignada.error{:style => 'display:none' if @actividades.size > 0}
+            La solicitud no ha sido asignada.
+          #asignaciones
+            = render :partial => 'asignaciones'
+          %h4 Datos del Solicitante
+          %table
+            %tr
+              %th{:width => "20%"}= label :solicitud, t("solicitudes.label_solicitante_institucion")
+              %td= @solicitud.solicitante_institucion
+            %tr
+              %th= label :solicitud, t("solicitudes.label_solicitante_nombre")
+              %td= @solicitud.solicitante_nombre
+            %tr
+              %th= label :solicitud, t("solicitudes.label_solicitante_identificacion")
+              %td= @solicitud.solicitante_identificacion
+            %tr
+              %th= label :solicitud, t("solicitudes.label_solicitante_telefonos")
+              %td= @solicitud.solicitante_telefonos
+            %tr
+              %th= label :solicitud, t("solicitudes.label_email")
+              %td= @solicitud.email
+            %tr
+              %th= label :solicitud, t("solicitudes.label_solicitante_direccion")
+              %td= @solicitud.solicitante_direccion
+            %tr
+              %th= label :solicitud, t("solicitudes.label_departamento_municipio")
+              %td= @solicitud.municipio.nombre_completo unless @solicitud.municipio.nil?
+          %hr/
+          %h4 Datos Solicitud
+          %table
+            %tr
+              %th{:width => "20%"}= label :solicitud, t("solicitudes.label_estado_id")
+              %td= @solicitud.estado.nombre
+            %tr
+              %th= label :solicitud, t("solicitudes.label_fecha_programada")
+              %td= l(@solicitud.fecha_programada)
+            %tr
+              %th= label :solicitud, t("solicitudes.label_fecha_entregada")
+              %td= l(@solicitud.fecha_entregada) unless @solicitud.fecha_entregada.nil?
+            %tr
+              %th= label :solicitud, t("solicitudes.label_fecha_resolucion")
+              %td= l(@solicitud.fecha_resolucion) unless @solicitud.fecha_resolucion.nil?
+            %tr
+              %th= label :solicitud, t("solicitudes.label_fecha_prorroga")
+              %td= l(@solicitud.fecha_prorroga) unless @solicitud.fecha_prorroga.nil?
+            %tr
+              %th= label :solicitud, t("solicitudes.label_forma_entrega")
+              %td= @solicitud.forma_entrega
+            %tr
+              %th= label :solicitud, t("solicitudes.label_observaciones")
+              %td= @solicitud.observaciones
+          %hr/
+          %h4
+            = t("solicitudes.label_textosolicitud")
+          = @solicitud.texto_solicitud(usuario_actual)
+          %hr.space/
+          %h4= Resolucion.human_name.pluralize
+          #resoluciones
+            = render :partial => 'resoluciones'
+          #adjuntos
+            = render :partial => 'adjuntos'

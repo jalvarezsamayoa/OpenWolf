@@ -1,0 +1,7 @@
+.mantform
+  %h2
+    Nuevo #{Estado.human_name}
+  - semantic_form_for @estado do |form|
+    = form.semantic_errors
+    = render :partial => 'form', :locals => {:form => form}
+    = buttons_create(estados_path)

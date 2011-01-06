@@ -1,0 +1,27 @@
+#pendientes-resolucion
+  - if @pendresolucion.size > 0
+    %h3
+      = image_tag("clock22.png")
+      Completadas pendientes de resolucion
+    %table.minimalist-b{:width => "100%"}
+      %thead
+        %th.col= t("solicitudes.label_codigo")
+        %th.col= t("solicitudes.label_fecha_creacion")
+        %th.col= t("solicitudes.label_institucion_id")
+        %th.col= t("solicitudes.label_estado_id")
+        %th.col= t("solicitudes.label_dias_restantes")
+        %th.col= t("solicitudes.label_avance")
+      %tbody
+        - for solicitud in @pendresolucion do
+          <tr #{class_estado_asignacion(solicitud)}>
+          %td= link_to solicitud.codigo, institucion_solicitud_path(solicitud.institucion_id, solicitud)
+          %td= l(solicitud.fecha_creacion)
+          %td= solicitud.institucion.nombre
+          %td
+            = solicitud.estado.nombre
+            = "[COMPLETA]" if solicitud.terminada?
+          %td= solicitud.dias_restantes
+          %td= solicitud.avance
+      %tfoot
+        %td{:colspan => "10"}
+          *Solicitudes completadas.

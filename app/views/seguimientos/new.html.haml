@@ -1,0 +1,26 @@
+%h1 New seguimiento
+- form_for(@seguimiento) do |f|
+  = f.error_messages
+  %p
+    = f.label :actividad_id
+    %br/
+    = f.text_field :actividad_id
+  %p
+    = f.label :institucion_id
+    %br/
+    = f.text_field :institucion_id
+  %p
+    = f.label :usuario_id
+    %br/
+    = f.text_field :usuario_id
+  %p
+    = f.label :fecha_creacion
+    %br/
+    = f.date_select :fecha_creacion
+  %p
+    = f.label :textoseguimiento
+    %br/
+    = f.text_area :textoseguimiento
+  %p
+    = f.submit 'Create'
+= link_to 'Back', seguimientos_path

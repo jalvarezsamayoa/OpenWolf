@@ -1,0 +1,21 @@
+= render :partial => "breadcrums"
+.listing
+  %h2= Institucion.human_name.pluralize
+  #options
+    = button_new(new_institucion_path)
+    = render :partial => 'shared/findbox', :locals => {:url => instituciones_path}
+  %table.minimalist-b
+    %thead
+      %tr
+        %th= Institucion.human_attribute_name(:codigo)
+        %th= Institucion.human_attribute_name(:nombre)
+        %th= Institucion.human_attribute_name(:parent_id)
+    %tbody
+      - for institucion in @instituciones  do
+        %tr
+          %td= institucion.codigo
+          %td
+            = link_to institucion.nombre, institucion_path(institucion)
+          %td
+            = institucion.parent.nil? ? '' : institucion.parent.nombre
+  = will_paginate @instituciones

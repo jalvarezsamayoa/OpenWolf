@@ -1,0 +1,57 @@
+- @forview = "SHOW"
+= render :partial=>"breadcrums"
+%h1.alt
+  = t("mensajes.title")
+%fieldset
+  %legend
+    = image_tag("infoabout22.png")
+    = t("mensajes.title_show")
+  .options
+    %strong
+      = t("data.label_options")
+    |
+    \#{image_tag('edit16.png')}#{link_to( t("data.edit"), edit_institucion_mensaje_path(@institucion,@mensaje) )} |
+    \#{image_tag('delete16.png')}#{link_to t("data.delete"), @mensaje, :confirm => t("data.rusure"), :method => :delete} |
+    \#{image_tag('add16.png')}#{link_to t("data.new"), new_institucion_mensaje_path(@institucion)} |
+    \#{image_tag('undo16.png')}#{link_to( t("data.cancel"), institucion_mensajes_path(@institucion) )}
+  %hr/
+  %table
+    %tr
+      %th{:width => "20%"}= label :mensaje, t("mensajes.label_numero")
+      %td{:width => "80%"}= @mensaje.numero
+    %tr
+      %td
+        = label :tipomensaje_id, t('mensajes.label_tipomensaje_id')
+      %td= @mensaje.tipomensaje.nombre
+    %tr
+      %td
+        = label :fecha_recepcion, t('mensajes.label_fecha_recepcion')
+      %td= @mensaje.fecha_recepcion
+    %tr
+      %td
+        = label :fuente_id, t('mensajes.label_fuente_id')
+      %td= @mensaje.fuente.nombre
+    %tr
+      %td
+        = label :direccion, t('mensajes.label_direccion')
+      %td= @mensaje.direccion
+    %tr
+      %td
+        = label :telefonos, t('mensajes.label_telefonos')
+      %td= @mensaje.telefonos
+    %tr
+      %td
+        = label :remitente, t('mensajes.label_remitente')
+      %td= @mensaje.remitente
+    %tr
+      %td
+        = label :asunto, t('mensajes.label_asunto')
+      %td= @mensaje.asunto
+    %tr
+      %td
+        = label :fecha_documento, t('mensajes.label_fecha_documento')
+      %td= @mensaje.fecha_documento
+    %tr
+      %td
+        = label :observaciones, t('mensajes.label_observaciones')
+      %td= @mensaje.observaciones

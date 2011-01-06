@@ -1,0 +1,44 @@
+<h1>Editing recursorevision</h1>
+
+<% form_for(@recursorevision) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :solicitud_id %><br />
+    <%= f.text_field :solicitud_id %>
+  </p>
+  <p>
+    <%= f.label :fecha_presentacion %><br />
+    <%= f.date_select :fecha_presentacion %>
+  </p>
+  <p>
+    <%= f.label :fecha_notificacion %><br />
+    <%= f.date_select :fecha_notificacion %>
+  </p>
+  <p>
+    <%= f.label :fecha_resolucion %><br />
+    <%= f.date_select :fecha_resolucion %>
+  </p>
+  <p>
+    <%= f.label :descripcion %><br />
+    <%= f.text_area :descripcion %>
+  </p>
+  <p>
+    <%= f.label :sentidoresolucion_id %><br />
+    <%= f.text_field :sentidoresolucion_id %>
+  </p>
+  <p>
+    <%= f.label :institucion_id %><br />
+    <%= f.text_field :institucion_id %>
+  </p>
+  <p>
+    <%= f.label :usuario_id %><br />
+    <%= f.text_field :usuario_id %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @recursorevision %> |
+<%= link_to 'Back', recursosrevision_path %>

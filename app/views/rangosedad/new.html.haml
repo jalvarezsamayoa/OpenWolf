@@ -1,0 +1,10 @@
+%h1 New rangoedad
+- form_for(@rangoedad) do |f|
+  = f.error_messages
+  %p
+    = f.label :nombre
+    %br/
+    = f.text_field :nombre
+  %p
+    = f.submit 'Create'
+= link_to 'Back', rangosedad_path

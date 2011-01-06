@@ -1,0 +1,17 @@
+%table{:border => "0", :cellpadding => "0", :cellspacing => "0", :width => "100%"}
+  %tr
+    %td
+      %h2
+        Panel de Control: #{usuario_actual.institucion.nombre}
+    %td{:style => "text-align: right;", :width => "30%"}= image_tag usuario_actual.institucion.logo.url(:medium)
+%hr/
+%table{:border => "0", :cellpadding => "10", :cellspacing => "10", :width => "100%"}
+  %tr
+    %th Datos Globales
+    %th Datos Institucion
+  %tr
+    %td{:width => "50%"}= image_tag(solicitudes_por_mes())
+    %td= image_tag(solicitudes_por_mes(usuario_actual))
+  %tr
+    %td= image_tag(solicitudes_por_estado())
+    %td= image_tag(solicitudes_por_estado(usuario_actual))

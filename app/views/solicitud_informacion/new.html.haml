@@ -1,0 +1,7 @@
+= render :partial => 'portal/find_box'
+.mantform
+  %h2
+    Nueva #{Solicitud.human_name}
+  - semantic_form_for @solicitud, :url => solicitud_informacion_url do |form|
+    = render :partial => 'form', :locals => {:form => form}
+    = buttons_create(solicitudes_path)

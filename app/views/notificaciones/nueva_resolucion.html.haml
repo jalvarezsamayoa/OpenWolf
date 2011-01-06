@@ -1,0 +1,32 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+  %body
+    Buen día
+    = succeed ":" do
+      %b= @solicitud.solicitante_nombre
+    %br/
+    Por este medio se le informa que se ha emitido una nueva resolución sobre su solicitud de información pública número #{@solicitud.codigo}:
+    %br/
+    %h2
+      Resolucion número #{@resolucion.numero}
+    %b Institución:
+    = @solicitud.institucion.nombre
+    %br/
+    %b Número Solicitud:
+    = @solicitud.codigo
+    ( #{@url_solicitud} )
+    %br/
+    %b Fecha emisión resolución:
+    = l(@resolucion.created_at.to_date)
+    %br/
+    %b Tipo de Resolución
+    = @resolucion.tiporesolucion.nombre
+    %br/
+    %b Razón Resolución
+    = @resolucion.razontiporesolucion.nombre
+    %br/
+    %h3 Texto Resolución
+    %p
+      = h @resolucion.descripcion

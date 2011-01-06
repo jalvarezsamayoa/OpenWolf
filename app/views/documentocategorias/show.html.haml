@@ -1,0 +1,15 @@
+.show
+  %h2= Documentocategoria.human_name
+  #options
+    = button_new(new_documentocategoria_path)
+    = button_edit(edit_documentocategoria_path(@documentocategoria))
+    = button_delete(documentocategoria_path(@documentocategoria))
+    = button_cancel(documentocategorias_path)
+    %br/
+  .box
+    %table
+      %colgroup.show-table-header
+      %colgroup.show-table-data
+      %tr
+        %th= label :nombre, Documentocategoria.human_attribute_name(:nombre)
+        %td= @documentocategoria.nombre

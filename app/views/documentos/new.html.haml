@@ -1,0 +1,9 @@
+- content_for :head do
+  = javascript_include_tag 'combobox.js', 'documentos.js', 'jquery.ui.datepicker-es.js'
+.mantform
+  %h2
+    Nuevo #{Documento.human_name}
+  - semantic_form_for @documento, :url => documentos_path(@institucion) do |form|
+    = form.semantic_errors
+    = render :partial => 'form', :locals => {:form => form}
+    = buttons_create(documentos_path(@institucion))

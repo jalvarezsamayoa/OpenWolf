@@ -1,0 +1,24 @@
+- @forview = "SHOW"
+= render :partial=>"breadcrums"
+%h1.alt
+  = t("puestos.title")
+%fieldset
+  %legend
+    = image_tag("infoabout22.png")
+    = t("puestos.title_show")
+  .options
+    %strong
+      = t("data.label_options")
+    |
+    \#{image_tag('edit16.png')}#{link_to( t("data.edit"), edit_puesto_path(@puesto) )} |
+    \#{image_tag('delete16.png')}#{link_to t("data.delete"), @puesto, :confirm => t("data.rusure"), :method => :delete} |
+    \#{image_tag('add16.png')}#{link_to t("data.new"), new_puesto_path} |
+    \#{image_tag('undo16.png')}#{link_to( t("data.cancel"), puestos_path )}
+  %hr/
+  %table
+    %tr
+      %th{:width => "20%"}= label :puesto, t("puestos.label_nombre")
+      %td{:width => "80%"}= @puesto.nombre
+    %tr
+      %th= label :puesto, t("puestos.label_institucion_id")
+      %td= @puesto.institucion.nombre

@@ -1,0 +1,43 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  id: 1
+  nombre: En trámite
+  final: false
+  puede_entregar: false
+
+two:
+  id: 2
+  nombre: Prórroga
+  final: false
+  puede_entregar: true
+
+three:
+  id: 3
+  nombre: Entregada Total
+  final: true
+  puede_entregar: true
+
+cuatro:
+  id: 4
+  nombre: Entregada Parcial
+  final: true
+  puede_entregar: true
+
+cinco:
+  id: 5
+  nombre: Entregada y Denegada
+  final: true
+  puede_entregar: true
+
+seis:
+  id: 6
+  nombre: Desechada
+  final: true
+  puede_entregar: true
+
+siete:
+  id: 7
+  nombre: No Recogida
+  final: true
+  puede_entregar: true

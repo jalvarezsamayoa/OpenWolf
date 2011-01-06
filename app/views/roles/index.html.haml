@@ -1,0 +1,15 @@
+.listing
+  %h2= Role.human_name.pluralize
+  #options
+    = button_new(new_role_path)
+    = render :partial => 'shared/findbox', :locals => {:url => roles_path}
+  %table.minimalist-b
+    %thead
+      %tr
+        %th= Role.human_attribute_name(:name)
+    %tbody
+      - for role in @roles  do
+        %tr
+          %td
+            = link_to role.name, role_path(role)
+  = will_paginate @roles

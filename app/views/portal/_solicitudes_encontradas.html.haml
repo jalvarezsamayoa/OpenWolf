@@ -1,0 +1,31 @@
+- unless @solicitudes.nil?
+  %h3
+    = @solicitudes.total
+    Solicitudes Encontradas
+  %table.minimalist-b{:width => "100%"}
+    %thead
+      %tr
+        %th= Solicitud.human_attribute_name(:codigo)
+        %th= Solicitud.human_attribute_name(:fecha_creacion)
+        %th= Solicitud.human_attribute_name(:solicitante_nombre)
+        %th= Solicitud.human_attribute_name(:estado)
+        %th= Solicitud.human_attribute_name(:avance)
+        %th= Solicitud.human_attribute_name(:textosolicitud)
+        %th= Solicitud.human_attribute_name(:institucion_id)
+    %tbody
+      - @solicitudes.each_hit_with_result do |hit, solicitud|
+        %tr
+          %td
+            = link_to solicitud.codigo, solicitud_portal_path(:id => solicitud.id), :title => "Haga click para ver contendido de Solicitud."
+          %td
+            = l(solicitud.fecha_creacion)
+          %td
+            = solicitud.solicitante_nombre
+          %td= solicitud.estado_actual
+          %td= solicitud.avance
+          %td= solicitud.extracto
+          %td= link_to solicitud.institucion.abreviatura, institucion_portal_path(solicitud.institucion), :title => solicitud.institucion.nombre
+  %br/
+  = will_paginate @solicitudes.results
+  %br/
+  %br/

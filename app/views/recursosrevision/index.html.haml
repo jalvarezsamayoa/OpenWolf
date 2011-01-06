@@ -1,0 +1,26 @@
+%h1 Listing recursosrevision
+%table
+  %tr
+    %th Solicitud
+    %th Fecha presentacion
+    %th Fecha notificacion
+    %th Fecha resolucion
+    %th Descripcion
+    %th Sentidoresolucion
+    %th Institucion
+    %th Usuario
+  - @recursosrevision.each do |recursorevision|
+    %tr
+      %td= h recursorevision.solicitud_id
+      %td= h recursorevision.fecha_presentacion
+      %td= h recursorevision.fecha_notificacion
+      %td= h recursorevision.fecha_resolucion
+      %td= h recursorevision.descripcion
+      %td= h recursorevision.sentidoresolucion_id
+      %td= h recursorevision.institucion_id
+      %td= h recursorevision.usuario_id
+      %td= link_to 'Show', recursorevision
+      %td= link_to 'Edit', edit_recursorevision_path(recursorevision)
+      %td= link_to 'Destroy', recursorevision, :confirm => 'Are you sure?', :method => :delete
+%br/
+= link_to 'New recursorevision', new_recursorevision_path

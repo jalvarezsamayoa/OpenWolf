@@ -1,0 +1,15 @@
+.listing
+  %h2= Profesion.human_name.pluralize
+  #options
+    = button_new(new_profesion_path)
+    = render :partial => 'shared/findbox', :locals => {:url => profesiones_path}
+  %table.minimalist-b
+    %thead
+      %tr
+        %th= Profesion.human_attribute_name(:nombre)
+    %tbody
+      - for profesion in @profesiones  do
+        %tr
+          %td
+            = link_to profesion.nombre, profesion_path(profesion)
+  = will_paginate @profesiones

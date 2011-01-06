@@ -1,0 +1,20 @@
+%h2.alt
+  = t("solicitudes.label_cambiar_estado")
+%fieldset
+  %legend
+    = image_tag('add22.png')
+    = t("solicitudes.label_nuevo_estado")
+  = error_messages_for :solicitud
+  - remote_form_for  @solicitud, :url => actualizar_estado_solicitud_path(@solicitud), :html=>{:method => :put, :class=>"mantform"} do |f|
+    %table{:border => "0", :cellpadding => "0"}
+      %tr
+        %td
+          = f.label :estado_id, t('solicitudes.label_estado_id')
+        %td= f.collection_select(:estado_id, @estados, :id, :nombre)
+      %tr
+        %td &nbsp;
+        %td
+          = f.submit t("data.submit_edit")
+          | #{close_popup('updateestado')}
+    %script{:charset => "utf-8", :type => "text/javascript"}
+      setfocus('solicitud_estado_id');

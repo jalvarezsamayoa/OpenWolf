@@ -1,0 +1,23 @@
+<div class="show">
+  <h2><%= Role.human_name %></h2>
+  
+  <div id="options">
+    <%= button_new(new_role_path) %>
+    <%= button_edit(edit_role_path(@role)) %>
+    <%= button_delete(role_path(@role)) %>
+    <%= button_cancel(roles_path) %>
+    <br />
+  </div>
+  
+  <div class="box">
+    <table>
+      <colgroup class="show-table-header"></colgroup>
+      <colgroup class="show-table-data"></colgroup>
+      <tr>
+        <th><%= label :name, Role.human_attribute_name(:name) %></th>
+        <td><%= @role.name %></td>
+      </tr>
+    </table>     
+  </div>
+  
+</div>

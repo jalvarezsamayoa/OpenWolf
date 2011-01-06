@@ -1,0 +1,31 @@
+#terminadas
+  - if @terminadas.size > 0
+    %h3
+      = image_tag("accept22.png")
+      Completas, Listas para Entrega
+    %table.minimalist-b{:width => "100%"}
+      %thead
+        %th.col= t("solicitudes.label_codigo")
+        %th.col= t("solicitudes.label_fecha_creacion")
+        %th.col= t("solicitudes.label_institucion_id")
+        %th.col= t("solicitudes.label_estado_id")
+        %th.col= t("solicitudes.label_dias_restantes")
+        %th.col= t("solicitudes.label_avance")
+        %th{:scope => "col"}= t("solicitudes.label_accion")
+      %tbody
+        - for solicitud in @terminadas do
+          <tr #{class_estado_asignacion(solicitud)}>
+          %td= link_to solicitud.codigo, institucion_solicitud_path(solicitud.institucion_id, solicitud)
+          %td= l(solicitud.fecha_creacion)
+          %td= solicitud.institucion.nombre
+          %td
+            = solicitud.estado.nombre
+            = "[COMPLETA]" if solicitud.terminada?
+          %td= solicitud.dias_restantes
+          %td= solicitud.avance
+          %td
+            = image_tag("refresh16.png")
+            = link_to_if( solicitud.terminada?, t("solicitudes.label_entregar"), marcar_entregada_solicitud_path(solicitud), :method=>'put', :confirm => t("data.rusure"))
+      %tfoot
+        %td{:colspan => "10"}
+          *Solicitudes completadas, listas para entregar a solicitante.

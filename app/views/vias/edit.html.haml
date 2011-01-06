@@ -1,0 +1,9 @@
+- @forview = "EDIT"
+= render :partial => "breadcrums"
+.mantform
+  %h2
+    Editar #{Via.human_name}
+  - semantic_form_for @via do |form|
+    = form.semantic_errors
+    = render :partial => 'form', :locals => {:form => form}
+    = buttons_update(vias_path)

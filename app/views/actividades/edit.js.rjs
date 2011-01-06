@@ -1,0 +1,2 @@
+page.replace_html 'newactividad', :partial => "edit"
+page.show 'newactividad'

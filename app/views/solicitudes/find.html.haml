@@ -1,0 +1,40 @@
+- content_for :head do
+  = javascript_include_tag 'filtro_solicitudes', 'jquery.ui.datepicker-es.js'
+.listing
+  %h2= Solicitud.human_name.pluralize
+  #options
+    = link_to image_tag('filesearch16.png')+' Filtrar', '#', :class => "button filtro"
+    #findbox
+      - form_tag buscar_path, :method=>:get do
+        = image_tag("find16.png")
+        = text_field_tag 'search', '', :id=>'search'
+        = submit_tag 'Buscar'
+  %table.minimalist-b
+    %thead
+      %tr
+        %th= Solicitud.human_attribute_name(:codigo)
+        %th= Solicitud.human_attribute_name(:fecha_creacion)
+        %th= Solicitud.human_attribute_name(:institucion)
+        %th= Solicitud.human_attribute_name(:solicitante_nombre)
+        %th= Solicitud.human_attribute_name(:estado)
+        %th= Solicitud.human_attribute_name(:dias)
+        %th= Solicitud.human_attribute_name(:avance)
+        %th= Solicitud.human_attribute_name(:textosolicitud)
+    %tbody
+      - if @solicitudes
+        - for solicitud in @solicitudes  do
+          %tr
+            %td
+              = link_to solicitud.codigo, solicitud_path(solicitud)
+            %td
+              = l(solicitud.fecha_creacion)
+            %td= solicitud.institucion.abreviatura
+            %td
+              = solicitud.solicitante_nombre
+            %td= solicitud.estado_actual
+            %td= solicitud.dias_restantes
+            %td= solicitud.avance
+            %td= solicitud.extracto(usuario_actual)
+  = will_paginate @solicitudes unless @solicitudes.nil?
+#filtro.popup{:style => "display: none; height: 450px;"}
+  = render :partial => 'filtro'

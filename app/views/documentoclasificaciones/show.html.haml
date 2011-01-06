@@ -1,0 +1,15 @@
+.show
+  %h2= Documentoclasificacion.human_name
+  #options
+    = button_new(new_documentoclasificacion_path)
+    = button_edit(edit_documentoclasificacion_path(@documentoclasificacion))
+    = button_delete(documentoclasificacion_path(@documentoclasificacion))
+    = button_cancel(documentoclasificaciones_path)
+    %br/
+  .box
+    %table
+      %colgroup.show-table-header
+      %colgroup.show-table-data
+      %tr
+        %th= label :nombre, Documentoclasificacion.human_attribute_name(:nombre)
+        %td= @documentoclasificacion.nombre

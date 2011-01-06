@@ -1,0 +1,4 @@
+page.hide :updateestado
+page.replace_html :updateestado, ''
+page.replace_html :estado_solicitud_nombre, @solicitud.estado_actual
+page.ajax_flash

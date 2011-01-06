@@ -1,0 +1,18 @@
+%p
+  %b Actividad:
+  = h @seguimiento.actividad_id
+%p
+  %b Institucion:
+  = h @seguimiento.institucion_id
+%p
+  %b Usuario:
+  = h @seguimiento.usuario_id
+%p
+  %b Fecha creacion:
+  = h @seguimiento.fecha_creacion
+%p
+  %b Textoseguimiento:
+  = h @seguimiento.textoseguimiento
+= link_to 'Edit', edit_seguimiento_path(@seguimiento)
+|
+\#{link_to 'Back', seguimientos_path}

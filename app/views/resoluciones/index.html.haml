@@ -1,0 +1,26 @@
+%h1 Listing resoluciones
+%table
+  %tr
+    %th Numero
+    %th Solicitud
+    %th Usuario
+    %th Institucion
+    %th Descripcion
+    %th Tiporesolucion
+    %th Razonresolucion
+    %th Nueva fecha
+  - @resoluciones.each do |resolucion|
+    %tr
+      %td= h resolucion.numero
+      %td= h resolucion.solicitud_id
+      %td= h resolucion.usuario_id
+      %td= h resolucion.institucion_id
+      %td= h resolucion.descripcion
+      %td= h resolucion.tiporesolucion_id
+      %td= h resolucion.razonresolucion_id
+      %td= h resolucion.nueva_fecha
+      %td= link_to 'Show', resolucion
+      %td= link_to 'Edit', edit_resolucion_path(resolucion)
+      %td= link_to 'Destroy', resolucion, :confirm => 'Are you sure?', :method => :delete
+%br/
+= link_to 'New resolucion', new_resolucion_path

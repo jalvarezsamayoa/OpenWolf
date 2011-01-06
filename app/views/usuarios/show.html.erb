@@ -1,0 +1,34 @@
+<% @forview = "SHOW" %>
+<%= render :partial=>"breadcrums" %>
+
+<div class="show">
+  <h2><%= Usuario.human_name %></h2>
+  
+  <div id="options">
+    <%= button_new(new_usuario_path) %>
+    <%= button_edit(edit_usuario_path(@usuario)) %>
+    <%= button_delete(usuario_path(@usuario)) %>
+    <%= button_cancel(usuarios_path) %>
+    <br />
+  </div>
+  
+  <div class="box">
+    <table>
+      <colgroup class="show-table-header"></colgroup>
+      <colgroup class="show-table-data"></colgroup>
+      <tr>
+        <th><%= label :nombre, Usuario.human_attribute_name(:nombre) %></th>
+        <td><%= @usuario.nombre %></td>
+      </tr>
+      <tr>
+        <th><%= label :institucion_id, Usuario.human_attribute_name(:institucion_id) %></th>
+        <td><%= @usuario.institucion.nombre %></td>
+      </tr>
+      <tr>
+        <th><%= label :cargo, Usuario.human_attribute_name(:cargo) %></th>
+        <td><%= @usuario.cargo %></td>
+      </tr>
+    </table>     
+  </div>
+  
+</div>

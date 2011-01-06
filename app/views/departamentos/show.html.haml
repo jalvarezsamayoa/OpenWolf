@@ -1,0 +1,20 @@
+- @forview = "SHOW"
+= render :partial=>"breadcrums"
+.show
+  %h2= Departamento.human_name
+  #options
+    = button_new(new_departamento_path)
+    = button_edit(edit_departamento_path(@departamento))
+    = button_delete(departamento_path(@departamento))
+    = button_cancel(departamentos_path)
+    %br/
+  .box
+    %table
+      %colgroup.show-table-header
+      %colgroup.show-table-data
+      %tr
+        %th= label :nombre, Departamento.human_attribute_name(:nombre)
+        %td= @departamento.nombre
+      %tr
+        %th= label :abreviatura, Departamento.human_attribute_name(:abreviatura)
+        %td= @departamento.abreviatura

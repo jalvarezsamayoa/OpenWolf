@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  id: 1
+  nombre: Ninguna
+
+two:
+  id: 2
+  nombre: Volumen de la información
+
+tres:
+  id: 3
+  nombre: Extensión de la respuesta

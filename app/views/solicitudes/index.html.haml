@@ -1,0 +1,19 @@
+- content_for :head do
+  = javascript_include_tag 'solicitudes.js'
+= render :partial => "breadcrums"
+%h1.alt Solicitudes y Tareas
+.solicitudes-y-tareas
+  #solicitudes-y-tareas-tabs
+    %ul
+      - if nivel_seguridad(usuario_actual,'personaludip')
+        %li= link_to "No Asignadas (#{@noasignadas.size})", "#no-asignadas"
+        %li= link_to "En Tramite (#{@entramite.size})", "#en-tramite"
+        %li= link_to "Pend. Resolución (#{@pendresolucion.size})", "#pendientes-resolucion"
+        %li= link_to "Terminadas (#{@terminadas.size})", "#terminadas"
+      %li= link_to "Tareas Asignadas (#{@asignaciones.size})", "#tareas"
+    - if nivel_seguridad(usuario_actual,'personaludip')
+      = render :partial => 'solicitudes/noasignadas'
+      = render :partial => 'solicitudes/entramite'
+      = render :partial => 'solicitudes/pendientesresolucion'
+      = render :partial => 'solicitudes/terminadas'
+    = render :partial => 'actividades/mis_actividades'

@@ -1,0 +1,78 @@
+- content_for :head do
+  = javascript_include_tag 'combobox.js', 'importar.js'
+.mantform
+  %h1 Importar Solicitudes de Informacion
+  %p
+    Descargar #{link_to "Aqui", root_url + 'formato_importar.csv'} el formato para importar datos.
+  - form_tag importar_index_path,  :multipart => true, :class => 'formtastic'  do
+    = label_tag 'institucion_id', 'Institucion'
+    %br/
+    = select_tag "institucion_id", options_from_collection_for_select(@instituciones, 'id', 'nombre'), :class => "combobox"
+    %br/
+    %br/
+    = label_tag 'archivo', 'Archivo a Importar (CSV)'
+    %br/
+    = file_field_tag :archivo
+    %br/
+    %br/
+    %hr/
+    %h2 Nombres de campos
+    %table{:border => "0", :cellpadding => "0", :cellspacing => "0", :width => "100%"}
+      %tr
+        %th Via Solicitud
+        %td= text_field_tag "campos[via]", 'via'
+      %tr
+        %th{:width => "20%"} Fecha Solicitud
+        %td= text_field_tag "campos[fecha]", 'fecha'
+      %tr
+        %th Fecha Limite
+        %td= text_field_tag "campos[fecha_limite]", 'fecha_limite'
+      %tr
+        %th Fecha Resolucion
+        %td= text_field_tag "campos[fecha_resolucion]", 'fecha_resolucion'
+      %tr
+        %th Fecha Prorroga
+        %td= text_field_tag "campos[fecha_prorroga]", 'fecha_prorroga'
+      %tr
+        %th Fecha Completada
+        %td= text_field_tag "campos[fecha_completada]", 'fecha_resolucion'
+      %tr
+        %th Nombre Solicitante
+        %td= text_field_tag "campos[solicitante]", 'solicitante'
+      %tr
+        %th Direccion Solicitante
+        %td= text_field_tag "campos[direccion]", 'direccion'
+      %tr
+        %th Cédula Solicitante
+        %td= text_field_tag "campos[cedula]", 'cedula'
+      %tr
+        %th Telefono Solicitante
+        %td= text_field_tag "campos[telefono]", 'telefono'
+      %tr
+        %th Codigo Departamento
+        %td= text_field_tag "campos[departamento]", 'departamento'
+      %tr
+        %th Nombre Municipio
+        %td= text_field_tag "campos[municipio]", 'municipio'
+      %tr
+        %th Texto Solicitud
+        %td= text_field_tag "campos[solicitud]", 'solicitud'
+      %tr
+        %th Dias Respuesta
+        %td= text_field_tag "campos[dias_repuesta]", 'dias_repuesta'
+      %tr
+        %th Dias Prorroga
+        %td= text_field_tag "campos[dias_prorroga]", 'dias_prorroga'
+      %tr
+        %th Razon negativa
+        %td= text_field_tag "campos[razon_negativa]", 'razon_negativa'
+      %tr
+        %th Razon prorroga
+        %td= text_field_tag "campos[razon_prorroga]", 'razon_prorroga'
+      %tr
+        %th Numero de Resoluciones
+        %td= text_field_tag "campos[numero_resoluciones]", 'numero_resoluciones'
+      %tr
+        %th Estado
+        %td= text_field_tag "campos[estatus]", 'estatus'
+    = submit_tag "Importar"

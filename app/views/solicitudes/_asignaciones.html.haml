@@ -1,0 +1,22 @@
+%table#minimalist-a
+  %thead
+    %th.col= t("actividades.label_numero")
+    %th.col= t("actividades.label_usuario_id")
+    %th.col= t("actividades.label_cargo")
+    %th.col= t("actividades.label_institucion")
+    %th.col= t("actividades.label_fecha_asignacion")
+    %th.col= t("actividades.label_estado")
+    %th.col{:colspan => "2"} &nbsp;
+  %tbody
+    - for actividad in @solicitud.actividades do
+      %tr
+        %td= actividad.id
+        %td= actividad.usuario.nombre
+        %td= actividad.usuario.cargo
+        %td= actividad.usuario.institucion.abreviatura
+        %td= l(actividad.fecha_asignacion)
+        %td= actividad.estado.nombre
+        %td= link_to_if nivel_seguridad(usuario_actual,'encargadoudip'), 'Remover', institucion_solicitud_actividad_path(@institucion, @solicitud, actividad), :confirm => '¿Está seguro de remover asignación?', :method => :delete
+        %td= link_to_remote 'Ver', :url => institucion_solicitud_actividad_path(@institucion, @solicitud, actividad), :method => :get, :title => "Mostrar informacion de Asignacion"
+#showactividad.popup{:style => "display: none; height: 400px;"}
+%hr/

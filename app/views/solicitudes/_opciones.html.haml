@@ -1,0 +1,52 @@
+/ Descripcion: Barra de opciones para solicitud
+/ Llamada desde: /views/solicitudes/show.html.erb
+.options.clear2
+  = link_to(image_tag('undo16.png') + t("data.back"), solicitudes_path, :class => 'button' )
+  - if @solicitud.es_pertinente?(usuario_actual)
+    = link_to(image_tag('printer16.png') + t("data.print"), |
+      root_url+"imprimir_solicitud/#{@solicitud.id}.pdf",   |
+      :class => 'button', :popup => true )                  |
+    - if nivel_seguridad(usuario_actual,'encargadoudip')
+      = link_to( image_tag('edit16.png') + t("data.edit"),        |
+        edit_institucion_solicitud_path(@institucion,@solicitud), |
+        :class => 'button' )                                      |
+      -#
+      = link_to(image_tag('delete16.png') + t("data.delete"), |
+        institucion_solicitud_path(@institucion,@solicitud),  |
+        :class => 'button',                                   |
+        :confirm => t("data.rusure"),                         |
+        :method => :delete )                                  |
+    - unless @solicitud.entregada?
+      - if nivel_seguridad(usuario_actual,'personaludip')
+        = link_to(image_tag('adduser16.png') + t("actividades.title_new"),    |
+          new_institucion_solicitud_actividad_path(@institucion, @solicitud), |
+          :title => 'Asignar solicitud a responsable',                        |
+          :class => 'button',                                                 |
+          :method => :get,                                                    |
+          :remote => true )                                                   |
+      = link_to(image_tag("textfile16.png") + t("solicitudes.label_adjuntaradjunto"), |
+        new_solicitud_adjunto_path(@solicitud),                                       |
+        :title => 'Adjuntar adjunto de referencia a Solicitud',                       |
+        :class => 'button',                                                           |
+        :method => :get,                                                              |
+        :remote => true )                                                             |
+      - if nivel_seguridad(usuario_actual,'encargadoudip') and @solicitud.avance == 100
+        = link_to(image_tag("refresh16.png") +  t("solicitudes.label_resoluciones"),           |
+          new_institucion_solicitud_resolucion_path(@solicitud.institucion_id, @solicitud.id), |
+          :method => :get,                                                                     |
+          :remote => true,                                                                     |
+          :id=>'link_new_resolucion',                                                          |
+          :class => 'button',                                                                  |
+          :style => "#{'display:none' unless @solicitud.asignada?}"  )                         |
+    - else
+      - if nivel_seguridad(usuario_actual,'encargadoudip')
+        = link_to(image_tag("cut16.png") +  t("solicitudes.label_recursosrevision"),                |
+          new_institucion_solicitud_recursorevision_path(@solicitud.institucion_id, @solicitud.id), |
+          :method => :get,                                                                          |
+          :remote => true,                                                                          |
+          :id=>'link_new_recursorevision' ,                                                         |
+          :class => 'button',                                                                       |
+          :style => "#{'display:none' unless @solicitud.entregada?}" )                              |
+  %br/
+  %br/
+  %br/

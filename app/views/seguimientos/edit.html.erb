@@ -1,0 +1,32 @@
+<h1>Editing seguimiento</h1>
+
+<% form_for(@seguimiento) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :actividad_id %><br />
+    <%= f.text_field :actividad_id %>
+  </p>
+  <p>
+    <%= f.label :institucion_id %><br />
+    <%= f.text_field :institucion_id %>
+  </p>
+  <p>
+    <%= f.label :usuario_id %><br />
+    <%= f.text_field :usuario_id %>
+  </p>
+  <p>
+    <%= f.label :fecha_creacion %><br />
+    <%= f.date_select :fecha_creacion %>
+  </p>
+  <p>
+    <%= f.label :textoseguimiento %><br />
+    <%= f.text_area :textoseguimiento %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @seguimiento %> |
+<%= link_to 'Back', seguimientos_path %>

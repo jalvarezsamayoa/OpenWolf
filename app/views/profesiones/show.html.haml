@@ -1,0 +1,15 @@
+.show
+  %h2= Profesion.human_name
+  #options
+    = button_new(new_profesion_path)
+    = button_edit(edit_profesion_path(@profesion))
+    = button_delete(profesion_path(@profesion))
+    = button_cancel(profesiones_path)
+    %br/
+  .box
+    %table
+      %colgroup.show-table-header
+      %colgroup.show-table-data
+      %tr
+        %th= label :nombre, Profesion.human_attribute_name(:nombre)
+        %td= @profesion.nombre

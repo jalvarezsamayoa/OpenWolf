@@ -1,0 +1,13 @@
+<% form.inputs do %>
+  <%= form.input :numero %>
+  <%= form.input :fecha_presentacion, :as => :string, :input_html => {:size => 20} %>
+
+  <% if current_page?(:action => 'new') %>
+  <%= form.input :fecha_notificacion, :as => :string, :input_html => {:size => 20} %>
+  <%= form.input :fecha_resolucion, :as => :string, :input_html => {:size => 20} %>
+  <% end %>
+
+  <%= form.input :sentidoresolucion, :include_blank => false %>  
+  <%= form.input :descripcion %>
+<% end %>
+

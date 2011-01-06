@@ -1,0 +1,337 @@
+"id","nombre","departamento_id"
+"1","CAHABON                  ",1
+"2","CHAHAL                    ",1
+"3","CHISEC                    ",1
+"4","COBAN                     ",1
+"5","FRAY BARTOLOME DE LAS     ",1
+"6","LANQUIN                   ",1
+"7","PANZOS                    ",1
+"8","SAN CRISTOBAL VERAPAZ     ",1
+"9","SAN JUAN CHAMELCO         ",1
+"10","SAN PEDRO CARCHA          ",1
+"11","SANTA CATALINA LA TIN     ",1
+"12","SANTA CRUZ VERAPAZ        ",1
+"13","SENAHU                    ",1
+"14","TACTIC                    ",1
+"15","TAMAHU                    ",1
+"16","TUCURU                    ",1
+"17","CUBULCO                   ",2
+"18","EL CHOL                   ",2
+"19","GRANADOS                  ",2
+"20","PURULHA                   ",2
+"21","RABINAL                   ",2
+"22","SALAMA                    ",2
+"23","SAN JERONIMO              ",2
+"24","SAN MIGUEL CHICAJ         ",2
+"25","ACATENANGO                ",3
+"26","CHIMALTENANGO             ",3
+"27","COMALAPA                  ",3
+"28","EL TEJAR                  ",3
+"29","PARRAMOS                  ",3
+"30","PATZICIA                  ",3
+"31","PATZUN                    ",3
+"32","POCHUTA                   ",3
+"33","SAN ANDRES ITZAPA         ",3
+"34","SAN JOSE POAQUIL          ",3
+"35","SAN MARTIN JILOTEPEQU     ",3
+"36","SANTA APOLONIA            ",3
+"37","SANTA CRUZ BALANYA        ",3
+"38","TECPAN GUATEMALA          ",3
+"39","YEPOCAPA                  ",3
+"40","ZARAGOZA                  ",3
+"41","CAMOTAN                   ",4
+"42","CHIQUIMULA                ",4
+"43","CONCEPCION  LAS MINAS     ",4
+"44","ESQUIPULAS                ",4
+"45","IPALA                     ",4
+"46","JOCOTAN                   ",4
+"47","OLOPA                     ",4
+"48","QUEZALTEPEQUE             ",4
+"49","SAN JACINTO               ",4
+"50","SAN JOSE LA ARADA         ",4
+"51","SAN JUAN  ERMITA          ",4
+"52","EL JICARO                 ",5
+"53","GUASTATOYA                ",5
+"54","MORAZAN                   ",5
+"55","SAN AGUSTIN ACASAGUAS     ",5
+"56","SAN ANTONIO LA PAZ        ",5
+"57","SAN CRISTOBAL ACASAGU     ",5
+"58","SANARATE                  ",5
+"59","SANSARE                   ",5
+"60","ESCUINTLA                 ",6
+"61","GUANAGAZAPA               ",6
+"62","IZTAPA                    ",6
+"63","LA DEMOCRACIA             ",6
+"64","LA GOMERA                 ",6
+"65","MASAGUA                   ",6
+"66","NUEVA CONCEPCION          ",6
+"67","PALIN                     ",6
+"68","PUERTO SAN JOSE           ",6
+"69","SAN VICENTE PACAYA        ",6
+"70","SANTA LUCIA  COTZUMAL     ",6
+"71","SIQUINALA                 ",6
+"72","TIQUISATE                 ",6
+"73","AMATITLAN                 ",7
+"74","CHINAUTLA                 ",7
+"75","CHUARRANCHO               ",7
+"76","FRAIJANES                 ",7
+"77","GUATEMALA                 ",7
+"78","MIXCO                     ",7
+"79","PALENCIA                  ",7
+"80","SAN MIGUEL PETAPA         ",7
+"81","SAN JOSE DEL GOLFO        ",7
+"82","SAN JOSE PINULA           ",7
+"83","SAN JUAN SACATEPEQUEZ     ",7
+"84","SAN PEDRO AYAMPUC         ",7
+"85","SAN PEDRO SACATEPEQUE     ",7
+"86","SAN RAIMUNDO              ",7
+"87","SANTA CATARINA PINULA     ",7
+"88","VILLA CANALES             ",7
+"89","VILLA NUEVA               ",7
+"90","AGUACATAN                 ",8
+"91","BARILLAS                  ",8
+"92","CHIANTLA                  ",8
+"93","COLOTENANGO               ",8
+"94","CONCEPCION HUISTA         ",8
+"95","CUILCO                    ",8
+"96","HUEHUETENANGO             ",8
+"97","SAN ILDEFONSO IXTAHUACAN  ",8
+"98","JACALTENANGO              ",8
+"99","LA DEMOCRACIA -HUE-       ",8
+"100","LA LIBERTAD -HUE-         ",8
+"101","MALACATANCITO             ",8
+"102","NENTON                    ",8
+"103","SAN ANTONIO HUISTA        ",8
+"104","SAN GASPAR IXCHIL         ",8
+"105","SAN JUAN  ATITAN          ",8
+"106","SAN JUAN IXCOY            ",8
+"107","SAN MATEO IXTATAN         ",8
+"108","SAN MIGUEL ACATAN         ",8
+"109","SAN PEDRO NECTA           ",8
+"110","SAN RAFAEL  LA INDEPE     ",8
+"111","SAN RAFAEL PETZAL         ",8
+"112","SAN SEBASTIAN COATAN      ",8
+"113","SAN SEBASTIAN HUEHUET     ",8
+"114","SANTA ANA HUISTA          ",8
+"115","SANTA BARBARA -HUE-       ",8
+"116","SANTA EULALIA             ",8
+"117","SANTIAGO CHIMALTENANG     ",8
+"118","SOLOMA                    ",8
+"119","TECTITAN                  ",8
+"120","TODOS SANTOS CUCHUMAT     ",8
+"121","EL ESTOR                  ",9
+"122","LIVINGSTON                ",9
+"123","LOS AMATES                ",9
+"124","MORALES                   ",9
+"125","PUERTO BARRIOS            ",9
+"126","JALAPA                    ",10
+"127","MATAQUESCUINTLA           ",10
+"128","MONJAS                    ",10
+"129","SAN CARLOS ALZATATE       ",10
+"130","SAN LUIS JILOTEPEQUE      ",10
+"131","SAN MANUEL CHAPARRON      ",10
+"132","SAN PEDRO PINULA          ",10
+"133","AGUA BLANCA               ",11
+"134","ASUNCION MITA             ",11
+"135","ATESCATEMPA               ",11
+"136","COMAPA                    ",11
+"137","CONGUACO                  ",11
+"138","EL ADELANTO               ",11
+"139","EL PROGRESO               ",11
+"140","JALPATAGUA                ",11
+"141","JEREZ                     ",11
+"142","JUTIAPA                   ",11
+"143","MOYUTA                    ",11
+"144","PASACO                    ",11
+"145","QUEZADA                   ",11
+"146","SAN JOSE ACATEMPA         ",11
+"147","SANTA CATARINA MITA       ",11
+"148","YUPILTEPEQUE              ",11
+"149","ZAPOTITLAN                ",11
+"150","DOLORES                   ",12
+"151","FLORES                    ",12
+"152","LA LIBERTAD               ",12
+"153","MELCHOR DE MENCOS         ",12
+"154","POPTUN                    ",12
+"155","SAN ANDRES                ",12
+"156","SAN BENITO                ",12
+"157","SAN FRANCISCO             ",12
+"158","SAN JOSE                  ",12
+"159","SAN LUIS                  ",12
+"160","SANTA ANA                 ",12
+"161","SAYAXCHE                  ",12
+"162","ALMOLONGA                 ",13
+"163","CABRICAN                  ",13
+"164","CAJOLA                    ",13
+"165","CANTEL                    ",13
+"166","COATEPEQUE                ",13
+"167","COLOMBA                   ",13
+"168","CONCEPCION CHIQUIRICH     ",13
+"169","EL PALMAR                 ",13
+"170","FLORES COSTA CUCA         ",13
+"171","GENOVA                    ",13
+"172","HUITAN                    ",13
+"173","LA ESPERANZA              ",13
+"174","OLINTEPEQUE               ",13
+"175","PALESTINA DE LOS ALTO     ",13
+"176","QUETZALTENANGO            ",13
+"177","SALCAJA                   ",13
+"178","SAN CARLOS SIJA           ",13
+"179","SAN FRANCISCO LA UNIO     ",13
+"180","SAN JUAN OSTUNCALCO       ",13
+"181","SAN MARTIN SACATEPEQU     ",13
+"182","SAN MATEO                 ",13
+"183","SAN MIGUEL SIGUILA        ",13
+"184","SIBILIA                   ",13
+"185","ZUNIL                     ",13
+"186","CANILLA                   ",14
+"187","CHAJUL                    ",14
+"188","CHICAMAN                  ",14
+"189","CHICHE                    ",14
+"190","CHICHICASTENANGO          ",14
+"191","CHINIQUE                  ",14
+"192","CUNEN                     ",14
+"193","IXCAN                     ",14
+"194","JOYABAJ                   ",14
+"195","NEBAJ                     ",14
+"196","PACHALUM                  ",14
+"197","PATZITE                   ",14
+"198","SACAPULAS                 ",14
+"199","SAN ANDRES SAJCABAJA      ",14
+"200","SAN ANTONIO ILOTENANG     ",14
+"201","SAN BARTOLOME  JOCOTE     ",14
+"202","SAN JUAN COTZAL           ",14
+"203","SAN PEDRO JOCOPILAS       ",14
+"204","SANTA CRUZ DEL  QUICH     ",14
+"205","USPANTAN                  ",14
+"206","ZACUALPA                  ",14
+"207","CHAMPERICO                ",15
+"208","EL ASINTAL                ",15
+"209","NUEVO SAN CARLOS          ",15
+"210","RETALHULEU                ",15
+"211","SAN ANDRES VILLA SECA     ",15
+"212","SAN FELIPE                ",15
+"213","SAN MARTIN ZAPOTITLAN     ",15
+"214","SAN SEBASTIAN             ",15
+"215","SANTA CRUZ MULUA          ",15
+"216","ALOTENANGO                ",16
+"217","ANTIGUA GUATEMALA         ",16
+"218","CIUDAD VIEJA              ",16
+"219","JOCOTENANGO               ",16
+"220","MAGDALENA MILPAS ALTA     ",16
+"221","PASTORES                  ",16
+"222","SAN ANTONIO AGUAS CAL     ",16
+"223","SAN BARTOLOME MILPAS      ",16
+"224","SAN LUCAS SACATEPEQUE     ",16
+"225","SAN MIGUEL DUE�AS         ",16
+"226","SANTA CATARINA BARAHO     ",16
+"227","SANTA LUCIA MILPAS AL     ",16
+"228","SANTA MARIA DE JESUS      ",16
+"229","SANTIAGO SACATEPEQUEZ     ",16
+"230","SANTO DOMINGO XENACOJ     ",16
+"231","SUMPANGO                  ",16
+"232","AYUTLA                    ",17
+"233","CATARINA                  ",17
+"234","COMITANCILLO              ",17
+"235","CONCEPCION TUTUAPA        ",17
+"236","EL QUETZAL                ",17
+"237","EL RODEO                  ",17
+"238","EL TUMBADOR               ",17
+"239","ESQUIPULAS PALO GORDO     ",17
+"240","IXCHIGUAN                 ",17
+"241","LA REFORMA                ",17
+"242","MALACATAN                 ",17
+"243","NUEVO PROGRESO            ",17
+"244","OCOS                      ",17
+"245","PAJAPITA                  ",17
+"246","RIO BLANCO                ",17
+"247","SAN ANTONIO SACATEPEQ     ",17
+"248","SAN CRISTOBAL CUCHO       ",17
+"249","SAN JOSE OJETENAM         ",17
+"250","SAN LORENZO -SMA-         ",17
+"251","SAN MARCOS                ",17
+"252","SAN MIGUEL  IXTAHUACA     ",17
+"253","SAN PABLO                 ",17
+"254","SAN PEDRO SACATEPEQUE -SMA-",17
+"255","SAN RAFAEL PIE DE  LA     ",17
+"256","SIBINAL                   ",17
+"257","SIPACAPA                  ",17
+"258","TACANA                    ",17
+"259","TAJUMULCO                 ",17
+"260","TEJUTLA                   ",17
+"261","BARBERENA                 ",18
+"262","CASILLAS                  ",18
+"263","CHIQUIMULILLA             ",18
+"264","CUILAPA                   ",18
+"265","GUAZACAPAN                ",18
+"266","NUEVA SANTA ROSA          ",18
+"267","ORATORIO                  ",18
+"268","PUEBLO NUEVO VI�AS        ",18
+"269","SAN JUAN TECUACO          ",18
+"270","SAN RAFAEL LAS FLORES     ",18
+"271","SANTA CRUZ  NARANJO       ",18
+"272","SANTA MARIA IXHUATAN      ",18
+"273","SANTA ROSA DE LIMA        ",18
+"274","TAXISCO                   ",18
+"275","CONCEPCION                ",19
+"276","NAHUALA                   ",19
+"277","PANAJACHEL                ",19
+"278","SAN  LUCAS TOLIMAN        ",19
+"279","SAN ANDRES SEMETABAJ      ",19
+"280","SAN ANTONIO PALOPO        ",19
+"281","SAN JOSE CHACAYA          ",19
+"282","SAN JUAN LA LAGUNA        ",19
+"283","SAN MARCOS LA LAGUNA      ",19
+"284","SAN PABLO LA LAGUNA       ",19
+"285","SAN PEDRO LA LAGUNA       ",19
+"286","SANTA CATARINA IXTAHU     ",19
+"287","SANTA CATARINA PALOPO     ",19
+"288","SANTA CLARA LA LAGUNA     ",19
+"289","SANTA CRUZ LA LAGUNA      ",19
+"290","SANTA LUCIA UTATLAN       ",19
+"291","SANTA MARIA VISITACIO     ",19
+"292","SANTIAGO ATITLAN          ",19
+"293","SOLOLA                    ",19
+"294","CHICACAO                  ",20
+"295","CUYOTENANGO               ",20
+"296","MAZATENANGO               ",20
+"297","PATULUL                   ",20
+"298","PUEBLO NUEVO              ",20
+"299","RIO BRAVO                 ",20
+"300","SAMAYAC                   ",20
+"301","SAN ANTONIO SUCHITEPE     ",20
+"302","SAN BERNARDINO            ",20
+"303","SAN FRANCISCO ZAPOTIT     ",20
+"304","SAN GABRIEL               ",20
+"305","SAN JOSE EL  IDOLO        ",20
+"306","SAN JUAN BAUTISTA         ",20
+"307","SAN LORENZO               ",20
+"308","SAN MIGUEL PANAN          ",20
+"309","SAN PABLO JOCOPILAS       ",20
+"310","SANTA BARBARA             ",20
+"311","SANTO DOMINGO SUCHITE     ",20
+"312","SANTO TOMAS LA UNION      ",20
+"313","VARIOS                    ",20
+"314","ZUNILITO                  ",20
+"315","MOMOSTENANGO              ",21
+"316","SAN ANDRES XECUL          ",21
+"317","SAN BARTOLO               ",21
+"318","SAN CRISTOBAL TOTONIC     ",21
+"319","SAN FRANCISCO EL ALTO     ",21
+"320","SANTA LUCIA LA REFORM     ",21
+"321","SANTA MARIA CHIQUIMUL     ",21
+"322","TOTONICAPAN               ",21
+"323","CABA�AS                   ",22
+"324","ESTANZUELA                ",22
+"325","GUALAN                    ",22
+"326","HUITE                     ",22
+"327","LA UNION                  ",22
+"328","RIO HONDO                 ",22
+"329","SAN DIEGO                 ",22
+"330","TECULUTAN                 ",22
+"331","USUMATLAN                 ",22
+"332","ZACAPA                    ",22
+"333","RAXRUJA                   ",1
+"334","IXMUCANE                  ",14
+"335","EL TRIUNFO                ",13
+"336","SANTA ELENA               ",12

@@ -1,0 +1,8 @@
+<h1 class="alt"> <%= t("seguimientos.title") %></h1>
+<fieldset>
+  <legend><%= image_tag('edit22.png') %> <%= t("seguimientos.title_edit") %></legend>
+  <%= error_messages_for :seguimiento %>
+  <% remote_form_for [@institucion, @solicitud, @actividad, @seguimiento], :html=>{:class=>"mantform"} do |f| %>
+  <%= render :partial=>'form', :locals=>{:f => f, :submittext => t("data.submit_edit")} %>
+  <% end %>
+</fieldset>

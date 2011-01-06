@@ -1,0 +1,10 @@
+%h1 New clasificacion
+- form_for(@clasificacion) do |f|
+  = f.error_messages
+  %p
+    = f.label :nombre
+    %br/
+    = f.text_field :nombre
+  %p
+    = f.submit 'Create'
+= link_to 'Back', clasificaciones_path

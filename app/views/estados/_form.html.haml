@@ -1,0 +1,5 @@
+- form.inputs do
+  = form.input :nombre
+  = form.input :modulo_id, :as => :select, :collection => Estado::MODULOS, :include_blank => false
+  = form.input :final, :hint => 'Solicitud ya no se muestra como activa.'
+  = form.input :puede_entregar, :hint => 'Solicitud puede entregarse a solicitante.'

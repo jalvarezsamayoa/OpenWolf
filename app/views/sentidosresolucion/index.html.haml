@@ -1,0 +1,12 @@
+%h1 Listing sentidosresolucion
+%table
+  %tr
+    %th Nombre
+  - @sentidosresolucion.each do |sentidoresolucion|
+    %tr
+      %td= h sentidoresolucion.nombre
+      %td= link_to 'Show', sentidoresolucion
+      %td= link_to 'Edit', edit_sentidoresolucion_path(sentidoresolucion)
+      %td= link_to 'Destroy', sentidoresolucion, :confirm => 'Are you sure?', :method => :delete
+%br/
+= link_to 'New sentidoresolucion', new_sentidoresolucion_path

@@ -1,0 +1,17 @@
+- content_tag_for(:tr, seguimiento) do
+  - actividad = seguimiento.actividad
+  - solicitud = actividad.solicitud
+  - institucion = @institucion
+  %td
+    = image_tag("edit16.png")
+    = link_to_remote t("data.edit"),                 |
+      :url => edit_seguimiento_path(seguimiento.id), |
+      :method => :get                                |
+  %td
+    = image_tag('delete16.png')
+    = link_to_remote t("data.delete"),       |
+      :url => seguimiento_path(seguimiento), |
+      :confirm => t("data.rusure"),          |
+      :method => :delete                     |
+  %td= l(seguimiento.fecha_creacion)
+  %td= seguimiento.textoseguimiento

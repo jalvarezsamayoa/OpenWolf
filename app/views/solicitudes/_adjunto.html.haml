@@ -1,0 +1,9 @@
+%tr
+  %td= link_to adjunto.numero, adjunto.archivo.url
+  %td= adjunto.observaciones
+  %td
+    = image_tag('delete16.png')
+    - if nivel_seguridad(usuario_actual,'encargadoudip')
+      = link_to_remote t("data.delete"), :url=>solicitud_adjunto_path(adjunto.proceso, adjunto), :confirm => t("data.rusure"), :method => :delete
+    - else
+      = t("data.delete")

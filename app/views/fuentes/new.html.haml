@@ -1,0 +1,7 @@
+.mantform
+  %h2
+    Nueva #{Fuente.human_name}
+  - semantic_form_for @fuente do |form|
+    = form.semantic_errors
+    = render :partial => 'form', :locals => {:form => form}
+    = buttons_create(fuentes_path)

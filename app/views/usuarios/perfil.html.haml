@@ -1,0 +1,10 @@
+.mantform
+  %h2
+    Perfil #{@usuario.nombre}
+  - semantic_form_for @usuario do |form|
+    = form.semantic_errors
+    = render :partial => 'form', :locals => {:form => form}
+    - if action_name == 'perfil'
+      = buttons_update(main_index_path)
+    - else
+      = buttons_update(usuarios_path)

@@ -1,4 +1,130 @@
 OpenwolfV3::Application.routes.draw do
+
+  resources :main
+  resources :importar  
+  resources :documentocategorias
+  resources :documentoclasificaciones
+  resources :sentidosresolucion
+  resources :recursosrevision
+  resources :seguimientos
+  resources :estados
+  resources :vias
+  resources :municipios
+  resources :departamentos
+  resource :solicitud_informacion  
+  resources :razonestiposresoluciones
+  resources :tiposresoluciones
+  resources :motivosnegativa
+  resources :clasificaciones
+  resources :rangosedad
+  resources :roles 
+  resources :profesiones
+  resources :fuentes
+  resources :tipomensajes
+  resources :seguimientos
+
+  resources :portal, :only => [:index] do
+    member do
+      get:solicitud
+      get :print
+      get :documento
+      get :print_documento
+      get :institucion
+    end
+    collection do
+      get :buscar
+    end
+  end
+
+  resources :resoluciones do
+    collection do
+      get :actualizar_razones
+    end
+  end
+  
+  resources :instituciones do
+    resources :solicitudes do
+      resources :actividades do
+        resources :seguimientos        
+      end
+      resources :resoluciones
+      resources :recursosrevision
+    end
+
+    resources :mensajes do
+      collection do
+        get :recibidos
+        get :enviados
+      end
+    end    
+  end
+
+  resources :documentos do
+    member do
+      get :plantilla
+    end
+  end
+
+  # resources :mensajes, :only => [:destroy]
+
+  # resources :instituciones do |instituciones|
+  #   instituciones.resources :actividades
+  # end
+  
+  resources :solicitudes do
+    member do
+      get :cambiar_estado
+      get :actualizar_estado
+      put :marcar_entregada
+    end
+    collection do
+      get :actualizar_municipios
+    end
+    resources :adjuntos do
+      member do
+        get :download
+      end
+    end
+  end
+
+  resources :adjuntos do
+    member do
+      get :download
+    end
+  end
+  
+  resources :actividades do
+    member do
+      put :marcar_como_completada
+    end    
+    collection do
+      get :actualizar_usuarios
+    end
+  end
+  
+  devise_for :usuarios
+
+  devise_scope :usuario do
+    get "/login" => "devise/sessions#new", :as => "login"
+    get "/logout" => "devise/sessions#destroy", :as => "logout"
+  end
+  
+  match 'perfil', :to => "usuarios#perfil", :as => "perfil"
+
+  resources :usuarios
+  
+  match 'imprimir_solicitud/:id',
+  :to => 'solicitudes#print', :as => "imprimir_solicitud"
+
+  match 'buscar', :to => "solicitudes#find", :as => "buscar"
+
+  match 'reportes/solicitudes',
+  :to => "reportes#solicitudes", :as =>"reporte_solicitudes"
+    
+  match 'reportes/solicitudes_csv',
+  :to => "reportes#solicitudes_csv",  :as => "reporte_solicitudes_csv"
+
+ 
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -48,7 +174,7 @@ OpenwolfV3::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => "welcome#index"
+  root :to => "portal#index"
 
   # See how all your routes lay out with "rake routes"
 

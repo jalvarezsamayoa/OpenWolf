@@ -46,4 +46,17 @@ OpenwolfV3::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
+
+  #configuracion de dominio predeterminado para DEVISE
+  config.action_mailer.default_url_options = { :host => 'transparencia.gob.gt' }
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :address => 'mail.openwolf.org',
+    :port => 26,
+    :authentication => :login,
+    :user_name => 'notificaciones+openwolf.org',
+    :password => '123456'
+  }
+ 
 end

@@ -1,2 +1,0 @@
-page.replace_html 'actividad_usuario_id', options_from_collection_for_select(@usuarios, 'id', 'nombre_cargo')
-page.visual_effect :highlight, 'actividad_usuario_id'

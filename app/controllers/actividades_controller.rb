@@ -8,6 +8,12 @@ class ActividadesController < ApplicationController
 
   def show
     @actividad = Actividad.find(params[:id])
+
+    @es_pertinente_a_usuario = @solicitud.es_pertinente?(usuario_actual)
+    @usuario_es_supervisor =  nivel_seguridad(usuario_actual,'encargadoudip')
+
+    @puede_remover = @es_pertinente_a_usuario && @usuario_es_supervisor
+    
     respond_to do |format|
       format.js
     end
@@ -17,8 +23,7 @@ class ActividadesController < ApplicationController
   # GET /actividades/new.xml
   def new
     @actividad = usuario_actual.institucion.actividades.new
-    @instituciones = usuario_actual.institucion.familia
-
+    @instituciones = usuario_actual.institucion.familia_activa
     respond_to do |format|
       format.js
     end
@@ -92,22 +97,21 @@ class ActividadesController < ApplicationController
     
     respond_to do |format|
       if @actividad.marcar_como_terminada
-        flash[:success] = 'Asignacion marcada como Completada.'
-        
+        flash[:success] = 'Asignacion marcada como Completada.'        
       else
         flash[:error] = 'Asignacion no pudo ser actualizada'
       end
 
       @asignaciones = usuario_actual.actividades.nocompletadas
       
-      format.html { redirect_to solicitudes_path }
+      format.html { redirect_to solicitud_path(@actividad.solicitud) }
     end    
   end
 
   def actualizar_usuarios
     institucion = Institucion.find(params[:institucion_id])
     if institucion.id == usuario_actual.institucion_id
-      @usuarios = institucion.usuarios
+      @usuarios = institucion.usuarios.enlaces
     else
       @usuarios = institucion.usuarios.supervisores
     end

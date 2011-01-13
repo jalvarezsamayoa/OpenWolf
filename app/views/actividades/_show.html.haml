@@ -9,13 +9,13 @@
       %td= @actividad.id
     %tr
       %th= label :actividad, t("actividades.label_fecha_asignacion")
-      %td= @actividad.fecha_asignacion
+      %td= l(@actividad.fecha_asignacion)
     %tr
       %th= label :actividad, t("actividades.label_estado")
       %td= @actividad.estado.nombre
     %tr
       %th= label :actividad, t("actividades.label_fecha_resolucion")
-      %td= @actividad.fecha_resolucion
+      %td= l(@actividad.fecha_resolucion)
     %tr
       %th= label :actividad, t("actividades.label_textoactividad")
       %td= @actividad.textoactividad
@@ -28,7 +28,7 @@
       - for seguimiento in @actividad.seguimientos  do
         %tr
           %td
-            = seguimiento.fecha_creacion
+            = l(seguimiento.fecha_creacion)
           %td= seguimiento.textoseguimiento
   %br/
   = close_popup('showactividad')

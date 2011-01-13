@@ -13,7 +13,6 @@
   %br/
   %br/
   %h2 Información Optativa
-  %h4 Información para notificaciones
   = form.input :solicitante_direccion, :input_html => {:size => 100, :maxsize => 254}, :hint => 'Opcional: si el ciudadano require que se le envien documentos.'
   = form.input :email, :input_html => {:size => 60, :maxsize => 254}, :hint => 'Opcional: si el ciudadano desea recibir notificaciones automáticas.'
   = form.input :solicitante_telefonos, :input_html => {:size => 60, :maxsize => 254}, :hint => "Opcional: si el ciudadano requiere que se le notifique telefónicamente."
@@ -21,8 +20,9 @@
   = form.input :departamento, :hint => "Opcional: Departamento de la república donde se realiza la solicitud."
   = form.input :municipio, :hint => "Opcional: Municipio de la república donde se realiza la solicitud."
   = form.input :genero, :include_blank => true, :hint => "Opcional: Género del solicitante"
+  = form.input :idioma, :include_blank => false, :hint => "Idioma que habla el solicitante"
   = form.input :rangoedad, :include_blank => true, :hint => "Opcional: Edad del solicitante"
   = form.input :clasificacion, :include_blank => true, :hint => "Opcional: Ocupación del solicitante"
   = form.input :profesion, :hint => "Opcional: Profesión del solicitante"
   = form.input :observaciones, :input_html => {:rows => 5}, :hint => "Observaciones pertinentes sobre solicitud."
-= observe_field(:solicitud_departamento_id, :url => actualizar_municipios_solicitudes_path, :with => "departamento_id", :method => :get)
+

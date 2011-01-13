@@ -6,6 +6,13 @@ class Profesion < ActiveRecord::Base
 
   has_many :solicitudes
 
+  scope :nombre_like, lambda { |nombre|
+    unless nombre.nil? || nombre.empty? || nombre.first.nil?
+      valor = "%#{nombre}%".upcase
+      where("UPPER(profesiones.nombre) like ?", valor )
+   end
+  }
+
   def to_label
     nombre
   end

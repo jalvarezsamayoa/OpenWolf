@@ -40,5 +40,6 @@ module OpenwolfV3
     config.filter_parameters += [:password, :password_confirmation]
 
     config.middleware.use "PDFKit::Middleware", :print_media_type => true
+
   end
 end

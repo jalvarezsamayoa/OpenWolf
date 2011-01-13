@@ -1,10 +1,8 @@
 - if @desde.nil? or @hasta.nil?
-- @desde = @hasta = Date.today
-- end
+  - @desde = @hasta = Date.today
 - if usuario_actual.nil?
-- @url = usuario_actual.nil? ? buscar_portal_index_url : buscar_url
-- @method = usuario_actual.nil? ? :get : :post
-- end
+  - @url = usuario_actual.nil? ? buscar_portal_index_url : buscar_url
+  - @method = usuario_actual.nil? ? :get : :post
 / Inicia formas de filtro
 .mantform
   #filtros
@@ -14,7 +12,7 @@
         %li= link_to "Documentos", "#tab-documentos"
     #tab-solicitudes
       %h2 Filtrar Solicitudes
-      - form_tag @url, :method => @method do
+      = form_tag @url, :method => @method do
         %table{:border => "0", :cellpadding => "0", :cellspacing => "0", :width => "100%"}
           %tr
             %th Instituciones
@@ -30,14 +28,8 @@
               = text_field_tag :fecha_desde, l(@desde)
               al#{text_field_tag :fecha_hasta, l(@hasta)}
           %tr
-            %th Solicitado Por
-            %td= text_field_tag :solicitante_nombre, '', :size => 60
-          %tr
-            %th Texto Solicitud
-            %td= text_field_tag :solicitud_texto, '', :size => 60
-          %tr
-            %th Código Solicitud
-            %td= text_field_tag :solicitud_codigo, '', :size => 60
+            %th Contiene texto
+            %td= text_field_tag :search, '', :size => 60         
           %tr
             %th Vía Solicitud
             %td= select_tag :solicitud_via, options_for_select(Via.all.collect {|c| [c.nombre, c.id] }.insert(0, 'Todos'))

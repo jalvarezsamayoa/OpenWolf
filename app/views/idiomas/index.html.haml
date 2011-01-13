@@ -1,0 +1,15 @@
+= render :partial => "breadcrumbs"
+.listing
+  %h2= Idioma.human_name.pluralize
+  %div{:id => "options"}
+    = button_new(new_idioma_path)
+    = render :partial => 'shared/findbox', :locals => {:url => idiomas_path}
+  %table.minimalist-b
+    %thead
+      %tr
+        %th= Idioma.human_attribute_name(:nombre)
+    %tbody
+      - for idioma in @idiomas
+        %tr
+          %td= link_to idioma.nombre, idioma_path(idioma)
+  = will_paginate @idiomas

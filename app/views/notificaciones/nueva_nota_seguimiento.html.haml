@@ -1,0 +1,27 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+  %body
+    Buen día
+    = succeed ":" do
+      %b= @solicitud.nombres_enlaces
+    %br/
+    Por este medio se les informa que se le ha agregado una nueva
+    nota de seguimiento con los siguientes datos:
+    %br/
+    %br/
+    %b Institución:
+    = @solicitud.institucion.nombre
+    %br/
+    %b Número Solicitud:
+    = "@solicitud.codigo ( #{@url_solicitud} )"
+    %br/
+    %b Fecha programa de entrega:
+    = l(@solicitud.fecha_programada)
+    %br/
+    %p
+    %b Texto Seguimiento:
+    %br/
+    = h @nota.texto
+

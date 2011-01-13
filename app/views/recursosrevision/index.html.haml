@@ -1,26 +1,31 @@
-%h1 Listing recursosrevision
-%table
-  %tr
-    %th Solicitud
-    %th Fecha presentacion
-    %th Fecha notificacion
-    %th Fecha resolucion
-    %th Descripcion
-    %th Sentidoresolucion
-    %th Institucion
-    %th Usuario
-  - @recursosrevision.each do |recursorevision|
-    %tr
-      %td= h recursorevision.solicitud_id
-      %td= h recursorevision.fecha_presentacion
-      %td= h recursorevision.fecha_notificacion
-      %td= h recursorevision.fecha_resolucion
-      %td= h recursorevision.descripcion
-      %td= h recursorevision.sentidoresolucion_id
-      %td= h recursorevision.institucion_id
-      %td= h recursorevision.usuario_id
-      %td= link_to 'Show', recursorevision
-      %td= link_to 'Edit', edit_recursorevision_path(recursorevision)
-      %td= link_to 'Destroy', recursorevision, :confirm => 'Are you sure?', :method => :delete
-%br/
-= link_to 'New recursorevision', new_recursorevision_path
+- @forview = "INDEX"
+= render :partial => "breadcrumbs"
+
+%h1.alt= "Recursos revisión"
+
+= render :partial => "solicitudes/solicitud"
+
+%fieldset
+  %legend
+    = image_tag('refresh22.png')
+    = "Recursos revisión"
+
+  .listing
+    %div{:id => "options"}
+      = button_new(new_solicitud_recursorevision_path(@solicitud))
+      = button_cancel(solicitud_path(@solicitud),'Regresar a solicitud')
+    %table.minimalist-b
+      %thead
+        %tr 
+          %th{:width => "20%"}= Recursorevision.human_attribute_name(:numero)
+          %th= Recursorevision.human_attribute_name(:fecha_presentacion)
+          %th= Sentidoresolucion.human_name
+          %th= Recursorevision.human_attribute_name(:descripcion)
+      %tbody
+        - for recursorevision in @recursosrevision
+          %tr
+            %td= link_to recursorevision.numero, solicitud_recursorevision_path(@solicitud,recursorevision)
+            %td= l(recursorevision.fecha_presentacion)
+            %td= recursorevision.sentidoresolucion.nombre
+            %td= recursorevision.descripcion
+

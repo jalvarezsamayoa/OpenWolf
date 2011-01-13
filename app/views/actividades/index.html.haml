@@ -18,7 +18,7 @@
           %td= asignacion.solicitud.estado.nombre
           %td= link_to asignacion.solicitud.codigo, institucion_solicitud_path(asignacion.solicitud.institucion_id, asignacion.solicitud)
           %td= asignacion.solicitud.institucion.nombre
-          %td= asignacion.solicitud.fecha_creacion
+          %td= l(asignacion.solicitud.fecha_creacion)
           %td= asignacion.solicitud.dias_restantes
     %tfoot
       %td{:colspan => "10"}

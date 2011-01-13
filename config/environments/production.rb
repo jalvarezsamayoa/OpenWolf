@@ -52,11 +52,12 @@ OpenwolfV3::Application.configure do
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    :address => 'mail.openwolf.org',
-    :port => 26,
-    :authentication => :login,
-    :user_name => 'notificaciones+openwolf.org',
-    :password => '123456'
-  }
+    :address              => "smtp.gmail.com",
+    :port                 => 587,
+    :domain               => 'openwolf.org',
+    :user_name            => 'notificaciones@openwolf.org',
+    :password             => 'Bless777',
+    :authentication       => 'plain',
+    :enable_starttls_auto => true  }
  
 end

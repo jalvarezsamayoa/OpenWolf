@@ -50,12 +50,15 @@
       ©2010 Open Wolf - Plataforma virtual para la transparencia
       %br/
       %br/
-      = link_to "Blog", "http://openwolf.org/blog"
+      = link_to "Blog", "http://openwolf.org/blog"      
       |
-      \#{link_to "Acerca del Proyecto", "http://openwolf.org/sobre-openwolf-libre-acceso-informacion-guatemala/"} |
-      \#{link_to "Preguntas Frecuentes", "#"} |
-      \#{link_to "Licenciamiento", "http://openwolf.org/gplv3/"} |
-      \#{link_to "Portal Estatal", main_index_url}
+      = link_to "Acerca del Proyecto", "http://openwolf.org/sobre-openwolf-libre-acceso-informacion-guatemala/"
+      |
+      = link_to "Preguntas Frecuentes", "#"
+      |
+      = link_to "Licenciamiento", "http://openwolf.org/gplv3/"
+      |
+      = link_to "Portal Estatal", main_index_url
     div
     #poweredby{:style => "text-align: center; margin-top: 20px; width: 100%; float: left;"}
       = link_to image_tag('logopenwolf.png',:alt => 'Powered by OpenWolf v0.1a',:width=>'100px'), 'http://openwolf.org', :title => "Powered by OpenWolf"

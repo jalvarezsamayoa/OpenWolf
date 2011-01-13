@@ -3,7 +3,7 @@ class Resolucion < ActiveRecord::Base
   
   TIPO_ENTREGA = 1
   
-  validates_presence_of :numero
+  validates_presence_of :numero, :descripcion
   validates_uniqueness_of :numero
 
   belongs_to :solicitud

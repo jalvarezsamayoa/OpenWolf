@@ -1,0 +1,15 @@
+<% @forview = "EDIT" %>
+<%= render :partial => "breadcrumbs" %>
+
+<%= render :partial => 'solicitud'  %>
+
+<div class="mantform">
+  <h2>Editar <%= Nota.human_name %></h2>
+  
+  <% semantic_form_for [@solicitud, @nota] do |form| %>
+    <%= form.semantic_errors %>
+    <%= render :partial => 'form', :locals => {:form => form} %>     
+    <%= buttons_update(solicitud_notas_path(@solicitud)) %>
+  <% end %>
+  
+</div>

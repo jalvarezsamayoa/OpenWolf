@@ -1,0 +1,20 @@
+- @forview = "SHOW"
+= render :partial=>"breadcrumbs"
+
+.show
+  %h2= Idioma.human_name
+
+  %div{:id=>"options"}
+    = button_new(new_idioma_path)
+    = button_edit(edit_idioma_path(@idioma))
+    = button_delete(idioma_path(@idioma))
+    = button_cancel(idiomas_path)
+    %br
+
+  .box
+    %table
+      %colgroup.show-table-header
+      %colgroup.show-table-data
+      %tr
+        %th= label :nombre, Idioma.human_attribute_name(:nombre)
+        %td= @idioma.nombre

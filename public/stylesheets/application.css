@@ -193,7 +193,10 @@ body{
            background-color: #FFF;
            padding: 10px;
            border: 1px solid #064176;
-           min-height: 700px;
+           min-height: 700px;         
+           width: auto;
+           min-width: 770px;
+           float: left;
            }
 
 #navigation {
@@ -366,7 +369,17 @@ body{
                  }
 
 
-.listing #options #findbox { float: right; }
+.listing { float: left;
+         width: 100%;}
+.listing #options { float: left; 
+                  width: 100%; }
+.listing #options #buttons { float: left; }
+.listing #options #findbox { float: right;}
+
+.listing #solicitudes { float: left; 
+                      width: 100%;
+                      margin-bottom: 20px;
+}
 
 
 /************************************/
@@ -436,6 +449,13 @@ body{
 	}
 
 
+/* Links de paginacion */
 
-
-
+div.pagination {
+  width: auto;
+  text-align: center;  
+}
+div.pagination a {
+  padding-left: 2px;
+  padding-right: 2px;
+}

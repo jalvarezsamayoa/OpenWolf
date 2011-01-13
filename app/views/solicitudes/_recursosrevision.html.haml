@@ -1,13 +1,15 @@
 %table#minimalist-a
   %thead
-    %th= Recursorevision.human_attribute_name(:numero)
+    %th{:width => "20%"}= Recursorevision.human_attribute_name(:numero)
     %th= Recursorevision.human_attribute_name(:fecha_presentacion)
     %th= Sentidoresolucion.human_name
+    %th= Recursorevision.human_attribute_name(:descripcion)
   %tbody
     - for recursorevision in @solicitud.recursosrevision
       %tr
         %td= recursorevision.numero
         %td= l(recursorevision.fecha_presentacion)
         %td= recursorevision.sentidoresolucion.nombre
+        %td= recursorevision.descripcion
 #showrecursorevision.popup{:style => "display: none; height: 400px;"}
 %hr/

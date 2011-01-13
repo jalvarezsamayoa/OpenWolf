@@ -7,14 +7,15 @@
   %table.minimalist-b
     %thead
       %tr
+        %th= Usuario.human_attribute_name(:username)
         %th= Usuario.human_attribute_name(:nombre)
         %th= Usuario.human_attribute_name(:cargo)
         %th= Usuario.human_attribute_name(:institucion_id)
     %tbody
       - for usuario in @usuarios  do
         %tr
-          %td
-            = link_to usuario.username, usuario_path(usuario)
+          %td= link_to usuario.username, usuario_path(usuario)
+          %td= usuario.nombre
           %td= usuario.cargo
           %td= usuario.institucion.nombre
   = will_paginate @usuarios

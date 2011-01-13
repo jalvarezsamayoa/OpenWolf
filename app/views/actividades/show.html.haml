@@ -6,7 +6,7 @@
   = h @actividad.usuario_id
 %p
   %b Fecha asignacion:
-  = h @actividad.fecha_asignacion
+  = h l(@actividad.fecha_asignacion)
 %p
   %b Textoactividad:
   = h @actividad.textoactividad
@@ -15,7 +15,7 @@
   = h @actividad.estado_id
 %p
   %b Fecha resolucion:
-  = h @actividad.fecha_resolucion
+  = h l(@actividad.fecha_resolucion)
 = link_to 'Edit', edit_actividad_path(@actividad)
 |
 \#{link_to 'Back', actividades_path}

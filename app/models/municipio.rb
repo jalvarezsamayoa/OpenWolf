@@ -8,6 +8,13 @@ class Municipio < ActiveRecord::Base
 
   default_scope :include => :departamento, :order => "departamentos.nombre, municipios.nombre"
 
+  scope :nombre_like, lambda { |nombre|
+    unless nombre.nil? || nombre.empty? || nombre.first.nil?
+      valor = "%#{nombre}%".upcase
+      where("UPPER(municipios.nombre) like ? or UPPER(departamentos.nombre) like ?", valor, valor )
+   end
+  }
+
   def nombre_completo
     return nombre + ', ' + departamento.nombre
   end

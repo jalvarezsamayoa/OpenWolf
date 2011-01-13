@@ -1,27 +1,42 @@
-%p
-  %b Solicitud:
-  = h @recursorevision.solicitud_id
-%p
-  %b Fecha presentacion:
-  = h @recursorevision.fecha_presentacion
-%p
-  %b Fecha notificacion:
-  = h @recursorevision.fecha_notificacion
-%p
-  %b Fecha resolucion:
-  = h @recursorevision.fecha_resolucion
-%p
-  %b Descripcion:
-  = h @recursorevision.descripcion
-%p
-  %b Sentidoresolucion:
-  = h @recursorevision.sentidoresolucion_id
-%p
-  %b Institucion:
-  = h @recursorevision.institucion_id
-%p
-  %b Usuario:
-  = h @recursorevision.usuario_id
-= link_to 'Edit', edit_recursorevision_path(@recursorevision)
-|
-\#{link_to 'Back', recursosrevision_path}
+- @forview = "SHOW"
+= render :partial => "breadcrumbs"
+
+%h1.alt= "Recursos revisión"
+
+= render :partial => "solicitudes/solicitud"
+
+.show
+  %h2= Recursorevision.human_name
+
+  %div{:id=>"options"}
+    = button_new(new_solicitud_recursorevision_path(@solicitud))
+    = button_edit(edit_solicitud_recursorevision_path(@solicitud,@recursorevision))
+    = button_delete(solicitud_recursorevision_path(@solicitud,@recursorevision))
+    = button_cancel(solicitud_recursosrevision_path(@solicitud))
+    %br
+
+  .box
+    %table
+      %colgroup.show-table-header
+      %colgroup.show-table-data
+      %tr
+        %th= label :numero, Recursorevision.human_attribute_name(:numero)
+        %td= @recursorevision.numero
+      %tr
+        %th= label :usuario_id, Recursorevision.human_attribute_name(:usuario_id)
+        %td= @recursorevision.usuario.nombre
+      %tr
+        %th= label :fecha_presentacion, Recursorevision.human_attribute_name(:fecha_presentacion)
+        %td= l(@recursorevision.fecha_presentacion) unless @recursorevision.fecha_presentacion.nil?
+      %tr
+        %th= label :fecha_notificacion, Recursorevision.human_attribute_name(:fecha_notificacion)
+        %td= l(@recursorevision.fecha_notificacion) unless @recursorevision.fecha_notificacion.nil?
+      %tr
+        %th= label :fecha_resolucion, Recursorevision.human_attribute_name(:fecha_resolucion)
+        %td= l(@recursorevision.fecha_resolucion) unless @recursorevision.fecha_resolucion.nil?
+      %tr
+        %th= label :sentidoresolucion, Recursorevision.human_attribute_name(:sentidoresolucion)
+        %td= @recursorevision.sentidoresolucion.nombre
+      %tr
+        %th= label :descripcion, Recursorevision.human_attribute_name(:descripcion)
+        %td= @recursorevision.descripcion

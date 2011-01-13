@@ -129,6 +129,7 @@ en:
       documentoclasificacion: "Clasificación Documental"
       documentocategoria: "Categoría Documental"
       documento: "Documento"
+      nota: "Nota Seguimiento"
     attributes:
       usuario:
         email: "Correo electrónico"
@@ -194,6 +195,8 @@ en:
         rpt_fechapresentacionrecursorevision: "Fecha de presentación del recurso de revisión"
         rpt_fechanotificacionrecursorevision: "Fecha en la que se notificó el recurso de revisión"
         rpt_sentidoresolucion: "Sentido de la resolución caida al recurso"
+        notas: "Seguimientos"
+        enlaces: "Personal asignado"
       tiporesolucion:
         nombre: "Descripcion"
         actualiza_fecha: "Modifica fecha entrega"
@@ -274,6 +277,10 @@ en:
         documentocategoria_id: "Categoria Documental"
       documentocategoria:
         nombre: "Nombre Categoria"
+      nota:
+        texto: "Mensaje seguimiento"
+        usuario_id: "Usuario"
+        created_at: "Fecha"
 
   breadcrums:
     homepage: "Pagina de Inicio"
@@ -353,7 +360,7 @@ en:
     label_institucion: "Institución"
     title: "Asignaciones"
     title_new: "Asignar"
-    label_mistareas: "Mis Tareas Asignadas"
+    label_mistareas: "Mis Asignaciones"
     label_cargo: "Cargo"
 
   seguimientos:
@@ -371,3 +378,8 @@ en:
     label_observaciones: "Descripcion"
     label_adjunto: "Archivo Adjunto"
     label_archivo: "Archivo Adjunto"
+
+  notas:
+    title: "Notas Seguimiento"
+    title_new: "Nueva Nota Seguimiento"
+    title_edit: "Modificar Nota Segumiento"

@@ -1,8 +1,0 @@
-<h3 class="alt"> <%= t("actividades.title") %></h3>
-<fieldset>
-  <legend><%= image_tag('edit22.png') %> <%= t("actividades.title_edit") %></legend>
-  <%= error_messages_for :actividad %>
-  <% form_for [@institucion, @solicitud, @actividad], :html=>{:class=>"mantform"} do |f| %>
-  <%= render :partial=>'form', :locals=>{:f => f, :submittext => t("data.submit_edit")} %>
-  <% end %>
-</fieldset>

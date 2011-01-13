@@ -1,4 +1,0 @@
-page.hide :newadjunto
-page.replace_html :newadjunto, ''
-page.replace_html :adjuntos, :partial => 'solicitudes/adjuntos'
-page.ajax_flash

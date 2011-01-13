@@ -18,10 +18,10 @@
   #solicitud.span-24.last
     .span-12.left
       = label :fecha_creacion, Solicitud.human_attribute_name(:fecha_creacion)
-      = @solicitud.fecha_creacion
+      = l(@solicitud.fecha_creacion)
     .span-12.last.right
       = label :solicitud, t("solicitudes.label_fecha_entregada")
-      = @solicitud.fecha_entregada
+      = l(@solicitud.fecha_entregada)
     %hr.space/
     %h3 Información Solicitante
     %hr/

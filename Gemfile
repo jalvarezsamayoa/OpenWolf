@@ -37,6 +37,7 @@ gem 'activerecord-import', :require => nil # herramienta para importacion de dat
 gem 'serenity-odt' #generacion de templates ODT
 gem 'fastercsv' #manejo de archivos CSV
 gem 'vestal_versions', :git => 'git://github.com/adamcooper/vestal_versions' #manejor de versiones de modelos
+gem 'silent-postgres' #elimina la salida de el log de postgresql 
 
 # MONITOREO
 gem 'newrelic_rpm' # monitoreo de performance http://newrelic.com

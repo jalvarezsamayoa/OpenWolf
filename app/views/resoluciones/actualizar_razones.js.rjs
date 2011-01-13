@@ -1,7 +1,0 @@
-page.replace_html 'resolucion_razontiporesolucion_id', options_from_collection_for_select(@razones, 'id', 'nombre')
-page.visual_effect :highlight, 'resolucion_razontiporesolucion_id'
-if (@tiporesolucion.actualiza_fecha?)
- page.show :resolucion_nueva_fecha_input
-else
- page.hide :resolucion_nueva_fecha_input
-end

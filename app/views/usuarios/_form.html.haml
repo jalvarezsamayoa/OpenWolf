@@ -1,18 +1,15 @@
 - form.inputs do
-  = form.input :username
+  = form.input :email, :input_html => {:size => 60}
+  = form.input :username, :required => true, :input_html => {:size => 60}
   = form.input :password
   = form.input :password_confirmation
-  = form.input :nombre
-  = form.input :cargo
-- ##TODO: Limpiar select, convertir en helper
-  - disabled = (nivel_seguridad(usuario_actual,'superadmin') ? false : true )
-  = form.input :institucion, :include_blank => false, :input_html => {:disabled => disabled, :class => 'combobox', :style => "width: 450px;"}
-  = form.input :email
-  = form.input :openid_identifier
-  - if nivel_seguridad(usuario_actual,'administrador')
+  = form.input :nombre, :input_html => {:size => 60}
+  = form.input :cargo, :input_html => {:size => 60}
+  = form.input :institucion, :include_blank => false, :input_html => {:disabled => @disabled, :class => 'combobox', :style => "width: 450px;"}
+  - if @usuario_es_admin
     %hr/
     %h4 Roles de Seguridad
-    - if nivel_seguridad(usuario_actual,'superadmin')
+    - if @usuario_es_superadmin
       = form.input :roles, :as => :check_boxes, :collection => Role.all
     - else
       = form.input :roles, :as => :check_boxes, :collection => Role.basicos

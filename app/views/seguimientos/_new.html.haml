@@ -1,9 +1,6 @@
-%h1.alt
-  = t("seguimientos.title")
 %fieldset
   %legend
     = image_tag('add22.png')
     = t("seguimientos.title_new")
-  = error_messages_for :seguimiento
-  - remote_form_for [@institucion, @solicitud, @actividad, @seguimiento], :html=>{:class=>"mantform"} do |f|
+  -  form_for [@institucion, @solicitud, @actividad, @seguimiento], {:remote => true}, {:class=>"mantform"} do |f|
     = render :partial=>'form', :locals=>{:f => f, :submittext => t("data.submit_new")}

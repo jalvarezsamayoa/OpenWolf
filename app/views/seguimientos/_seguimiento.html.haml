@@ -4,14 +4,8 @@
   - institucion = @institucion
   %td
     = image_tag("edit16.png")
-    = link_to_remote t("data.edit"),                 |
-      :url => edit_seguimiento_path(seguimiento.id), |
-      :method => :get                                |
+    = link_to t("data.edit"),  edit_seguimiento_path(seguimiento.id), :method => :get, :remote => true
   %td
-    = image_tag('delete16.png')
-    = link_to_remote t("data.delete"),       |
-      :url => seguimiento_path(seguimiento), |
-      :confirm => t("data.rusure"),          |
-      :method => :delete                     |
+    = link_to t("data.delete"), seguimiento_path(seguimiento), :confirm => t("data.rusure"), :method => :delete, :remote => true
   %td= l(seguimiento.fecha_creacion)
   %td= seguimiento.textoseguimiento

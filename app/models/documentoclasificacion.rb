@@ -12,6 +12,12 @@ class Documentoclasificacion < ActiveRecord::Base
 
   default_scope :include => :documentocategoria, :order => :nombre
 
+  scope :nombre_like, lambda { |nombre|
+    unless nombre.nil? || nombre.empty? || nombre.first.nil?
+      where("documentoclasificaciones.nombre like ?", "%#{nombre}%" )
+   end
+  }
+
   def to_label
     nombre
   end

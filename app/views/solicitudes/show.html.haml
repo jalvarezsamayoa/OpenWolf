@@ -1,5 +1,5 @@
 - content_for :head do
-  = javascript_include_tag 'jquery-blockui.js'
+  = javascript_include_tag 'solicitudes.js', 'jquery-blockui.js'
 - @forview = "SHOW"
 = render :partial=>"breadcrums"
 %h1.alt= Solicitud.human_name
@@ -13,8 +13,11 @@
     %span#estado_solicitud_nombre= @solicitud.estado_actual
   %table
     %tr
+      %th= label :id, Solicitud.human_attribute_name(:id)
+      %td= @solicitud.id
+    %tr
       %th{:width => "20%"}= label :codigo, Solicitud.human_attribute_name(:codigo)
-      %td{:width => "80%"}= @solicitud.codigo
+      %td{:width => "80%"}= @solicitud.codigo 
     %tr
       %th= label :fecha_creacion, Solicitud.human_attribute_name(:fecha_creacion)
       %td= l(@solicitud.fecha_creacion)
@@ -26,10 +29,10 @@
       %td= @solicitud.via.nombre
   %hr/
   %h4 Asignado a
-  #solicitud_no_asignada.error{:style => 'display:none' if @actividades.size > 0}
+  #solicitud_no_asignada.error{ @actividades.size > 0 ? {:style => "display:none"} : {} }
     La solicitud no ha sido asignada.
   #asignaciones
-    = render :partial => 'asignaciones'
+    = render(:partial => 'asignaciones')
   %h4 Datos del Solicitante
   %table
     %tr
@@ -88,9 +91,12 @@
   %h4= t("activerecord.models.recursosrevision")
   #recursosrevision
     = render :partial => 'recursosrevision'
+  %h4= t("activerecord.models.nota")
+  #notasseguimiento
+    = render :partial => 'notas_seguimiento'
   #adjuntos
     = render :partial => 'adjuntos'
 #newactividad.popup{:style => "display: none; height: 440px; text-align:left;"}
 #newadjunto.popup{:style => "display: none; height: 400px;"}
-#newresolucion.popup{:style => "display: none; height: 400px;"}
-#newrecursorevision.popup{:style => "display: none; height: 400px;"}
+#newresolucion.popup{:style => "display: none; height: 550px;"}
+#newrecursorevision.popup{:style => "display: none; height: 550px;"}

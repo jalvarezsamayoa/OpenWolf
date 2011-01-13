@@ -1,0 +1,3 @@
+$("#resolucion_razontiporesolucion_id").html("<%= escape_javascript( options_from_collection_for_select(@razones, 'id', 'nombre') ) %>");
+$("#resolucion_razontiporesolucion_id").effect("highlight", {}, 3000);
+$("#resolucion_nueva_fecha_input").<%= escape_javascript( (@tiporesolucion.actualiza_fecha? ? 'show' : 'hide') ) %>();

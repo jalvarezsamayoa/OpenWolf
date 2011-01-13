@@ -21,10 +21,8 @@
     %tbody
       - for mensaje in @mensajes  do
         %tr
-          %td
-            = link_to mensaje.numero, institucion_mensaje_path(@institucion,mensaje)
-          %td
-            = mensaje.fecha_recepcion
+          %td= link_to mensaje.numero, institucion_mensaje_path(@institucion,mensaje)
+          %td= l(mensaje.fecha_recepcion)
           %td= mensaje.tipomensaje.nombre
           %td= mensaje.remitente
           %td= mensaje.fuente.nombre

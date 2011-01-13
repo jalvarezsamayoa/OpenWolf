@@ -1,0 +1,36 @@
+<%= render :partial => "breadcrumbs" %>
+<h1 class="alt"> <%= t("notas.title") %></h1>
+
+<%= render :partial => "solicitud" %>
+
+<fieldset>
+  <legend> <%= image_tag('chat22.png') %> <%= t("notas.title") %> </legend>
+  
+  <%= link_to(image_tag('add16.png')+t("data.new"),
+  new_solicitud_nota_path(@solicitud),
+  {:title=>t("data.linktitle_new"), :class => 'button'} ) %>
+  <%= button_cancel(solicitud_path(@solicitud),'Regresar a solicitud') %>
+  <table id="minimalist-a">
+    <thead>
+      <tr>
+        <th><%= Nota.human_attribute_name(:created_at) %></th>
+        <th><%= Nota.human_attribute_name(:usuario_id) %></th>
+        <th><%= Nota.human_attribute_name(:texto) %></th>
+        <th width="10%">&nbsp;</th>
+      </tr>
+    </thead> 
+    <tbody>
+      <% for nota in @notas  do%>
+        <tr>
+          <td><%= l(nota.created_at.to_date) %></td>
+          <td><%= nota.usuario.nombre %></td>
+          <td>
+	    <%= nota.texto %>
+          </td>
+          <td><%= link_to 'Ver', solicitud_nota_path(nota.proceso_id, nota) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  
+</fieldset>

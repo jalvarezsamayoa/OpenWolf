@@ -1,40 +1,19 @@
-%h1 Editing recursorevision
-- form_for(@recursorevision) do |f|
-  = f.error_messages
-  %p
-    = f.label :solicitud_id
-    %br/
-    = f.text_field :solicitud_id
-  %p
-    = f.label :fecha_presentacion
-    %br/
-    = f.date_select :fecha_presentacion
-  %p
-    = f.label :fecha_notificacion
-    %br/
-    = f.date_select :fecha_notificacion
-  %p
-    = f.label :fecha_resolucion
-    %br/
-    = f.date_select :fecha_resolucion
-  %p
-    = f.label :descripcion
-    %br/
-    = f.text_area :descripcion
-  %p
-    = f.label :sentidoresolucion_id
-    %br/
-    = f.text_field :sentidoresolucion_id
-  %p
-    = f.label :institucion_id
-    %br/
-    = f.text_field :institucion_id
-  %p
-    = f.label :usuario_id
-    %br/
-    = f.text_field :usuario_id
-  %p
-    = f.submit 'Update'
-= link_to 'Show', @recursorevision
-|
-\#{link_to 'Back', recursosrevision_path}
+- content_for :head do
+  = javascript_include_tag 'recursosrevision.js'
+
+- @forview = "EDIT"
+= render :partial => "breadcrumbs"
+
+%h1.alt= Recursorevision.human_name.pluralize
+
+= render :partial => "solicitudes/solicitud"
+
+.mantform
+  %h2
+    Editar 
+    = Recursorevision.human_name
+
+  - semantic_form_for [@solicitud,@recursorevision] do |form|
+    = form.semantic_errors
+    = render :partial => 'form', :locals => {:form => form}
+    = buttons_update(solicitud_recursosrevision_path(@solicitud))

@@ -1,9 +1,0 @@
-<div class="mantform">
-  <h2>Nuevo <%= Tiporesolucion.human_name %></h2>
-  
-  <% semantic_form_for @tiporesolucion do |form| %>
-    <%= form.semantic_errors %>
-    <%= render :partial => 'form', :locals => {:form => form} %>    
-    <%= buttons_create(tiposresoluciones_path) %>
-  <% end %>
-</div>

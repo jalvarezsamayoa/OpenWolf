@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
 
   rescue_from 'Acl9::AccessDenied', :with => :acceso_denegado
   
-  helper_method :usuario_actual, :current_user
+  helper_method :usuario_actual, :current_user, :nivel_seguridad, :fix_date
 
   layout :layout_por_recurso
 
@@ -75,6 +75,48 @@ class ApplicationController < ActionController::Base
     return nil if fecha.nil? or fecha.empty?
     a_fecha = fecha.split('/')
     return Date.civil(a_fecha[2].to_i, a_fecha[1].to_i, a_fecha[0].to_i)
+  end
+
+   # helpers para seguridad
+  def nivel_seguridad(u = nil, nivel = 'public')
+    return false if u.nil?
+    
+    logger.debug { "Verificando nivel: #{nivel}" }
+    l_ok = false
+    case nivel
+    when 'superadmin'
+#      logger.debug { "Es: superadmin" }
+      l_ok =  u.has_role?(:superadmin)
+      logger.debug { "#{l_ok}" }
+    when 'administrador'
+ #     logger.debug { "Es: administrador" }
+      l_ok =  (u.has_role?(:superadmin) or u.has_role?(:localadmin))
+      logger.debug { "#{l_ok}" }
+    when 'encargadoudip'
+       logger.debug { "Es: encargadoudip" }
+      l_ok = (u.has_role?(:superudip))
+    when 'personaludip'
+      l_ok = (u.has_role?(:superudip) or u.has_role?(:userudip))
+    end
+    return l_ok
+  end
+
+
+   # transforma un string fecha con formato DD/MM/YYY a un objeto
+  # fecha con formato YYYY-MM-DD que pueda ser grabado a la base de datos
+  def fix_date(c_date)
+    return nil if c_date.nil?
+
+    a_date = c_date.split('/')
+    return nil unless a_date.size == 3
+
+    if a_date[2].size == 2
+      a_date[2] = '20'+a_date[2]
+    end
+
+    new_date = Date.civil(a_date[2].to_i, a_date[1].to_i, a_date[0].to_i)
+    
+    return new_date
   end
   
 end

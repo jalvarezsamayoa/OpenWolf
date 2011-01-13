@@ -1,6 +1,0 @@
-page.hide 'newactividad'
-page.replace_html 'newactividad', ''
-page.show 'link_new_resolucion'
-page.hide 'solicitud_no_asignada'
-page.replace_html 'asignaciones', :partial => 'solicitudes/asignaciones'
-page.ajax_flash

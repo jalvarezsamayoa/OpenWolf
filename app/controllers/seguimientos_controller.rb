@@ -5,7 +5,7 @@ class SeguimientosController < ApplicationController
   # GET /seguimientos/new.xml
   def new
     @seguimiento = Seguimiento.new
-
+  
     respond_to do |format|
       format.js # new.html.erb
     end
@@ -17,7 +17,7 @@ class SeguimientosController < ApplicationController
     @seguimiento = Seguimiento.new(params[:seguimiento])
     @seguimiento.usuario_id = usuario_actual.id
     @seguimiento.actividad = @actividad
-
+    @dom_id = "#seguimientos_actividad_"+@seguimiento.actividad_id.to_s
     respond_to do |format|
       if @seguimiento.save
         flash[:success] = 'Seguimiento grabado con exito.'

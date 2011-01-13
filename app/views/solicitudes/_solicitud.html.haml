@@ -1,0 +1,14 @@
+%fieldset
+  %legend
+    = image_tag('textfile22.png')
+    = Solicitud.human_name
+  %table
+    %tr
+      %th{:width=>"20%"}= label :codigo, Solicitud.human_attribute_name(:codigo)
+      %td{:width=>"80%"}= link_to @solicitud.codigo, solicitud_path(@solicitud) 
+    %tr
+      %th= label :institucion_id, Solicitud.human_attribute_name(:institucion_id)
+      %td= @solicitud.institucion.nombre
+    %tr
+      %th= label :enlaces, Solicitud.human_attribute_name(:enlaces)
+      %td= @solicitud.nombres_enlaces

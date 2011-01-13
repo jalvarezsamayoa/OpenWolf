@@ -1,5 +1,5 @@
 - form.inputs do
-  = form.input :numero
+  = form.input :numero, :input_html => {:size => 60}
   = form.input :fecha_presentacion, :as => :string, :input_html => {:size => 20}
   - if current_page?(:action => 'new')
     = form.input :fecha_notificacion, :as => :string, :input_html => {:size => 20}

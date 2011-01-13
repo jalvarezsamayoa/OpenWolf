@@ -1,26 +1,32 @@
-%h1 Listing resoluciones
-%table
-  %tr
-    %th Numero
-    %th Solicitud
-    %th Usuario
-    %th Institucion
-    %th Descripcion
-    %th Tiporesolucion
-    %th Razonresolucion
-    %th Nueva fecha
-  - @resoluciones.each do |resolucion|
-    %tr
-      %td= h resolucion.numero
-      %td= h resolucion.solicitud_id
-      %td= h resolucion.usuario_id
-      %td= h resolucion.institucion_id
-      %td= h resolucion.descripcion
-      %td= h resolucion.tiporesolucion_id
-      %td= h resolucion.razonresolucion_id
-      %td= h resolucion.nueva_fecha
-      %td= link_to 'Show', resolucion
-      %td= link_to 'Edit', edit_resolucion_path(resolucion)
-      %td= link_to 'Destroy', resolucion, :confirm => 'Are you sure?', :method => :delete
-%br/
-= link_to 'New resolucion', new_resolucion_path
+- @forview = "INDEX"
+= render :partial => "breadcrumbs"
+
+%h1.alt= Resolucion.human_name.pluralize
+
+= render :partial => "solicitudes/solicitud"
+
+%fieldset
+  %legend
+    = image_tag('refresh22.png')
+    = Resolucion.human_name.pluralize
+
+  .listing
+    %div{:id => "options"}
+      = button_new(new_solicitud_resolucion_path(@solicitud))
+      = button_cancel(solicitud_path(@solicitud),'Regresar a solicitud')
+    %table.minimalist-b
+      %thead
+        %tr
+          %th{:width => "20%"}= Resolucion.human_attribute_name(:numero)
+          %th{:width => "10%"}= Resolucion.human_attribute_name(:created_at)
+          %th{:width => "10%"}= Resolucion.human_attribute_name(:tiporesolucion_id)
+          %th{:width => "15%"}= Resolucion.human_attribute_name(:tiporazonresolucion_id)
+          %th= Resolucion.human_attribute_name(:descripcion)
+        %tbody
+        - for resolucion in @resoluciones do
+          %tr
+            %td= link_to resolucion.numero, solicitud_resolucion_path(@solicitud,resolucion)
+            %td= l(resolucion.created_at.to_date)
+            %td= resolucion.tiporesolucion.nombre
+            %td= resolucion.razontiporesolucion.nombre
+            %td= resolucion.descripcion

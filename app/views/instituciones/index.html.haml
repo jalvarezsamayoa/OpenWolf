@@ -8,14 +8,16 @@
     %thead
       %tr
         %th= Institucion.human_attribute_name(:codigo)
+        %th= Institucion.human_attribute_name(:unidad_ejecutora)
+        %th= Institucion.human_attribute_name(:entidad)
         %th= Institucion.human_attribute_name(:nombre)
         %th= Institucion.human_attribute_name(:parent_id)
     %tbody
       - for institucion in @instituciones  do
         %tr
           %td= institucion.codigo
-          %td
-            = link_to institucion.nombre, institucion_path(institucion)
-          %td
-            = institucion.parent.nil? ? '' : institucion.parent.nombre
+          %td= institucion.unidad_ejecutora
+          %td= institucion.entidad
+          %td= link_to institucion.nombre.strip, institucion_path(institucion)
+          %td= institucion.parent.nil? ? '' : institucion.parent.nombre.strip
   = will_paginate @instituciones

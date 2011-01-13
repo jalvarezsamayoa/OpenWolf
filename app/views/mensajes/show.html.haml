@@ -26,7 +26,7 @@
     %tr
       %td
         = label :fecha_recepcion, t('mensajes.label_fecha_recepcion')
-      %td= @mensaje.fecha_recepcion
+      %td= l(@mensaje.fecha_recepcion)
     %tr
       %td
         = label :fuente_id, t('mensajes.label_fuente_id')
@@ -50,7 +50,7 @@
     %tr
       %td
         = label :fecha_documento, t('mensajes.label_fecha_documento')
-      %td= @mensaje.fecha_documento
+      %td= l(@mensaje.fecha_documento)
     %tr
       %td
         = label :observaciones, t('mensajes.label_observaciones')

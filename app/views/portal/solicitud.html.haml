@@ -34,7 +34,7 @@
               %td= @solicitud.via.nombre
           %hr/
           %h4 Asignado a
-          #solicitud_no_asignada.error{:style => 'display:none' if @actividades.size > 0}
+          #solicitud_no_asignada.error{ @actividades.size > 0 ? {:style => "display:none"} : {} }
             La solicitud no ha sido asignada.
           #asignaciones
             = render :partial => 'asignaciones'
@@ -93,5 +93,11 @@
           %h4= Resolucion.human_name.pluralize
           #resoluciones
             = render :partial => 'resoluciones'
+          %h4= t("activerecord.models.recursosrevision")
+          #recursosrevision
+            = render :partial => 'solicitudes/recursosrevision'
+          %h4= t("activerecord.models.nota")
+          #notasseguimiento
+            = render :partial => 'solicitudes/notas_seguimiento'
           #adjuntos
-            = render :partial => 'adjuntos'
+            = render :partial => 'adjuntos'            

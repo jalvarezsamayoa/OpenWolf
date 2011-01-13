@@ -6,7 +6,8 @@ class Recursorevision < ActiveRecord::Base
   belongs_to :institucion
   belongs_to :sentidoresolucion
 
-  validates_presence_of :fecha_presentacion, :descripcion
+  validates_presence_of :fecha_presentacion, :descripcion, :numero
+  validates_uniqueness_of :numero
 
   before_validation(:on => :create) do
     cleanup

@@ -40,4 +40,14 @@ class Notificaciones < ActionMailer::Base
   end
 
 
+  def nueva_nota_seguimiento(nota)
+    @nota = nota
+    @solicitud = nota.proceso
+    @url_solicitud = solicitud_portal_url(@solicitud.id)
+    
+    mail(:to => @solicitud.correos_interesados,
+         :subject => "openwolf - Nueva nota seguimiento - Solicitud #{@solicitud.codigo}.")           
+  end
+
+
 end

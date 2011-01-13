@@ -1,9 +1,0 @@
-<div class="mantform">
-  <h2>Nuevo <%= Role.human_name %></h2>
-  
-  <% semantic_form_for @role do |form| %>
-    <%= form.semantic_errors %>
-    <%= render :partial => 'form', :locals => {:form => form} %>    
-    <%= buttons_create(roles_path) %>
-  <% end %>
-</div>

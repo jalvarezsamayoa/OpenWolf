@@ -13,6 +13,12 @@ class Estado < ActiveRecord::Base
   scope :laip, :conditions => ["modulo_id = ?",MODULO_LAIP]
   scope :mensajes, :conditions => ["modulo_id = ?",MODULO_MENSAJES]
 
+  scope :nombre_like, lambda { |nombre|
+    unless nombre.nil? || nombre.empty? || nombre.first.nil?
+      where("estados.nombre like ?", "%#{nombre}%" )
+   end
+  }
+
   def to_label
     nombre
   end

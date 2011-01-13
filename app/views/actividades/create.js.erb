@@ -1,0 +1,7 @@
+$("#newactividad").hide();
+$("#newactividad").html("");
+
+$("#link_new_resolucion").show();
+$("#solicitud_no_asignada").hide();
+
+$('#asignaciones').html("<%= escape_javascript(render :partial => 'solicitudes/asignaciones') %>");

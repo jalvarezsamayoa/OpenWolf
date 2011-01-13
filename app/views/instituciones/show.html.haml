@@ -13,11 +13,32 @@
       %colgroup.show-table-header
       %colgroup.show-table-data
       %tr
+        %th= label :codigo, Institucion.human_attribute_name(:codigo)
+        %td= @institucion.codigo
+      %tr
+        %th= label :unidad_ejecutora, Institucion.human_attribute_name(:unidad_ejecutora)
+        %td= @institucion.unidad_ejecutora
+      %tr
+        %th= label :entidad, Institucion.human_attribute_name(:entidad)
+        %td= @institucion.entidad
+      %tr
         %th= label :nombre, Institucion.human_attribute_name(:nombre)
         %td= @institucion.nombre
       %tr
+        %th= label :abreviatura, Institucion.human_attribute_name(:abreviatura)
+        %td= @institucion.abreviatura
+      %tr
         %th= label :parent_id, Institucion.human_attribute_name(:parent_id)
         %td= @institucion.parent.nombre unless @institucion.root? or @institucion.parent.nil?
+      %tr
+        %th= label :direccion, Institucion.human_attribute_name(:direccion)
+        %td= @institucion.direccion
+      %tr
+        %th= label :telefono, Institucion.human_attribute_name(:telefono)
+        %td= @institucion.telefono
+      %tr
+        %th= label :webpage, Institucion.human_attribute_name(:webpage)
+        %td= @institucion.webpage
       %tr
         %th= label :tipoinstitucion_id, Institucion.human_attribute_name(:tipoinstitucion_id)
         %td= @institucion.tipo_nombre

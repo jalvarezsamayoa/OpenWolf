@@ -1,0 +1,19 @@
+- content_for :head do
+  = javascript_include_tag 'resoluciones.js'
+
+- @forview = "NEW"
+= render :partial => "breadcrumbs"
+
+%h1.alt= Resolucion.human_name.pluralize
+
+= render :partial => "solicitudes/solicitud"
+
+.mantform
+  %h2
+    Nueva 
+    = Resolucion.human_name
+
+  - semantic_form_for [@solicitud, @resolucion] do |form|
+    = form.semantic_errors
+    = render :partial => 'form', :locals => {:form => form}
+    = buttons_create(solicitud_resoluciones_path(@solicitud))

@@ -4,7 +4,5 @@
   %legend
     = image_tag('add22.png')
     = t("adjuntos.title_new")
-  = error_messages_for :adjunto
-  - form_for([@proceso, @adjunto], :url => solicitud_adjuntos_path(@proceso, :format => 'js'),
-  - :html => { :class => "mantform", :multipart => true, :target => 'upload_frame' }) do |f|
+  - form_for([@proceso, @adjunto], :url => solicitud_adjuntos_path(@proceso, :format => 'js'), :html => { :class => "mantform", :multipart => true, :target => 'upload_frame' }) do |f|
     = render :partial=>'form', :locals=>{:f => f, :submittext => t("data.submit_new")}

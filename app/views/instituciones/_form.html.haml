@@ -1,12 +1,14 @@
 - form.inputs do
   = form.input :codigo
-  = form.input :nombre
+  = form.input :unidad_ejecutora
+  = form.input :entidad
+  = form.input :nombre, :input_html => {:size => 60}
   = form.input :abreviatura
   = form.input :parent_id, :as => :select, :collection => @padres, :include_blank => false unless @institucion.root?
   = form.input :tipoinstitucion_id, :as => :select , :collection => Institucion::TIPOS_OPTIONS, :include_blank => false
-  = form.input :direccion
-  = form.input :telefono
+  = form.input :direccion, :input_html => {:size => 60}
+  = form.input :telefono, :input_html => {:size => 60}
   = form.input :activa
   = form.input :usasolicitudesprivadas
-  = form.input :webpage
+  = form.input :webpage, :input_html => {:size => 60}
   = form.input :logo, :as => :file

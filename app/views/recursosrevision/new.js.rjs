@@ -1,3 +1,0 @@
-page.replace_html :newrecursorevision, :partial => 'new'
-page.show :newrecursorevision
-page['recursorevision_numero'].focus

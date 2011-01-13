@@ -19,7 +19,7 @@ class Institucion < ActiveRecord::Base
   has_many :actividades
   has_many :usuarios
   has_many :solicitudes, :dependent => :destroy
-  has_many :mensajes, :dependent => :destroy
+  has_many :documentos, :dependent => :destroy
   
   validates_presence_of :nombre, :message=>"Campo Nombre no puede estar vacio."
   validates_uniqueness_of :nombre, :scope => :parent_id, :message=>"Nombre ya esta en uso."
@@ -28,14 +28,25 @@ class Institucion < ActiveRecord::Base
     cleanup
   end
 
+  #####################
+  # Filtros de busqueda
+  #####################
+
   default_scope :order => "nombre asc"
+  
   scope :padres, :conditions=>["tipoinstitucion_id < ?", TIPO_INSTITUCION ], :order => :nombre
   scope :ministerios, :conditions=>["tipoinstitucion_id = ?",TIPO_MINISTERIO], :order => :nombre
   scope :instituciones, :conditions=>["tipoinstitucion_id = ?",TIPO_INSTITUCION], :order => :nombre
   scope :asignables, :conditions=>["tipoinstitucion_id = ? or tipoinstitucion_id = ?",TIPO_MINISTERIO,TIPO_INSTITUCION], :order => :nombre
   scope :activas, :conditions => ["activa = ?",true]
 
- 
+  scope :nombre_like, lambda { |nombre|
+    unless nombre.nil? || nombre.empty? || nombre.first.nil?
+      valor = "%#{nombre}%".upcase
+      where("UPPER(instituciones.nombre) like ? or UPPER(instituciones.codigo) like ?", valor, valor )
+   end
+  }
+
   def tipo_nombre
     return TIPOS[tipoinstitucion_id]
   end
@@ -46,6 +57,10 @@ class Institucion < ActiveRecord::Base
 
   def familia
     self.self_and_ancestors.asignables.concat( self.children.asignables  )
+  end
+
+  def familia_activa
+    self.self_and_ancestors.activas.asignables.concat( self.children.asignables  )
   end
 
   def cleanup

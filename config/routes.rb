@@ -1,5 +1,7 @@
 OpenwolfV3::Application.routes.draw do
 
+  resources :idiomas
+
   resources :main
   resources :importar  
   resources :documentocategorias
@@ -85,6 +87,9 @@ OpenwolfV3::Application.routes.draw do
         get :download
       end
     end
+    resources :notas
+    resources :resoluciones
+    resources :recursosrevision
   end
 
   resources :adjuntos do
@@ -102,7 +107,7 @@ OpenwolfV3::Application.routes.draw do
     end
   end
   
-  devise_for :usuarios
+  devise_for :usuarios, :path_prefix => 'd'
 
   devise_scope :usuario do
     get "/login" => "devise/sessions#new", :as => "login"

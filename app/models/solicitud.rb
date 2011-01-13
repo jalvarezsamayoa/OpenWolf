@@ -20,6 +20,8 @@ class Solicitud < ActiveRecord::Base
              ["0 a 3 dias", "0a3"],
              ["Atrasadas", "LATE"]]
 
+  IDIOMA_DEFAULT = 12 #ladino
+
   attr_accessor :dont_send_email
 
   #####################
@@ -28,7 +30,7 @@ class Solicitud < ActiveRecord::Base
   
   versioned
   
-#  acts_as_solr :fields => [:codigo, :solicitante_nombre,
+  #  acts_as_solr :fields => [:codigo, :solicitante_nombre,
   #  :textosolicitud, :observaciones, :fecha_creacion]
 
   #######################
@@ -41,14 +43,16 @@ class Solicitud < ActiveRecord::Base
     text :textosolicitud, :default_boost => 2
     text :observaciones
     date :fecha_creacion
+    date :fecha_programada
     time :created_at
-    # integer :institucion_id, :references => Institucion
-    # integer :municipio_id, :references => Municipio
-    # integer :departamento_id, :references => Departamento
-    # integer :via_id, :references => Via
-    # integer :estado_id, :references => Estado
-    # integer :clasificacion_id, :references => Clasificacion
-    # integer :documentoclasificacion_id, :references => Documentoclasificacion
+    integer :institucion_id, :references => Institucion
+    integer :municipio_id, :references => Municipio
+    integer :departamento_id, :references => Departamento
+    integer :via_id, :references => Via
+    integer :estado_id, :references => Estado
+    integer :clasificacion_id, :references => Clasificacion
+    integer :documentoclasificacion_id, :references => Documentoclasificacion
+    integer :idioma_id, :references => Idioma
   end
 
   ##################
@@ -80,9 +84,11 @@ class Solicitud < ActiveRecord::Base
   belongs_to :motivonegativa
   belongs_to :motivoprorroga
   belongs_to :documentoclasificacion
+  belongs_to :idioma
 
   has_many :actividades, :dependent => :destroy
   has_many :adjuntos, :as => :proceso, :dependent => :destroy
+  has_many :notas, :as => :proceso, :dependent => :destroy
   has_many :resoluciones, :dependent => :destroy
   has_many :recursosrevision, :dependent => :destroy
 
@@ -111,10 +117,11 @@ class Solicitud < ActiveRecord::Base
 
   scope :sinresolucion, :conditions=>["solicitudes.fecha_resolucion is null" ]
   scope :conresolucion, :conditions=>["solicitudes.fecha_resolucion is not null" ]
+
+  scope :entregadas, :conditions=>["solicitudes.fecha_entregada is not null" ]
   scope :noentregadas, :conditions=>["solicitudes.fecha_entregada is null" ]
 
   scope :recientes, :order => "fecha_creacion desc"
-
 
   scope :tiempoejecucion, lambda { |tiempo_desde, tiempo_hasta| {
       :conditions => ["(((fecha_programada - ?)*100)/10) between ? and ?",Date.today, tiempo_desde, tiempo_hasta]
@@ -127,6 +134,77 @@ class Solicitud < ActiveRecord::Base
   scope :tiempo_restante, lambda { |tiempo_desde, tiempo_hasta| {
       :conditions => ["(fecha_programada - current_date) between ? and ?",tiempo_desde, tiempo_hasta]
     }}
+
+  ########################################
+  # Metodos de búsqueda que utilizarn Solr
+  #########################################
+
+  # busca registros utilizando servidor solr
+
+  # 
+  #
+  # @param [String] params[:q] Termino a buscar
+  # @param [Integer] params[:page] Pagina a obtener
+  # @param [Integer] params[:per_page] Resultados por pagina
+  # @param [Integer] params[:institucion] Id de Institucion
+  # @return [Sunspot::Search] 
+  # @example 
+  #   @solicitudes = Solicitud.buscar(:q => "Contrato",
+  #                    :institucion => 25,
+  #                    :page => 2,
+  #                    :per_page => 25)
+  def self.buscar(params = nil)
+    return nil if params.nil?
+    return nil if params[:search] && params[:search].empty?
+    
+    l_filtrar_instituciones = (params[:institucion_id] && params[:institucion_id] != 'ALL')
+    l_filtrar_vias = (params[:solicitud_via] && params[:solicitud_via] != 'Todos')
+    l_filtrar_estados = (params[:solicitud_estado] && params[:solicitud_estado] != 'Todos')
+    l_filtrar_tiempo_restante = (params[:solicitud_tiempo] && params[:solicitud_tiempo != 'ALL'])       
+
+    i_institucion_id = (params[:institucion_id] ? params[:institucion_id] : nil)           
+    i_via_id = (params[:solicitud_via] ? params[:solicitud_via] : nil )
+    i_estado_id = (params[:solicitud_estado] ? params[:solicitud_estado] : nil )
+
+    d_fechadesde = (params[:fecha_desde] ? Date.strptime(params[:fecha_desde], "%d/%m/%Y") : nil)
+    d_fechahasta = (params[:fecha_hasta] ? Date.strptime(params[:fecha_hasta], "%d/%m/%Y") : nil)
+
+
+    if l_filtrar_tiempo_restante
+      case params[:solicitud_tiempo]
+      when '0a3'
+        desde = 0
+        hasta = 3
+      when '4a6'
+        desde = 4
+        hasta = 6
+      when '7a9'
+        desde = 7
+        hasta = 9
+      when '10'
+        desde = 10
+        hasta = 10
+      when 'LATE'
+        hasta = 11
+        desde = 100000
+      end
+      
+      d_fechaprogdesde = Date.today + desde
+      d_fechaproghasta = Date.today + hasta
+    end
+    
+    self.search do
+      keywords(params[:search])
+      with :institucion_id, i_institucion_id if l_filtrar_instituciones
+      with :solicitud_via, i_via_id if l_filtrar_vias
+      with :solicitud_estado, i_estado_id if l_filtrar_estados
+      with(:fecha_creacion).between(d_fechadesde..d_fechahasta) if d_fechadesde
+      with(:fecha_programada).between(d_fechaprogdesde..dfechaproghasta) if l_filtrar_tiempo_restante
+      paginate(:page => (params[:page] ||= 1), :per_page => (params[:per_page] ||= 20))
+      order_by(:created_at, :desc)
+    end
+    
+  end
 
 
   ################################
@@ -332,26 +410,30 @@ class Solicitud < ActiveRecord::Base
   
   def dias_restantes
     dias = (fecha_programada - Date.today)
-    if dias <= 0 or self.terminada?
-      dias = 0
-    end
+    return 0 if self.terminada? or dias < 0
     return dias
   end
 
   def actualizar_asignaciones
+    #actualizamos el estado de asignacion
     self.asignada = (self.actividades.count > 0)
+    
+    #actualizamos el estado de entrega
+    self.marcar_como_terminada
+    
     self.save!
   end
-
+  
   #actualiza el estado de la solicitud segun el estado de sus
   #actividades
   def actividad_terminada(fecha = Date.today)
-    l_ok = true
-    if self.actividades.count == self.actividades.completadas.count
-      self.fecha_completada = fecha
-      l_ok = self.save
-    end
-    return l_ok
+    self.marcar_como_terminada(fecha)   
+    self.save
+  end
+
+  # marca solicitud como terminada
+  def marcar_como_terminada(fecha = Date.today)
+     self.fecha_completada = fecha if ( self.actividades.count == self.actividades.completadas.count)     
   end
 
   #actualiza el estado a Entregada a Solicitante
@@ -359,6 +441,19 @@ class Solicitud < ActiveRecord::Base
     self.fecha_entregada = date
     self.estado_id = ESTADO_ENTREGADA
     self.save!
+  end
+
+  #retorna string con nombres de enlaces asignados
+  def nombres_enlaces
+    return 'Solicitud no tiene enlaces.' if self.enlaces.count == 0
+
+    c_nombres = ''
+    self.enlaces.each do |e|
+      c_nombres += e.nombre + ', '
+    end
+    c_nombres = c_nombres.strip.chop
+    
+    return c_nombres
   end
 
   #retorna un arreglo con los correos electronicos
@@ -422,19 +517,21 @@ class Solicitud < ActiveRecord::Base
 
       if self.origen_id != ORIGEN_MIGRACION        
         self.fecha_creacion = Date.today if self.fecha_creacion.nil?
-        self.fecha_programada = fecha_creacion + 10
+        self.fecha_programada = fecha_creacion + 10.days
         self.departamento_id = municipio.departamento_id unless municipio.nil?
         self.estado_id = ESTADO_NORMAL
         self.asignada = false      
-        self.solicitante_identificacion = 'No Disponible'        
+        self.solicitante_identificacion = 'No Disponible'
       end
 
+      self.ano = self.fecha_creacion.year
       self.tiposolicitud_id = TIPO_INFORMACION
       self.documentoclasificacion_id = Documentoclasificacion.find_by_codigo(Documentoclasificacion::SOLICITUDINFOPUBLICA).id
       self.numero = Solicitud.maximum(:numero, :conditions => ["solicitudes.institucion_id = ? and solicitudes.ano = ?",self.institucion_id, self.ano]).to_i + 1               
       self.codigo = institucion.codigo + '-'+Documentoclasificacion::SOLICITUDINFOPUBLICA+'-' +  self.ano.to_s + '-' + self.numero.to_s.rjust(6,'0')
-      self.forma_entrega = 'No Disponible'        
-      self.ano = self.fecha_creacion.year
+      self.forma_entrega = 'No Disponible'
+      self.idioma_id = IDIOMA_DEFAULT if self.idioma_id.nil?
+
       
     end
 

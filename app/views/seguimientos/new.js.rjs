@@ -1,2 +1,0 @@
-page.replace_html 'newseguimiento', :partial => 'seguimientos/new'
-page.show 'newseguimiento'

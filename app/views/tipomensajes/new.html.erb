@@ -1,9 +1,0 @@
-<div class="mantform">
-  <h2>Nuevo <%= Tipomensaje.human_name %></h2>
-  
-  <% semantic_form_for @tipomensaje do |form| %>
-    <%= form.semantic_errors %>
-    <%= render :partial => 'form', :locals => {:form => form} %>    
-    <%= buttons_create(tipomensajes_path) %>
-  <% end %>
-</div>

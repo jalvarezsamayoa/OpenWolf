@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110105174720) do
+ActiveRecord::Schema.define(:version => 20110113040220) do
 
   create_table "actividades", :force => true do |t|
     t.integer  "institucion_id",                  :null => false
@@ -190,6 +190,12 @@ ActiveRecord::Schema.define(:version => 20110105174720) do
     t.datetime "updated_at"
   end
 
+  create_table "idiomas", :force => true do |t|
+    t.string   "nombre"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "instituciones", :force => true do |t|
     t.string   "nombre",                                          :null => false
     t.integer  "tipoinstitucion_id",                              :null => false
@@ -243,6 +249,19 @@ ActiveRecord::Schema.define(:version => 20110105174720) do
   end
 
   add_index "municipios", ["departamento_id"], :name => "index_municipios_on_departamento_id"
+
+  create_table "notas", :force => true do |t|
+    t.integer  "proceso_id"
+    t.string   "proceso_type"
+    t.integer  "usuario_id"
+    t.text     "texto"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "notas", ["proceso_id"], :name => "index_notas_on_proceso_id"
+  add_index "notas", ["proceso_type"], :name => "index_notas_on_proceso_type"
+  add_index "notas", ["usuario_id"], :name => "index_notas_on_usuario_id"
 
   create_table "open_id_authentication_associations", :force => true do |t|
     t.integer "issued"
@@ -427,6 +446,7 @@ ActiveRecord::Schema.define(:version => 20110105174720) do
     t.boolean  "informacion_publica",        :default => true,                :null => false
     t.integer  "origen_id",                  :default => 1
     t.integer  "documentoclasificacion_id",  :default => 1
+    t.integer  "idioma_id",                  :default => 12,                  :null => false
   end
 
   add_index "solicitudes", ["ano"], :name => "index_solicitudes_on_ano"
@@ -442,6 +462,7 @@ ActiveRecord::Schema.define(:version => 20110105174720) do
   add_index "solicitudes", ["fecha_prorroga"], :name => "index_solicitudes_on_fecha_prorroga"
   add_index "solicitudes", ["fecha_resolucion"], :name => "index_solicitudes_on_fecha_resolucion"
   add_index "solicitudes", ["genero_id"], :name => "index_solicitudes_on_genero_id"
+  add_index "solicitudes", ["idioma_id"], :name => "index_solicitudes_on_idioma_id"
   add_index "solicitudes", ["informacion_publica"], :name => "index_solicitudes_on_informacion_publica"
   add_index "solicitudes", ["institucion_id"], :name => "index_solicitudes_on_institucion_id"
   add_index "solicitudes", ["motivonegativa_id"], :name => "index_solicitudes_on_motivonegativa_id"

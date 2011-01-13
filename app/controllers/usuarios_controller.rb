@@ -5,13 +5,11 @@ class UsuariosController < ApplicationController
   # GET /usuarios
   # GET /usuarios.xml
   def index
-    p = '@'
-    p = '%'+ params[:search][0] +'%' if params[:search]
     
     if usuario_actual.has_role?(:superadmin)
-      @usuarios = Usuario.where("usuarios.username like ? or usuarios.nombre like ? or usuarios.cargo like ?",p, p,p).paginate :page=>params[:page], :per_page=>10, :include => [:institucion]
+      @usuarios = Usuario.nombre_like(params[:search]).paginate :page=>params[:page], :per_page=>25
     else
-      @usuarios = usuario_actual.institucion.usuarios.where("usuarios.username like ? or usuarios.nombre like ? or usuarios.cargo like ?",p,p,p).paginate :page=>params[:page], :per_page=>10, :include => [:institucion]
+      @usuarios = usuario_actual.institucion.usuarios.nombre_like(params[:search]).paginate :page=>params[:page], :per_page=>25
     end
 
     respond_to do |format|
@@ -36,6 +34,10 @@ class UsuariosController < ApplicationController
   def new
     @usuario = Usuario.new
 
+    @usuario_es_admin = nivel_seguridad(usuario_actual,'administrador')
+    @usuario_es_superadmin =  nivel_seguridad(usuario_actual,'superadmin')
+    @disabled = @usuario_es_superadmin
+
     #verificar a que institucion pueden asignar usuarios
     unless usuario_actual.has_role?(:superadmin)
       @usuario.institucion_id = usuario_actual.institucion_id
@@ -50,6 +52,12 @@ class UsuariosController < ApplicationController
   # GET /usuarios/1/edit
   def edit
     @usuario = Usuario.find(params[:id])
+
+    @usuario_es_admin = nivel_seguridad(usuario_actual,'administrador')
+    @usuario_es_superadmin =  nivel_seguridad(usuario_actual,'superadmin')
+    @disabled = @usuario_es_superadmin
+
+    
   end
 
   # POST /usuarios
@@ -58,26 +66,25 @@ class UsuariosController < ApplicationController
     @usuario = Usuario.new(params[:usuario])
     @usuario.institucion_id = usuario_actual.institucion_id if @usuario.institucion.nil?
 
-    respond_to do |format|
+    if @usuario.save
+      flash[:notice] = 'Usuario creado con exito.'
+      redirect_to(@usuario) 
+    else
+      render :action => "new" 
+    end #save
 
-      @usuario.save do |result|
-        if result
-          flash[:notice] = 'Usuario creado con exito.'
-          format.html { redirect_to(@usuario) }
-          format.xml  { render :xml => @usuario, :status => :created, :location => @usuario }
-        else
-          format.html { render :action => "new" }
-          format.xml  { render :xml => @usuario.errors, :status => :unprocessable_entity }
-        end #if resutl
-      end #save
-    end #respond
   end #create
 
   # PUT /usuarios/1
   # PUT /usuarios/1.xml
   def update
     @usuario = Usuario.find(params[:id])
-        
+
+    if params[:usuario][:password].nil? or params[:usuario][:password].empty?
+      params[:usuario].delete(:password)
+      params[:usuario].delete(:password_confirmation)
+    end
+    
     if @usuario.update_attributes(params[:usuario])
       flash[:notice] = 'Usuario actualizado con exito.'
       if usuario_actual.has_role?(:superadmin) or usuario_actual.has_role?(:localadmin)

@@ -30,6 +30,14 @@ module ApplicationHelper
     c_response += "#{text}</a>"
     return raw(c_response)
   end
+
+  def close_dialog(divname, text = 'Cancelar', image = 'close16.png')
+    c_response = "<a href = 'javascript:void(0)' onclick = \"$('#" + divname + "').dialog('close');\" class='button negative'>"
+    c_response += image_tag(image)
+    c_response += "#{text}</a>"
+    return raw(c_response)
+  end
+  
   
   # RJS Helpers
   def context

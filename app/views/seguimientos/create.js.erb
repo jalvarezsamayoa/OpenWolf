@@ -1,0 +1,2 @@
+$("div#newseguimiento").dialog('close');
+$("<%= escape_javascript( @dom_id ) %>").html("<%= escape_javascript(render :partial => 'actividades/actividad_seguimientos', :locals => {:actividad => @actividad}) %>");

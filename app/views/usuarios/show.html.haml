@@ -16,6 +16,12 @@
         %th= label :nombre, Usuario.human_attribute_name(:nombre)
         %td= @usuario.nombre
       %tr
+        %th= label :username, Usuario.human_attribute_name(:username)
+        %td= @usuario.username
+      %tr
+        %th= label :email, Usuario.human_attribute_name(:email)
+        %td= @usuario.email
+      %tr
         %th= label :institucion_id, Usuario.human_attribute_name(:institucion_id)
         %td= @usuario.institucion.nombre
       %tr

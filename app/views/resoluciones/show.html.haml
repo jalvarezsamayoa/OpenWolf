@@ -1,27 +1,36 @@
-%p
-  %b Numero:
-  = h @resolucion.numero
-%p
-  %b Solicitud:
-  = h @resolucion.solicitud_id
-%p
-  %b Usuario:
-  = h @resolucion.usuario_id
-%p
-  %b Institucion:
-  = h @resolucion.institucion_id
-%p
-  %b Descripcion:
-  = h @resolucion.descripcion
-%p
-  %b Tiporesolucion:
-  = h @resolucion.tiporesolucion_id
-%p
-  %b Razonresolucion:
-  = h @resolucion.razonresolucion_id
-%p
-  %b Nueva fecha:
-  = h @resolucion.nueva_fecha
-= link_to 'Edit', edit_resolucion_path(@resolucion)
-|
-\#{link_to 'Back', resoluciones_path}
+- @forview = "SHOW"
+= render :partial => "breadcrumbs"
+
+%h1.alt= Resolucion.human_name.pluralize
+
+= render :partial => "solicitudes/solicitud"
+
+.show
+  %h2= Resolucion.human_name
+
+  %div{:id=>"options"}
+    = button_new(new_solicitud_resolucion_path(@solicitud))
+    = button_edit(edit_solicitud_resolucion_path(@solicitud.id,@resolucion))
+    = button_delete(solicitud_resolucion_path(@solicitud.id,@resolucion))
+    = button_cancel(solicitud_resoluciones_path(@solicitud))
+    %br
+
+  .box
+    %table
+      %colgroup.show-table-header
+      %colgroup.show-table-data
+      %tr
+        %th= label :numero, Resolucion.human_attribute_name(:numero)
+        %td= @resolucion.numero
+      %tr
+        %th= label :usuario_id, Resolucion.human_attribute_name(:usuario_id)
+        %td= @resolucion.usuario.nombre
+      %tr
+        %th= label :tiporesolucion_id, Resolucion.human_attribute_name(:tiporesolucion_id)
+        %td= @resolucion.tiporesolucion.nombre
+      %tr
+        %th= label :razonresolucion_id, Resolucion.human_attribute_name(:razonresolucion_id)
+        %td= @resolucion.razontiporesolucion.nombre
+      %tr
+        %th= label :nueva_fecha, Resolucion.human_attribute_name(:nueva_fecha)
+        %td= l(@resolucion.nueva_fecha) unless @resolucion.nueva_fecha.nil?

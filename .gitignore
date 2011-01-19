@@ -35,3 +35,4 @@ feature.html
 capybara-*.html
 index/*
 solr/data
+lib/generators/haml

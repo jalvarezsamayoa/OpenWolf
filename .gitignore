@@ -34,6 +34,7 @@ TAGS
 feature.html
 capybara-*.html
 index/*
-solr/data
+solr
+solr/*
 lib/generators/haml
 lib/generators/haml/*

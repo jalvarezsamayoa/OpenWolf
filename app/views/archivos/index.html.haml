@@ -1,0 +1,17 @@
+= render :partial => "breadcrumbs"
+.listing
+  %h2= Archivo.human_name.pluralize
+  %div{:id => "options"}
+    = button_new(new_archivo_path)
+    = render :partial => 'shared/findbox', :locals => {:url => archivos_path}
+  %table.minimalist-b
+    %thead
+      %tr
+        %th= Archivo.human_attribute_name(:nombre)
+        %th= Archivo.human_attribute_name(:institucion_id)
+    %tbody
+      - for archivo in @archivos
+        %tr
+          %td= link_to archivo.nombre, archivo_path(archivo)
+          %td= archivo.institucion.nombre
+  = will_paginate @archivos

@@ -1,0 +1,47 @@
+= form_for(@documentotraslado) do |f|
+  - if @documentotraslado.errors.any?
+    #errorExplanation
+      %h2= "#{pluralize(@documentotraslado.errors.count, 'error')} prohibited this user from being saved:"
+      %ul
+      - @documentotraslado.errors.full_messages.each do |msg|
+        %li= msg
+  
+  .field
+    = f.label :institucion_id
+    %br
+    = f.text_field :institucion_id
+  .field
+    = f.label :usuario_id
+    %br
+    = f.text_field :usuario_id
+  .field
+    = f.label :destinatario_id
+    %br
+    = f.text_field :destinatario_id
+  .field
+    = f.label :documento_id
+    %br
+    = f.text_field :documento_id
+  .field
+    = f.label :documento_destinatario_id
+    %br
+    = f.text_field :documento_destinatario_id
+  .field
+    = f.label :original
+    %br
+    = f.check_box :original
+  .field
+    = f.label :estado_entrega_id
+    %br
+    = f.text_field :estado_entrega_id
+  .field
+    = f.label :fecha_envio
+    %br
+    = f.datetime_select :fecha_envio
+  .field
+    = f.label :fecha_respuesta
+    %br
+    = f.datetime_select :fecha_respuesta
+
+  .actions
+    = f.submit

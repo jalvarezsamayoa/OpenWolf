@@ -1,0 +1,18 @@
+.mantform
+  %h2
+    Archivar Documento
+
+  - semantic_form_for @documentotraslado do |form|
+    = form.semantic_errors
+    
+    - form.inputs do
+      = form.input :usuario, :collection => @enlaces, :include_blank => false, :label => "De:"
+      = form.input :destinatario, :collection => @enlaces, :include_blank => false, :label => "Para: "
+      = form.input :original
+      = form.input :descripcion
+      = form.hidden_field(:documento_id)
+      = form.hidden_field(:institucion_id)
+
+    = submit_popup("Trasladar")
+    = close_dialog("trasladar-dialog")
+

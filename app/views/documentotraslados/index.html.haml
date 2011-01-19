@@ -1,0 +1,32 @@
+%h1= t('.title')
+%p= link_to t('.new_documentotraslado'), new_documentotraslado_path
+
+%table
+  %thead
+    %tr
+      %th= Documentotraslado.human_attribute_name :institucion_id
+      %th= Documentotraslado.human_attribute_name :usuario_id
+      %th= Documentotraslado.human_attribute_name :destinatario_id
+      %th= Documentotraslado.human_attribute_name :documento_id
+      %th= Documentotraslado.human_attribute_name :documento_destinatario_id
+      %th= Documentotraslado.human_attribute_name :original
+      %th= Documentotraslado.human_attribute_name :estado_entrega_id
+      %th= Documentotraslado.human_attribute_name :fecha_envio
+      %th= Documentotraslado.human_attribute_name :fecha_respuesta
+      %th{:colspan => 3}= t 'actions'
+  
+  %tbody
+    - for documentotraslado in @documentotraslados
+      %tr{ :class => cycle(:odd, :even) }
+        %td= documentotraslado.institucion_id
+        %td= documentotraslado.usuario_id
+        %td= documentotraslado.destinatario_id
+        %td= documentotraslado.documento_id
+        %td= documentotraslado.documento_destinatario_id
+        %td= documentotraslado.original
+        %td= documentotraslado.estado_entrega_id
+        %td= documentotraslado.fecha_envio
+        %td= documentotraslado.fecha_respuesta
+        %td.action= link_to t('show'), documentotraslado
+        %td.action= link_to t('edit'), edit_documentotraslado_path(documentotraslado)
+        %td.action= link_to t('destroy'), documentotraslado, :confirm => t('are_you_sure'), :method => :delete

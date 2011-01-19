@@ -1,0 +1,24 @@
+%h1= t '.title'
+%p
+  = link_to t('back'), documentotraslados_path
+  = link_to t('edit'), edit_documentotraslado_path(@documentotraslado)
+
+%dl
+  %dt= Documentotraslado.human_attribute_name :institucion_id
+  %dd= @documentotraslado.institucion_id
+  %dt= Documentotraslado.human_attribute_name :usuario_id
+  %dd= @documentotraslado.usuario_id
+  %dt= Documentotraslado.human_attribute_name :destinatario_id
+  %dd= @documentotraslado.destinatario_id
+  %dt= Documentotraslado.human_attribute_name :documento_id
+  %dd= @documentotraslado.documento_id
+  %dt= Documentotraslado.human_attribute_name :documento_destinatario_id
+  %dd= @documentotraslado.documento_destinatario_id
+  %dt= Documentotraslado.human_attribute_name :original
+  %dd= @documentotraslado.original
+  %dt= Documentotraslado.human_attribute_name :estado_entrega_id
+  %dd= @documentotraslado.estado_entrega_id
+  %dt= Documentotraslado.human_attribute_name :fecha_envio
+  %dd= @documentotraslado.fecha_envio
+  %dt= Documentotraslado.human_attribute_name :fecha_respuesta
+  %dd= @documentotraslado.fecha_respuesta

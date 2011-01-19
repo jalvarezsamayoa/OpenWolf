@@ -1,0 +1,15 @@
+- content_for :head do
+  = javascript_include_tag 'combobox.js', 'archivos.js'
+
+- @forview = "EDIT"
+= render :partial=>"breadcrumbs"
+
+.mantform
+  %h2
+    Editar 
+    = Archivo.human_name
+
+  - semantic_form_for @archivo do |form|
+    = form.semantic_errors
+    = render :partial => 'form', :locals => {:form => form}
+    = buttons_update(archivos_path)

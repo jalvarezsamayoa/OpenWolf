@@ -1,0 +1,14 @@
+#breadcrumbs
+  %ul#crumbs
+    %li
+      = link_to t("breadcrums.homepage"), main_index_path
+    %li
+      = link_to Archivo.human_name.pluralize, archivos_path
+    - if @forview
+      - if @forview == "NEW"
+        %li= t("data.title_new")
+      - elsif @forview == "EDIT"
+        %li= t("data.title_edit")
+      - else
+        %li= t("data.title_show")
+.clear &nbsp;

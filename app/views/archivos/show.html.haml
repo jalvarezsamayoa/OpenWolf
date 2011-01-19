@@ -1,0 +1,24 @@
+- @forview = "SHOW"
+= render :partial=>"breadcrumbs"
+
+.show
+  %h2= Archivo.human_name
+
+  %div{:id=>"options"}
+    = button_new(new_archivo_path)
+    = button_edit(edit_archivo_path(@archivo))
+    = button_delete(archivo_path(@archivo))
+    = button_cancel(archivos_path)
+    %br
+
+  .box
+    %table
+      %colgroup.show-table-header
+      %colgroup.show-table-data
+      %tr
+        %th= label :nombre, Archivo.human_attribute_name(:nombre)
+        %td= @archivo.nombre
+      %tr
+        %th= label :institucion_id, Archivo.human_attribute_name(:institucion_id)
+        %td= @archivo.institucion.nombre
+        

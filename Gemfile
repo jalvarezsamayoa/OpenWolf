@@ -31,7 +31,7 @@ gem 'jquery-rails', '>= 0.2.6' #jquery para rails, remplaza prototype y scriptac
 
 # HERRAMIENTAS
 gem 'faker' # herramienta para generacion de datos de prueba
-gem 'admin_data', :require => nil # modulo para administracion de base de datos
+gem 'admin_data', :git => "git://github.com/neerajdotname/admin_data.git" # modulo para administracion de base de datos
 gem 'whenever' # manejo de cronjobs
 gem 'activerecord-import', :require => nil # herramienta para importacion de data
 gem 'serenity-odt' #generacion de templates ODT

@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
 
   rescue_from 'Acl9::AccessDenied', :with => :acceso_denegado
   
-  helper_method :usuario_actual, :current_user, :nivel_seguridad, :fix_date
+  helper_method :usuario_actual, :current_user, :nivel_seguridad, :fix_date, :usuario_autenticado?, :usuario_actual_admin?
 
   layout :layout_por_recurso
 
@@ -33,6 +33,10 @@ class ApplicationController < ActionController::Base
   def usuario_actual_admin?
     return false if usuario_actual.nil?
     return usuario_actual.has_role?(:superadmin)
+  end
+
+  def usuario_autenticado?
+    return (usuario_actual ? true : false)
   end
   
   def requiere_usuario

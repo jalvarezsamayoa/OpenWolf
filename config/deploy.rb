@@ -30,9 +30,9 @@ namespace :deploy do
 end
 
 
-#before "deploy:update_code", "solr:stop"
+before "deploy:update_code", "solr:stop"
 after "deploy:symlink", "solr:symlink"
-#after "solr:symlink", "solr:start"
+after "solr:symlink", "solr:start"
 
 namespace :solr do
   desc "Link in solr directory"
@@ -47,7 +47,7 @@ namespace :solr do
   task :stop, :roles => :solr do
     run <<-CMD
       cd #{current_path} &&
-      rake solr:stop RAILS_ENV=production
+      rake sunspot:solr:stop RAILS_ENV=production
     CMD
   end
   
@@ -103,4 +103,5 @@ Dir[File.join(File.dirname(__FILE__), '..', 'vendor', 'gems', 'hoptoad_notifier-
   $: << File.join(vendored_notifier, 'lib')
 end
 
+require 'config/boot'
 require 'hoptoad_notifier/capistrano'

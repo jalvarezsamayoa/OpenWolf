@@ -21,8 +21,9 @@ class Documento < ActiveRecord::Base
   belongs_to :autor, :class_name => "Usuario", :foreign_key => :autor_id
   belongs_to :usuario
   belongs_to :institucion
+  belongs_to :archivo
 
-  has_many :documentodestinatarios, :dependent => :destroy
+  has_many :documentotraslados, :dependent => :destroy
 
   validates_presence_of :numero, :fecha_documento, :asunto, :texto
   validates_uniqueness_of :numero
@@ -51,9 +52,20 @@ class Documento < ActiveRecord::Base
     text :remitente_email
     text :institucion_nombre
     time :created_at
+    integer :archivo_id, :references => Archivo
+    integer :institucion_id, :references => Institucion
+    integer :usuario_id, :references => Usuario    
   end
 
   default_scope :include => [:documentoclasificacion, :documentocategoria, :autor, :usuario, :institucion]
+
+  def archivado?
+    return (!self.archivo_id.nil?)
+  end
+  
+  def archivo_nombre
+    self.archivo.nil? ? 'Documento NO Archivado' : self.archivo.nombre
+  end
   
   def clasificacion_nombre
     self.documentoclasificacion.nombre
@@ -99,10 +111,16 @@ class Documento < ActiveRecord::Base
     self.estado_envio_id = ESTADO_BORRADOR
 
     #tipo de copia
-    self.original = ORIGINAL
+    self.original = ORIGINAL if self.original.nil?
+
+    #asignamos archivo
+#    a = self.institucion.archivos.first
+#    self.archivo_id = a.id unless a.nil?
     
     #asignamos numero a documento si este es interno
     if generar_numero?
+
+      self.numero = Documento.nuevo_numero(self.institucion, codigo)
       
       codigo = self.documentoclasificacion.codigo
       
@@ -117,11 +135,14 @@ class Documento < ActiveRecord::Base
   def generar_numero?
     l_generar = false
 
+    if self.original == true
     if (self.origen_id == ORIGEN_INTERNO) || (self.origen_id == ORIGEN_EXTERNO and self.numero.empty?)
       l_generar = true
+    end
     end
     
     return l_generar
   end
+
   
 end

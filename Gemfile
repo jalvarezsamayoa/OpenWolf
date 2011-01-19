@@ -59,4 +59,5 @@ group :development, :test do
    gem "autotest"
    gem "capybara"
    gem "factory_girl_rails" # https://github.com/thoughtbot/factory_girl_rails
+   gem "cucumber-rails"
 end

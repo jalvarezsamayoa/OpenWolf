@@ -2,7 +2,9 @@ class DocumentosController < ApplicationController
   uses_tiny_mce
   
   def index
-    @documentos = usuario_actual.documentos.numero_or_asunto_like(params[:search]).paginate(:page => params[:page])
+#    @documentos =
+    #    usuario_actual.documentos.numero_or_asunto_like(params[:search]).paginate(:page => params[:page])
+        @documentos = usuario_actual.documentos.paginate(:page => params[:page])
     
     respond_to do |format|
       format.html # index.html.erb
@@ -12,7 +14,9 @@ class DocumentosController < ApplicationController
   
   def show
     @documento = Documento.find(params[:id])
-    
+
+    @hay_archivos = (@documento.institucion.archivos.count > 0)
+      
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @documento }
@@ -60,7 +64,7 @@ class DocumentosController < ApplicationController
     
     respond_to do |format|
       if @documento.update_attributes(params[:documento])
-        flash[:notice] = 'Documento was successfully updated.'
+        flash[:notice] = 'Documento ha sido actualizado con exito.'
         format.html { redirect_to(@documento) }
         format.xml  { head :ok }
       else
@@ -89,4 +93,29 @@ class DocumentosController < ApplicationController
      :disposition => 'attachment'
   end
 
+  def archivar
+    @documento = Documento.find(params[:id])
+
+    @archivos = @documento.institucion.archivos
+    
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def trasladar
+    @documento = Documento.find(params[:id])
+    @documentotraslado = Documentotraslado.new
+    @documentotraslado.documento_id = @documento.id
+    @documentotraslado.institucion_id = current_user.institucion.id
+    
+
+    @enlaces = @documento.institucion.usuarios.enlaces
+    
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  
 end

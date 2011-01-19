@@ -30,6 +30,8 @@ class Usuario < ActiveRecord::Base
   has_many :actividades
   has_many :solicitudes
   has_many :documentos
+  has_many :documentotraslados
+  has_many :documentostrasladados, :class_name => "Documentotraslado", :foreign_key => "destinatario_id"
 
   ###############
   # Validaciones

@@ -1,3 +1,5 @@
+- content_for :head do
+  = javascript_include_tag 'combobox.js', 'documentos.js', 'jquery.ui.datepicker-es.js'
 .show
   %h2= Documento.human_name
   #options
@@ -6,11 +8,19 @@
     = button_delete(documento_path(@documento))
     = button_cancel(documentos_path)
     = button_export(plantilla_documento_path(@documento))
+    = documento_boton_archivar(@documento, @hay_archivos)
+    = documento_boton_trasladar(@documento, @hay_archivos)
     %br/
   .box
     %table
       %colgroup.show-table-header
       %colgroup.show-table-data
+      %tr{:class => "#{@documento.archivado? ? 'success' : 'error' }"}
+        %th= label :archivo_id, Documento.human_attribute_name(:archivo_id)
+        %td= @documento.archivo_nombre
+      %tr
+        %th= label :institucion_id, Documento.human_attribute_name(:institucion_id)
+        %td= @documento.institucion.nombre
       %tr
         %th= label :numero, Documento.human_attribute_name(:numero)
         %td= @documento.numero
@@ -56,3 +66,6 @@
       %tr
         %th= label :texto, Documento.human_attribute_name(:texto)
         %td= raw(@documento.texto)
+
+%div{:id => "archivar-dialog"}
+%div{:id => "trasladar-dialog"}

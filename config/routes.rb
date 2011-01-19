@@ -1,5 +1,9 @@
 OpenwolfV3::Application.routes.draw do
 
+  resources :documentotraslados
+
+  resources :archivos    
+ 
   resources :idiomas
 
   resources :main
@@ -64,6 +68,8 @@ OpenwolfV3::Application.routes.draw do
   resources :documentos do
     member do
       get :plantilla
+      get :archivar
+      get :trasladar
     end
   end
 

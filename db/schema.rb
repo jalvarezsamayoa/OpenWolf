@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110113040220) do
+ActiveRecord::Schema.define(:version => 20110113191755) do
 
   create_table "actividades", :force => true do |t|
     t.integer  "institucion_id",                  :null => false
@@ -51,6 +51,15 @@ ActiveRecord::Schema.define(:version => 20110113040220) do
   add_index "adjuntos", ["proceso_id"], :name => "index_adjuntos_on_proceso_id"
   add_index "adjuntos", ["proceso_type"], :name => "index_adjuntos_on_proceso_type"
   add_index "adjuntos", ["usuario_id"], :name => "index_adjuntos_on_usuario_id"
+
+  create_table "archivos", :force => true do |t|
+    t.string   "nombre",         :null => false
+    t.integer  "institucion_id", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "archivos", ["institucion_id"], :name => "index_archivos_on_institucion_id"
 
   create_table "audits", :force => true do |t|
     t.integer  "auditable_id"
@@ -148,8 +157,10 @@ ActiveRecord::Schema.define(:version => 20110113040220) do
     t.integer  "rgt"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "archivo_id"
   end
 
+  add_index "documentos", ["archivo_id"], :name => "index_documentos_on_archivo_id"
   add_index "documentos", ["autor_id"], :name => "index_documentos_on_autor_id"
   add_index "documentos", ["documentocategoria_id"], :name => "index_documentos_on_documentocategoria_id"
   add_index "documentos", ["documentoclasificacion_id"], :name => "index_documentos_on_documentoclasificacion_id"
@@ -164,6 +175,31 @@ ActiveRecord::Schema.define(:version => 20110113040220) do
   add_index "documentos", ["parent_id"], :name => "index_documentos_on_parent_id"
   add_index "documentos", ["rgt"], :name => "index_documentos_on_rgt"
   add_index "documentos", ["usuario_id"], :name => "index_documentos_on_usuario_id"
+
+  create_table "documentotraslados", :force => true do |t|
+    t.integer  "institucion_id",                               :null => false
+    t.integer  "usuario_id",                                   :null => false
+    t.integer  "destinatario_id",                              :null => false
+    t.integer  "documento_id",                                 :null => false
+    t.integer  "documento_destinatario_id",                    :null => false
+    t.boolean  "original",                  :default => false
+    t.integer  "estado_entrega_id",         :default => 1,     :null => false
+    t.datetime "fecha_envio"
+    t.datetime "fecha_respuesta"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.text     "descripcion"
+  end
+
+  add_index "documentotraslados", ["destinatario_id"], :name => "index_documentotraslados_on_destinatario_id"
+  add_index "documentotraslados", ["documento_destinatario_id"], :name => "index_documentotraslados_on_documento_destinatario_id"
+  add_index "documentotraslados", ["documento_id"], :name => "index_documentotraslados_on_documento_id"
+  add_index "documentotraslados", ["estado_entrega_id"], :name => "index_documentotraslados_on_estado_entrega_id"
+  add_index "documentotraslados", ["fecha_envio"], :name => "index_documentotraslados_on_fecha_envio"
+  add_index "documentotraslados", ["fecha_respuesta"], :name => "index_documentotraslados_on_fecha_respuesta"
+  add_index "documentotraslados", ["institucion_id"], :name => "index_documentotraslados_on_institucion_id"
+  add_index "documentotraslados", ["original"], :name => "index_documentotraslados_on_original"
+  add_index "documentotraslados", ["usuario_id"], :name => "index_documentotraslados_on_usuario_id"
 
   create_table "estados", :force => true do |t|
     t.string   "nombre",                            :null => false

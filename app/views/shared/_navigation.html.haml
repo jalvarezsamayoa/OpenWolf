@@ -45,6 +45,7 @@
         = link_to( 'Razones Resoluciones', razonestiposresoluciones_path, :title => 'Administracion de Razones de Resoluciones')
         = link_to "Clasificaciones Documentales", documentoclasificaciones_path, :title=>"Administracion Clasificaciones Documentales"
         = link_to "Categorías Documentales", documentocategorias_path, :title=>"Administracion Categorías Documentales"
+        = link_to "Archivos", archivos_path, :title => "Administración de Archivos documentales"
         = link_to "Importar Solicitudes", importar_index_path, :title => "Importar solicitudes en formato CSV"
       - if nivel_seguridad(usuario_actual,'administrador')
         = link_to( 'Usuarios', usuarios_path, :title => 'Administracion de Usuarios')

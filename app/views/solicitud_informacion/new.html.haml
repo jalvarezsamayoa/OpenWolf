@@ -2,6 +2,8 @@
 .mantform
   %h2
     Nueva #{Solicitud.human_name}
+  .notice
+    Atencion! Debido a que su solicitud esta siendo presentada en un horario fuera de oficina. La solicitud inciara a procesarse el dia de mañana en horario de oficina.
   - semantic_form_for @solicitud, :url => solicitud_informacion_url do |form|
     = render :partial => 'form', :locals => {:form => form}
     = buttons_create(solicitudes_path)

@@ -16,7 +16,8 @@ set :deploy_via, :remote_cache
 set :use_sudo, false
 
 set :scm, "git"
-set :repository, "git@gitorious.org:openwolf/openwolf.git"
+#set :repository, "git@gitorious.org:openwolf/openwolf.git"
+set :repository, "git://gitorious.org/openwolf/openwolf_v3.git"
 set :branch, "master"
 set :git_enable_submodules, 1
 
@@ -46,7 +47,7 @@ namespace :solr do
   task :stop, :roles => :solr do
     run <<-CMD
       cd #{current_path} &&
-      rake solr:stop RAILS_ENV=production
+      rake sunspot:solr:stop RAILS_ENV=production
     CMD
   end
   
@@ -54,7 +55,7 @@ namespace :solr do
   task :start, :roles => :solr do
     run <<-CMD
       cd #{current_path} &&
-      nohup rake solr:start RAILS_ENV=production > #{shared_path}/log/solr.log 2> #{shared_path}/log/solr.err.log
+      nohup rake sunspot:solr:start RAILS_ENV=production > #{shared_path}/log/solr.log 2> #{shared_path}/log/solr.err.log
     CMD
   end
 

@@ -36,3 +36,4 @@ capybara-*.html
 index/*
 solr/data
 lib/generators/haml
+lib/generators/haml/*

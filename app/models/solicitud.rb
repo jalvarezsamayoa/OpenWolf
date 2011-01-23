@@ -101,8 +101,7 @@ class Solicitud < ActiveRecord::Base
   validates_presence_of :fecha_creacion, :solicitante_nombre, :textosolicitud, :institucion_id
   
   validates_presence_of :email, :if => Proc.new{ |s| (s.origen_id == ORIGEN_PORTAL ? true : false) }
-  validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :unless => Proc.new{ |s| s.email.nil? or s.email.empty? }
-  validates_associated :institucion
+  validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :unless => Proc.new{ |s| s.email.nil? or s.email.empty? }, :message => "Correo electrónico no es válido."
   
   ########################
   # Filtros
@@ -201,7 +200,7 @@ class Solicitud < ActiveRecord::Base
       with(:fecha_creacion).between(d_fechadesde..d_fechahasta) if d_fechadesde
       with(:fecha_programada).between(d_fechaprogdesde..dfechaproghasta) if l_filtrar_tiempo_restante
       paginate(:page => (params[:page] ||= 1), :per_page => (params[:per_page] ||= 20))
-      order_by(:created_at, :desc)
+      order_by(:fecha_creacion, :desc)
     end
     
   end
@@ -491,28 +490,26 @@ class Solicitud < ActiveRecord::Base
     #validamos el origen de la solicitud
     # y determinamos institucion y usuario a utilizar
 
-    logger.debug { "Completando Info" }
     if self.origen_id == ORIGEN_DEFAULT
       # usa current_user para obtenerlo
-      logger.debug { "Origen default" }
       self.institucion_id = self.usuario.institucion_id      
     elsif self.origen_id == ORIGEN_PORTAL
       #si el orgen es el portal no hay usuario
       # asi que usamos el usuario de tipo ciudadano
-      logger.debug { "Origen portal" }
 
-      ciudadano = self.institucion.usuarios.ciudadanos.first      
-      self.usuario_id = ciudadano.id
+      #verificamos si hay institucion
+      unless self.institucion_id.nil?      
+        ciudadano = self.institucion.usuarios.ciudadanos.first      
+        self.usuario_id = ciudadano.id
+      end
       
-      logger.debug { "Usuario: #{self.usuario_id}" }
     else
-      logger.debug { "Origen migracion" }
+      # si es migracion usamos al primer usario de UDIP
       superudip = self.institucion.usuarios.supervisores.first
       self.usuario_id = superudip.id
     end
 
-    logger.debug { "Ins: #{self.institucion_id}" }
-    
+    # validamos si hay institucion asignada    
     unless self.institucion.nil?
 
       if self.origen_id != ORIGEN_MIGRACION        
@@ -531,11 +528,8 @@ class Solicitud < ActiveRecord::Base
       self.codigo = institucion.codigo + '-'+Documentoclasificacion::SOLICITUDINFOPUBLICA+'-' +  self.ano.to_s + '-' + self.numero.to_s.rjust(6,'0')
       self.forma_entrega = 'No Disponible'
       self.idioma_id = IDIOMA_DEFAULT if self.idioma_id.nil?
-
       
-    end
-
-    logger.debug { "Before save: #{self.inspect}" }
+    end # institucion.nil?
     
   end
 

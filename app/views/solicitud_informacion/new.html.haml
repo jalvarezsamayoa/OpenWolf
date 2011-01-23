@@ -1,9 +1,8 @@
 = render :partial => 'portal/find_box'
 .mantform
   %h2
-    Nueva #{Solicitud.human_name}
-  .notice
-    Atencion! Debido a que su solicitud esta siendo presentada en un horario fuera de oficina. La solicitud inciara a procesarse el dia de mañana en horario de oficina.
+    Nueva Solicitud de Información Pública
+  = render :partial => "advertencia_horario_de_atencion" if false
   - semantic_form_for @solicitud, :url => solicitud_informacion_url do |form|
     = render :partial => 'form', :locals => {:form => form}
     = buttons_create(solicitudes_path)

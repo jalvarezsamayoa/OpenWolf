@@ -13,11 +13,11 @@ class SolicitudesController < ApplicationController
 
     if @usuario_es_udip
       
-      @noasignadas = usuario_actual.institucion.solicitudes.noasignadas
-      @entramite = usuario_actual.institucion.solicitudes.asignadas.nocompletadas
-      @terminadas = usuario_actual.institucion.solicitudes.completadas.conresolucion.noentregadas
-      @pendresolucion = usuario_actual.institucion.solicitudes.completadas.sinresolucion
-      @entregadas = usuario_actual.institucion.solicitudes.entregadas
+      @noasignadas = usuario_actual.institucion.solicitudes.noasignadas.recientes
+      @entramite = usuario_actual.institucion.solicitudes.asignadas.nocompletadas.recientes
+      @terminadas = usuario_actual.institucion.solicitudes.completadas.conresolucion.noentregadas.recientes
+      @pendresolucion = usuario_actual.institucion.solicitudes.completadas.sinresolucion.recientes
+      @entregadas = usuario_actual.institucion.solicitudes.entregadas.recientes
     else
       @noasignadas = nil
       @entramite = nil

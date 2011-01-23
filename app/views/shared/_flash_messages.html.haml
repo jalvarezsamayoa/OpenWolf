@@ -5,3 +5,5 @@
     .error= flash[:error]
   - if flash[:success]
     .success= flash[:success]
+  - if flash[:alert]
+    .notice.span-24.last= flash[:alert]

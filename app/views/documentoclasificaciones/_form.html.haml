@@ -1,5 +1,5 @@
 - form.inputs do
-  = form.input :codigo
-  = form.input :nombre
+  = form.input :codigo, :input_html => {:size => 20}
+  = form.input :nombre, :input_html => {:size => 60}
   = form.input :documentocategoria, :include_blank => false
-  = form.input :plantilla
+  = form.input :plantilla, :input_html => {:size => 60}

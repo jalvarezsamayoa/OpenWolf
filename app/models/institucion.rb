@@ -25,6 +25,12 @@ class Institucion < ActiveRecord::Base
   validates_presence_of :nombre, :message=>"Campo Nombre no puede estar vacio."
   validates_uniqueness_of :nombre, :scope => :parent_id, :message=>"Nombre ya esta en uso."
 
+  validates :codigo, :presence => true, :uniqueness => true
+  validates :abreviatura, :presence => true, :uniqueness => true
+  validates :codigo, :presence => true, :uniqueness => true
+  validates :unidad_ejecutora, :presence => true
+  validates :entidad, :presence => true
+
   before_validation(:on => :create) do
     cleanup
   end
@@ -65,12 +71,20 @@ class Institucion < ActiveRecord::Base
   end
 
   def cleanup
+    
     if self.abreviatura.empty?
       unless self.nombre.empty?
         nombres = self.nombre.split(' ')      
         nombres.each {|n| self.abreviatura += n.slice(0..0) }
       end
     end
+
+    # verficamos los codigos de la institucion
+    if self.unidad_ejecutora == '0' or self.unidad_ejecutora.empty?
+      self.unidad_ejecutora = '000'
+    end
+    
+    
   end
   
 end

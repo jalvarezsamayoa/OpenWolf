@@ -15,7 +15,7 @@
       %td= @actividad.estado.nombre
     %tr
       %th= label :actividad, t("actividades.label_fecha_resolucion")
-      %td= l(@actividad.fecha_resolucion)
+      %td= l(@actividad.fecha_resolucion) unless @actividad.fecha_resolucion.nil?
     %tr
       %th= label :actividad, t("actividades.label_textoactividad")
       %td= @actividad.textoactividad

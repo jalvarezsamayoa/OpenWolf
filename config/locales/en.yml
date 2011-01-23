@@ -197,6 +197,7 @@ en:
         rpt_sentidoresolucion: "Sentido de la resolución caida al recurso"
         notas: "Seguimientos"
         enlaces: "Personal asignado"
+        idioma: "Pertenencia sociolinguistica"
       tiporesolucion:
         nombre: "Descripcion"
         actualiza_fecha: "Modifica fecha entrega"

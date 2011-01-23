@@ -26,16 +26,20 @@ class Resolucion < ActiveRecord::Base
   def nuevo_numero
     i = Resolucion.count(:conditions => ["institucion_id = ? and date_part(\'year\',created_at) = ?", self.institucion_id, Date.today.year ] ).to_i + 1
     
-    self.numero = self.institucion.codigo + '-02-' +  Date.today.year.to_s + '-' + i.to_s.rjust(6,'0')
+    self.numero = self.institucion.codigo + '-'+ Documentoclasificacion::RESOLUCION + '-' +  Date.today.year.to_s + '-' + i.to_s.rjust(6,'0')
   end
 
   def cleanup
+    self.documentoclasificacion_id =  Documentoclasificacion.find_by_codigo(Documentoclasificacion::RESOLUCION).id
+    self.numero = self.nuevo_numero if (self.numero.nil? or self.numero.empty?)
+    
     unless self.nueva_fecha.nil?
       if self.nueva_fecha < self.solicitud.fecha_programada
         logger.debug { "Nueva fecha no es valida." }
       end
     end
-    self.numero = self.nuevo_numero if (self.numero.nil? or self.numero.empty?)
+    
+    
     return true
   end
 

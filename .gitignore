@@ -8,6 +8,7 @@ doc/api
 doc/app
 log/*.log
 log/*.pid
+log/*.lck
 log/profile.txt
 tmp/**/*
 tmp/*.json

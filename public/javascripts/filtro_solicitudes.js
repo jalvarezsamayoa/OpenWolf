@@ -7,16 +7,21 @@
 
 jQuery(function($){
 
+         $('.popup').hide();
+
          $('.filtro').click(function(){
                               $('#filtro').show();
                             });
 
-         $(function(){
-             $("#fecha_desde").datepicker();
-             $("#fecha_hasta").datepicker();
-           });
 
-         $(function(){
-             $("#filtros").tabs();
-           });
+         $("#fecha_desde").datepicker();
+         $("#fecha_hasta").datepicker();
+         $('.ui-datepicker').hide();
+
+
+         $("#filtros").tabs();
+         
+         $(".combobox").combobox();
+
+
        });

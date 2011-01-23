@@ -6,23 +6,25 @@
     %link{:href => "/favicon.ico", :rel => "shortcut icon", :type => "image/ico"}/
     %title
       OpenWolf 0.1 - #{@page_title || "Plataforma Virtual para la Transparencia"}
+
     = formtastic_stylesheet_link_tag
     = stylesheet_link_tag 'reset.css', 'tablas.css', 'buttons.css', 'formtastic_changes.css', 'redmond/jquery-ui-1.8.4.custom.css','portal.css'
     %link{:href => "http://fonts.googleapis.com/css?family=Josefin+Sans&subset=latin", :rel => "stylesheet", :type => "text/css"}
-      = javascript_include_tag :defaults
-      = yield :head
-      :javascript
-        var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', 'UA-19786792-1']);
-        _gaq.push(['_trackPageview']);
+    = csrf_meta_tag
+    = javascript_include_tag :defaults, 'jquery-ui.min.js', 'jquery.ui.datepicker-es.js', 'combobox.js'
+    = yield :head
+    :javascript
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-19786792-1']);
+      _gaq.push(['_trackPageview']);
 
-        (function() {
+      (function() {
         var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-        })();
+      })();
 
-        %body
+  %body
     #options
       #modules-menu.hlist
         %ul
@@ -58,7 +60,5 @@
       = link_to "Licenciamiento", "http://openwolf.org/gplv3/"
       |
       = link_to "Portal Estatal", main_index_url
-    div
-    #poweredby{:style => "text-align: center; margin-top: 20px; width: 100%; float: left;"}
-      = link_to image_tag('logopenwolf.png',:alt => 'Powered by OpenWolf v0.1a',:width=>'100px'), 'http://openwolf.org', :title => "Powered by OpenWolf"
-    %iframe#upload_frame{:name => "upload_frame", :src => "about:blank", :style => "width:1px;height:1px;border:0px"}
+      #poweredby{:style => "text-align: center; margin-top: 20px; width: 100%; float: left;"}
+        = link_to image_tag('logopenwolf.png',:alt => 'Powered by OpenWolf v0.1a',:width=>'100px'), 'http://openwolf.org', :title => "Powered by OpenWolf"

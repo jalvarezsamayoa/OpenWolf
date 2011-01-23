@@ -1,5 +1,6 @@
 - if @desde.nil? or @hasta.nil?
-  - @desde = @hasta = Date.today
+  - @desde =  (Date.today - Date.today.yday + 1)
+  - @hasta = Date.today
 - if usuario_actual.nil?
   - @url = usuario_actual.nil? ? buscar_portal_index_url : buscar_url
   - @method = usuario_actual.nil? ? :get : :post
@@ -18,10 +19,10 @@
             %th Instituciones
             %td
               - if usuario_actual.nil?
-                = select_tag :institucion_id, options_from_collection_for_select(Institucion.instituciones,'id','nombre'), :style => "width: 450px;"
+                = select_tag :institucion_id, options_from_collection_for_select(Institucion.instituciones,'id','nombre'), :style => "width: 450px;", :class => "combobox"
               - else
                 = select_tag :institucion_id, options_for_select([[usuario_actual.institucion.nombre,usuario_actual.institucion_id], |
-                  ['Todas','ALL']]), :html => {:style => "width: 450px"}                                                             |
+                  ['Todas','ALL']]), :html => {:style => "width: 450px", :class => "combobox"}                                                             |
           %tr
             %th{:width => "30%"} Fechas:
             %td
@@ -29,7 +30,7 @@
               al#{text_field_tag :fecha_hasta, l(@hasta)}
           %tr
             %th Contiene texto
-            %td= text_field_tag :search, '', :size => 60         
+            %td= text_field_tag :search, '', :size => 60   
           %tr
             %th Vía Solicitud
             %td= select_tag :solicitud_via, options_for_select(Via.all.collect {|c| [c.nombre, c.id] }.insert(0, 'Todos'))

@@ -4,7 +4,7 @@ class Notificaciones < ActionMailer::Base
   if Rails.env.development?
     default_url_options[:host] = "localhost:3000"
   else
-    default_url_options[:host] = "live.openwolf.org"
+    default_url_options[:host] = "transparencia.gob.gt"
   end
   
   # envia correo cuando se genera una nueva solicitud
@@ -39,13 +39,15 @@ class Notificaciones < ActionMailer::Base
     
   end
 
-  def nuevo_seguimiento(sent_at = Time.now)
-    subject    'Notificaciones#nuevo_seguimiento'
-    recipients ''
-    from       ''
+  def nueva_nota_seguimiento(nota, sent_at = Time.now)
+    subject    "openwolf - Nueva Nota de Seguimiento - Solicitud #{actividad.solicitud.codigo}"
+    recipients nota.solicitud.correos_interesados
+    from       'notificaciones@openwolf.org'
     sent_on    sent_at
+    content_type "text/html"
+
+    body       :solicitud => solicitud, :nota => nota, :url_solicitud => solicitud_portal_url(solicitud.id)
     
-    body       :greeting => 'Hi,'
   end
 
   def asignacion_completada(sent_at = Time.now)

@@ -28,7 +28,7 @@ class Solicitud < ActiveRecord::Base
   # Modulos y Plugins
   #####################
   
-  versioned
+  versioned :if => :guardar_version?
   
   #  acts_as_solr :fields => [:codigo, :solicitante_nombre,
   #  :textosolicitud, :observaciones, :fecha_creacion]
@@ -540,6 +540,11 @@ class Solicitud < ActiveRecord::Base
   #limpia la informacion de la solicitud
   def cleanup
     self.solicitante_nombre = self.solicitante_nombre.slice(0..254)
+  end
+
+  #indica si se graba una version
+  def guardar_version?
+    return (self.origen_id == ORIGEN_MIGRACION ? false : true)    
   end
   
 end

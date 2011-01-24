@@ -44,7 +44,10 @@ class Resolucion < ActiveRecord::Base
   end
 
   def actualizar_solicitud
+    logger.debug { "Resolucion#actualizar_solicitud" }
+    
     unless self.nueva_fecha.nil?
+      logger.debug { "Actualizando fecha solicitud." }
       if self.nueva_fecha > self.solicitud.fecha_programada
         self.solicitud.fecha_prorroga = self.nueva_fecha
         self.solicitud.fecha_programada = self.nueva_fecha

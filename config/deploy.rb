@@ -29,8 +29,7 @@ namespace :deploy do
   end
 end
 
-b
-efore "deploy:update_code", "solr:stop"
+before "deploy:update_code", "solr:stop"
 after "deploy:symlink", "solr:symlink"
 after "solr:symlink", "solr:start"
 

@@ -40,8 +40,10 @@ class Notificaciones < ActionMailer::Base
   end
 
   def nueva_nota_seguimiento(nota, sent_at = Time.now)
-    subject    "openwolf - Nueva Nota de Seguimiento - Solicitud #{actividad.solicitud.codigo}"
-    recipients nota.solicitud.correos_interesados
+    solicitud = nota.solicitud
+    
+    subject    "openwolf - Nueva Nota de Seguimiento - Solicitud #{solicitud.codigo}"
+    recipients solicitud.correos_interesados
     from       'notificaciones@openwolf.org'
     sent_on    sent_at
     content_type "text/html"

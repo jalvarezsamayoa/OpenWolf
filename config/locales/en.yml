@@ -373,9 +373,9 @@ en:
 
   adjuntos:
     title: "Adjunto"
-    title_new: "Nuevo Adjunto Adjunto"
+    title_new: "Información del Documento"
     title_edit: "Modificar Adjunto Adjunto"
-    label_numero: "Numero Adjunto"
+    label_numero: "Referencia"
     label_observaciones: "Descripcion"
     label_adjunto: "Archivo Adjunto"
     label_archivo: "Archivo Adjunto"

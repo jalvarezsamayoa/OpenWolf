@@ -376,7 +376,7 @@ class Solicitud < ActiveRecord::Base
   def atrasada?
     l_ok = false
     unless terminada? or entregada?
-      if dias_restantes < 0
+      if dias_restantes <= 0
         l_ok = true
       end
     end

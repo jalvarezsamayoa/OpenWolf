@@ -16,7 +16,7 @@ class Recursorevision < ActiveRecord::Base
   def nuevo_numero
     i = Recursorevision.count(:conditions => ["institucion_id = ? and date_part(\'year\',created_at) = ?", self.institucion_id, Date.today.year ] ).to_i + 1
     
-    self.numero = self.institucion.codigo + '-03-' +  Date.today.year.to_s + '-' + i.to_s.rjust(6,'0')
+    self.numero = self.institucion.codigo + '-' + Documentoclasificacion::REVISION +  '-' +  Date.today.year.to_s + '-' + i.to_s.rjust(6,'0')
   end
   
   def cleanup

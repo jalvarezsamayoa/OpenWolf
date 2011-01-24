@@ -201,11 +201,13 @@ class Herramienta
 
   def crear_solicitud_desechada(row, campos, estado_solicitud, institucion, enlace)
     logger.debug { "Creado solicitud en desechada." }
+     crear_solicitud_entregada(row,campos,ESTADO_DESECHADA)
     return true
   end
 
   def crear_solicitud_no_recogida(row, campos, estado_solicitud, institucion, enlace)
     logger.debug { "Creado solicitud no recogida." }
+    crear_solicitud_entregada(row,campos,ESTADO_DESECHADA)
     return true
   end
 

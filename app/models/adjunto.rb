@@ -4,7 +4,7 @@ class Adjunto < ActiveRecord::Base
   
   has_attached_file :archivo,
   :url => "/adjuntos/:id/download",  
-  :path => ":rails_root/public/assets/adjuntos/:id/:style/:basename.:extension"  
+  :path => ":rails_root/public/system/assets/adjuntos/:id/:basename.:extension"  
 
   validates_presence_of :numero, :message => "Debe incluir un numero de adjunto."
   validates_uniqueness_of :numero, :message=>"Valor de Numero de Adjunto ya esta en uso."

@@ -1,2 +1,0 @@
-page.replace_html :adjuntos, :partial => 'solicitudes/adjuntos'
-page.ajax_flash

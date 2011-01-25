@@ -29,7 +29,7 @@ namespace :deploy do
   end
 end
 
-#before "deploy:update_code", "solr:stop"
+before "deploy:update_code", "solr:stop"
 after "deploy:symlink", "solr:symlink"
 after "solr:symlink", "solr:start"
 #after "solr:start", "solr:reindex"
@@ -60,7 +60,7 @@ namespace :solr do
   end
 
   desc "Reindexar solr"
-  task :start, :roles => :solr do
+  task :reindex, :roles => :solr do
     run <<-CMD
       cd #{current_path} &&
       rake sunspot:solr:reindex RAILS_ENV=production

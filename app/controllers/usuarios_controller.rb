@@ -36,7 +36,7 @@ class UsuariosController < ApplicationController
 
     @usuario_es_admin = nivel_seguridad(usuario_actual,'administrador')
     @usuario_es_superadmin =  nivel_seguridad(usuario_actual,'superadmin')
-    @disabled = @usuario_es_superadmin
+    @disabled = !@usuario_es_superadmin
 
     #verificar a que institucion pueden asignar usuarios
     unless usuario_actual.has_role?(:superadmin)
@@ -64,7 +64,10 @@ class UsuariosController < ApplicationController
   # POST /usuarios.xml
   def create
     @usuario = Usuario.new(params[:usuario])
-    @usuario.institucion_id = usuario_actual.institucion_id if @usuario.institucion.nil?
+
+    raise
+    
+    @usuario.institucion_id = usuario_actual.institucion_id if @usuario.institucion_id.nil?
 
     if @usuario.save
       flash[:notice] = 'Usuario creado con exito.'

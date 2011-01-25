@@ -29,19 +29,20 @@ namespace :deploy do
   end
 end
 
-before "deploy:update_code", "solr:stop"
+#before "deploy:update_code", "solr:stop"
 after "deploy:symlink", "solr:symlink"
 after "solr:symlink", "solr:start"
+#after "solr:start", "solr:reindex"
 
 namespace :solr do
   desc "Link in solr directory"
   task :symlink, :roles => :solr do
     run <<-CMD
       cd #{release_path} &&
-      ln -nfs #{shared_path}/solr #{release_path}/solr 
+      ln -nfs #{shared_path}/solr #{release_path}/solr
     CMD
   end
-  
+
   desc "Before update_code you want to stop SOLR in a specific environment"
   task :stop, :roles => :solr do
     run <<-CMD
@@ -49,7 +50,7 @@ namespace :solr do
       rake sunspot:solr:stop RAILS_ENV=production
     CMD
   end
-  
+
   desc "After update_code you want to restart SOLR in a specific environment"
   task :start, :roles => :solr do
     run <<-CMD
@@ -58,8 +59,13 @@ namespace :solr do
     CMD
   end
 
-  
-  
+  desc "Reindexar solr"
+  task :start, :roles => :solr do
+    run <<-CMD
+      cd #{current_path} &&
+      rake sunspot:solr:reindex RAILS_ENV=production
+    CMD
+  end
 end
 
 

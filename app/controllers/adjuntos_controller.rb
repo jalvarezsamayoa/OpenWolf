@@ -16,7 +16,7 @@ class AdjuntosController < ApplicationController
    
   def create
     obtener_proceso    
-    @adjunto = @proceso.adjuntos.build(params[:adjunto])
+    @adjunto = @proceso.adjuntos.new(params[:adjunto])
     @adjunto.usuario_id = usuario_actual.id
     @adjunto.numero = @adjunto.archivo_file_name if @adjunto.numero.empty?
         
@@ -49,7 +49,8 @@ class AdjuntosController < ApplicationController
     head(:not_found) and return if (@adjunto = Adjunto.find_by_id(params[:id])).nil?
     head(:forbidden) and return unless @adjunto.puede_descargar?(usuario_actual)
     
-    send_file @adjunto.archivo.path, :type => @adjunto.archivo_content_type
+    send_file @adjunto.archivo.path, :type => @adjunto.archivo_content_type, :diposition => 'attachment'
+    
   end
 
   private

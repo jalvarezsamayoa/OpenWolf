@@ -195,7 +195,7 @@ class SolicitudesController < ApplicationController
     # si no se esta solicitando un filtro
     # solo mostramos las solicitudes de la institucion
     # del usuario actual
-    params[:institucion_id] = usuario_actual.institucion_id unless params[:filtrar]
+    params[:institucion_id] = usuario_actual.institucion_id unless (params[:filtrar] or usuario_actual_admin?)
 
     # guardamos el estado del filtro para agregarlo a la paginacion
     if params[:filtrar]
@@ -203,8 +203,7 @@ class SolicitudesController < ApplicationController
     else
       @filtros = nil
     end
-    
-    
+        
     @solicitudes = Solicitud.buscar(params)
     
     # @desde = Solicitud.minimum(:fecha_creacion)

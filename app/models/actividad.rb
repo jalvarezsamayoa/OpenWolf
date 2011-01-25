@@ -1,5 +1,5 @@
 class Actividad < ActiveRecord::Base
-  versioned
+  versioned :if => :guardar_version?
   
   ESTADO_ACTIVA = 1
   ESTADO_COMPLETADA = 3
@@ -50,5 +50,9 @@ class Actividad < ActiveRecord::Base
     self.institucion_id = self.usuario.institucion_id unless self.usuario.nil?
     self.fecha_asignacion = Date.today if self.fecha_asignacion.nil?
     self.estado_id = ESTADO_ACTIVA if self.estado_id.nil?
+  end
+
+  def guardar_version?
+    return self.solicitud.guardar_version?
   end
 end

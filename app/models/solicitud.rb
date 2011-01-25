@@ -39,6 +39,7 @@ class Solicitud < ActiveRecord::Base
 
   searchable do
     text :codigo
+    integer :numero
     text :solicitante_nombre
     text :textosolicitud, :default_boost => 2
     text :observaciones
@@ -153,9 +154,12 @@ class Solicitud < ActiveRecord::Base
   #                    :page => 2,
   #                    :per_page => 25)
   def self.buscar(params = nil)
+    logger.debug { "params.nil?" }
     return nil if params.nil?
+    logger.debug { "search.empty?" }
     return nil if params[:search] && params[:search].empty?
-    
+
+    logger.debug { "filters" }
     l_filtrar_instituciones = (params[:institucion_id] && params[:institucion_id] != 'ALL')
     l_filtrar_vias = (params[:solicitud_via] && params[:solicitud_via] != 'Todos')
     l_filtrar_estados = (params[:solicitud_estado] && params[:solicitud_estado] != 'Todos')
@@ -168,6 +172,15 @@ class Solicitud < ActiveRecord::Base
     d_fechadesde = (params[:fecha_desde] ? Date.strptime(params[:fecha_desde], "%d/%m/%Y") : nil)
     d_fechahasta = (params[:fecha_hasta] ? Date.strptime(params[:fecha_hasta], "%d/%m/%Y") : nil)
 
+
+    #veficar si usuario intento enviar un solo entero
+    # que seria el correlativo de la solicitud
+    i_numero = params[:search].to_i
+    if i_numero > 0
+      params[:search] = ''
+    else
+      i_numero = nil
+    end
 
     if l_filtrar_tiempo_restante
       case params[:solicitud_tiempo]
@@ -191,9 +204,11 @@ class Solicitud < ActiveRecord::Base
       d_fechaprogdesde = Date.today + desde
       d_fechaproghasta = Date.today + hasta
     end
-    
+
+    logger.debug { "search" }
     self.search do
       keywords(params[:search])
+      with :numero, i_numero if i_numero
       with :institucion_id, i_institucion_id if l_filtrar_instituciones
       with :solicitud_via, i_via_id if l_filtrar_vias
       with :solicitud_estado, i_estado_id if l_filtrar_estados
@@ -479,6 +494,11 @@ class Solicitud < ActiveRecord::Base
     return correos
   end
 
+  #indica si se graba una version
+  def guardar_version?
+    return (self.origen_id == ORIGEN_MIGRACION ? false : true)    
+  end
+
   ################################
   # Metodos de Instancia Privados
   # http://apidock.com/ruby/Module/private
@@ -542,9 +562,6 @@ class Solicitud < ActiveRecord::Base
     self.solicitante_nombre = self.solicitante_nombre.slice(0..254)
   end
 
-  #indica si se graba una version
-  def guardar_version?
-    return (self.origen_id == ORIGEN_MIGRACION ? false : true)    
-  end
+
   
 end

@@ -41,7 +41,7 @@ class AdjuntosController < ApplicationController
 
     flash[:success] = 'Adjunto eliminado con exito.'
     respond_to do |format|
-      format.js
+      format.jsy
     end
   end
 
@@ -49,7 +49,7 @@ class AdjuntosController < ApplicationController
     head(:not_found) and return if (@adjunto = Adjunto.find_by_id(params[:id])).nil?
     head(:forbidden) and return unless @adjunto.puede_descargar?(usuario_actual)
     
-    send_file @adjunto.archivo.path, :diposition => 'attachment'
+    send_file @adjunto.archivo.path, :type => @adjunto.archivo_content_type, :x_sendfile => true
     
   end
 

@@ -64,8 +64,6 @@ class UsuariosController < ApplicationController
   # POST /usuarios.xml
   def create
     @usuario = Usuario.new(params[:usuario])
-
-    raise
     
     @usuario.institucion_id = usuario_actual.institucion_id if @usuario.institucion_id.nil?
 

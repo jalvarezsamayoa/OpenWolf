@@ -15,16 +15,13 @@
     %tbody
       - @solicitudes.each_hit_with_result do |hit, solicitud|
         %tr
-          %td
-            = link_to solicitud.codigo, solicitud_portal_path(:id => solicitud.id), :title => "Haga click para ver contendido de Solicitud."
-          %td
-            = l(solicitud.fecha_creacion)
-          %td
-            = solicitud.solicitante_nombre
+          %td= link_to_solicitud_portal(solicitud) 
+          %td= l(solicitud.fecha_creacion)
+          %td= solicitud.solicitante_nombre
           %td= solicitud.estado_actual
           %td= solicitud.avance
           %td= solicitud.extracto
-          %td= link_to solicitud.institucion.abreviatura, institucion_portal_path(solicitud.institucion), :title => solicitud.institucion.nombre
+          %td= link_to(solicitud.institucion.abreviatura, institucion_portal_path(solicitud.institucion), :title => solicitud.institucion.nombre)
   %br/
   = will_paginate @solicitudes.results
   %br/

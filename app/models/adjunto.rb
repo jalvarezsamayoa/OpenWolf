@@ -1,5 +1,4 @@
 class Adjunto < ActiveRecord::Base
-  versioned
   
   belongs_to :proceso, :polymorphic => true
   

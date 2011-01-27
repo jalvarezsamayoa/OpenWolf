@@ -3,11 +3,9 @@
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
   %body
-    Buen día
-    = succeed ":" do
-      %b= @solicitud.nombres_enlaces
+    Buen día:
     %br/
-    Por este medio se les informa que se le ha agregado una nueva
+    Por este medio se le informa que se le ha agregado una nueva
     nota de seguimiento con los siguientes datos:
     %br/
     %br/
@@ -15,7 +13,7 @@
     = @solicitud.institucion.nombre
     %br/
     %b Número Solicitud:
-    = "@solicitud.codigo ( #{@url_solicitud} )"
+    = "#{@solicitud.codigo} ( #{@url_solicitud} )"
     %br/
     %b Fecha programa de entrega:
     = l(@solicitud.fecha_programada)

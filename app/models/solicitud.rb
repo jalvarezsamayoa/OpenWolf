@@ -156,16 +156,19 @@ class Solicitud < ActiveRecord::Base
   def self.buscar(params = nil)
     logger.debug { "params.nil?" }
     return nil if params.nil?
+    
     logger.debug { "search.empty?" }
-    return nil if params[:search] && params[:search].empty?
+    if params[:filtrar].nil?
+      return nil if params[:search] && params[:search].empty?
+    end
 
     logger.debug { "filters" }
     l_filtrar_instituciones = (params[:institucion_id] && params[:institucion_id] != 'ALL')
     l_filtrar_vias = (params[:solicitud_via] && params[:solicitud_via] != 'Todos')
     l_filtrar_estados = (params[:solicitud_estado] && params[:solicitud_estado] != 'Todos')
-    l_filtrar_tiempo_restante = (params[:solicitud_tiempo] && params[:solicitud_tiempo != 'ALL'])       
+    l_filtrar_tiempo_restante = (params[:solicitud_tiempo] && params[:solicitud_tiempo] != 'ALL')       
 
-    i_institucion_id = (params[:institucion_id] ? params[:institucion_id] : nil)           
+    i_institucion_id = (params[:institucion_id] ? params[:institucion_id] : nil)
     i_via_id = (params[:solicitud_via] ? params[:solicitud_via] : nil )
     i_estado_id = (params[:solicitud_estado] ? params[:solicitud_estado] : nil )
 
@@ -203,20 +206,23 @@ class Solicitud < ActiveRecord::Base
       
       d_fechaprogdesde = Date.today + desde
       d_fechaproghasta = Date.today + hasta
+
     end
 
-    logger.debug { "search" }
+
     self.search do
-      keywords(params[:search])
+      keywords(params[:search]) unless params[:search].empty?
       with :numero, i_numero if i_numero
       with :institucion_id, i_institucion_id if l_filtrar_instituciones
-      with :solicitud_via, i_via_id if l_filtrar_vias
-      with :solicitud_estado, i_estado_id if l_filtrar_estados
+      with :via_id, i_via_id if l_filtrar_vias
+      with :estado_id, i_estado_id if l_filtrar_estados
       with(:fecha_creacion).between(d_fechadesde..d_fechahasta) if d_fechadesde
-      with(:fecha_programada).between(d_fechaprogdesde..dfechaproghasta) if l_filtrar_tiempo_restante
+      with(:fecha_programada).between(d_fechaprogdesde..d_fechaproghasta) if l_filtrar_tiempo_restante
       paginate(:page => (params[:page] ||= 1), :per_page => (params[:per_page] ||= 20))
       order_by(:fecha_creacion, :desc)
     end
+
+       
     
   end
 

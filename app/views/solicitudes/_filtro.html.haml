@@ -27,7 +27,8 @@
             %th{:width => "30%"} Fechas:
             %td
               = text_field_tag :fecha_desde, l(@desde)
-              al#{text_field_tag :fecha_hasta, l(@hasta)}
+              al
+              = text_field_tag :fecha_hasta, l(@hasta)
           %tr
             %th Contiene texto
             %td= text_field_tag :search, '', :size => 60   

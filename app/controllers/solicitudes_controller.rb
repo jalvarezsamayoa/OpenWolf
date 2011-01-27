@@ -206,14 +206,10 @@ class SolicitudesController < ApplicationController
         
     @solicitudes = Solicitud.buscar(params)
     
-    # @desde = Solicitud.minimum(:fecha_creacion)
-    
-    # @hasta = Solicitud.maximum(:fecha_creacion)
-    @desde = Date.today - Date.today.yday + 1
-    @hasta = Date.today
 
-#    @desde = Date.today if @desde.nil?
-#    @hasta = Date.today if @hasta.nil?
+    @desde = ( params[:fecha_desde] ? Date.strptime(params[:fecha_desde], "%d/%m/%Y") : Date.today - Date.today.yday + 1 )
+    @hasta = ( params[:fecha_hasta] ? Date.strptime(params[:fecha_hasta], "%d/%m/%Y") : Date.today )
+
   end
 
   private

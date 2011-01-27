@@ -5,7 +5,10 @@
   = solicitud_boton_imprimir(@solicitud, @es_pertinente_a_usuario)
 
   / limita editar y eliminar la solicitud al Encargado de la UDIP
-  = solicitud_boton_editar(@solicitud, @es_pertinente_a_usuario, @usuario_es_supervisor)
+
+  / segun https://www.pivotaltracker.com/story/show/9190827
+  / para editar solo es necesario ser miembro de UDIP
+  = solicitud_boton_editar(@solicitud, @es_pertinente_a_usuario, @usuario_es_udip)
   = solicitud_boton_eliminar(@solicitud, @es_pertinente_a_usuario,  @usuaario_es_supervisor)
 
   / acciones que puede realizarse si la solicitud no ha sido entregada al ciudadano

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 module DashboardHelper
   BASEURL = 'http://chart.apis.google.com/chart'
   MESES = '?chxl=0:|Ene|Feb|Mar|Abr|May|Jun|Jul|Ago|Sep|Oct|Nov|Dic'
@@ -5,7 +6,9 @@ module DashboardHelper
 
   #genera un diagrama de pie indicando 
   def solicitudes_por_estado(user = nil)
-    data = get_solicitudes_por_estado(user)
+    ano = Date.today.year
+    data = get_solicitudes_por_estado(user, ano)
+    
 
    # raise data.inspect
 
@@ -16,7 +19,7 @@ module DashboardHelper
     url += '&chd=t:'+data[0].to_s #porcentajes
     url += '&chdl='+data[1].to_s #labels porcentaje
     url += '&chl='+data[2].to_s  #labels
-    url += '&chtt=Solicitudes+por+Estado'
+    url += '&chtt=Solicitudes+por+Estado+'+ano.to_s
     
    
     # http://chart.apis.google.com/chart
@@ -77,14 +80,14 @@ module DashboardHelper
 
   private
 
-  def get_solicitudes_por_estado(user)
+  def get_solicitudes_por_estado(user, ano = Date.today.year)
     data = ['','','']
     
     if user.nil?
-      solicitudes = Solicitud.count(:all, :group => "estado_id")
+      solicitudes = Solicitud.count(:all,  :conditions => "date_part('year',fecha_creacion) = #{ano}", :group => "estado_id")
       n = Solicitud.count
     else
-      solicitudes = user.institucion.solicitudes.count(:all, :group => "estado_id")
+      solicitudes = user.institucion.solicitudes.count(:all,  :conditions => "date_part('year',fecha_creacion) = #{ano}", :group => "estado_id")
       n = user.institucion.solicitudes.count
     end
 

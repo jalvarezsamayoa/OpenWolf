@@ -55,7 +55,8 @@ class UsuariosController < ApplicationController
 
     @usuario_es_admin = nivel_seguridad(usuario_actual,'administrador')
     @usuario_es_superadmin =  nivel_seguridad(usuario_actual,'superadmin')
-    @disabled = @usuario_es_superadmin
+    
+    @disabled = !@usuario_es_superadmin
 
     
   end

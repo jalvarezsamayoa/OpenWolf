@@ -88,6 +88,8 @@ class Solicitud < ActiveRecord::Base
   belongs_to :idioma
 
   has_many :actividades, :dependent => :destroy
+  has_many :seguimientos, :through => :actividades
+  
   has_many :adjuntos, :as => :proceso, :dependent => :destroy
   has_many :notas, :as => :proceso, :dependent => :destroy
   has_many :resoluciones, :dependent => :destroy

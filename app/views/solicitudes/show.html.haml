@@ -85,6 +85,11 @@
     = t("solicitudes.label_textosolicitud")
   = @solicitud.texto_solicitud
   %hr.space/
+
+  %h4= "Seguimientos"
+  #seguimientos
+    = render :partial => 'seguimientos'
+
   %h4= Resolucion.human_name.pluralize
   #resoluciones
     = render :partial => 'resoluciones'

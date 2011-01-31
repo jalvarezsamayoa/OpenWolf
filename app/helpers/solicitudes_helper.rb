@@ -45,7 +45,7 @@ module SolicitudesHelper
   end
 
   def solicitud_boton_adjuntar_documento(solicitud, pertinente = false, udip = false)
-    return '' unless (!@solicitud.entregada? && pertinente && udip)
+    return '' unless (pertinente && udip)
     raw( link_to(image_tag("textfile16.png") + t("solicitudes.label_adjuntaradjunto"), 
                  new_solicitud_adjunto_path(@solicitud),                                       
                  :title => 'Adjuntar archivos a Solicitud',                       

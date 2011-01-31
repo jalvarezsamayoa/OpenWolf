@@ -124,6 +124,7 @@ class Solicitud < ActiveRecord::Base
   scope :noentregadas, :conditions=>["solicitudes.fecha_entregada is null" ]
 
   scope :recientes, :order => "fecha_creacion desc"
+  scope :correlativo, :order => "ano desc, numero desc"
 
   scope :tiempoejecucion, lambda { |tiempo_desde, tiempo_hasta| {
       :conditions => ["(((fecha_programada - ?)*100)/10) between ? and ?",Date.today, tiempo_desde, tiempo_hasta]

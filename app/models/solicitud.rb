@@ -543,7 +543,7 @@ class Solicitud < ActiveRecord::Base
 
       if self.origen_id != ORIGEN_MIGRACION        
         self.fecha_creacion = Date.today if self.fecha_creacion.nil?
-        self.fecha_programada = fecha_creacion + 10.days
+        self.fecha_programada = fecha_creacion + 14.days
         self.departamento_id = municipio.departamento_id unless municipio.nil?
         self.estado_id = ESTADO_NORMAL
         self.asignada = false      

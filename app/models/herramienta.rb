@@ -218,7 +218,7 @@ class Herramienta
     
     # la fecha programada de entrega SIEMPRE SON 10 DIAS POR LEY
     # solo se modifica si hay prorroga
-    valores[:fecha_programada] = valores[:fecha_creacion] + 10
+    valores[:fecha_programada] = valores[:fecha_creacion] + 14
 
     # si no se encuentra en un estado final todas las fechas son NIL
     unless e.final?

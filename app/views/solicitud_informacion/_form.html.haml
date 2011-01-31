@@ -5,5 +5,6 @@
   = form.input :email, :input_html => {:size => 60, :maxsize => 254}, :hint => "Correo electrónico del solicitante. Para seguimiento y notificaciones.", :required => true
   = form.input :textosolicitud, :input_html => {:rows => 5}, :hint => "Descripción de información solicitada"
   %h2 Información Opcional
+  = form.input :solicitante_identificacion, :input_html => {:size => 60, :maxsize => 254}, :hint => '(opcional) Número de Cédula, DPI, Pasaporte, etc..'
   = form.input :solicitante_telefonos, :input_html => {:size => 60, :maxsize => 254}, :hint => "(opcional) Teléfonos para contactar a solicitante en caso de aclaración o seguimiento."
   = form.input :idioma, :include_blank => false, :hint => "(opcional) Preferencia sociolingustica del solicitante"

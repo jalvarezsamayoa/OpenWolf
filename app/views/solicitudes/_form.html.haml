@@ -13,6 +13,7 @@
   %br/
   %br/
   %h2 Información Optativa
+  = form.input :solicitante_identificacion, :input_html => {:size => 60, :maxsize => 254}, :hint => 'Opcional: Número de Cédula, DPI, Pasaporte, etc..'
   = form.input :solicitante_direccion, :input_html => {:size => 100, :maxsize => 254}, :hint => 'Opcional: si el ciudadano require que se le envien documentos.'
   = form.input :email, :input_html => {:size => 60, :maxsize => 254}, :hint => 'Opcional: si el ciudadano desea recibir notificaciones automáticas.'
   = form.input :solicitante_telefonos, :input_html => {:size => 60, :maxsize => 254}, :hint => "Opcional: si el ciudadano requiere que se le notifique telefónicamente."

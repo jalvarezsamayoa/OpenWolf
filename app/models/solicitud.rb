@@ -531,7 +531,9 @@ class Solicitud < ActiveRecord::Base
         ciudadano = self.institucion.usuarios.ciudadanos.first      
         self.usuario_id = ciudadano.id
       end
-      
+
+      #si es orgien portal la via es internet
+      self.via_id = 4 #internet
     else
       # si es migracion usamos al primer usario de UDIP
       superudip = self.institucion.usuarios.supervisores.first

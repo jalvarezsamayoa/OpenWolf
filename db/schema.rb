@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110113191755) do
+ActiveRecord::Schema.define(:version => 20110203225654) do
 
   create_table "actividades", :force => true do |t|
     t.integer  "institucion_id",                  :null => false
@@ -293,8 +293,10 @@ ActiveRecord::Schema.define(:version => 20110113191755) do
     t.text     "texto"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "informacion_publica", :default => true, :null => false
   end
 
+  add_index "notas", ["informacion_publica"], :name => "index_notas_on_informacion_publica"
   add_index "notas", ["proceso_id"], :name => "index_notas_on_proceso_id"
   add_index "notas", ["proceso_type"], :name => "index_notas_on_proceso_type"
   add_index "notas", ["usuario_id"], :name => "index_notas_on_usuario_id"

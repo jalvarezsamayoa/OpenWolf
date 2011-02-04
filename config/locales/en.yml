@@ -282,6 +282,7 @@ en:
         texto: "Mensaje seguimiento"
         usuario_id: "Usuario"
         created_at: "Fecha"
+        informacion_publica: "Información es pública"
 
   breadcrums:
     homepage: "Pagina de Inicio"

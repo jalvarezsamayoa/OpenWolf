@@ -29,6 +29,8 @@ class PortalController < ApplicationController
 
     @page_title = @solicitud.institucion.nombre + ' ('+ @solicitud.institucion.abreviatura + ') - Solicitud No. ' + @solicitud.codigo
     @q = @solicitud.codigo
+
+    @restringir_seguimientos_privados = true
     
     respond_to do |format|
       format.html # show.html.erb

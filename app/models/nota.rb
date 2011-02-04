@@ -7,6 +7,10 @@ class Nota < ActiveRecord::Base
   
   after_create :notificar_creacion
 
+  scope :publicas, where(:informacion_publica => true)
+  scope :privadas, where(:informacion_publica => false)
+  scope :restringir, lambda { |restringir_privadas| restringir_privadas == true ? where(:informacion_publica => true) : all  }
+
   private
 
   def notificar_creacion

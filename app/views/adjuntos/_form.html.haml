@@ -8,7 +8,7 @@
     %td= f.text_area(:observaciones, :cols => 68, :rows => 4)
   %tr
     %td
-      = f.label :archivo, t('adjuntos.label_archivo')
+      = f.label :archivo, t('adjuntos.label_archivo') + ' (5MB MAX)'
     %td= f.file_field :archivo
   - if @usa_solicitudes_privadas == true
     %tr

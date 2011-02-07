@@ -129,7 +129,7 @@ en:
       documentoclasificacion: "Clasificación Documental"
       documentocategoria: "Categoría Documental"
       documento: "Documento"
-      nota: "Nota Seguimiento"
+      nota: "Seguimiento General"
     attributes:
       usuario:
         email: "Correo electrónico"
@@ -195,7 +195,7 @@ en:
         rpt_fechapresentacionrecursorevision: "Fecha de presentación del recurso de revisión"
         rpt_fechanotificacionrecursorevision: "Fecha en la que se notificó el recurso de revisión"
         rpt_sentidoresolucion: "Sentido de la resolución caida al recurso"
-        notas: "Seguimientos"
+        notas: "Seguimientos Generales"
         enlaces: "Personal asignado"
         idioma: "Pertenencia sociolinguistica"
       tiporesolucion:
@@ -382,6 +382,6 @@ en:
     label_archivo: "Archivo Adjunto"
 
   notas:
-    title: "Notas Seguimiento"
+    title: "Seguimientos Generales"
     title_new: "Nueva Nota Seguimiento"
     title_edit: "Modificar Nota Segumiento"

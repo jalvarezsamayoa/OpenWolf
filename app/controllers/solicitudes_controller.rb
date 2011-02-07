@@ -46,7 +46,7 @@ class SolicitudesController < ApplicationController
     @usuario_es_supervisor =  nivel_seguridad(usuario_actual,'encargadoudip')
     @usuario_es_udip = nivel_seguridad(usuario_actual,'personaludip')
 
-    @puede_remover = (@es_pertinente_a_usuario && @usuario_es_udip)
+    @puede_remover_asignacion = (@es_pertinente_a_usuario && @usuario_es_udip)
     @restringir_seguimientos_privados = !(@es_pertinente_a_usuario && @usuario_es_udip)
     
     respond_to do |format|

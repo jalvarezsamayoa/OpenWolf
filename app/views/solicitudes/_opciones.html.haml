@@ -18,7 +18,7 @@
   = solicitud_boton_adjuntar_documento(@solicitud, @es_pertinente_a_usuario, @usuario_es_udip)
 
   / solo el encargado de la UDIP puede emitir resoluciones y solamente si estan al 100%
-  = solicitud_boton_emitir_resolucion(@solicitud, @es_pertinente_a_usuario,  @usuario_es_supervisor)
+  = solicitud_boton_emitir_resolucion(@solicitud, @es_pertinente_a_usuario,  @usuario_es_udip)
 
   / solo se puede emitir recurso de revision si ya fue entregada al ciudadano
   = solicitud_boton_recurso_revision(@solicitud, @es_pertinente_a_usuario, @usuario_es_udip)

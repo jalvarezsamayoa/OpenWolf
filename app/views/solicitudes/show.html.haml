@@ -34,12 +34,9 @@
   #asignaciones
     = render(:partial => 'asignaciones')
   %h4 Datos del Solicitante
-  %table
+  %table   
     %tr
-      %th{:width => "20%"}= label :solicitud, t("solicitudes.label_solicitante_institucion")
-      %td= @solicitud.solicitante_institucion
-    %tr
-      %th= label :solicitud, t("solicitudes.label_solicitante_nombre")
+      %th{:width => "20%"}= label :solicitud, t("solicitudes.label_solicitante_nombre")
       %td= @solicitud.solicitante_nombre
     %tr
       %th= label :solicitud, t("solicitudes.label_solicitante_identificacion")
@@ -86,7 +83,7 @@
   = @solicitud.texto_solicitud
   %hr.space/
 
-  %h4= "Seguimientos"
+  %h4= "Seguimientos de enlaces"
   #seguimientos
     = render :partial => 'seguimientos'
 

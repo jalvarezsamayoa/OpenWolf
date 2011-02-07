@@ -481,7 +481,7 @@ class Solicitud < ActiveRecord::Base
 
   #retorna un arreglo con los correos electronicos
   # de las personas relacionadas a la notificacion
-  def correos_interesados
+  def correos_interesados(l_incluir_ciudadano = true)
     correos = []
 
     #usuarios unidad informacion
@@ -491,7 +491,7 @@ class Solicitud < ActiveRecord::Base
     }
     
     #ciudadano si hay correo
-    unless self.email.empty?
+    unless self.email.empty? and l_incluir_ciudadano
       correos << self.email
     end
 

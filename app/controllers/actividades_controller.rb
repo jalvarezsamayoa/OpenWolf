@@ -1,6 +1,7 @@
 class ActividadesController < ApplicationController
   before_filter :requiere_usuario
   before_filter :get_data, :except =>[:marcar_como_completada, :index, :actualizar_usuarios]
+  before_filter :obtener_privilegios, :only => [:show, :create]
 
   def index
     @asignaciones = usuario_actual.actividades
@@ -8,11 +9,6 @@ class ActividadesController < ApplicationController
 
   def show
     @actividad = Actividad.find(params[:id])
-
-    @es_pertinente_a_usuario = @solicitud.es_pertinente?(usuario_actual)
-    @usuario_es_supervisor =  nivel_seguridad(usuario_actual,'encargadoudip')
-
-    @puede_remover = @es_pertinente_a_usuario && @usuario_es_supervisor
     
     respond_to do |format|
       format.js
@@ -41,8 +37,7 @@ class ActividadesController < ApplicationController
   # POST /actividades
   # POST /actividades.xml
   def create
-    @actividad = Actividad.new(params[:actividad])
-    @actividad.solicitud_id = @solicitud.id
+    @actividad = @solicitud.actividades.new(params[:actividad])
     @actividades = @solicitud.actividades
     
     respond_to do |format|
@@ -115,7 +110,7 @@ class ActividadesController < ApplicationController
     else
       @usuarios = institucion.usuarios.supervisores
     end
-     respond_to do |format|
+    respond_to do |format|
       format.js do
         render :actualizar_usuarios
       end
@@ -124,6 +119,14 @@ class ActividadesController < ApplicationController
 
   private
 
+ 
+  def obtener_privilegios
+    @es_pertinente_a_usuario = @solicitud.es_pertinente?(usuario_actual)
+    # @usuario_es_supervisor =  nivel_seguridad(usuario_actual,'encargadoudip')
+    @usuario_es_udip = nivel_seguridad(usuario_actual,'personaludip')
+    @puede_remover_asignacion = (@es_pertinente_a_usuario && @usuario_es_udip)
+  end
+  
   def get_data
     @institucion = usuario_actual.institucion
     @solicitud = Solicitud.find(params[:solicitud_id])

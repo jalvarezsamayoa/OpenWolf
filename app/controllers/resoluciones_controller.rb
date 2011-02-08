@@ -1,5 +1,6 @@
 class ResolucionesController < ApplicationController
   before_filter :get_solicitud, :except => [:actualizar_razones]
+  before_filter :obtener_privilegios, :only => [:new, :edit]
   
   access_control do
     allow :superudip
@@ -24,6 +25,9 @@ class ResolucionesController < ApplicationController
     @resolucion.institucion_id = current_user.institucion_id
     @resolucion.descripcion = 'No Disponible'
     @resolucion.numero = @resolucion.nuevo_numero
+    
+    @resolucion.fecha = l(Date.today)
+    @resolucion.fecha_notificacion = l(Date.today)
 
     respond_to do |format|
       format.html
@@ -43,6 +47,16 @@ class ResolucionesController < ApplicationController
     @resolucion.institucion_id = current_user.institucion_id
     @resolucion.solicitud_id = @solicitud.id
     @resolucion.usuario_id = current_user.id
+
+    if params[:resolucion][:fecha]
+     #limpiamos fecha de creacion pasandola a formato MM/DD/YYYY
+      @resolucion.fecha = fix_date(params[:resolucion][:fecha])
+    end
+
+     if params[:resolucion][:fecha_notificacion]
+     #limpiamos fecha de creacion pasandola a formato MM/DD/YYYY
+      @resolucion.fecha_notificacion = fix_date(params[:resolucion][:fecha_notificacion])
+    end
     
 
     respond_to do |format|
@@ -60,6 +74,16 @@ class ResolucionesController < ApplicationController
   # PUT /resoluciones/1.xml
   def update
     @resolucion = @solicitud.resoluciones.find(params[:id])
+
+     if params[:resolucion][:fecha]
+    #limpiamos fecha de creacion pasandola a formato MM/DD/YYYY
+      params[:resolucion][:fecha] = fix_date(params[:resolucion][:fecha])
+     end
+
+     if params[:resolucion][:fecha_notificacion]
+    #limpiamos fecha de creacion pasandola a formato MM/DD/YYYY
+      params[:resolucion][:fecha_notificacion] = fix_date(params[:resolucion][:fecha_notificacion])
+     end
 
     respond_to do |format|
       if @resolucion.update_attributes(params[:resolucion])
@@ -98,5 +122,11 @@ class ResolucionesController < ApplicationController
       end
     end
   end
-  
+
+  def obtener_privilegios
+    @es_pertinente_a_usuario = @solicitud.es_pertinente?(usuario_actual)
+    @usuario_es_supervisor =  nivel_seguridad(usuario_actual,'encargadoudip')
+    @puede_modificar_fecha = (@es_pertinente_a_usuario && @usuario_es_supervisor)
+  end
+    
 end

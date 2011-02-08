@@ -201,6 +201,7 @@ en:
       tiporesolucion:
         nombre: "Descripcion"
         actualiza_fecha: "Modifica fecha entrega"
+        actualiza_fecha_notificacion: "Modifica fecha notificacion"
         estado_id: "Actualiza a estado"
       razontiporesolucion:
         nombre: "Descripcion"
@@ -219,6 +220,7 @@ en:
         nueva_fecha: "Nueva fecha de entrega"
         informacion_publica: "Información es pública"
         created_at: "Fecha de creación"
+        fecha: "Fecha de resolución"
       recursorevison:
         numero: "Número recurso"
         usuario_id: "Usuario"

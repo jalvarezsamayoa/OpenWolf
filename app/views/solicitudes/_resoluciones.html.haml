@@ -1,7 +1,7 @@
 %table#minimalist-a
   %thead
     %th{:width => "20%"}= Resolucion.human_attribute_name(:numero)
-    %th{:width => "10%"}= Resolucion.human_attribute_name(:created_at)
+    %th{:width => "10%"}= Resolucion.human_attribute_name(:fecha)
     %th{:width => "10%"}= Resolucion.human_attribute_name(:tiporesolucion_id)
     %th{:width => "15%"}= Resolucion.human_attribute_name(:tiporazonresolucion_id)
     %th= Resolucion.human_attribute_name(:descripcion)
@@ -9,7 +9,7 @@
     - for resolucion in @solicitud.resoluciones do
       %tr
         %td= resolucion.numero
-        %td= l(resolucion.created_at.to_date)
+        %td= l(resolucion.fecha)
         %td= resolucion.tiporesolucion.nombre
         %td= resolucion.razontiporesolucion.nombre
         %td= resolucion.descripcion

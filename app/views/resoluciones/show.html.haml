@@ -20,6 +20,9 @@
       %colgroup.show-table-header
       %colgroup.show-table-data
       %tr
+        %th= label :fecha, Resolucion.human_attribute_name(:fecha)
+        %td= l(@resolucion.fecha)
+      %tr
         %th= label :numero, Resolucion.human_attribute_name(:numero)
         %td= @resolucion.numero
       %tr
@@ -31,6 +34,9 @@
       %tr
         %th= label :razonresolucion_id, Resolucion.human_attribute_name(:razonresolucion_id)
         %td= @resolucion.razontiporesolucion.nombre
+      %tr
+        %th= label :fecha_notificacion, Resolucion.human_attribute_name(:fecha_notificacion)
+        %td= l(@resolucion.fecha_notificacion)
       %tr
         %th= label :nueva_fecha, Resolucion.human_attribute_name(:nueva_fecha)
         %td= l(@resolucion.nueva_fecha) unless @resolucion.nueva_fecha.nil?

@@ -1,14 +1,14 @@
 %table#minimalist-a
   %thead
     %th= Resolucion.human_attribute_name(:numero)
-    %th= Resolucion.human_attribute_name(:created_at)
+    %th= Resolucion.human_attribute_name(:fecha)
     %th= Resolucion.human_attribute_name(:tiporesolucion_id)
     %th= Resolucion.human_attribute_name(:tiporazonresolucion_id)
   %tbody
     - for resolucion in @solicitud.resoluciones do
       %tr
         %td= resolucion.numero
-        %td= l(resolucion.created_at.to_date)
+        %td= l(resolucion.fecha)
         %td= resolucion.tiporesolucion.nombre
         %td= resolucion.razontiporesolucion.nombre
 #showresolucion.popup{:style => "display: none; height: 400px;"}

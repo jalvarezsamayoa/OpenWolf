@@ -1,4 +1,9 @@
 jQuery(function($){
+         $("#resolucion_fecha").datepicker();
+
+         $("#resolucion_fecha_notificacion").datepicker();
+         $("#resolucion_fecha_notificacion_input").hide();
+
          $("#resolucion_nueva_fecha_input").hide();
          $("#resolucion_nueva_fecha").datepicker();
 

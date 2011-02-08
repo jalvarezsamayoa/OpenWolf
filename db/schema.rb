@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110203225654) do
+ActiveRecord::Schema.define(:version => 20110207174109) do
 
   create_table "actividades", :force => true do |t|
     t.integer  "institucion_id",                  :null => false
@@ -383,9 +383,13 @@ ActiveRecord::Schema.define(:version => 20110203225654) do
     t.datetime "updated_at"
     t.boolean  "informacion_publica",       :default => true, :null => false
     t.integer  "documentoclasificacion_id", :default => 2
+    t.date     "fecha"
+    t.date     "fecha_notificacion"
   end
 
   add_index "resoluciones", ["documentoclasificacion_id"], :name => "index_resoluciones_on_documentoclasificacion_id"
+  add_index "resoluciones", ["fecha"], :name => "index_resoluciones_on_fecha"
+  add_index "resoluciones", ["fecha_notificacion"], :name => "index_resoluciones_on_fecha_notificacion"
   add_index "resoluciones", ["informacion_publica"], :name => "index_resoluciones_on_informacion_publica"
   add_index "resoluciones", ["institucion_id"], :name => "index_resoluciones_on_institucion_id"
   add_index "resoluciones", ["numero"], :name => "index_resoluciones_on_numero"
@@ -522,11 +526,12 @@ ActiveRecord::Schema.define(:version => 20110203225654) do
   end
 
   create_table "tiposresoluciones", :force => true do |t|
-    t.string   "nombre",                             :null => false
-    t.boolean  "actualiza_fecha", :default => false
-    t.integer  "estado_id",       :default => 1,     :null => false
+    t.string   "nombre",                                          :null => false
+    t.boolean  "actualiza_fecha",              :default => false
+    t.integer  "estado_id",                    :default => 1,     :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "actualiza_fecha_notificacion", :default => false
   end
 
   create_table "usuarios", :force => true do |t|

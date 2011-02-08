@@ -38,7 +38,12 @@ class Resolucion < ActiveRecord::Base
         logger.debug { "Nueva fecha no es valida." }
       end
     end
-    
+
+    #verificamos existencia de fecha de resolucion
+    # superudip tiene derecho a cambiarla o asignarla
+    self.fecha = Date.today if self.fecha.nil?
+    self.fecha_notificacion = Date.today if self.fecha_notificacion.nil?
+
     
     return true
   end

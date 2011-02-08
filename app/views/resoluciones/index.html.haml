@@ -18,7 +18,7 @@
       %thead
         %tr
           %th{:width => "20%"}= Resolucion.human_attribute_name(:numero)
-          %th{:width => "10%"}= Resolucion.human_attribute_name(:created_at)
+          %th{:width => "10%"}= Resolucion.human_attribute_name(:fecha)
           %th{:width => "10%"}= Resolucion.human_attribute_name(:tiporesolucion_id)
           %th{:width => "15%"}= Resolucion.human_attribute_name(:tiporazonresolucion_id)
           %th= Resolucion.human_attribute_name(:descripcion)
@@ -26,7 +26,7 @@
         - for resolucion in @resoluciones do
           %tr
             %td= link_to resolucion.numero, solicitud_resolucion_path(@solicitud,resolucion)
-            %td= l(resolucion.created_at.to_date)
+            %td= l(resolucion.fecha.to_date)
             %td= resolucion.tiporesolucion.nombre
             %td= resolucion.razontiporesolucion.nombre
             %td= resolucion.descripcion

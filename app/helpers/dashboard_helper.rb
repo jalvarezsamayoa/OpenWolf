@@ -19,7 +19,7 @@ module DashboardHelper
     url += '&chd=t:'+data[0].to_s #porcentajes
     url += '&chdl='+data[1].to_s #labels porcentaje
     url += '&chl='+data[2].to_s  #labels
-    url += '&chtt=Solicitudes+por+Estado+'+ano.to_s
+    url += '&chtt=Solicitudes+Institución+'+ano.to_s
     
    
     # http://chart.apis.google.com/chart

@@ -44,7 +44,7 @@
     .span-8
       = label :solicitante_telefonos, Solicitud.human_attribute_name(:solicitante_telefonos)
     .span-16.last
-      = @solicitud.solicitante_telefonos.empty? ? 'No Disponible' : @solicitud.solicitante_telefonos
+      = @solicitud.solicitante_telefonos.nil? ? 'No Disponible' : @solicitud.solicitante_telefonos
     %hr.space/
     %h3 Solicitud de Información
     %hr/

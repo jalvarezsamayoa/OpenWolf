@@ -12,8 +12,8 @@ role :solr, 'transparencia.gob.gt'
 
 set :user, "transparencia"
 set :deploy_to, "/home/transparencia/public_html/#{application}"
-#set :deploy_via, :remote_cache
-set :deploy_via, :copy
+set :deploy_via, :remote_cache
+#set :deploy_via, :copy
 set :use_sudo, false
 
 set :scm, "git"
@@ -30,7 +30,7 @@ namespace :deploy do
   end
 end
 
-#before "deploy:update_code", "solr:stop"
+before "deploy:update_code", "solr:stop"
 after "deploy:symlink", "solr:symlink"
 after "solr:symlink", "solr:start"
 #after "solr:start", "solr:reindex"

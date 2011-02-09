@@ -9,11 +9,11 @@
 
 
 Resolucion.all.each { |r|
-  if r.fecha.nil?
+#  if r.fecha.nil?
     r.fecha = r.created_at.to_date
     r.fecha_notificacion = r.created_at.to_date
     r.save!
-  end
+#  end
 }
 
 

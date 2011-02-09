@@ -1,0 +1,2 @@
+$('#newseguimiento').hide();
+$('#seguimientos_actividad_<%= escape_javascript(@seguimiento.actividad_id.to_s) %>').html("<%= escape_javascript(render :partial => 'actividades/actividad_seguimientos', :locals => {:actividad =>  @actividad}) %>");

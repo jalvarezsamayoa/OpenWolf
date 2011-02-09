@@ -1,5 +1,4 @@
-#require 'capistrano/deepmodules'
-#hello world
+require 'delayed/recipes'
 
 default_run_options[:pty] = true
 

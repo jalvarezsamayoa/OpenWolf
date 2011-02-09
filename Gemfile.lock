@@ -80,6 +80,10 @@ GEM
     cucumber-rails (0.3.2)
       cucumber (>= 0.8.0)
     culerity (0.2.15)
+    daemons (1.1.0)
+    delayed_job (2.1.3)
+      activesupport (~> 3.0)
+      daemons
     devise (1.1.5)
       bcrypt-ruby (~> 2.1.2)
       warden (~> 1.0.2)
@@ -225,6 +229,7 @@ DEPENDENCIES
   capistrano
   capybara
   cucumber-rails
+  delayed_job
   devise
   factory_girl_rails
   faker

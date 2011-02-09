@@ -38,6 +38,7 @@ gem 'serenity-odt' #generacion de templates ODT
 gem 'fastercsv' #manejo de archivos CSV
 gem 'vestal_versions', :git => 'git://github.com/adamcooper/vestal_versions' #manejor de versiones de modelos
 gem 'silent-postgres' #elimina la salida de el log de postgresql 
+gem 'delayed_job' # envia procesos a background - en uso para enviar correos
 
 # MONITOREO
 gem 'newrelic_rpm' # monitoreo de performance http://newrelic.com

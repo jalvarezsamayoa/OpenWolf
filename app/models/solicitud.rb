@@ -565,7 +565,7 @@ class Solicitud < ActiveRecord::Base
   end
 
   def notificar_creacion
-    Notificaciones.deliver_nueva_solicitud(self) unless (self.dont_send_email == true)
+    Notificaciones.delay.deliver_nueva_solicitud(self) unless (self.dont_send_email == true)
   end
 
   #limpia la informacion de la solicitud

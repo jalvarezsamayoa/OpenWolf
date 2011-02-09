@@ -66,7 +66,7 @@ class Resolucion < ActiveRecord::Base
 
   def notificar_creacion
     return true if self.solicitud.email.empty?
-    Notificaciones.deliver_nueva_resolucion(self) unless (self.dont_send_email == true)
+    Notificaciones.delay.deliver_nueva_resolucion(self) unless (self.dont_send_email == true)
     return true
   end
 end

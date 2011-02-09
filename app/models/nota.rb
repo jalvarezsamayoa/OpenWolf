@@ -19,6 +19,6 @@ class Nota < ActiveRecord::Base
   private
 
   def notificar_creacion
-    Notificaciones.deliver_nueva_nota_seguimiento(self) unless (self.dont_send_email == true)
+    Notificaciones.delay.deliver_nueva_nota_seguimiento(self) unless (self.dont_send_email == true)
   end
 end

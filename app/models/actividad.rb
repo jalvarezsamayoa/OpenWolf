@@ -39,7 +39,7 @@ class Actividad < ActiveRecord::Base
   private
 
   def notificar_asignacion
-    Notificaciones.deliver_nueva_asignacion(self) unless (self.dont_send_email == true)
+    Notificaciones.delay.deliver_nueva_asignacion(self) unless (self.dont_send_email == true)
   end
 
   def actualizar_solicitud

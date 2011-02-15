@@ -2,6 +2,8 @@ require 'delayed/recipes'
 
 default_run_options[:pty] = true
 
+set :rails_env, "production"
+
 set :application, "openwolf"
 set :applicationdir, "/home/transparencia/public_html/#{application}"
 role :web, "transparencia.gob.gt"
@@ -33,6 +35,10 @@ before "deploy:update_code", "solr:stop"
 after "deploy:symlink", "solr:symlink"
 after "solr:symlink", "solr:start"
 #after "solr:start", "solr:reindex"
+
+after "deploy:stop",    "delayed_job:stop"
+after "deploy:start",   "delayed_job:start"
+after "deploy:restart", "delayed_job:restart"
 
 namespace :solr do
   desc "Link in solr directory"

@@ -1,0 +1,21 @@
+- if nivel_seguridad(usuario_actual,'superadmin')
+  %div 
+    %span Mesajería
+    = link_to "Nuevo Documento", new_documento_path, :title => "Crear nuevo documento."
+    = link_to "Mis Documentos", documentos_path, :title => "Listar documentos que he creado."
+    = link_to "Nuevo Mensaje", '#', :title => "Crear nuevo mensaje"
+    = link_to "Bandeja Entrada", '#', :title=>"Ver mensajes recibidos"
+    = link_to "Mensajes Enviados", '#', :title=>"Ver mensajes enviados"
+    = link_to "Borradores", '#', :title=>"Ver mensajes pendientes de enviar."
+    = link_to "Busqueda Mensajes", '#', :title=>"Buscar mensajes y documentos."
+  .collapsed
+    %span Archivo
+    %a{:href => "#"} Mis Archivos
+    %a{:href => "#"} Historico
+    %a{:href => "#"} Trasladar Documento
+  %div
+    %span Procesos
+    %a{:href => "#"} Current or not
+    %a{:href => "#"} Current or not
+    %a{:href => "#"} Current or not
+    %a{:href => "#"} Current or not

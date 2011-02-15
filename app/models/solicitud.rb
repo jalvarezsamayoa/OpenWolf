@@ -557,7 +557,7 @@ class Solicitud < ActiveRecord::Base
       self.documentoclasificacion_id = Documentoclasificacion.find_by_codigo(Documentoclasificacion::SOLICITUDINFOPUBLICA).id
       self.numero = Solicitud.maximum(:numero, :conditions => ["solicitudes.institucion_id = ? and solicitudes.ano = ?",self.institucion_id, self.ano]).to_i + 1               
       self.codigo = institucion.codigo + '-'+Documentoclasificacion::SOLICITUDINFOPUBLICA+'-' +  self.ano.to_s + '-' + self.numero.to_s.rjust(6,'0')
-      self.forma_entrega = 'No Disponible'
+      self.forma_entrega = 'No Disponible' if self.forma_entrega.nil?
       self.idioma_id = IDIOMA_DEFAULT if self.idioma_id.nil?
       
     end # institucion.nil?

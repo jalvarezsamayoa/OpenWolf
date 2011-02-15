@@ -32,6 +32,9 @@
             %tr
               %th= label :via_id, Solicitud.human_attribute_name(:via_id)
               %td= @solicitud.via.nombre
+            %tr
+              %th= label :forma_entrega, Solicitud.human_attribute_name(:forma_entrega)
+              %td= @solicitud.forma_entrega
           %hr/
           %h4 Asignado a
           #solicitud_no_asignada.error{ @actividades.size > 0 ? {:style => "display:none"} : {} }

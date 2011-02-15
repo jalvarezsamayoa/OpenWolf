@@ -2,6 +2,7 @@
   %h2 Información Obligatoria
   = form.input :fecha_creacion, :as => :string,  :hint => "Fecha en que se realiza la solicitud.", :input_html => {:size => 20, :tab_index => 1 }
   = form.input :via, :hint => "Forma o medio como el solicitante presenta la solicitud.", :include_blank => false
+  = form.input :forma_entrega, :hint => "Forma o medio como el solicitante requiere la solicitud.", :input_html => {:size => 60}
   = form.input :solicitante_nombre, :input_html => {:size => 60, :maxsize => 254}, :hint => "Nombre, siglas o sinónimo como se identifica el solicitante."
   = form.input :textosolicitud, :input_html => {:rows => 5}, :hint => "Descripción de información solicitada"
   - if @usa_solicitudes_privadas == true

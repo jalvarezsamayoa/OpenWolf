@@ -9,8 +9,8 @@ module SolicitudesHelper
 
   def solicitud_boton_imprimir(solicitud, mostrar = true)
     return '' unless mostrar
-    raw( link_to(image_tag('printer16.png') + t("data.print"), 
-                 root_url+"imprimir_solicitud/#{solicitud.id}.pdf",   
+    raw( link_to(image_tag('printer16.png') + t("data.print"),
+                 print_portal_url(solicitud, :format => 'pdf'),
                  :class => 'button', :popup => true )
          )
   end

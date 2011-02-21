@@ -5,6 +5,7 @@
   %legend
     = image_tag('textfile22.png')
     = t("actividades.title")
+  = will_paginate @asignaciones
   %table#minimalist-a{:width => "100%"}
     %thead
       %th.col= t("solicitudes.label_estado_id")

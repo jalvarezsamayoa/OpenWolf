@@ -15,7 +15,7 @@
 
   / la solicitud solo puede ser asiganda por un miembreo de la UDIP
   = solicitud_boton_asignar_enlace(@solicitud, @es_pertinente_a_usuario, @usuario_es_udip)
-  = solicitud_boton_adjuntar_documento(@solicitud, @es_pertinente_a_usuario, @usuario_es_udip)
+  = solicitud_boton_adjuntar_documento(@solicitud, @es_pertinente_a_usuario, true)
 
   / solo el encargado de la UDIP puede emitir resoluciones y solamente si estan al 100%
   = solicitud_boton_emitir_resolucion(@solicitud, @es_pertinente_a_usuario,  @usuario_es_udip)

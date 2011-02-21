@@ -48,6 +48,7 @@ class Resolucion < ActiveRecord::Base
     return true
   end
 
+  # TODO: mover toda esta logica a modelo Solicitud
   def actualizar_solicitud
     logger.debug { "Resolucion#actualizar_solicitud" }
     
@@ -61,6 +62,14 @@ class Resolucion < ActiveRecord::Base
 
     self.solicitud.estado_id = self.tiporesolucion.estado_id
     self.solicitud.fecha_resolucion = self.created_at.to_date
+
+    # si estado es final pero no debe entregar
+    # actualizamos fecha de entrega
+    # esto funciona en casos como una negativa
+    if self.tiporesolucion.estado.final == true and self.tiporesolucion.estado.puede_entregar == false
+      self.solicitud.fecha_entregada = Date.today
+    end
+    
     self.solicitud.save
   end
 

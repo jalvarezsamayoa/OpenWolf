@@ -30,15 +30,14 @@ gem 'will_paginate' # pagineo de resultados
 gem 'jquery-rails', '>= 0.2.6' #jquery para rails, remplaza prototype y scriptaculous
 
 # HERRAMIENTAS
-gem 'faker' # herramienta para generacion de datos de prueba
 gem 'admin_data', :git => "git://github.com/neerajdotname/admin_data.git" # modulo para administracion de base de datos
 gem 'whenever' # manejo de cronjobs
 gem 'activerecord-import', '>= 0.2.0' # herramienta para importacion de data
 gem 'serenity-odt' #generacion de templates ODT
 gem 'fastercsv' #manejo de archivos CSV
 gem 'vestal_versions', :git => 'git://github.com/adamcooper/vestal_versions' #manejor de versiones de modelos
-gem 'silent-postgres' #elimina la salida de el log de postgresql 
 gem 'delayed_job' # envia procesos a background - en uso para enviar correos
+gem 'dalli' # interfaz con servicio de almacenamiento de cache de objetos Memcached - memcached.org
 
 # MONITOREO
 gem 'newrelic_rpm' # monitoreo de performance http://newrelic.com
@@ -53,6 +52,8 @@ gem 'hoptoad_notifier' #notificacion de errores via http://hoptoadapp.com/
 
 # TESTING
 group :development, :test do
+   gem 'silent-postgres' #elimina la salida de el log de postgresql 
+   gem 'faker' # herramienta para generacion de datos de prueba
    gem "rspec-rails", ">=2.0.1" # http://relishapp.com/rspec/rspec-rails
    gem 'remarkable', '>=4.0.0.alpha2'
    gem 'remarkable_activemodel', '>=4.0.0.alpha2'

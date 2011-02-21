@@ -9,6 +9,7 @@ class Solicitud < ActiveRecord::Base
   TIPO_DENUNCIA = 2
   ESTADO_NORMAL = 1
   ESTADO_ENTREGADA = 3
+
   ESTADO_NOENTREGADA = false
   ESTADO_NOASIGNADA = false
   ESTADO_COMPLETADA = true
@@ -214,7 +215,7 @@ class Solicitud < ActiveRecord::Base
 
 
     self.search do
-      keywords(params[:search]) unless params[:search].empty?
+      keywords(params[:search]) unless params[:search].nil? or params[:search].empty?
       with :numero, i_numero if i_numero
       with :institucion_id, i_institucion_id if l_filtrar_instituciones
       with :via_id, i_via_id if l_filtrar_vias

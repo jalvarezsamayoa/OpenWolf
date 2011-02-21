@@ -1,3 +1,4 @@
+require 'bundler/capistrano'
 require 'delayed/recipes'
 
 default_run_options[:pty] = true

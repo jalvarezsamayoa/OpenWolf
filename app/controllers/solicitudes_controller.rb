@@ -113,6 +113,9 @@ class SolicitudesController < ApplicationController
   def update
     @solicitud = Solicitud.find(params[:id])
 
+    #limpiamos fecha de creacion pasandola a formato MM/DD/YYYY
+    @solicitud.fecha_creacion = fix_date(params[:solicitud][:fecha_creacion])
+    
     respond_to do |format|
       if @solicitud.update_attributes(params[:solicitud])
         flash[:notice] = 'Solicitud actualizada con exito.'
@@ -204,9 +207,8 @@ class SolicitudesController < ApplicationController
     else
       @filtros = nil
     end
-        
+
     @solicitudes = Solicitud.buscar(params)
-    
 
     @desde = ( params[:fecha_desde] ? Date.strptime(params[:fecha_desde], "%d/%m/%Y") : Date.today - Date.today.yday + 1 )
     @hasta = ( params[:fecha_hasta] ? Date.strptime(params[:fecha_hasta], "%d/%m/%Y") : Date.today )

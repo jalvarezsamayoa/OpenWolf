@@ -4,7 +4,8 @@ class ActividadesController < ApplicationController
   before_filter :obtener_privilegios, :only => [:show, :create]
 
   def index
-    @asignaciones = usuario_actual.actividades
+    # @asignaciones = usuario_actual.actividades
+    @asignaciones = usuario_actual.actividades.paginate(:page => params[:page])
   end
 
   def show

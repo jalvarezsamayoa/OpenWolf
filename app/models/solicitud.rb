@@ -121,6 +121,10 @@ class Solicitud < ActiveRecord::Base
   scope :sinresolucion, :conditions=>["solicitudes.fecha_resolucion is null" ]
   scope :conresolucion, :conditions=>["solicitudes.fecha_resolucion is not null" ]
 
+  scope :sinresolucionfinal, :conditions=>["(solicitudes.fecha_resolucion is null) or (solicitudes.fecha_resolucion is not null and estados.final = ?)",false ]
+  scope :conresolucionfinal, :conditions=>["(solicitudes.fecha_resolucion is not null) and (estados.final = ?)", true ]
+
+
   scope :entregadas, :conditions=>["solicitudes.fecha_entregada is not null" ]
   scope :noentregadas, :conditions=>["solicitudes.fecha_entregada is null" ]
 

@@ -56,7 +56,8 @@ module SolicitudesHelper
   end
 
   def solicitud_boton_emitir_resolucion(solicitud, pertinente = false, supervisor = false)
-   return '' unless (solicitud.terminada? && pertinente && supervisor)
+    return '' unless (solicitud.asignada? && pertinente && supervisor)
+    return '' if solicitud.entregada?
     raw( link_to(image_tag("refresh16.png") +  t("solicitudes.label_resoluciones"),           
                  solicitud_resoluciones_path(solicitud),                             
                  :id=>'link_new_resolucion',

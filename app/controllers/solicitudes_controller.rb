@@ -15,9 +15,12 @@ class SolicitudesController < ApplicationController
       
       @noasignadas = usuario_actual.institucion.solicitudes.noasignadas.recientes.correlativo
       @entramite = usuario_actual.institucion.solicitudes.asignadas.nocompletadas.recientes.correlativo
-      @terminadas = usuario_actual.institucion.solicitudes.completadas.conresolucion.noentregadas.recientes.correlativo
-      @pendresolucion = usuario_actual.institucion.solicitudes.completadas.sinresolucion.recientes.correlativo
+      @terminadas = usuario_actual.institucion.solicitudes.completadas.conresolucionfinal.noentregadas.recientes.correlativo
+      
+      @pendresolucion = usuario_actual.institucion.solicitudes.completadas.sinresolucionfinal.recientes.correlativo
+      
       @entregadas = usuario_actual.institucion.solicitudes.entregadas.recientes.correlativo
+      
     else
       @noasignadas = nil
       @entramite = nil

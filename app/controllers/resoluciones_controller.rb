@@ -110,7 +110,17 @@ class ResolucionesController < ApplicationController
 
   def get_solicitud
     @solicitud = Solicitud.find(params[:solicitud_id])
-    @razones = Tiporesolucion.first.razonestiposresoluciones.all(:order => "razonestiposresoluciones.nombre")
+
+    # si una solicitud no esta termindada? = 100%
+    # solo se pueden emitir prorrogas
+    
+    if @solicitud.terminada?
+      @tiposresoluciones = Tiporesolucion.all
+      @razones = Tiporesolucion.first.razonestiposresoluciones.all(:order => "razonestiposresoluciones.nombre")
+    else
+      @tiposresoluciones = Tiporesolucion.prorroga
+      @razones = @tiposresoluciones.first.razonestiposresoluciones.all(:order => "razonestiposresoluciones.nombre")
+    end
   end
 
   def actualizar_razones

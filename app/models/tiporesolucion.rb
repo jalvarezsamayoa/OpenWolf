@@ -1,4 +1,5 @@
 class Tiporesolucion < ActiveRecord::Base
+  TIPO_PRORROGA = 4
   versioned
   
   validates_presence_of :nombre
@@ -13,6 +14,8 @@ class Tiporesolucion < ActiveRecord::Base
       where("tiporesoluciones.nombre like ?", "%#{nombre}%" )
    end
   }
+
+  scope :prorroga, where("id = ?",TIPO_PRORROGA)
 
   def to_label
     nombre

@@ -4,7 +4,7 @@ class SeguimientosController < ApplicationController
   # GET /seguimientos/new
   # GET /seguimientos/new.xml
   def new
-    @seguimiento = Seguimiento.new
+    @seguimiento = @institucion.seguimientos.new
   
     respond_to do |format|
       format.js # new.html.erb
@@ -14,7 +14,7 @@ class SeguimientosController < ApplicationController
   # POST /seguimientos
   # POST /seguimientos.xml
   def create
-    @seguimiento = Seguimiento.new(params[:seguimiento])
+    @seguimiento = @institucion.seguimientos.new(params[:seguimiento])
     @seguimiento.usuario_id = usuario_actual.id
     @seguimiento.actividad = @actividad
     @dom_id = "#seguimientos_actividad_"+@seguimiento.actividad_id.to_s
@@ -33,7 +33,7 @@ class SeguimientosController < ApplicationController
   # GET /seguimientos
   # GET /seguimientos.xml
   def index
-    @seguimientos = Seguimiento.all
+    @seguimientos = @institucion.seguimientos
 
     respond_to do |format|
       format.html # index.html.erb
@@ -44,7 +44,7 @@ class SeguimientosController < ApplicationController
   # GET /seguimientos/1
   # GET /seguimientos/1.xml
   def show
-    @seguimiento = Seguimiento.find(params[:id])
+    @seguimiento = @institucion.seguimientos.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -55,7 +55,7 @@ class SeguimientosController < ApplicationController
   
   # GET /seguimientos/1/edit
   def edit
-    @seguimiento = Seguimiento.find(params[:id])
+    @seguimiento = @institucion.seguimientos.find(params[:id])
     @actividad = @seguimiento.actividad
     @solicitud = @actividad.solicitud
     @institucion = @solicitud.institucion
@@ -69,8 +69,11 @@ class SeguimientosController < ApplicationController
   # PUT /seguimientos/1
   # PUT /seguimientos/1.xml
   def update
-    @seguimiento = Seguimiento.find(params[:id])
+    @seguimiento = @institucion.seguimientos.find(params[:id])
+    @actividad = @seguimiento.actividad
 
+    @dom_id = "#seguimientos_actividad_"+@seguimiento.actividad_id.to_s
+    
     respond_to do |format|
       if @seguimiento.update_attributes(params[:seguimiento])
         flash[:notice] = 'Seguimiento actualizado con exito.'
@@ -84,7 +87,7 @@ class SeguimientosController < ApplicationController
   # DELETE /seguimientos/1
   # DELETE /seguimientos/1.xml
   def destroy
-    @seguimiento = Seguimiento.find(params[:id])
+    @seguimiento = @institucion.seguimientos.find(params[:id])
     @actividad = @seguimiento.actividad
     @seguimiento.destroy
     
@@ -97,8 +100,8 @@ class SeguimientosController < ApplicationController
   private
 
   def get_data
-    @institucion = Institucion.find(params[:institucion_id]) if params[:institucion_id]
-    @solicitud = Solicitud.find(params[:solicitud_id]) if params[:solicitud_id]
-    @actividad = Actividad.find(params[:actividad_id]) if params[:actividad_id]
+    @institucion = current_user.institucion
+    @solicitud = @institucion.solicitudes.find(params[:solicitud_id]) if params[:solicitud_id]
+    @actividad = @institucion.actividades.find(params[:actividad_id]) if params[:actividad_id]
   end
 end

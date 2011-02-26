@@ -21,6 +21,7 @@ class Institucion < ActiveRecord::Base
   has_many :solicitudes, :dependent => :destroy
   has_many :documentos, :dependent => :destroy
   has_many :archivos, :dependent => :destroy
+  has_many :seguimientos, :dependent => :destroy
   
   validates_presence_of :nombre, :message=>"Campo Nombre no puede estar vacio."
   validates_uniqueness_of :nombre, :scope => :parent_id, :message=>"Nombre ya esta en uso."

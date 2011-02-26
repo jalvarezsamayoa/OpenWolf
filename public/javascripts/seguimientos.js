@@ -29,10 +29,31 @@ var seguimientosPage = {
                                               data: form.serialize(),
                                               dataType: "script"
                                             });
-
                                    });
-  }
 
+    // asignacion de funcionalid a forma creacion de seguimientos
+    // seguimientos/_edit.html.haml
+    $("form.edit_seguimiento").live('submit',function(event){
+                                      event.preventDefault();
+                                      var form = $(this);
+                                      var texto = form.find('textarea#seguimiento_textoseguimiento');
+                                      if (texto.val() == '') {
+                                        texto.focus();
+                                        alert('Debe ingresar una descripción para grabar el seguimiento.');
+                                        return false;
+                                      };
+
+                                      form.block({message: '<h2><img src=\"/images/ajax-loader.gif\"/> Procesando...</h2>'});
+
+                                      $.ajax({
+                                               type: "PUT",
+                                               url: form.attr("action"),
+                                               data: form.serialize(),
+                                               dataType: "script"
+                                             });
+
+                                    });
+  }
 };
 
 $(document).ready(function(){

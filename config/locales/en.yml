@@ -221,6 +221,7 @@ en:
         informacion_publica: "Información es pública"
         created_at: "Fecha de creación"
         fecha: "Fecha de resolución"
+        razontiporesolucion: "Justificación"
       recursorevison:
         numero: "Número recurso"
         usuario_id: "Usuario"

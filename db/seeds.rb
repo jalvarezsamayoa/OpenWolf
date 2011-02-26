@@ -8,18 +8,18 @@
 #   Major.create(:name => 'Daley', :city => cities.first)
 
 
-Resolucion.all.each { |r|
-#  if r.fecha.nil?
-    r.fecha = r.created_at.to_date
-    r.fecha_notificacion = r.created_at.to_date
-    r.save!
-#  end
-}
+# Resolucion.all.each { |r|
+# #  if r.fecha.nil?
+#     r.fecha = r.created_at.to_date
+#     r.fecha_notificacion = r.created_at.to_date
+#     r.save!
+# #  end
+# }
 
 
 
 # puts 'Crear Maestros...'
-# load "#{Rails.root}/db/create_maestros.rb"
+ load "#{Rails.root}/db/create_maestros.rb"
 # #puts 'Crear Instituciones' 
 # #load "#{Rails.root}/db/create_instituciones.rb"
 # #load "#{Rails.root}/db/create_entidadades.rb"

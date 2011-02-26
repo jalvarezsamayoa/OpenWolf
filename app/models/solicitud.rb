@@ -240,7 +240,11 @@ class Solicitud < ActiveRecord::Base
   ###############################
 
   def es_pertinente?(u)
+    return false if u.institucion.nil? or self.institucion.nil?
+    
     l_ok = false
+
+    
 
     #verficamos si es miembro de la unidad de informacion
     # de la institucion a la cual pertenece la solicitud

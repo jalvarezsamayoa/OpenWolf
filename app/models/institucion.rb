@@ -31,6 +31,7 @@ class Institucion < ActiveRecord::Base
   validates :codigo, :presence => true, :uniqueness => true
   validates :unidad_ejecutora, :presence => true
   validates :entidad, :presence => true
+  validates :email, :presence => true, :uniqueness => true
 
   before_validation(:on => :create) do
     cleanup

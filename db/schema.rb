@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110209143335) do
+ActiveRecord::Schema.define(:version => 20110226173548) do
 
   create_table "actividades", :force => true do |t|
     t.integer  "institucion_id",                  :null => false
@@ -268,6 +268,7 @@ ActiveRecord::Schema.define(:version => 20110209143335) do
     t.string   "unidad_ejecutora"
     t.string   "entidad"
     t.string   "webpage"
+    t.string   "email"
   end
 
   add_index "instituciones", ["abreviatura"], :name => "index_instituciones_on_abreviatura"

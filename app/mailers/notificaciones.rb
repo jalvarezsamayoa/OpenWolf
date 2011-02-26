@@ -14,8 +14,11 @@ class Notificaciones < ActionMailer::Base
   def nueva_solicitud(solicitud,  sent_at = Time.now)
     @solicitud = solicitud
     @url_solicitud = solicitud_portal_url(solicitud.id)
+
+    email = solicitud.institucion.email
+    correo_institucional = ( email.nil? ? '' : ', ' + email)
     
-    mail(:to => solicitud.correos_interesados,
+    mail(:to => solicitud.correos_interesados + correo_institucional,
          :subject => "openwolf - Confirmación nueva solicitud de información - #{solicitud.codigo}.")           
   end
 
@@ -23,8 +26,11 @@ class Notificaciones < ActionMailer::Base
   def nueva_asignacion(actividad, sent_at = Time.now)
     @actividad = actividad
     @url_solicitud = institucion_solicitud_url(actividad.institucion_id, actividad.solicitud_id)
-        
-    mail(:to => actividad.usuario.email,
+
+    email = actividad.institucion.email
+    correo_institucional = ( email.nil? ? '' : ', ' + email)
+    
+    mail(:to => actividad.usuario.email + correo_institucional,
          :subject => "openwolf - Nueva Asignación - Solicitud #{actividad.solicitud.codigo}")    
   end
 
@@ -34,7 +40,11 @@ class Notificaciones < ActionMailer::Base
     @solicitud = resolucion.solicitud
     @url_solicitud =  solicitud_portal_url(resolucion.solicitud_id)
 
-    mail(:to => resolucion.solicitud.email,
+    email = @solicitud.institucion.email
+    correo_institucional = ( email.nil? ? '' : ', ' + email)
+    
+
+    mail(:to => resolucion.solicitud.email + correo_institucional ,
          :subject => "openwolf - Aviso emisión de resolución - #{resolucion.numero}.")
     
   end
@@ -44,8 +54,12 @@ class Notificaciones < ActionMailer::Base
     @nota = nota
     @solicitud = nota.proceso
     @url_solicitud = solicitud_portal_url(@solicitud.id)
+
+    email = @solicitud.institucion.email
+    correo_institucional = ( email.nil? ? '' : ', ' + email)
     
-    mail(:to => @solicitud.correos_interesados,
+    
+    mail(:to => @solicitud.correos_interesados + correo_institucional,
          :subject => "openwolf - Nueva nota seguimiento - Solicitud #{@solicitud.codigo}.")           
   end
 

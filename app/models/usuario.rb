@@ -90,7 +90,7 @@ class Usuario < ActiveRecord::Base
   # Permite que plugin Devise pueda utilizar 'username' en lugar de 'email'
   def self.find_for_database_authentication(conditions)
     login = conditions.delete(:login)
-    where(conditions).where(["username = :value OR email = :value", { :value => login }]).first
+    where(conditions).where(["usuarios.username = :value OR usuarios.email = :value", { :value => login }]).first
   end
   
 end

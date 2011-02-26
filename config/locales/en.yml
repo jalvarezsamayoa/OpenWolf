@@ -142,6 +142,7 @@ en:
         parent_id: "Dependencia de"
         tipoinstitucion_id: "Tipo Institucion"
         usasolicitudesprivadas: "Ciudadano puede hacer solicitudes 'privadas'"
+        email: "Correo Institucional"
       solicitud:
         usuario_id: "Usuario"
         codigo: "Código"

@@ -243,7 +243,6 @@ class Solicitud < ActiveRecord::Base
     return false if u.institucion.nil? or self.institucion.nil?
     
     l_ok = false
-
     
 
     #verficamos si es miembro de la unidad de informacion
@@ -447,12 +446,18 @@ class Solicitud < ActiveRecord::Base
   end
 
   def actualizar_asignaciones
-    #actualizamos el estado de asignacion
-    self.asignada = (self.actividades.count > 0)
-    
+    cnt_asignaciones = self.actividades.count
+   
     #actualizamos el estado de entrega
-    self.marcar_como_terminada
-    
+    if cnt_asignaciones > 0
+      #actualizamos el estado de asignacion
+      self.asignada = true
+      self.marcar_como_terminada
+    else
+      self.asignada = false
+      self.marcar_como_no_terminada
+    end
+
     self.save!
   end
   
@@ -466,6 +471,11 @@ class Solicitud < ActiveRecord::Base
   # marca solicitud como terminada
   def marcar_como_terminada(fecha = Date.today)
      self.fecha_completada = fecha if ( self.actividades.count == self.actividades.completadas.count)     
+  end
+
+  #marca la solicitud como no terminada
+  def marcar_como_no_terminada
+    self.fecha_completada = nil
   end
 
   #actualiza el estado a Entregada a Solicitante

@@ -19,6 +19,7 @@ class ResolucionesController < ApplicationController
   # GET /resoluciones/new.xml
   def new
     @resolucion = @solicitud.resoluciones.new
+
     @resolucion.numero = ''
     @resolucion.solicitud_id = @solicitud.id
     @resolucion.usuario_id = current_user.id

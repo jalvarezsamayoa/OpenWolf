@@ -7,6 +7,8 @@ class Actividad < ActiveRecord::Base
   before_validation(:on => :create) do
     completar_informacion
   end
+
+  after_destroy :actualizar_solicitud
   
   validates_presence_of :usuario_id, :institucion_id, :textoactividad
   

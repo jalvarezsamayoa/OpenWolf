@@ -36,21 +36,33 @@ jQuery(function($){
 
          // hacer submit via ajax de la forma para asignacion de actividades a enlaces
          $("form#new_actividad").live('submit',function(event){
-                                    event.preventDefault();
-                                    var form = $(this);
+                                        event.preventDefault();
+                                        var form = $(this);
 
-                                    form.block({message: '<h2><img src=\"/images/ajax-loader.gif\"/> Procesando...</h2>'});
+                                        form.block({message: '<h2><img src=\"/images/ajax-loader.gif\"/> Procesando...</h2>'});
 
-                                    $.ajax({
-                                             type: "POST",
-                                             url: form.attr("action"),
-                                             data: form.serialize(),
-                                             dataType: "script"
-                                           });
+                                        $.ajax({
+                                                 type: "POST",
+                                                 url: form.attr("action"),
+                                                 data: form.serialize(),
+                                                 dataType: "script"
+                                               });
 
-                                  });
+                                      });
 
-        
+
+         // bloquear la forma de solcitudes para evitar doble creacion de la solicitud
+         $("form#new_solicitud").live('submit',function(event){
+                                        var form = $(this);
+                                        form.block({message: '<h2><img src=\"/images/ajax-loader.gif\"/> Procesando...</h2>'});
+                                      });
+
+          $("form.edit_solicitud").live('submit',function(event){
+                                        var form = $(this);
+                                        form.block({message: '<h2><img src=\"/images/ajax-loader.gif\"/> Procesando...</h2>'});
+                                      });
+
+
 
          $("#solicitudes-y-tareas-tabs").tabs();
          $("#solicitud_fecha_creacion").datepicker();

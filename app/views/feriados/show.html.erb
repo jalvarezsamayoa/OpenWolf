@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Nombre:</b>
+  <%= @feriado.nombre %>
+</p>
+
+<p>
+  <b>Dia:</b>
+  <%= @feriado.dia %>
+</p>
+
+<p>
+  <b>Mes:</b>
+  <%= @feriado.mes %>
+</p>
+
+<p>
+  <b>Institucion:</b>
+  <%= @feriado.institucion_id %>
+</p>
+
+<p>
+  <b>Tipoferiado:</b>
+  <%= @feriado.tipoferiado_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_feriado_path(@feriado) %> |
+<%= link_to 'Back', feriados_path %>

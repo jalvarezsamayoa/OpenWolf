@@ -1,8 +1,8 @@
 - form.inputs do
-  = ( form.input :fecha, :as => :string, :input_html => {:size => 20} ) if @puede_modificar_fecha
+  = ( form.input :fecha, :as => :string, :input_html => {:size => 20}, :hint => "Ej. dd / mm / aaaa" ) if @puede_modificar_fecha
   = form.input :numero, :input_html => {:size => 60}
   = form.input :tiporesolucion, :collection => @tiposresoluciones, :include_blank => false
   = form.input :razontiporesolucion, :as => :select, :collection => @razones, :include_blank => false
-  = form.input :fecha_notificacion, :as => :string, :input_html => {:size => 20}
-  = form.input :nueva_fecha, :as => :string, :input_html => {:size => 20}
+  = form.input :fecha_notificacion, :as => :string, :input_html => {:size => 20}, :hint => "Ej. dd / mm / aaaa"
+  = form.input :nueva_fecha, :as => :string, :input_html => {:size => 20}, :hint => "Ej. dd / mm / aaaa"
   = form.input :descripcion

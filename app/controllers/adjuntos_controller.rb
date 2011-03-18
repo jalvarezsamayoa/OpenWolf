@@ -27,7 +27,7 @@ class AdjuntosController < ApplicationController
         format.js { responds_to_parent {render} }
       else
         flash[:error] = 'Ha ocurrido un error al grabar el adjunto.'
-        format.js { responds_to_parent {render} }
+        format.js { responds_to_parent {render 'error'} }
       end
     end #respond_to
     

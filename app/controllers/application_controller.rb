@@ -111,7 +111,7 @@ class ApplicationController < ActionController::Base
   def fix_date(c_date)
     return nil if c_date.nil?
 
-    a_date = c_date.split('/')
+    a_date = c_date.split('/')   
     return nil unless a_date.size == 3
 
     if a_date[2].size == 2
@@ -119,8 +119,10 @@ class ApplicationController < ActionController::Base
     end
 
     new_date = Date.civil(a_date[2].to_i, a_date[1].to_i, a_date[0].to_i)
-    
+
+   
     return new_date
   end
-  
+
+ 
 end

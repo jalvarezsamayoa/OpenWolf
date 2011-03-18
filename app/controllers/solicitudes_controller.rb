@@ -108,6 +108,7 @@ class SolicitudesController < ApplicationController
   # GET /solicitudes/1/edit
   def edit
     @solicitud = Solicitud.find(params[:id])
+   @solicitud.fecha_creacion = l(@solicitud.fecha_creacion)
   end
 
 
@@ -117,7 +118,7 @@ class SolicitudesController < ApplicationController
     @solicitud = Solicitud.find(params[:id])
 
     #limpiamos fecha de creacion pasandola a formato MM/DD/YYYY
-    @solicitud.fecha_creacion = fix_date(params[:solicitud][:fecha_creacion])
+    params[:solicitud][:fecha_creacion] = fix_date(params[:solicitud][:fecha_creacion]) if params[:solicitud][:fecha_creacion]
     
     respond_to do |format|
       if @solicitud.update_attributes(params[:solicitud])

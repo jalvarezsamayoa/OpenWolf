@@ -11,6 +11,7 @@ class Actividad < ActiveRecord::Base
   after_destroy :actualizar_solicitud
   
   validates_presence_of :usuario_id, :institucion_id, :textoactividad
+  validates_associated :solicitud
   
   after_create :actualizar_solicitud
   after_create :notificar_asignacion
@@ -45,7 +46,7 @@ class Actividad < ActiveRecord::Base
   end
 
   def actualizar_solicitud
-    self.solicitud.actualizar_asignaciones
+    self.solicitud.actualizar_asignaciones unless self.solicitud.nil?
   end
   
   def completar_informacion    

@@ -1,0 +1,12 @@
+- @forview = "NEW"
+= render :partial=>"breadcrumbs"
+
+.mantform
+  %h2
+    Nuevo 
+    = Feriado.human_name
+
+  - semantic_form_for @feriado do |form|
+    = form.semantic_errors
+    = render :partial => 'form', :locals => {:form => form}
+    = buttons_create(feriados_path)

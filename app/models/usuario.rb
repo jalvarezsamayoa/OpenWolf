@@ -9,7 +9,7 @@ class Usuario < ActiveRecord::Base
   devise :database_authenticatable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :nombre, :cargo, :departamento_id, :areadocumento_id, :puesto_id, :institucion_id, :essupervisorarea, :username, :role_ids
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :nombre, :cargo, :departamento_id, :areadocumento_id, :puesto_id, :institucion_id, :essupervisorarea, :username, :role_ids, :login
 
   # atributo virtual necesario para que plugin Devise
   # pueda utilizar campo login en lugar de email

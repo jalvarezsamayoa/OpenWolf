@@ -1,0 +1,37 @@
+<%= form_for(@feriado) do |f| %>
+  <% if @feriado.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@feriado.errors.count, "error") %> prohibited this feriado from being saved:</h2>
+
+      <ul>
+      <% @feriado.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :nombre %><br />
+    <%= f.text_field :nombre %>
+  </div>
+  <div class="field">
+    <%= f.label :dia %><br />
+    <%= f.text_field :dia %>
+  </div>
+  <div class="field">
+    <%= f.label :mes %><br />
+    <%= f.text_field :mes %>
+  </div>
+  <div class="field">
+    <%= f.label :institucion_id %><br />
+    <%= f.text_field :institucion_id %>
+  </div>
+  <div class="field">
+    <%= f.label :tipoferiado_id %><br />
+    <%= f.text_field :tipoferiado_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

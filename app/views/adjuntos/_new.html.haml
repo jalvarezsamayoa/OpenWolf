@@ -5,4 +5,11 @@
     = image_tag('add22.png')
     = t("adjuntos.title_new")
   - form_for([@proceso, @adjunto], :url => solicitud_adjuntos_path(@proceso, :format => 'js'), :html => { :class => "mantform", :multipart => true, :target => 'upload_frame' }) do |f|
+    - if @adjunto.errors.any?
+      %div.error
+        %h2
+          = "Existen " + pluralize(@adjunto.errors.count, "error") + " errores en la información del adjunto:"
+        %ul
+          - @adjunto.errors.full_messages.each do |msg|
+            %li= msg
     = render :partial=>'form', :locals=>{:f => f, :submittext => t("data.submit_new")}

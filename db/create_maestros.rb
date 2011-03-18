@@ -12,6 +12,7 @@ Fixtures.create_fixtures("#{Rails.root}/db/fixtures", "motivosnegativa")
 Fixtures.create_fixtures("#{Rails.root}/db/fixtures", "motivosprorroga")
 Fixtures.create_fixtures("#{Rails.root}/db/fixtures", "estados")
 Fixtures.create_fixtures("#{Rails.root}/db/fixtures", "idiomas")
+Fixtures.create_fixtures("#{Rails.root}/db/fixtures", "feriados")
 Fixtures.create_fixtures("#{Rails.root}/db/fixtures", "usuarios")
 
 vias = Via.create([ {:nombre => 'Escrita'},

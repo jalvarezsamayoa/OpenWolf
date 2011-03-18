@@ -1,5 +1,7 @@
 OpenwolfV3::Application.routes.draw do
 
+  resources :feriados
+
   resources :documentotraslados
 
   resources :archivos    

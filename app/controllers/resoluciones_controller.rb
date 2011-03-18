@@ -39,6 +39,9 @@ class ResolucionesController < ApplicationController
   # GET /resoluciones/1/edit
   def edit
     @resolucion = @solicitud.resoluciones.find(params[:id])
+    @resolucion.fecha = l(@resolucion.fecha)
+    @resolucion.fecha_notificacion = l(@resolucion.fecha_notificacion)
+    @resolucion.nueva_fecha = l(@resolucion.nueva_fecha)
   end
 
   # POST /resoluciones
@@ -75,16 +78,12 @@ class ResolucionesController < ApplicationController
   # PUT /resoluciones/1.xml
   def update
     @resolucion = @solicitud.resoluciones.find(params[:id])
-
-     if params[:resolucion][:fecha]
+     
     #limpiamos fecha de creacion pasandola a formato MM/DD/YYYY
-      params[:resolucion][:fecha] = fix_date(params[:resolucion][:fecha])
-     end
-
-     if params[:resolucion][:fecha_notificacion]
-    #limpiamos fecha de creacion pasandola a formato MM/DD/YYYY
-      params[:resolucion][:fecha_notificacion] = fix_date(params[:resolucion][:fecha_notificacion])
-     end
+    params[:resolucion][:fecha] = fix_date(params[:resolucion][:fecha]) if params[:resolucion][:fecha]
+    params[:resolucion][:fecha_notificacion] = fix_date(params[:resolucion][:fecha_notificacion]) if params[:resolucion][:fecha_notificacion]
+    params[:resolucion][:nueva_fecha] = fix_date(params[:resolucion][:nueva_fecha]) if params[:resolucion][:nueva_fecha]
+   
 
     respond_to do |format|
       if @resolucion.update_attributes(params[:resolucion])

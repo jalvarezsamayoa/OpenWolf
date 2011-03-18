@@ -55,6 +55,12 @@ class Solicitud < ActiveRecord::Base
     integer :clasificacion_id, :references => Clasificacion
     integer :documentoclasificacion_id, :references => Documentoclasificacion
     integer :idioma_id, :references => Idioma
+    text :lowcase_solicitante_nombre do
+      clean_string(solicitante_nombre.downcase)
+    end
+    text :lowcase_textosolicitud do
+      clean_string(textosolicitud.downcase)
+    end        
   end
 
   ##################
@@ -106,6 +112,8 @@ class Solicitud < ActiveRecord::Base
   
   validates_presence_of :email, :if => Proc.new{ |s| (s.origen_id == ORIGEN_PORTAL ? true : false) }
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :unless => Proc.new{ |s| s.email.nil? or s.email.empty? }, :message => "Correo electrónico no es válido."
+
+  validates_associated :estado
   
   ########################
   # Filtros
@@ -163,7 +171,7 @@ class Solicitud < ActiveRecord::Base
   #                    :per_page => 25)
   def self.buscar(params = nil)
     logger.debug { "params.nil?" }
-    return nil if params.nil?
+    return nil if params.nil? or params.empty?
     
     logger.debug { "search.empty?" }
     if params[:filtrar].nil?
@@ -186,11 +194,12 @@ class Solicitud < ActiveRecord::Base
 
     #veficar si usuario intento enviar un solo entero
     # que seria el correlativo de la solicitud
-    i_numero = params[:search].to_i
-    if i_numero > 0
-      params[:search] = ''
-    else
-      i_numero = nil
+    i_numero = nil
+    if params[:search]
+    unless params[:search].include?('-')
+      i_numero = params[:search].to_i
+      params[:search] = '' if i_numero > 0
+    end
     end
 
     if l_filtrar_tiempo_restante
@@ -564,7 +573,9 @@ class Solicitud < ActiveRecord::Base
 
       if self.origen_id != ORIGEN_MIGRACION        
         self.fecha_creacion = Date.today if self.fecha_creacion.nil?
-        self.fecha_programada = fecha_creacion + 14.days
+        
+        self.fecha_programada = calcular_fecha_entrega(self.fecha_creacion)
+        
         self.departamento_id = municipio.departamento_id unless municipio.nil?
         self.estado_id = ESTADO_NORMAL
         self.asignada = false      
@@ -592,6 +603,59 @@ class Solicitud < ActiveRecord::Base
     self.solicitante_nombre = self.solicitante_nombre.slice(0..254)
   end
 
+   #removes spetial characters for indexing
+  def clean_string(c_name)
 
+    c_name = c_name.tr('á','a')
+    c_name = c_name.tr('é','e')
+    c_name = c_name.tr('í','i')
+    c_name = c_name.tr('ó','o')
+    c_name = c_name.tr('ú','u')
+
+    c_name = c_name.tr('Á','A')
+    c_name = c_name.tr('É','E')
+    c_name = c_name.tr('Í','I')
+    c_name = c_name.tr('Ó','O')
+    c_name = c_name.tr('Ú','U')
+
+    return c_name
+  end
+  
+  def calcular_fecha_entrega
+    Solicitud.calcular_fecha_entrega(self.fecha_creacion, self.institucion_id)
+  end
+
+  def self.calcular_fecha_entrega(d_fecha_creacion = Date.today, i_institucion_id = 1)
+    d_fecha_creacion = d_fecha_creacion.to_date if d_fecha_creacion.class == String
+    d_fecha_entrega = d_fecha_creacion + 14.days
+
+    #obtenemos feriados entre las fechas
+    feriados_locales = []
+    feriados_nacionales = Feriado.nacional.entre_fechas(d_fecha_creacion, d_fecha_entrega)    
+    feriados_locales = Feriado.local.por_institucion(i_institucion_id).entre_fechas(d_fecha_creacion, d_fecha_entrega) unless i_institucion_id == 1
+
+    #aumentamos los dias de la solicitud segun los feriados
+    unless feriados_nacionales.blank?
+      for feriado in feriados_nacionales
+        if feriado.es_dia_laboral?
+          d_fecha_entrega += 1.day
+        end
+      end
+    end
+
+    unless feriados_locales.blank?
+      for feriado in feriados_locales
+        if feriado.es_dia_laboral?
+          d_fecha_entrega += 1.day
+        end
+      end
+    end
+
+    # verificamos que la nueve fecha sea dia laboral
+    d_fecha_entrega += 1.day if (d_fecha_entrega.wday == 6)
+    d_fecha_entrega += 1.day if (d_fecha_entrega.wday == 0)
+    
+    return d_fecha_entrega
+  end
   
 end

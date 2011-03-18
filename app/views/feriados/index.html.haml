@@ -1,0 +1,19 @@
+= render :partial => "breadcrumbs"
+.listing
+  %h2= Feriado.human_name.pluralize
+  %div{:id => "options"}
+    = button_new(new_feriado_path)
+    = render :partial => 'shared/findbox', :locals => {:url => feriados_path}
+  %table.minimalist-b
+    %thead
+      %tr
+        %th= Feriado.human_attribute_name(:nombre)
+        %th= Feriado.human_attribute_name(:tipoferiado)
+        %th= Feriado.human_attribute_name(:institucion_id)
+    %tbody
+      - for feriado in @feriados
+        %tr
+          %td= link_to feriado.nombre, feriado_path(feriado)
+          %td= feriado.tipo_feriado
+          %td= feriado.institucion.nombre
+  = will_paginate @feriados

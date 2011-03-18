@@ -1,0 +1,6 @@
+- form.inputs do
+   = form.input :nombre, :input_html => {:size => 60}
+   = form.input :dia, :as => :select, :collection => (1..31), :include_blank => false
+   = form.input :mes, :as => :select, :collection => (1..12), :include_blank => false
+   = form.input :tipoferiado_id, :as => :select, :collection => Feriado::TIPOS, :include_blank => false
+   = form.input :institucion, :collection => Institucion.estado_y_activas, :include_blank => false

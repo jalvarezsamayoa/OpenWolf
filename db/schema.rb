@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110226173548) do
+ActiveRecord::Schema.define(:version => 20110318043800) do
 
   create_table "actividades", :force => true do |t|
     t.integer  "institucion_id",                  :null => false
@@ -228,6 +228,23 @@ ActiveRecord::Schema.define(:version => 20110226173548) do
   add_index "estados", ["final"], :name => "index_estados_on_final"
   add_index "estados", ["modulo_id"], :name => "index_estados_on_modulo_id"
   add_index "estados", ["puede_entregar"], :name => "index_estados_on_puede_entregar"
+
+  create_table "feriados", :force => true do |t|
+    t.string   "nombre",                        :null => false
+    t.integer  "dia",            :default => 1, :null => false
+    t.integer  "mes",            :default => 1, :null => false
+    t.integer  "institucion_id", :default => 1, :null => false
+    t.integer  "tipoferiado_id", :default => 1, :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.date     "fecha"
+  end
+
+  add_index "feriados", ["dia"], :name => "index_feriados_on_dia"
+  add_index "feriados", ["fecha"], :name => "index_feriados_on_fecha"
+  add_index "feriados", ["institucion_id"], :name => "index_feriados_on_institucion_id"
+  add_index "feriados", ["mes"], :name => "index_feriados_on_mes"
+  add_index "feriados", ["tipoferiado_id"], :name => "index_feriados_on_tipoferiado_id"
 
   create_table "fuentes", :force => true do |t|
     t.string   "nombre",     :null => false

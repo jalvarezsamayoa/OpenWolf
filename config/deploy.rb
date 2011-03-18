@@ -1,6 +1,9 @@
 require 'bundler/capistrano'
 require 'delayed/recipes'
 
+set :whenever_command, "bundle exec whenever"
+require "whenever/capistrano"
+
 default_run_options[:pty] = true
 
 set :rails_env, "production"
@@ -17,6 +20,7 @@ set :deploy_to, "/home/transparencia/public_html/#{application}"
 set :deploy_via, :remote_cache
 #set :deploy_via, :copy
 set :use_sudo, false
+set :backup_dir, "#{deploy_to}/bk_database"
 
 set :scm, "git"
 #set :repository, "git@gitorious.org:openwolf/openwolf.git"
@@ -47,6 +51,7 @@ namespace :solr do
     run <<-CMD
       cd #{release_path} &&
       ln -nfs #{shared_path}/solr #{release_path}/solr
+
     CMD
   end
 
@@ -75,6 +80,31 @@ namespace :solr do
   end
 end
 
+task :backupdb, :roles => :db, :only => { :primary => true } do
+  puts "Remove old backups"
+  run <<-CMD
+     cd #{backup_dir} &&
+     rm *.bz2
+  CMD
+  
+   filename = "#{application}.dump.#{Time.now.to_f}.sql.bz2"
+   file_path = "#{backup_dir}/" + filename
+   text = capture "cat #{deploy_to}/current/config/database.yml"
+   yaml = YAML::load(text)
+ 
+  on_rollback { run "rm #{file_path}" }
+
+  puts "Backup database..."
+  run "pg_dump --clean --no-owner --no-privileges -U#{yaml['production']['username']} -h#{yaml['production']['host']} #{yaml['production']['database']} | bzip2 > #{file_path}" do |ch, stream, out|
+    ch.send_data "#{yaml['production']['password']}\n" if out =~ /^Password:/
+    puts out
+  end
+
+  puts "Downloading file..."
+  download(file_path, "/home/javier/Backup/#{filename}")
+
+  
+end
 
 
 # task :init_prawn_submodules do

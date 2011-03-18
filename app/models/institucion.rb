@@ -1,7 +1,8 @@
 class Institucion < ActiveRecord::Base
   versioned
   acts_as_nested_set
-  
+
+  ESTADO_GUATEMALA = 1
   TIPO_RAIZ = 1
   TIPO_PODER = 2
   TIPO_MINISTERIO = 3
@@ -26,12 +27,18 @@ class Institucion < ActiveRecord::Base
   validates_presence_of :nombre, :message=>"Campo Nombre no puede estar vacio."
   validates_uniqueness_of :nombre, :scope => :parent_id, :message=>"Nombre ya esta en uso."
 
-  validates :codigo, :presence => true, :uniqueness => true
-  validates :abreviatura, :presence => true, :uniqueness => true
-  validates :codigo, :presence => true, :uniqueness => true
+    
+  #TODO: aberviatura debe de ser unica
+  validates :abreviatura, :presence => true
+
+  #TODO: codigo debe de ser unica  
+  validates :codigo, :presence => true
+  
   validates :unidad_ejecutora, :presence => true
   validates :entidad, :presence => true
-  validates :email, :presence => true, :uniqueness => true
+  
+  #TODO: el email debe de ser unico
+  validates :email, :presence => true
 
   before_validation(:on => :create) do
     cleanup
@@ -48,6 +55,7 @@ class Institucion < ActiveRecord::Base
   scope :instituciones, :conditions=>["tipoinstitucion_id = ?",TIPO_INSTITUCION], :order => :nombre
   scope :asignables, :conditions=>["tipoinstitucion_id = ? or tipoinstitucion_id = ?",TIPO_MINISTERIO,TIPO_INSTITUCION], :order => :nombre
   scope :activas, :conditions => ["activa = ?",true]
+  scope :estado_y_activas, :conditions => ["instituciones.id = 1 or activa = ?",true]
 
   scope :nombre_like, lambda { |nombre|
     unless nombre.nil? || nombre.empty? || nombre.first.nil?

@@ -19,6 +19,7 @@ class Notificaciones < ActionMailer::Base
     correo_institucional = ( email.nil? ? '' : ', ' + email)
     
     mail(:to => solicitud.correos_interesados + correo_institucional,
+         :reply_to => correo_institucional,
          :subject => "openwolf - Confirmación nueva solicitud de información - #{solicitud.codigo}.")           
   end
 
@@ -31,6 +32,7 @@ class Notificaciones < ActionMailer::Base
     correo_institucional = ( email.nil? ? '' : ', ' + email)
     
     mail(:to => actividad.usuario.email + correo_institucional,
+         :reply_to => correo_institucional,
          :subject => "openwolf - Nueva Asignación - Solicitud #{actividad.solicitud.codigo}")    
   end
 
@@ -45,6 +47,7 @@ class Notificaciones < ActionMailer::Base
     
 
     mail(:to => resolucion.solicitud.email + correo_institucional ,
+         :reply_to => correo_institucional,
          :subject => "openwolf - Aviso emisión de resolución - #{resolucion.numero}.")
     
   end
@@ -60,6 +63,7 @@ class Notificaciones < ActionMailer::Base
     
     
     mail(:to => @solicitud.correos_interesados + correo_institucional,
+         :reply_to => correo_institucional,
          :subject => "openwolf - Nueva nota seguimiento - Solicitud #{@solicitud.codigo}.")           
   end
 

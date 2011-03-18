@@ -1,0 +1,32 @@
+- @forview = "SHOW"
+= render :partial=>"breadcrumbs"
+
+.show
+  %h2= Feriado.human_name
+
+  %div{:id=>"options"}
+    = button_new(new_feriado_path)
+    = button_edit(edit_feriado_path(@feriado))
+    = button_delete(feriado_path(@feriado))
+    = button_cancel(feriados_path)
+    %br
+
+  .box
+    %table
+      %colgroup.show-table-header
+      %colgroup.show-table-data
+      %tr
+        %th= label :nombre, Feriado.human_attribute_name(:nombre)
+        %td= @feriado.nombre
+      %tr
+        %th= label :dia, Feriado.human_attribute_name(:dia)
+        %td= @feriado.dia
+      %tr
+        %th= label :mes, Feriado.human_attribute_name(:mes)
+        %td= @feriado.mes
+      %tr
+        %th= label :institucion_id, Feriado.human_attribute_name(:institucion_id)
+        %td= @feriado.institucion.nombre
+      %tr
+        %th= label :tipoferiado_id, Feriado.human_attribute_name(:tipoferiado)
+        %td= @feriado.tipo_feriado

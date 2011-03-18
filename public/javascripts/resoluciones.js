@@ -2,10 +2,13 @@ jQuery(function($){
          $("#resolucion_fecha").datepicker();
 
          $("#resolucion_fecha_notificacion").datepicker();
-         $("#resolucion_fecha_notificacion_input").hide();
-
-         $("#resolucion_nueva_fecha_input").hide();
          $("#resolucion_nueva_fecha").datepicker();
+
+         // mostrar fechas si es prorroga
+         if ( $("#resolucion_tiporesolucion_id").val() != '4' ) {
+           $("#resolucion_fecha_notificacion_input").hide();
+           $("#resolucion_nueva_fecha_input").hide();
+         }
 
 
          // observer para la actualizacion de razones de resoluciones

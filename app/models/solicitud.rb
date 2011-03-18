@@ -567,10 +567,12 @@ class Solicitud < ActiveRecord::Base
     # validamos si hay institucion asignada    
     unless self.institucion.nil?
 
-      if self.origen_id != ORIGEN_MIGRACION        
+      if self.origen_id != ORIGEN_MIGRACION
+        logger.debug { "#{self.fecha_creacion}" }
         self.fecha_creacion = Date.today if self.fecha_creacion.nil?
+        logger.debug { "#{self.fecha_creacion}" }
         
-        self.fecha_programada = calcular_fecha_entrega(self.fecha_creacion)
+        self.fecha_programada = calcular_fecha_entrega()
         
         self.departamento_id = municipio.departamento_id unless municipio.nil?
         self.estado_id = ESTADO_NORMAL

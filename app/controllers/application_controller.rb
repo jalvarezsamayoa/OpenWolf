@@ -109,6 +109,7 @@ class ApplicationController < ActionController::Base
    # transforma un string fecha con formato DD/MM/YYY a un objeto
   # fecha con formato YYYY-MM-DD que pueda ser grabado a la base de datos
   def fix_date(c_date)
+    logger.debug { "c_date>#{c_date}" }
     return nil if c_date.nil?
 
     a_date = c_date.split('/')   
@@ -119,6 +120,8 @@ class ApplicationController < ActionController::Base
     end
 
     new_date = Date.civil(a_date[2].to_i, a_date[1].to_i, a_date[0].to_i)
+
+    logger.debug { "#{new_date}" }
 
    
     return new_date

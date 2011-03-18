@@ -170,6 +170,7 @@ class Solicitud < ActiveRecord::Base
   #                    :page => 2,
   #                    :per_page => 25)
   def self.buscar(params = nil)
+    logger.debug { "#{params}" }
     logger.debug { "params.nil?" }
     return nil if params.nil? or params.empty?
     
@@ -196,10 +197,10 @@ class Solicitud < ActiveRecord::Base
     # que seria el correlativo de la solicitud
     i_numero = nil
     if params[:search]
-    unless params[:search].include?('-')
-      i_numero = params[:search].to_i
-      params[:search] = '' if i_numero > 0
-    end
+      unless params[:search].include?('-')
+        i_numero = params[:search].to_i
+        params[:search] = '' if i_numero > 0
+      end
     end
 
     if l_filtrar_tiempo_restante
@@ -223,13 +224,11 @@ class Solicitud < ActiveRecord::Base
       
       d_fechaprogdesde = Date.today + desde
       d_fechaproghasta = Date.today + hasta
-
     end
 
-
     self.search do
-      keywords(params[:search]) unless params[:search].nil? or params[:search].empty?
-      with :numero, i_numero if i_numero
+      keywords(params[:search]) unless (params[:search].nil? or params[:search].empty?)
+      with :numero, i_numero unless (i_numero.nil? or i_numero == 0)
       with :institucion_id, i_institucion_id if l_filtrar_instituciones
       with :via_id, i_via_id if l_filtrar_vias
       with :estado_id, i_estado_id if l_filtrar_estados
@@ -237,10 +236,7 @@ class Solicitud < ActiveRecord::Base
       with(:fecha_programada).between(d_fechaprogdesde..d_fechaproghasta) if l_filtrar_tiempo_restante
       paginate(:page => (params[:page] ||= 1), :per_page => (params[:per_page] ||= 20))
       order_by(:fecha_creacion, :desc)
-    end
-
-       
-    
+    end       
   end
 
 
@@ -456,7 +452,7 @@ class Solicitud < ActiveRecord::Base
 
   def actualizar_asignaciones
     cnt_asignaciones = self.actividades.count
-   
+    
     #actualizamos el estado de entrega
     if cnt_asignaciones > 0
       #actualizamos el estado de asignacion
@@ -479,7 +475,7 @@ class Solicitud < ActiveRecord::Base
 
   # marca solicitud como terminada
   def marcar_como_terminada(fecha = Date.today)
-     self.fecha_completada = fecha if ( self.actividades.count == self.actividades.completadas.count)     
+    self.fecha_completada = fecha if ( self.actividades.count == self.actividades.completadas.count)     
   end
 
   #marca la solicitud como no terminada
@@ -603,7 +599,7 @@ class Solicitud < ActiveRecord::Base
     self.solicitante_nombre = self.solicitante_nombre.slice(0..254)
   end
 
-   #removes spetial characters for indexing
+  #removes spetial characters for indexing
   def clean_string(c_name)
 
     c_name = c_name.tr('á','a')

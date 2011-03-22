@@ -16,34 +16,34 @@
 # #  end
 # }
 
-# puts "reiniciar passwords"
-# Usuario.all.each do |u|
-#   u.password = '123456'
-#   u.password_confirmation = '123456'
-#   u.save!
-# end
+puts "reiniciar passwords"
+Usuario.all.each do |u|
+  u.password = '123456'
+  u.password_confirmation = '123456'
+  u.save!
+end
 
 # puts "Limpiar data..."
-Documento.all.each do |d|
-  d.delete if d.autor.nil?
-end
+# Documento.all.each do |d|
+#   d.delete if d.autor.nil?
+# end
 
-Institucion.all.each do |i|
-  puts i.nombre
-  unless i.valid?
-    i.email = 'notificaciones@openwolf.org'
-    i.save!
-  end
- end
+# Institucion.all.each do |i|
+#   puts i.nombre
+#   unless i.valid?
+#     i.email = 'notificaciones@openwolf.org'
+#     i.save!
+#   end
+#  end
 
-Actividad.all.each do |a|
-  if a.solicitud.nil?
-    a.destroy
-  end
-end
+# Actividad.all.each do |a|
+#   if a.solicitud.nil?
+#     a.destroy
+#   end
+# end
 
-require 'active_record/fixtures'
-Fixtures.create_fixtures("#{Rails.root}/db/fixtures", "feriados")
+# require 'active_record/fixtures'
+# Fixtures.create_fixtures("#{Rails.root}/db/fixtures", "feriados")
 
 # puts 'Crear Maestros...'
 # load "#{Rails.root}/db/create_maestros.rb"

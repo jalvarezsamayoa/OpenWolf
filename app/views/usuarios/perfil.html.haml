@@ -3,7 +3,7 @@
     Perfil #{@usuario.nombre}
   - semantic_form_for @usuario do |form|
     = form.semantic_errors
-    = render :partial => 'form', :locals => {:form => form}
+    = render :partial => 'form_perfil', :locals => {:form => form}
     - if action_name == 'perfil'
       = buttons_update(main_index_path)
     - else

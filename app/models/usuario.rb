@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 class Usuario < ActiveRecord::Base
   # configuracion plugin vestal_versions
   # provee log de cambios excepto en los siguientes campos
@@ -85,8 +86,26 @@ class Usuario < ActiveRecord::Base
   # Metodos protegidos
   ################################
   
-  protected
 
+
+  def before_destroy
+    if tiene_hijos?
+      errors.add_to_base("El usuario no puede ser eliminado ya que otros registros dependen de él.")
+      false
+    else
+      true
+    end
+  end
+
+  def tiene_hijos?
+    return true unless self.actividades.count == 0
+    return true unless self.solicitudes.count == 0
+    return true unless self.documentos.count == 0
+
+    return false
+  end
+
+    protected
   # Permite que plugin Devise pueda utilizar 'username' en lugar de 'email'
   def self.find_for_database_authentication(conditions)
     login = conditions.delete(:login)

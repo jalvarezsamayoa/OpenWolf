@@ -5,7 +5,8 @@
   = form.input :password_confirmation
   = form.input :nombre, :input_html => {:size => 60}
   = form.input :cargo, :input_html => {:size => 60}
-  = form.input :institucion, :include_blank => false, :input_html => {:disabled => @disabled, :class => 'combobox', :style => "width: 450px;"}
+  - if @usuario_es_superadmin
+    = form.input :institucion, :include_blank => false, :input_html => {:disabled => @disabled, :class => 'combobox', :style => "width: 450px;"}   
   - if @usuario_es_admin
     %hr/
     %h4 Roles de Seguridad

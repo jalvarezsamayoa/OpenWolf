@@ -9,24 +9,25 @@
   %h3= link_to "Reportes", "#"
   %div
     %p= link_to "Solicitudes (CSV)", reporte_solicitudes_csv_url, :popup => true
-  - if nivel_seguridad(usuario_actual,'superadmin')
+  - if nivel_seguridad(usuario_actual,'administrador')
     %h3= link_to "Administración", "#"
     %div
-      %p= link_to( 'Departamentos', departamentos_path, :title => 'Departamentos Republica' )
-      %p= link_to( 'Municipios', municipios_path, :title => 'Municipios Republica')
-      %p= link_to "Idiomas", idiomas_path, :title => "Idiomas solicitantes"
-      %p= link_to( 'Instituciones', instituciones_path, :title => 'Instituciones Estatales')
-      %p= link_to( "Fuentes Solicitudes", fuentes_path )
-      %p= link_to( "Vias", vias_path)
-      %p= link_to( "Estados", estados_path)
-      %p= link_to( 'Roles Seguridad', roles_path, :title => 'Administracion de Roles')
-      %p= link_to( 'Tipos de Resoluciones', tiposresoluciones_path, :title => 'Administracion de Tipos de Resoluciones')
-      %p= link_to( 'Razones Resoluciones', razonestiposresoluciones_path, :title => 'Administracion de Razones de Resoluciones')
-      %p= link_to "Clasificaciones Documentales", documentoclasificaciones_path, :title=>"Administracion Clasificaciones Documentales"
-      %p= link_to "Categorías Documentales", documentocategorias_path, :title=>"Administracion Categorías Documentales"
-      %p= link_to "Archivos", archivos_path, :title => "Administración de Archivos documentales"
-      %p= link_to "Importar Solicitudes", importar_index_path, :title => "Importar solicitudes en formato CSV"
       %p= link_to( 'Usuarios', usuarios_path, :title => 'Administracion de Usuarios')
-      %p= link_to( "Profesiones", profesiones_path, :title => "Profesiones de solicitantes")
-      %p= link_to "Feriados", feriados_path, :title => "Feriados Nacionales y Locales"
+      - if nivel_seguridad(usuario_actual, 'superadmin')
+        %p= link_to( 'Departamentos', departamentos_path, :title => 'Departamentos Republica' )
+        %p= link_to( 'Municipios', municipios_path, :title => 'Municipios Republica')
+        %p= link_to "Idiomas", idiomas_path, :title => "Idiomas solicitantes"
+        %p= link_to( 'Instituciones', instituciones_path, :title => 'Instituciones Estatales')
+        %p= link_to( "Fuentes Solicitudes", fuentes_path )
+        %p= link_to( "Vias", vias_path)
+        %p= link_to( "Estados", estados_path)
+        %p= link_to( 'Roles Seguridad', roles_path, :title => 'Administracion de Roles')
+        %p= link_to( 'Tipos de Resoluciones', tiposresoluciones_path, :title => 'Administracion de Tipos de Resoluciones')
+        %p= link_to( 'Razones Resoluciones', razonestiposresoluciones_path, :title => 'Administracion de Razones de Resoluciones')
+        %p= link_to "Clasificaciones Documentales", documentoclasificaciones_path, :title=>"Administracion Clasificaciones Documentales"
+        %p= link_to "Categorías Documentales", documentocategorias_path, :title=>"Administracion Categorías Documentales"
+        %p= link_to "Archivos", archivos_path, :title => "Administración de Archivos documentales"
+        %p= link_to "Importar Solicitudes", importar_index_path, :title => "Importar solicitudes en formato CSV"
+        %p= link_to( "Profesiones", profesiones_path, :title => "Profesiones de solicitantes")
+        %p= link_to "Feriados", feriados_path, :title => "Feriados Nacionales y Locales"
 / end - navigation

@@ -7,7 +7,7 @@ class Adjunto < ActiveRecord::Base
   :path => ":rails_root/public/system/assets/adjuntos/:id/:basename.:extension"  
 
   validates_presence_of :numero, :message => "Debe incluir un numero de adjunto."
-  validates_uniqueness_of :numero, :message=>"Valor de Numero de Adjunto ya esta en uso."
+  #validates_uniqueness_of :numero, :message=>"Valor de Numero de Adjunto ya esta en uso."
   
   validates_attachment_presence :archivo
   validates_attachment_size :archivo, :less_than => 5.megabytes

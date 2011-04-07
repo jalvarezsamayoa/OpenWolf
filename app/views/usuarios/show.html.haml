@@ -1,5 +1,12 @@
 - @forview = "SHOW"
 = render :partial=>"breadcrums"
+
+- if @usuario.errors.any?
+  .error
+    %ul
+    - @usuario.errors.full_messages.each do |msg|
+      %li= msg
+
 .show
   %h2= Usuario.human_name
   #options

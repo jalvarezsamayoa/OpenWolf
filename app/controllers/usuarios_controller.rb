@@ -99,9 +99,13 @@ class UsuariosController < ApplicationController
     @usuario.destroy
 
     respond_to do |format|
-      format.html { redirect_to(usuarios_url) }
-      format.xml  { head :ok }
-    end
+      if @usuario.destroy
+      format.html { redirect_to(estados_url) }
+        format.xml  { head :ok }
+      else
+        format.html { render :action => "show"}
+      end
+    end 
   end
 
   # Muestra forma para actualizacion de datos de perfil de usuario

@@ -29,7 +29,7 @@ class Feriado < ActiveRecord::Base
   }
 
   scope :en_fecha, lambda {|fecha|
-    fecha = fecha.tr('/','-').to_date unless desde.class == Date
+    fecha = fecha.tr('/','-').to_date unless fecha.class == Date
     a_fecha = [fecha.year, fecha.month, fecha.day]
     where("dia = ? and mes = ?",a_fecha[2], a_fecha[1])
   }
@@ -69,6 +69,51 @@ class Feriado < ActiveRecord::Base
     return l_hay_feriado
   end
 
+
+  # modifica una fecha hasta retornar un dia laborarl
+  def self.obtener_fecha_valida(d_fecha_entrega, institucion_id)
+    logger.debug { "Obteniendo fecha valida" }
+    
+    #es la ultima fecha feriado nacional
+    logger.debug { "Verificando feriado nacional" }
+    feriado_nacional = Feriado.hay_feriado?({:fecha => d_fecha_entrega})
+    if feriado_nacional == true
+      logger.debug { "Hay feriado, recalculando..." }
+        d_fecha_entrega += 1.day
+
+        d_fecha_entrega = self.obtener_fecha_valida(d_fecha_entrega, institucion_id)
+      end
+
+    #es la ultima fecha feriado local
+    logger.debug { "Verificando feriado local" }
+    feriado_local = Feriado.hay_feriado?({:fecha => d_fecha_entrega, :institucion_id => institucion_id})
+    if feriado_local == true
+      logger.debug { "Hay feriado recalculando..." }
+        d_fecha_entrega += 1.day
+        
+        d_fecha_entrega = self.obtener_fecha_valida(d_fecha_entrega, institucion_id)
+      end
+
+    # verificamos que la nueve fecha sea dia laboral
+    logger.debug { "Verificando dia sabado" }
+    if d_fecha_entrega.wday == 6
+      logger.debug { "Es sabado, recalculando.." }
+      d_fecha_entrega += 1.day
+      d_fecha_entrega = self.obtener_fecha_valida(d_fecha_entrega, institucion_id)
+    end
+
+    logger.debug { "Verificando dia domingo" }
+    if d_fecha_entrega.wday == 0
+      logger.debug { "Es domingo, recalculando..." }
+      d_fecha_entrega += 1.day
+      d_fecha_entrega = self.obtener_fecha_valida(d_fecha_entrega, institucion_id)
+    end
+
+    logger.debug { "Fecha valida obtenida" }
+    return d_fecha_entrega
+  end
+    
+
   def es_dia_laboral?(hoy = nil)
     hoy = Date.civil(Date.today.year,self.mes,self.dia) if hoy.nil?
     l_finsemana = (hoy.wday == 0 or hoy.wday == 6)
@@ -76,6 +121,10 @@ class Feriado < ActiveRecord::Base
   end
   
 
+  
+
+
+  
   private
 
   def cleanup

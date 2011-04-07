@@ -44,6 +44,10 @@ class Usuario < ActiveRecord::Base
   validates_presence_of :nombre, :email, :cargo, :institucion_id, :username
   validates_uniqueness_of :nombre, :email, :username
 
+  def before_destroy
+    check_for_children({:actividades => "Actividades", :solicitudes => "Solicitudes", :documentos => "Documentos"})
+  end
+
   #################
   # Filtros
   #################
@@ -86,24 +90,6 @@ class Usuario < ActiveRecord::Base
   # Metodos protegidos
   ################################
   
-
-
-  def before_destroy
-    if tiene_hijos?
-      errors.add_to_base("El usuario no puede ser eliminado ya que otros registros dependen de él.")
-      false
-    else
-      true
-    end
-  end
-
-  def tiene_hijos?
-    return true unless self.actividades.count == 0
-    return true unless self.solicitudes.count == 0
-    return true unless self.documentos.count == 0
-
-    return false
-  end
 
     protected
   # Permite que plugin Devise pueda utilizar 'username' en lugar de 'email'

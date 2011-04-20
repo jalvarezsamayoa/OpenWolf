@@ -20,7 +20,8 @@ class Resolucion < ActiveRecord::Base
 
   scope :negativas, :conditions => ["resoluciones.tiporesolucion_id = 3"]
   scope :prorrogas, :conditions => ["resoluciones.tiporesolucion_id = 4"]
-
+  scope :tipo_positiva, where("tiposresoluciones.positiva = ?",true).includes(:tiporesolucion)
+  scope :tipo_negativa, where("tiposresoluciones.positiva = ?",false).includes(:tiporesolucion)
 
   
   def nuevo_numero

@@ -16,12 +16,14 @@
 # #  end
 # }
 
-puts "reiniciar passwords"
-Usuario.all.each do |u|
-  u.password = '123456'
-  u.password_confirmation = '123456'
-  u.save!
-end
+
+#iniciar alias pdh
+    Tiporesolucion.all.each do |tr|
+      tr.aliaspdh = tr.nombre
+      tr.save(false)
+    end
+              
+
 
 # puts "Limpiar data..."
 # Documento.all.each do |d|

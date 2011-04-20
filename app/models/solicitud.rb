@@ -270,6 +270,19 @@ class Solicitud < ActiveRecord::Base
     return l_ok
   end
 
+  # retorna todas las razones que se dieron
+  # en las resoluciones que no sean una entrega total
+  def razon_nopositiva    
+    c_razon = ''    
+    res = self.resoluciones.tipo_negativa
+    unless res.nil?     
+      for r in res
+        c_razon += r.tiporesolucion.nombre + ":" + r.descripcion + "\n"
+      end      
+    end
+    return c_razon
+  end
+
   def razon_negativa
     negativa = self.resoluciones.negativas.last
     if negativa.nil?
@@ -289,7 +302,7 @@ class Solicitud < ActiveRecord::Base
   end
 
   def razon_resolucion
-    r = self.resoluciones.last
+    r = self.resoluciones.tipo_positiva.last
     if r.nil?
       c_razon = ''
     else
@@ -303,7 +316,7 @@ class Solicitud < ActiveRecord::Base
     if r.nil?
       c_razon = ''
     else
-      c_razon = r.tiporesolucion.nombre
+      c_razon = r.tiporesolucion.aliaspdh
     end
     return c_razon
   end

@@ -22,3 +22,9 @@
       %tr
         %th= label :estado_id, Tiporesolucion.human_attribute_name(:estado_id)
         %td= @tiporesolucion.estado.nombre
+      %tr
+        %th= label :positiva, Tiporesolucion.human_attribute_name(:positiva)
+        %td= si_no(@tiporesolucion.positiva)
+      %tr
+        %th= label :aliaspdh, Tiporesolucion.human_attribute_name(:aliaspdh)
+        %td= @tiporesolucion.aliaspdh

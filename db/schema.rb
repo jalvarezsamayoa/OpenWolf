@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110318043800) do
+ActiveRecord::Schema.define(:version => 20110420041440) do
 
   create_table "actividades", :force => true do |t|
     t.integer  "institucion_id",                  :null => false
@@ -565,7 +565,11 @@ ActiveRecord::Schema.define(:version => 20110318043800) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "actualiza_fecha_notificacion", :default => false
+    t.boolean  "positiva",                     :default => true
+    t.string   "aliaspdh"
   end
+
+  add_index "tiposresoluciones", ["positiva"], :name => "index_tiposresoluciones_on_positiva"
 
   create_table "usuarios", :force => true do |t|
     t.string   "username"

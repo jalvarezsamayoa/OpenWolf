@@ -22,7 +22,6 @@
             %th= Solicitud.human_attribute_name(:codigo)
             %th= Solicitud.human_attribute_name(:fecha_creacion)
             %th= Solicitud.human_attribute_name(:institucion)
-            %th= Solicitud.human_attribute_name(:solicitante_nombre)
             %th= Solicitud.human_attribute_name(:estado)
             %th= Solicitud.human_attribute_name(:dias)
             %th= Solicitud.human_attribute_name(:avance)
@@ -33,7 +32,6 @@
             %td= link_to solicitud.codigo, solicitud_path(solicitud)
             %td= l(solicitud.fecha_creacion)
             %td= solicitud.institucion.abreviatura
-            %td= solicitud.solicitante_nombre
             %td= solicitud.estado_actual
             %td= solicitud.dias_restantes
             %td= solicitud.avance

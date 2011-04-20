@@ -109,9 +109,11 @@ class Solicitud < ActiveRecord::Base
   ######################  
   
   validates_presence_of :fecha_creacion, :solicitante_nombre, :textosolicitud, :institucion_id
-  
+  validates_presence_of :solicitante_telefonos, :if => Proc.new{ |s| (s.origen_id == ORIGEN_PORTAL ? true : false) } 
+
   validates_presence_of :email, :if => Proc.new{ |s| (s.origen_id == ORIGEN_PORTAL ? true : false) }
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :unless => Proc.new{ |s| s.email.nil? or s.email.empty? }, :message => "Correo electrónico no es válido."
+
 
   validates_associated :estado
   
@@ -428,6 +430,10 @@ class Solicitud < ActiveRecord::Base
     return (not self.fecha_entregada.nil?)
   end
 
+  def con_resolucion_final?
+   return ( (!self.fecha_resolucion.nil?) and (self.estado.final == true) )
+  end
+
   def avance
     n_avance = 0.00
     if terminada?
@@ -536,7 +542,12 @@ class Solicitud < ActiveRecord::Base
   # Metodos de Instancia Privados
   # http://apidock.com/ruby/Module/private
   ################################
-  
+
+  def notificar_creacion
+    Notificaciones.delay.nueva_solicitud(self) unless (self.dont_send_email == true)
+  end
+
+   
   private
 
   def completar_informacion
@@ -590,10 +601,6 @@ class Solicitud < ActiveRecord::Base
       
     end # institucion.nil?
     
-  end
-
-  def notificar_creacion
-    Notificaciones.delay.deliver_nueva_solicitud(self) unless (self.dont_send_email == true)
   end
 
   #limpia la informacion de la solicitud

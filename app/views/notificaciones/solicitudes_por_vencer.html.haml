@@ -1,0 +1,27 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+  %body
+    %h1 Reporte de solicitudes por vencer
+    %h2 Solicitudes
+    %table.minimalist-b
+      %thead
+        %th.col= t("solicitudes.label_codigo")
+        %th.col= t("solicitudes.label_fecha_creacion")
+        %th.col= t("solicitudes.label_institucion_id")
+        %th.col= t("solicitudes.label_estado_id")
+        %th.col= t("solicitudes.label_dias_restantes")
+        %th.col= t("solicitudes.label_avance")
+      %tbody
+        - for solicitud in @solicitudes do
+          %tr
+            %td= solicitud.codigo
+            %td= l(solicitud.fecha_creacion)
+            %td= solicitud.institucion.nombre
+            %td= solicitud.estado.nombre
+            %td= solicitud.dias_restantes
+            %td= solicitud.avance
+      %tfoot
+        %td{:colspan => "10"}
+          *Solicitudes no completadas.

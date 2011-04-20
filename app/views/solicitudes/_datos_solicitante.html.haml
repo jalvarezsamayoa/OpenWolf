@@ -1,0 +1,21 @@
+%h4 Datos del Solicitante
+%table   
+  %tr
+    %th{:width => "20%"}= label :solicitud, t("solicitudes.label_solicitante_nombre")
+    %td= @solicitud.solicitante_nombre
+  %tr
+    %th= label :solicitud, t("solicitudes.label_solicitante_identificacion")
+    %td= @solicitud.solicitante_identificacion
+  %tr
+    %th= label :solicitud, t("solicitudes.label_solicitante_telefonos")
+    %td= @solicitud.solicitante_telefonos
+  %tr
+    %th= label :solicitud, t("solicitudes.label_email")
+    %td= @solicitud.email
+  %tr
+    %th= label :solicitud, t("solicitudes.label_solicitante_direccion")
+    %td= @solicitud.solicitante_direccion
+  %tr
+    %th= label :solicitud, t("solicitudes.label_departamento_municipio")
+    %td= @solicitud.municipio.nombre_completo unless @solicitud.municipio.nil?
+%hr/

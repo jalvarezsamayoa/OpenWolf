@@ -30,7 +30,7 @@ class SolicitudesController < ApplicationController
     end
     
     @asignaciones = usuario_actual.actividades.nocompletadas
-        
+    
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @solicitudes }
@@ -49,7 +49,14 @@ class SolicitudesController < ApplicationController
     @usuario_es_supervisor =  nivel_seguridad(usuario_actual,'encargadoudip')
     @usuario_es_udip = nivel_seguridad(usuario_actual,'personaludip')
 
-    @puede_remover_asignacion = (@es_pertinente_a_usuario && @usuario_es_udip)
+    @mostrar_datos_solicitante = (@es_pertinente_a_usuario and (@usuario_es_supervisor or @usuario_es_udip))
+
+    # es posible remover una asignacion si
+    # 1. el usuario tiene el nivel
+    # 2. si la solicitud no esta en un Estado FINAL
+    @puede_remover_asignacion = ( (@es_pertinente_a_usuario and @usuario_es_udip) and !@solicitud.con_resolucion_final?)
+
+    
     @restringir_seguimientos_privados = !(@es_pertinente_a_usuario && @usuario_es_udip)
     
     respond_to do |format|
@@ -108,7 +115,7 @@ class SolicitudesController < ApplicationController
   # GET /solicitudes/1/edit
   def edit
     @solicitud = Solicitud.find(params[:id])
-   @solicitud.fecha_creacion = l(@solicitud.fecha_creacion)
+    @solicitud.fecha_creacion = l(@solicitud.fecha_creacion)
   end
 
 
@@ -183,6 +190,16 @@ class SolicitudesController < ApplicationController
   #imprime en pdf
   def print
     @solicitud = Solicitud.find(params[:id])
+
+    if usuario_actual
+      @es_pertinente_a_usuario = @solicitud.es_pertinente?(usuario_actual)
+      @usuario_es_supervisor =  nivel_seguridad(usuario_actual,'encargadoudip')
+      @usuario_es_udip = nivel_seguridad(usuario_actual,'personaludip')
+
+      @mostrar_datos_solicitante = (@es_pertinente_a_usuario and (@usuario_es_supervisor or @usuario_es_udip))
+    else
+      @mostar_datos_solicitante = false
+    end
     respond_to do |format|
       format.html {render :layout => 'print'}
     end
@@ -230,9 +247,7 @@ class SolicitudesController < ApplicationController
     @municipios = Departamento.first.municipios.all(:order => "municipios.nombre")
   end
 
-  private
- 
-
+  
 
 end
 

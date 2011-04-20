@@ -16,7 +16,7 @@
         %td= actividad.usuario.institucion.abreviatura
         %td= l(actividad.fecha_asignacion)
         %td= actividad.estado.nombre
-        %td= link_to_if @puede_remover_asignacion, 'Remover', institucion_solicitud_actividad_path(@institucion, @solicitud, actividad), :confirm => '¿Está seguro de remover asignación?', :method => :delete
+        %td= link_to('Remover', institucion_solicitud_actividad_path(@institucion, @solicitud, actividad), :confirm => '¿Está seguro de remover asignación?', :method => :delete) if @puede_remover_asignacion
         %td= link_to 'Ver', institucion_solicitud_actividad_path(@institucion, @solicitud, actividad), {:method => :get, :remote => true} , { :title => "Mostrar informacion de Asignacion"}
 #showactividad.popup{:style => "display: none; height: 400px;"}
 %hr/

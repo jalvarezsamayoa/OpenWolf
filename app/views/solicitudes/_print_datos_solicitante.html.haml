@@ -1,0 +1,23 @@
+%h3 Información Solicitante
+   %hr/
+   .span-8
+     = label :solicitante_direccion, Solicitud.human_attribute_name(:solicitante_direccion)
+   .span-16.last
+     = @solicitud.solicitante_direccion.empty? ? 'No Disponible' : @solicitud.solicitante_direccion
+   .span-8
+     = label :email, Solicitud.human_attribute_name(:email)
+   .span-16.last
+     = @solicitud.email.empty? ? 'No Disponible' : @solicitud.email
+   .span-8
+     = label :departamento, Solicitud.human_attribute_name(:departamento)
+   .span-16.last
+     = @solicitud.departamento.nil? ? 'No Disponible' : @solicitud.departamento.nombre
+   .span-8
+     = label :municipio, Solicitud.human_attribute_name(:municipio)
+   .span-16.last
+     = @solicitud.municipio.nil? ? 'No Disponible' : @solicitud.municipio.nombre
+   .span-8
+     = label :solicitante_telefonos, Solicitud.human_attribute_name(:solicitante_telefonos)
+   .span-16.last
+     = @solicitud.solicitante_telefonos.nil? ? 'No Disponible' : @solicitud.solicitante_telefonos
+   %hr.space/

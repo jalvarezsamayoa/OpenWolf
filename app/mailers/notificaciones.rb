@@ -18,7 +18,7 @@ class Notificaciones < ActionMailer::Base
     email = solicitud.institucion.email
     correo_institucional = ( email.nil? ? '' : ', ' + email)
     
-    mail(:to => solicitud.correos_interesados + correo_institucional,
+    mail(:to => solicitud.correos_interesados.join(", ") + correo_institucional,
          :reply_to => correo_institucional,
          :subject => "openwolf - Confirmación nueva solicitud de información - #{solicitud.codigo}.")           
   end
@@ -62,10 +62,30 @@ class Notificaciones < ActionMailer::Base
     correo_institucional = ( email.nil? ? '' : ', ' + email)
     
     
-    mail(:to => @solicitud.correos_interesados + correo_institucional,
+    mail(:to => @solicitud.correos_interesados.join(", ") + correo_institucional,
          :reply_to => correo_institucional,
          :subject => "openwolf - Nueva nota seguimiento - Solicitud #{@solicitud.codigo}.")           
   end
 
+
+  def solicitudes_por_vencer(institucion, dias_desde = 0, dias_hasta = 3)
+    @solicitudes = institucion.solicitudes.noentregadas.tiempo_restante(dias_desde,dias_hasta)
+
+    #correo institucional
+    email = institucion.email
+    correo_institucional = ( email.nil? ? '' : ', ' + email)
+    
+    #correos superudip
+    correos = []
+    usuarios = institucion.usuarios.supervisores
+    usuarios.each { |u|
+      correos << u.email unless u.email.empty?
+    }
+    destinatarios = correos.join(", ") + correo_institucional
+
+    mail(:to => destinatarios,
+      :reply_to => correo_institucional,
+      :subject => "[openwolf] Reporte de Solicitudes por vencer.")           
+  end
 
 end

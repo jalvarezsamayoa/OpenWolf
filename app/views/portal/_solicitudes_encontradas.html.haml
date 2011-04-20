@@ -7,7 +7,6 @@
       %tr
         %th= Solicitud.human_attribute_name(:codigo)
         %th= Solicitud.human_attribute_name(:fecha_creacion)
-        %th= Solicitud.human_attribute_name(:solicitante_nombre)
         %th= Solicitud.human_attribute_name(:estado)
         %th= Solicitud.human_attribute_name(:avance)
         %th= Solicitud.human_attribute_name(:textosolicitud)
@@ -17,7 +16,6 @@
         %tr
           %td= link_to_solicitud_portal(solicitud) 
           %td= l(solicitud.fecha_creacion)
-          %td= solicitud.solicitante_nombre
           %td= solicitud.estado_actual
           %td= solicitud.avance
           %td= solicitud.extracto

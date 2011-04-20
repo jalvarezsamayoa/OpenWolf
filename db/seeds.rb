@@ -18,10 +18,13 @@
 
 
 #iniciar alias pdh
-    Tiporesolucion.all.each do |tr|
-      tr.aliaspdh = tr.nombre
-      tr.save(false)
-    end
+    # Tiporesolucion.all.each do |tr|
+    #   tr.aliaspdh = tr.nombre
+    #   tr.save(false)
+# end
+
+#iniciar anuladas
+Solicitud.update_all(:anulada => false)
               
 
 

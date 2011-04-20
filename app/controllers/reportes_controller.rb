@@ -6,7 +6,7 @@ class ReportesController < ApplicationController
     report = SolicitudesReport.new(:page_size => 'LEGAL',
                                    :page_layout => :landscape)
     report.reporttitle  = 'REPORTES DE SOLICITUDES'
-    report.items = Solicitud.find(:all, :conditions => ["solicitudes.institucion_id = ?", usuario_actual.institucion_id], :order => :numero)
+    report.items = Solicitud.find(:all, :conditions => ["solicitudes.institucion_id = ? and solicitudes.anulada = ?", usuario_actual.institucion_id, false], :order => :numero)
     output = report.to_pdf
     
     file_name = "solicitudes_" + Time.now.to_i.to_s + ".pdf"
@@ -20,7 +20,7 @@ class ReportesController < ApplicationController
   end
 
   def solicitudes_csv
-    @solicitudes = Solicitud.find(:all, :conditions => ["solicitudes.institucion_id = ?", usuario_actual.institucion_id], :order => :numero)
+    @solicitudes = Solicitud.find(:all, :conditions => ["solicitudes.institucion_id = ? and solicitudes.anulada = ?", usuario_actual.institucion_id, false], :order => :numero)
     csv_string = FasterCSV.generate do |csv| 
       csv <<  [Solicitud.human_attribute_name(:rpt_correlativo),
                Solicitud.human_attribute_name(:rpt_solicitud),

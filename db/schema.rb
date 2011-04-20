@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110420041440) do
+ActiveRecord::Schema.define(:version => 20110420150723) do
 
   create_table "actividades", :force => true do |t|
     t.integer  "institucion_id",                  :null => false
@@ -522,9 +522,11 @@ ActiveRecord::Schema.define(:version => 20110420041440) do
     t.integer  "origen_id",                  :default => 1
     t.integer  "documentoclasificacion_id",  :default => 1
     t.integer  "idioma_id",                  :default => 12,                  :null => false
+    t.boolean  "anulada",                    :default => false
   end
 
   add_index "solicitudes", ["ano"], :name => "index_solicitudes_on_ano"
+  add_index "solicitudes", ["anulada"], :name => "index_solicitudes_on_anulada"
   add_index "solicitudes", ["clasificacion_id"], :name => "index_solicitudes_on_clasificacion_id"
   add_index "solicitudes", ["codigo"], :name => "index_solicitudes_on_codigo"
   add_index "solicitudes", ["departamento_id"], :name => "index_solicitudes_on_departamento_id"

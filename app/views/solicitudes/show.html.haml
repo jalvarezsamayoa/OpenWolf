@@ -8,9 +8,7 @@
     = image_tag("infoabout22.png")
     Visualizar #{Solicitud.human_name}
   = render :partial => 'opciones'
-  #estado_solicitud.notice.span-24.last
-    %strong Estado de la solicitud:
-    %span#estado_solicitud_nombre= @solicitud.estado_actual
+  = render :partial => "estado_solicitud" 
   %table
     %tr
       %th= label :id, Solicitud.human_attribute_name(:id)

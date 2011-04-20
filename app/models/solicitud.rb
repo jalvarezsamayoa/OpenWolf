@@ -121,22 +121,26 @@ class Solicitud < ActiveRecord::Base
   # Filtros
   ########################
   default_scope :include => [:usuario, :institucion, :via, :estado]
+
+  scope :activas, where("solicitudes.anulada = ?", false)
+  scope :anuladas, where("solicitudes.anulada = ?", true)
   
-  scope :asignadas, :conditions=>["solicitudes.asignada = ?", true ]
-  scope :noasignadas, :conditions=>["solicitudes.asignada = ?", false ]
+  #  scope :asignadas, :conditions=>["solicitudes.asignada = ?", true ]
+  scope :asignadas, where("solicitudes.asignada = ?", true )
+  scope :noasignadas, where("solicitudes.asignada = ?", false)
 
-  scope :completadas, :conditions=>["solicitudes.fecha_completada is not null"]
-  scope :nocompletadas, :conditions=>["solicitudes.fecha_completada is null"]
+  scope :completadas, where("solicitudes.fecha_completada is not null")
+  scope :nocompletadas, where("solicitudes.fecha_completada is null")
 
-  scope :sinresolucion, :conditions=>["solicitudes.fecha_resolucion is null" ]
-  scope :conresolucion, :conditions=>["solicitudes.fecha_resolucion is not null" ]
+  scope :sinresolucion, where("solicitudes.fecha_resolucion is null")
+  scope :conresolucion, where("solicitudes.fecha_resolucion is not null")
 
-  scope :sinresolucionfinal, :conditions=>["(solicitudes.fecha_resolucion is null) or (solicitudes.fecha_resolucion is not null and estados.final = ?)",false ]
-  scope :conresolucionfinal, :conditions=>["(solicitudes.fecha_resolucion is not null) and (estados.final = ?)", true ]
+  scope :sinresolucionfinal, where("(solicitudes.fecha_resolucion is null) or (solicitudes.fecha_resolucion is not null and estados.final = ?)",false )
+  scope :conresolucionfinal, where("(solicitudes.fecha_resolucion is not null) and (estados.final = ?)", true )
 
 
-  scope :entregadas, :conditions=>["solicitudes.fecha_entregada is not null" ]
-  scope :noentregadas, :conditions=>["solicitudes.fecha_entregada is null" ]
+  scope :entregadas, where("solicitudes.fecha_entregada is not null")
+  scope :noentregadas, where("solicitudes.fecha_entregada is null")
 
   scope :recientes, :order => "fecha_creacion desc"
   scope :correlativo, :order => "ano desc, numero desc"
@@ -245,6 +249,12 @@ class Solicitud < ActiveRecord::Base
   ################################
   # Metodos de Instancia Publicos
   ###############################
+
+  # marca solicitud como anulada
+  def anular
+    self.anulada = true
+    self.save
+  end
 
   def es_pertinente?(u)
     return false if u.institucion.nil? or self.institucion.nil?
@@ -692,6 +702,5 @@ class Solicitud < ActiveRecord::Base
     
     return d_fecha_entrega
   end
-
   
 end

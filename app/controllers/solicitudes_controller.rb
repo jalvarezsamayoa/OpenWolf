@@ -13,13 +13,15 @@ class SolicitudesController < ApplicationController
 
     if @usuario_es_udip
       
-      @noasignadas = usuario_actual.institucion.solicitudes.noasignadas.recientes.correlativo
-      @entramite = usuario_actual.institucion.solicitudes.asignadas.nocompletadas.recientes.correlativo
-      @terminadas = usuario_actual.institucion.solicitudes.completadas.conresolucionfinal.noentregadas.recientes.correlativo
+      @noasignadas = usuario_actual.institucion.solicitudes.activas.noasignadas.recientes.correlativo
+      @entramite = usuario_actual.institucion.solicitudes.activas.asignadas.nocompletadas.recientes.correlativo
+      @terminadas = usuario_actual.institucion.solicitudes.activas.completadas.conresolucionfinal.noentregadas.recientes.correlativo
       
-      @pendresolucion = usuario_actual.institucion.solicitudes.completadas.sinresolucionfinal.recientes.correlativo
+      @pendresolucion = usuario_actual.institucion.solicitudes.activas.completadas.sinresolucionfinal.recientes.correlativo
       
-      @entregadas = usuario_actual.institucion.solicitudes.entregadas.recientes.correlativo
+      @entregadas = usuario_actual.institucion.solicitudes.activas.entregadas.recientes.correlativo
+
+      @anuladas = usuario_actual.institucion.solicitudes.anuladas
       
     else
       @noasignadas = nil
@@ -27,6 +29,7 @@ class SolicitudesController < ApplicationController
       @terminadas = nil
       @pendresolucion = nil
       @entregadas = nil
+      @anuladas = nil
     end
     
     @asignaciones = usuario_actual.actividades.nocompletadas
@@ -143,9 +146,10 @@ class SolicitudesController < ApplicationController
   # DELETE /solicitudes/1.xml
   def destroy
     @solicitud = Solicitud.find(params[:id])
-    @solicitud.destroy
+    @solicitud.anular
 
     respond_to do |format|
+      flash[:notice] = "Solicitud ha sido anulada"
       format.html { redirect_to(solicitudes_url) }
       format.xml  { head :ok }
     end

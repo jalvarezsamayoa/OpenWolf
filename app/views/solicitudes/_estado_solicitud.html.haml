@@ -1,0 +1,8 @@
+- if @solicitud.anulada?
+  #estado_solicitud.error.span-24.last
+    %strong Estado de la solicitud:
+    %span#estado_solicitud_nombre= 'SOLICITUD ANULADA'
+- else
+  #estado_solicitud.notice.span-24.last
+    %strong Estado de la solicitud:
+    %span#estado_solicitud_nombre= @solicitud.estado_actual

@@ -1,0 +1,21 @@
+#anuladas
+  - if @anuladas.size > 0
+    %h3
+      = image_tag("delete22.png")
+      Anuladas
+    %table.minimalist-b{:width => "100%"}
+      %thead
+        %th.col= t("solicitudes.label_codigo")
+        %th.col= t("solicitudes.label_institucion_id")
+        %th.col= t("solicitudes.label_fecha_creacion")
+        %th.col= t("solicitudes.label_estado_id")
+      %tbody
+        - for solicitud in @anuladas do
+          %tr
+            %td= link_to solicitud.codigo, institucion_solicitud_path(solicitud.institucion_id, solicitud)
+            %td= solicitud.institucion.nombre
+            %td= l(solicitud.fecha_creacion)
+            %td= solicitud.estado.nombre
+      %tfoot
+        %td{:colspan => "10"}
+          *Solicitudes anuladas

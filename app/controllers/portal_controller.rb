@@ -108,7 +108,7 @@ class PortalController < ApplicationController
                 s.tipo_resolucion,
                 (l(s.fecha_resolucion).to_s unless s.fecha_resolucion.nil?),
                 s.razon_nopositiva,
-                s.tiempo_respuesta.to_s,
+                s.dias_transcurridos.to_s,
                 s.hay_prorroga,
                 (l(s.fecha_notificacion_prorroga).to_s),
                 s.razon_prorroga,

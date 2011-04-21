@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110420150723) do
+ActiveRecord::Schema.define(:version => 20110421201519) do
 
   create_table "actividades", :force => true do |t|
     t.integer  "institucion_id",                  :null => false
@@ -481,18 +481,18 @@ ActiveRecord::Schema.define(:version => 20110420150723) do
   end
 
   create_table "solicitudes", :force => true do |t|
-    t.integer  "usuario_id",                                                  :null => false
-    t.string   "codigo",                     :default => "XXXXX-999999-9999", :null => false
-    t.integer  "institucion_id",                                              :null => false
-    t.integer  "tiposolicitud_id",           :default => 1
-    t.integer  "via_id",                     :default => 1,                   :null => false
+    t.integer  "usuario_id",                                                   :null => false
+    t.string   "codigo",                      :default => "XXXXX-999999-9999", :null => false
+    t.integer  "institucion_id",                                               :null => false
+    t.integer  "tiposolicitud_id",            :default => 1
+    t.integer  "via_id",                      :default => 1,                   :null => false
     t.date     "fecha_creacion"
     t.date     "fecha_programada"
     t.date     "fecha_entregada"
     t.date     "fecha_resolucion"
     t.date     "fecha_prorroga"
     t.date     "fecha_completada"
-    t.string   "solicitante_nombre",                                          :null => false
+    t.string   "solicitante_nombre",                                           :null => false
     t.string   "solicitante_identificacion"
     t.string   "solicitante_direccion"
     t.string   "solicitante_telefonos"
@@ -503,13 +503,13 @@ ActiveRecord::Schema.define(:version => 20110420150723) do
     t.string   "forma_entrega"
     t.text     "observaciones"
     t.string   "ubicacion_url"
-    t.integer  "estado_id",                  :default => 1
+    t.integer  "estado_id",                   :default => 1
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "textosolicitud"
     t.boolean  "asignada"
-    t.integer  "ano",                                                         :null => false
-    t.integer  "numero",                                                      :null => false
+    t.integer  "ano",                                                          :null => false
+    t.integer  "numero",                                                       :null => false
     t.integer  "profesion_id"
     t.integer  "genero_id"
     t.integer  "rangoedad_id"
@@ -518,11 +518,13 @@ ActiveRecord::Schema.define(:version => 20110420150723) do
     t.integer  "dias_prorroga"
     t.integer  "motivonegativa_id"
     t.integer  "motivoprorroga_id"
-    t.boolean  "informacion_publica",        :default => true,                :null => false
-    t.integer  "origen_id",                  :default => 1
-    t.integer  "documentoclasificacion_id",  :default => 1
-    t.integer  "idioma_id",                  :default => 12,                  :null => false
-    t.boolean  "anulada",                    :default => false
+    t.boolean  "informacion_publica",         :default => true,                :null => false
+    t.integer  "origen_id",                   :default => 1
+    t.integer  "documentoclasificacion_id",   :default => 1
+    t.integer  "idioma_id",                   :default => 12,                  :null => false
+    t.boolean  "anulada",                     :default => false
+    t.integer  "tiempo_respuesta",            :default => 0
+    t.integer  "tiempo_respuesta_calendario", :default => 0
   end
 
   add_index "solicitudes", ["ano"], :name => "index_solicitudes_on_ano"
@@ -550,6 +552,8 @@ ActiveRecord::Schema.define(:version => 20110420150723) do
   add_index "solicitudes", ["rangoedad_id"], :name => "index_solicitudes_on_rangoedad_id"
   add_index "solicitudes", ["solicitante_institucion"], :name => "index_solicitudes_on_solicitante_institucion"
   add_index "solicitudes", ["solicitante_nombre"], :name => "index_solicitudes_on_solicitante_nombre"
+  add_index "solicitudes", ["tiempo_respuesta"], :name => "index_solicitudes_on_tiempo_respuesta"
+  add_index "solicitudes", ["tiempo_respuesta_calendario"], :name => "index_solicitudes_on_tiempo_respuesta_calendario"
   add_index "solicitudes", ["tiposolicitud_id"], :name => "index_solicitudes_on_tiposolicitud_id"
   add_index "solicitudes", ["usuario_id"], :name => "index_solicitudes_on_usuario_id"
   add_index "solicitudes", ["via_id"], :name => "index_solicitudes_on_via_id"

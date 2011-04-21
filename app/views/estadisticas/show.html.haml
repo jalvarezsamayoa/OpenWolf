@@ -14,7 +14,9 @@
             %tr
               %th= 'Total de Solicitudes'
               %td= @institucion.total_solicitudes
-
+            %tr
+              %th= 'Promedio dias respuesta'
+              %td= @institucion.tiempo_respuesta_promedio
         #por-estado
           %h3 Solicitudes por Estado
           %table.minimalist-b{:width => "100%"}

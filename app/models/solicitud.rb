@@ -381,13 +381,13 @@ class Solicitud < ActiveRecord::Base
     return i_tiempo
   end
   
-  def tiempo_respuesta
+  def dias_transcurridos
     i_tiempo = 0
 
     if self.fecha_completada.nil?
       i_tiempo = (Date.today - self.fecha_creacion)
     else
-      i_tiempo = (self.fecha_completada - self.fecha_creacion)
+      i_tiempo = self.tiempo_respuesta
     end
     
     return i_tiempo
@@ -504,12 +504,27 @@ class Solicitud < ActiveRecord::Base
 
   # marca solicitud como terminada
   def marcar_como_terminada(fecha = Date.today)
-    self.fecha_completada = fecha if ( self.actividades.count == self.actividades.completadas.count)     
+    self.fecha_completada = fecha if ( self.actividades.count == self.actividades.completadas.count)
+    unless self.fecha_completada.nil?
+      #actualizamos los tiempos de entrega
+       dias = (self.fecha_completada - self.fecha_creacion)
+      dias = 1 if dias == 0
+      
+      self.tiempo_respuesta_calendario = dias
+      self.tiempo_respuesta = (dias - Feriado.calcular_dias_no_laborales(:fecha => self.fecha_creacion,
+                                                                         :dias => dias,
+                                                                         :institucion_id => self.institucion_id))
+      
+    end
   end
+ 
 
   #marca la solicitud como no terminada
   def marcar_como_no_terminada
     self.fecha_completada = nil
+    #actualizamos los tiempos de entrega
+    self.tiempo_respuesta = 0
+    self.tiempo_respuesta_calendario = 0
   end
 
   #actualiza el estado a Entregada a Solicitante

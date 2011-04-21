@@ -79,20 +79,20 @@ class Feriado < ActiveRecord::Base
     feriado_nacional = Feriado.hay_feriado?({:fecha => d_fecha_entrega})
     if feriado_nacional == true
       logger.debug { "Hay feriado, recalculando..." }
-        d_fecha_entrega += 1.day
+      d_fecha_entrega += 1.day
 
-        d_fecha_entrega = self.obtener_fecha_valida(d_fecha_entrega, institucion_id)
-      end
+      d_fecha_entrega = self.obtener_fecha_valida(d_fecha_entrega, institucion_id)
+    end
 
     #es la ultima fecha feriado local
     logger.debug { "Verificando feriado local" }
     feriado_local = Feriado.hay_feriado?({:fecha => d_fecha_entrega, :institucion_id => institucion_id})
     if feriado_local == true
       logger.debug { "Hay feriado recalculando..." }
-        d_fecha_entrega += 1.day
-        
-        d_fecha_entrega = self.obtener_fecha_valida(d_fecha_entrega, institucion_id)
-      end
+      d_fecha_entrega += 1.day
+      
+      d_fecha_entrega = self.obtener_fecha_valida(d_fecha_entrega, institucion_id)
+    end
 
     # verificamos que la nueve fecha sea dia laboral
     logger.debug { "Verificando dia sabado" }
@@ -112,7 +112,7 @@ class Feriado < ActiveRecord::Base
     logger.debug { "Fecha valida obtenida" }
     return d_fecha_entrega
   end
-    
+  
 
   def es_dia_laboral?(hoy = nil)
     hoy = Date.civil(Date.today.year,self.mes,self.dia) if hoy.nil?
@@ -121,9 +121,42 @@ class Feriado < ActiveRecord::Base
   end
   
 
-  
+  #calcula los dias calendario de respuesta
+  def self.calcular_dias_no_laborales(opts = {})   
+    opts[:fecha] = Date.today if opts[:fecha].nil?
+    opts[:dias] = 10 if opts[:dias].nil?
 
+    fecha = opts[:fecha]
+    dias = opts[:dias]
+    
+    #removermos dias no habiles
+    dias_no_laborales = 0
+    dias.times do |i|
 
+      dia = (fecha + i)
+      # es fin de semana
+      if (6..7) === dia.wday
+        dias_no_laborales += 1
+      else
+        
+        # es feriado global
+        if Feriado.hay_feriado?(:fecha => fecha,
+                                :institucion_id => Institucion::ESTADO_GUATEMALA)
+          dias_no_laborales += 1
+        end
+
+        # es feriado local
+        unless opts[:institucion_id].nil?        
+          if Feriado.hay_feriado?(:fecha => fecha,
+                                  :institucion_id => opts[:institucion_id])
+            dias_no_laborales += 1
+          end
+        end
+      end #(6..7)      
+    end #dias.times
+
+    return dias_no_laborales
+  end #self.calcular_dias_no_laborales
   
   private
 

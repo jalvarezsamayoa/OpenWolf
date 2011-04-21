@@ -176,7 +176,7 @@ class Solicitud < ActiveRecord::Base
   #                    :page => 2,
   #                    :per_page => 25)
   def self.buscar(params = nil)
-    logger.debug { "#{params}" }
+    logger.debug { "#{params.inspect}" }
     logger.debug { "params.nil?" }
     return nil if params.nil? or params.empty?
     
@@ -344,7 +344,7 @@ class Solicitud < ActiveRecord::Base
 
   def fecha_notificacion_prorroga
     p = self.resoluciones.prorrogas.last
-    fecha = p.nil? ? '' : p.created_at.to_date
+    fecha = p.nil? ? Date.new : p.created_at.to_date
     return fecha
   end
   

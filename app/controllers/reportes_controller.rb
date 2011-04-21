@@ -21,6 +21,7 @@ class ReportesController < ApplicationController
 
   def solicitudes_csv
     @solicitudes = Solicitud.find(:all, :conditions => ["solicitudes.institucion_id = ? and solicitudes.anulada = ?", usuario_actual.institucion_id, false], :order => :numero)
+    
     csv_string = FasterCSV.generate do |csv| 
       csv <<  [Solicitud.human_attribute_name(:rpt_correlativo),
                Solicitud.human_attribute_name(:rpt_solicitud),

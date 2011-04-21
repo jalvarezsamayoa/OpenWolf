@@ -41,6 +41,7 @@ OpenwolfV3::Application.routes.draw do
     end
     collection do
       get :buscar
+      get :exportar
     end
   end
 

@@ -43,6 +43,7 @@ OpenwolfV3::Application.routes.draw do
       get :buscar
       get :exportar
     end
+    resources :estadisticas, :only => [:index, :show]
   end
 
   resources :resoluciones do

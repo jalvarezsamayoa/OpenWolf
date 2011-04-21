@@ -48,7 +48,7 @@ class Institucion < ActiveRecord::Base
   # Filtros de busqueda
   #####################
 
-  default_scope :order => "nombre asc"
+  default_scope :order => "instituciones.nombre asc"
   
   scope :padres, :conditions=>["tipoinstitucion_id < ?", TIPO_INSTITUCION ], :order => :nombre
   scope :ministerios, :conditions=>["tipoinstitucion_id = ?",TIPO_MINISTERIO], :order => :nombre
@@ -79,6 +79,31 @@ class Institucion < ActiveRecord::Base
   def familia_activa
     self.self_and_ancestors.activas.asignables.concat( self.children.asignables  )
   end
+
+  ######################################
+  # Metodos para estadisticas
+  #####################################
+
+  def total_solicitudes
+    self.solicitudes.activas.count
+  end
+
+  def solicitudes_por_estado
+    estados = Estado.select('estados.nombre, count(solicitudes.estado_id) as total_solicitudes').joins(:solicitudes).where("solicitudes.anulada = ? and solicitudes.institucion_id = ?",false,self.id).group('estados.nombre')
+    return estados
+  end
+
+  def solicitudes_por_ano
+    solicitudes = self.solicitudes.activas.select("extract(year from fecha_creacion) as ano,  count(solicitudes.id) as total_solicitudes").group("extract(year from fecha_creacion)").order("extract(year from fecha_creacion) desc")
+    return solicitudes
+  end
+  
+  def solicitudes_por_mes_ano
+    solicitudes = self.solicitudes.activas.select("extract(year from fecha_creacion) as ano, extract(month from fecha_creacion) as mes,  count(solicitudes.id) as total_solicitudes").group("extract(year from fecha_creacion), extract(month from fecha_creacion)").order("extract(year from fecha_creacion) desc, extract(month from fecha_creacion) desc")
+    return solicitudes
+  end
+
+  private
 
   def cleanup
     

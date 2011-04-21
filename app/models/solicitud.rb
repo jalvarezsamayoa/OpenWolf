@@ -120,7 +120,7 @@ class Solicitud < ActiveRecord::Base
   ########################
   # Filtros
   ########################
-  default_scope :include => [:usuario, :institucion, :via, :estado]
+#  default_scope :include => [:usuario, :institucion, :via, :estado]
 
   scope :activas, where("solicitudes.anulada = ?", false)
   scope :anuladas, where("solicitudes.anulada = ?", true)
@@ -626,9 +626,7 @@ class Solicitud < ActiveRecord::Base
     Solicitud.xml_options
   end
   
-
-
-  
+ 
   ################################
   # Metodos de Instancia Privados
   # http://apidock.com/ruby/Module/private

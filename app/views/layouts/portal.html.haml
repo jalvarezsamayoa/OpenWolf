@@ -33,6 +33,7 @@
           %li= link_to "Portal Estatal", ( usuario_actual.nil? ? login_url : main_index_url), :title => "Portal Administrativo"
           %li= link_to "Busqueda", portal_index_url, :title => "Buscar Solicitudes de Información Pública o Documentos"
           %li= link_to "Crear Solicitud de Información Pública", new_solicitud_informacion_url, :title => "Generar una nueva solicitud de información pública."
+          %li= link_to "Estadisticas", portal_estadisticas_path(1), :title => "Estadísticas por Institución"
           %li= link_to "Ayuda", "http://docs.openwolf.org", :title => "Documentación OpenWolf"
       #account-menu.hlist
         %ul

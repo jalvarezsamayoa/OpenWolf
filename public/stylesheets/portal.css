@@ -349,3 +349,20 @@ div#search {
    bottom: 0px;
    vertical-align: middle;
 }
+
+/* estadisticas */
+
+.estadisticas {
+  width: 100%;
+}
+
+.estadisticas div {
+    margin-bottom: 20px;
+    border: 1px solid #999;
+    padding: 10px;
+
+}
+
+.estadisticas colgroup.show-table-header {
+    width: 30%;
+}

@@ -1,0 +1,49 @@
+= render :partial => "portal/find_box"
+#container
+  #wraper
+    #content
+      %h2= "Estadísticas - #{@institucion.nombre}"
+      #results.estadisticas
+
+        %br/
+        #generales
+          %h3 Solicitudes de información pública
+          %table.minimalist-b{:width => "100%"}
+            %colgroup.show-table-header
+            %colgroup.show-table-data
+            %tr
+              %th= 'Total de Solicitudes'
+              %td= @institucion.total_solicitudes
+
+        #por-estado
+          %h3 Solicitudes por Estado
+          %table.minimalist-b{:width => "100%"}
+            %colgroup.show-table-header
+            %colgroup.show-table-data
+            - for estado in @institucion.solicitudes_por_estado
+              %tr
+                %th= estado.nombre
+                %td= estado.total_solicitudes
+
+        #por-ano
+          %h3 Solicitudes por Año
+          %table.minimalist-b{:width => "100%"}
+            %colgroup.show-table-header
+            %colgroup.show-table-data
+            - for solicitud in @institucion.solicitudes_por_ano
+              %tr
+                %th= "#{solicitud.ano}"
+                %td= solicitud.total_solicitudes
+
+        #por-mes-ano
+          %h3 Solicitudes por Mes y Año
+          %table.minimalist-b{:width => "100%"}
+            %colgroup.show-table-header
+            %colgroup.show-table-data
+            - for solicitud in @institucion.solicitudes_por_mes_ano
+              %tr
+                %th= "#{solicitud.mes} / #{solicitud.ano}"
+                %td= solicitud.total_solicitudes
+
+  #navigation
+  = render :partial => "portal/news_links"

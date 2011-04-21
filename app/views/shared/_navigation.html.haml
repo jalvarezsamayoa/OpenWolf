@@ -9,6 +9,7 @@
   %h3= link_to "Reportes", "#"
   %div
     %p= link_to "Solicitudes (CSV)", reporte_solicitudes_csv_url, :popup => true
+    %p= link_to "Solicitudes (XML)", reporte_solicitudes_xml_url(:format => 'xml'), :popup => true, :confirm => "Este proceso puede tomar algunos minutos en completar. ¿Desea continuar?"
   - if nivel_seguridad(usuario_actual,'administrador')
     %h3= link_to "Administración", "#"
     %div

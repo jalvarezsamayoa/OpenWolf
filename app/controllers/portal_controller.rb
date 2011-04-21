@@ -34,8 +34,7 @@ class PortalController < ApplicationController
     
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @solicitud }
-      # format.pdf {render :layout => 'print'}
+      format.xml  { render :xml => @solicitud.to_xml(:include => @solicitud.xml_options ) }
     end
   end
 

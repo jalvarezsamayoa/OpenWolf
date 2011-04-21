@@ -19,6 +19,20 @@ class ReportesController < ApplicationController
     end
   end
 
+  def solicitudes_xml
+    @solicitudes = Solicitud.where("solicitudes.institucion_id = ? and solicitudes.anulada = ?", usuario_actual.institucion_id, false).order(:numero)
+    
+    # respond_to do |format|
+    #   format.xml  { render :xml => @solicitudes.to_xml(:include => Solicitud.xml_options ) }
+    # end
+    xml_string = @solicitudes.to_xml(:include => Solicitud.xml_options )
+    file_name = "solicitudes_" + Time.now.strftime("%Y-%m-%d-%H%M%S") + ".xml"
+    
+    send_data xml_string, :type => "text/plain", 
+    :filename=>file_name,
+    :disposition => 'attachment'
+  end
+
   def solicitudes_csv
     @solicitudes = Solicitud.find(:all, :conditions => ["solicitudes.institucion_id = ? and solicitudes.anulada = ?", usuario_actual.institucion_id, false], :order => :numero)
     
@@ -42,21 +56,21 @@ class ReportesController < ApplicationController
 
       @solicitudes.each do |s|
         csv << [s.codigo,
-                 s.textosolicitud,
-                 l(s.fecha_creacion).to_s,
-                 (s.via.nil? ? '' : s.via.nombre),
-                 s.tipo_resolucion,
-                 l(s.fecha_resolucion).to_s,
-                 s.razon_nopositiva,
-                 s.tiempo_respuesta.to_s,
-                 s.hay_prorroga,
-                 l(s.fecha_notificacion_prorroga).to_s,
-                 s.razon_prorroga,
-                 s.tiempo_ampliacion.to_s,
-                 s.hay_revision,
-                 l(s.fecha_revision).to_s,
-                 l(s.fecha_notificacion_revision).to_s,
-                 s.razon_resolucion]
+                s.textosolicitud,
+                l(s.fecha_creacion).to_s,
+                (s.via.nil? ? '' : s.via.nombre),
+                s.tipo_resolucion,
+                l(s.fecha_resolucion).to_s,
+                s.razon_nopositiva,
+                s.tiempo_respuesta.to_s,
+                s.hay_prorroga,
+                l(s.fecha_notificacion_prorroga).to_s,
+                s.razon_prorroga,
+                s.tiempo_ampliacion.to_s,
+                s.hay_revision,
+                l(s.fecha_revision).to_s,
+                l(s.fecha_notificacion_revision).to_s,
+                s.razon_resolucion]
       end
     end
     send_data csv_string, :type => "text/plain", 

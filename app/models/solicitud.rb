@@ -454,7 +454,7 @@ class Solicitud < ActiveRecord::Base
   end
 
   def con_resolucion_final?
-   return ( (!self.fecha_resolucion.nil?) and (self.estado.final == true) )
+    return ( (!self.fecha_resolucion.nil?) and (self.estado.final == true) )
   end
 
   def avance
@@ -561,6 +561,74 @@ class Solicitud < ActiveRecord::Base
     return (self.origen_id == ORIGEN_MIGRACION ? false : true)    
   end
 
+  def self.xml_options
+    options = {:institucion => {:only => [:codigo, :nombre, :abreviatura] },
+      :usuario => {:only => [:nombre, :cargo, :username]},
+      :municipio => {:only => [:nombre]},
+      :departamento => {:only => [:nombre]},
+      :via => {:only => [:nombre]},
+      :estado => {:only => [:nombre]},
+      :profesion => {:only => [:nombre]},
+      :genero => {:only => [:nombre]},
+      :rangoedad => {:only => [:nombre]},
+      :clasificacion => {:only => [:nombre]},
+      :documentoclasificacion => {:only => [:nombre]},
+      :idioma => {:only => [:nombre]},
+      :actividades => {:only => [:fecha_resolucion,
+                                 :fecha_asignacion,
+                                 :estado_id,
+                                 :usuario_id,
+                                 :textoactividad],
+        :include => {:estado => {:only => [:nombre] },
+          :usuario => {:only => [:nombre,
+                                 :cargo,
+                                 :username]  },
+          :seguimientos => {:only => [:usuario_id,
+                                      :fecha_creacion,
+                                      :textoseguimiento,
+                                      :informacion_publica],
+            :include => {:usuario => {:only => [:nombre, :cargo, :username]}}}
+        }
+      },
+      :resoluciones => {:only => [:informacion_publica,
+                                  :razontiporesolucion_id,
+                                  :tiporesolucion_id,
+                                  :usuario_id,
+                                  :descripcion,
+                                  :documentoclasificacion_id,
+                                  :numero,
+                                  :fecha,
+                                  :nuevafecha,
+                                  :fecha_notificacion],
+        :include => {:usuario => {:only => [:nombre, :cargo, :username]},
+          :tiporesolucion => {:only => [:nombre]},
+          :razontiporesolucion => {:only => [:nombre] }
+        }
+      },
+      :recursosrevision => {:only => [:fecha_presentacion, 
+                                      :fecha_notificacion,
+                                      :fecha_resolucion, 
+                                      :descripcion,
+                                      :sentidoresolucion_id,
+                                      :usuario_id,
+                                      :numero,
+                                      :documentoclasificacion_id],
+        :include => {:usuario => {:only => [:nombre, :cargo, :username]},
+          :sentidoresolucion => {:only => [:nombre]}
+        }
+      }
+    }
+    return options
+  end
+  
+  # retorna configuracion para exportacion a xml
+  def xml_options
+    Solicitud.xml_options
+  end
+  
+
+
+  
   ################################
   # Metodos de Instancia Privados
   # http://apidock.com/ruby/Module/private
@@ -570,7 +638,7 @@ class Solicitud < ActiveRecord::Base
     Notificaciones.delay.nueva_solicitud(self) unless (self.dont_send_email == true)
   end
 
-   
+  
   private
 
   def completar_informacion
@@ -675,9 +743,9 @@ class Solicitud < ActiveRecord::Base
       end
     end
 
-     logger.debug { "Solcitud fecha: #{d_fecha_entrega}" }
+    logger.debug { "Solcitud fecha: #{d_fecha_entrega}" }
 
-        logger.debug { "Solicitud Aumentando dias segun feriados locales" }
+    logger.debug { "Solicitud Aumentando dias segun feriados locales" }
     unless feriados_locales.blank?
       for feriado in feriados_locales
         if feriado.es_dia_laboral?
@@ -688,7 +756,7 @@ class Solicitud < ActiveRecord::Base
 
     logger.debug { "Solcitud fecha: #{d_fecha_entrega}" }
 
-   logger.debug { "Solicitud Aumentando dias segun dias laborales" }
+    logger.debug { "Solicitud Aumentando dias segun dias laborales" }
     # verificamos que la nueve fecha sea dia laboral
     d_fecha_entrega += 1.day if (d_fecha_entrega.wday == 6)
     d_fecha_entrega += 1.day if (d_fecha_entrega.wday == 0)

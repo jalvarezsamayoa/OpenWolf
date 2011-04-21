@@ -138,6 +138,9 @@ OpenwolfV3::Application.routes.draw do
   match 'reportes/solicitudes_csv',
   :to => "reportes#solicitudes_csv",  :as => "reporte_solicitudes_csv"
 
+  match 'reportes/solicitudes_xml',
+  :to => "reportes#solicitudes_xml",  :as => "reporte_solicitudes_xml"
+
  
   # The priority is based upon order of creation:
   # first created -> highest priority.

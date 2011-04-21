@@ -105,7 +105,7 @@ class Institucion < ActiveRecord::Base
   end
 
   def tiempo_respuesta_promedio
-    tiempo = Solicitud.find_by_sql("select avg(solicitudes.tiempo_respuesta) as promedio from solicitudes where solicitudes.institucion_id = #{self.id} and solicitudes.fecha_completada is not null")    
+    tiempo = Solicitud.find_by_sql("select avg(solicitudes.tiempo_respuesta) as promedio from solicitudes where solicitudes.institucion_id = #{self.id} and anulada = #{false} and solicitudes.fecha_completada is not null")    
     return tiempo[0].promedio.to_f.ceil
   end
  

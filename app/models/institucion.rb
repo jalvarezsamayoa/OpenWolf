@@ -94,12 +94,15 @@ class Institucion < ActiveRecord::Base
   end
 
   def solicitudes_por_ano
-    solicitudes = self.solicitudes.activas.select("extract(year from fecha_creacion) as ano,  count(solicitudes.id) as total_solicitudes").group("extract(year from fecha_creacion)").order("extract(year from fecha_creacion) desc")
+    solicitudes =  Solicitud.find_by_sql("select extract(year from fecha_creacion) as ano,  count(solicitudes.id) as total_solicitudes from solicitudes where institucion_id = #{self.id} and anulada = #{false} group by extract(year from fecha_creacion)")
+
     return solicitudes
   end
   
   def solicitudes_por_mes_ano
-    solicitudes = self.solicitudes.activas.select("extract(year from fecha_creacion) as ano, extract(month from fecha_creacion) as mes,  count(solicitudes.id) as total_solicitudes").group("extract(year from fecha_creacion), extract(month from fecha_creacion)").order("extract(year from fecha_creacion) desc, extract(month from fecha_creacion) desc")
+    solicitudes =  Solicitud.find_by_sql("select extract(year from fecha_creacion) as ano, extract(month from fecha_creacion) as mes,  count(solicitudes.id) as total_solicitudes from solicitudes where institucion_id = #{self.id} and anulada = #{false} group by extract(year from fecha_creacion), extract(month from fecha_creacion)")
+    
+
     return solicitudes
   end
 

@@ -39,9 +39,9 @@ class ResolucionesController < ApplicationController
   # GET /resoluciones/1/edit
   def edit
     @resolucion = @solicitud.resoluciones.find(params[:id])
-    @resolucion.fecha = l(@resolucion.fecha)
-    @resolucion.fecha_notificacion = l(@resolucion.fecha_notificacion)
-    @resolucion.nueva_fecha = l(@resolucion.nueva_fecha)
+    @resolucion.fecha = l(@resolucion.fecha) if @resolucion.fecha.class == Date
+    @resolucion.fecha_notificacion = l(@resolucion.fecha_notificacion) if @resolucion.fecha_notificacion.class == Date
+    @resolucion.nueva_fecha = l(@resolucion.nueva_fecha) if @resolucion.nueva_fecha.class == Date
   end
 
   # POST /resoluciones

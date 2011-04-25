@@ -505,9 +505,10 @@ class Solicitud < ActiveRecord::Base
   # marca solicitud como terminada
   def marcar_como_terminada(fecha = Date.today)
     self.fecha_completada = fecha if ( self.actividades.count == self.actividades.completadas.count)
+    
     unless self.fecha_completada.nil?
       #actualizamos los tiempos de entrega
-       dias = (self.fecha_completada - self.fecha_creacion)
+      dias = (self.fecha_completada - self.fecha_creacion).to_i
       dias = 1 if dias == 0
       
       self.tiempo_respuesta_calendario = dias

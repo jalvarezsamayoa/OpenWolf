@@ -60,8 +60,10 @@ class ResolucionesController < ApplicationController
      if params[:resolucion][:fecha_notificacion]
      #limpiamos fecha de creacion pasandola a formato MM/DD/YYYY
       @resolucion.fecha_notificacion = fix_date(params[:resolucion][:fecha_notificacion])
-    end
-    
+     end
+
+     params[:resolucion][:nueva_fecha] = fix_date(params[:resolucion][:nueva_fecha]) if params[:resolucion][:nueva_fecha]
+   
 
     respond_to do |format|
       if @resolucion.save

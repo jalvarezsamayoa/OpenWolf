@@ -63,4 +63,5 @@ group :development, :test do
    gem "capybara"
    gem "factory_girl_rails" # https://github.com/thoughtbot/factory_girl_rails
    gem "cucumber-rails"
+   gem "hirb"
 end

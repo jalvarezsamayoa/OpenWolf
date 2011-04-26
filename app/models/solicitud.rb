@@ -652,7 +652,60 @@ class Solicitud < ActiveRecord::Base
     Notificaciones.delay.nueva_solicitud(self) unless (self.dont_send_email == true)
   end
 
-  
+def calcular_fecha_entrega
+    Solicitud.calcular_fecha_entrega(self.fecha_creacion, nil,  self.institucion_id)
+  end
+
+   def self.calcular_fecha_entrega(d_fecha_creacion = Date.today, d_fecha_entrega = nil, i_institucion_id = 1)
+    logger.debug { "Solicitud: calculando fecha de entrega" }
+    d_fecha_creacion = d_fecha_creacion.to_date if d_fecha_creacion.class == String
+    d_fecha_entrega = d_fecha_creacion + 14.days unless d_fecha_entrega
+
+    logger.debug { "Solcitud fecha: #{d_fecha_entrega}" }
+    
+    #obtenemos feriados entre las fechas
+    feriados_locales = []
+    feriados_nacionales = Feriado.nacional.entre_fechas(d_fecha_creacion, d_fecha_entrega)    
+    feriados_locales = Feriado.local.por_institucion(i_institucion_id).entre_fechas(d_fecha_creacion, d_fecha_entrega) unless i_institucion_id == 1
+
+    logger.debug { "Solicitud Aumentando dias segun feriados nacinales" }
+    #aumentamos los dias de la solicitud segun los feriados
+    unless feriados_nacionales.blank?
+      for feriado in feriados_nacionales
+        if feriado.es_dia_laboral?
+          d_fecha_entrega += 1.day                    
+        end
+      end
+    end
+
+    logger.debug { "Solcitud fecha: #{d_fecha_entrega}" }
+
+    logger.debug { "Solicitud Aumentando dias segun feriados locales" }
+    unless feriados_locales.blank?
+      for feriado in feriados_locales
+        if feriado.es_dia_laboral?
+          d_fecha_entrega += 1.day
+        end
+      end
+    end
+
+    logger.debug { "Solcitud fecha: #{d_fecha_entrega}" }
+
+    logger.debug { "Solicitud Aumentando dias segun dias laborales" }
+    # verificamos que la nueve fecha sea dia laboral
+    d_fecha_entrega += 1.day if (d_fecha_entrega.wday == 6)
+    d_fecha_entrega += 1.day if (d_fecha_entrega.wday == 0)
+
+    logger.debug { "Solcitud fecha: #{d_fecha_entrega}" }
+
+    d_fecha_entrega = Feriado.obtener_fecha_valida(d_fecha_entrega, i_institucion_id)
+
+
+    logger.debug { "Solcitud fecha: #{d_fecha_entrega}" }
+    
+    return d_fecha_entrega
+   end
+   
   private
 
   def completar_informacion
@@ -731,58 +784,8 @@ class Solicitud < ActiveRecord::Base
     return c_name
   end
   
-  def calcular_fecha_entrega
-    Solicitud.calcular_fecha_entrega(self.fecha_creacion, nil,  self.institucion_id)
-  end
+  
 
-  def self.calcular_fecha_entrega(d_fecha_creacion = Date.today, d_fecha_entrega = nil, i_institucion_id = 1)
-    logger.debug { "Solicitud: calculando fecha de entrega" }
-    d_fecha_creacion = d_fecha_creacion.to_date if d_fecha_creacion.class == String
-    d_fecha_entrega = d_fecha_creacion + 14.days unless d_fecha_entrega
-
-    logger.debug { "Solcitud fecha: #{d_fecha_entrega}" }
-    
-    #obtenemos feriados entre las fechas
-    feriados_locales = []
-    feriados_nacionales = Feriado.nacional.entre_fechas(d_fecha_creacion, d_fecha_entrega)    
-    feriados_locales = Feriado.local.por_institucion(i_institucion_id).entre_fechas(d_fecha_creacion, d_fecha_entrega) unless i_institucion_id == 1
-
-    logger.debug { "Solicitud Aumentando dias segun feriados nacinales" }
-    #aumentamos los dias de la solicitud segun los feriados
-    unless feriados_nacionales.blank?
-      for feriado in feriados_nacionales
-        if feriado.es_dia_laboral?
-          d_fecha_entrega += 1.day                    
-        end
-      end
-    end
-
-    logger.debug { "Solcitud fecha: #{d_fecha_entrega}" }
-
-    logger.debug { "Solicitud Aumentando dias segun feriados locales" }
-    unless feriados_locales.blank?
-      for feriado in feriados_locales
-        if feriado.es_dia_laboral?
-          d_fecha_entrega += 1.day
-        end
-      end
-    end
-
-    logger.debug { "Solcitud fecha: #{d_fecha_entrega}" }
-
-    logger.debug { "Solicitud Aumentando dias segun dias laborales" }
-    # verificamos que la nueve fecha sea dia laboral
-    d_fecha_entrega += 1.day if (d_fecha_entrega.wday == 6)
-    d_fecha_entrega += 1.day if (d_fecha_entrega.wday == 0)
-
-    logger.debug { "Solcitud fecha: #{d_fecha_entrega}" }
-
-    d_fecha_entrega = Feriado.obtener_fecha_valida(d_fecha_entrega, i_institucion_id)
-
-
-    logger.debug { "Solcitud fecha: #{d_fecha_entrega}" }
-    
-    return d_fecha_entrega
-  end
+ 
   
 end

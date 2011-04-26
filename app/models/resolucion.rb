@@ -15,6 +15,7 @@ class Resolucion < ActiveRecord::Base
   before_validation :cleanup
   after_save :actualizar_solicitud
   after_create :notificar_creacion
+  after_destroy :revertir_resolucion
 
   attr_accessor :dont_send_email
 
@@ -55,6 +56,7 @@ class Resolucion < ActiveRecord::Base
     
     unless self.nueva_fecha.nil?
       logger.debug { "Actualizando fecha solicitud." }
+      logger.debug { "#{self.nueva_fecha}" }
       if self.nueva_fecha > self.solicitud.fecha_programada
         self.solicitud.fecha_prorroga = self.nueva_fecha
         self.solicitud.fecha_programada = self.nueva_fecha
@@ -72,6 +74,19 @@ class Resolucion < ActiveRecord::Base
     end
     
     self.solicitud.save
+  end
+
+  def revertir_resolucion
+    self.solicitud.fecha_prorroga = nil
+    self.solicitud.fecha_resolucion = nil
+    self.solicitud.fecha_programada = self.solicitud.calcular_fecha_entrega()
+    self.solicitud.save(false)
+
+    #obtener ultima resolucion
+    r = self.solicitud.resoluciones.last
+    if r
+      r.actualizar_solicitud
+    end
   end
 
   def notificar_creacion

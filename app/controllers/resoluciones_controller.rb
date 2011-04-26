@@ -47,6 +47,7 @@ class ResolucionesController < ApplicationController
   # POST /resoluciones
   # POST /resoluciones.xml
   def create
+
     @resolucion = @solicitud.resoluciones.new(params[:resolucion])
     @resolucion.institucion_id = current_user.institucion_id
     @resolucion.solicitud_id = @solicitud.id
@@ -62,7 +63,7 @@ class ResolucionesController < ApplicationController
       @resolucion.fecha_notificacion = fix_date(params[:resolucion][:fecha_notificacion])
      end
 
-     params[:resolucion][:nueva_fecha] = fix_date(params[:resolucion][:nueva_fecha]) if params[:resolucion][:nueva_fecha]
+     @resolucion.nueva_fecha = fix_date(params[:resolucion][:nueva_fecha]) if params[:resolucion][:nueva_fecha]
    
 
     respond_to do |format|

@@ -95,12 +95,21 @@ class ActividadesController < ApplicationController
       if @actividad.marcar_como_terminada
         flash[:success] = 'Asignacion marcada como Completada.'        
       else
-        flash[:error] = 'Asignacion no pudo ser actualizada'
+        c_errores = "Asignacion no pudo ser actualizada. "
+        @actividad.errors.full_messages.each do |msg|
+          c_errores += msg + ". "
+        end
+        @actividad.solicitud.errors.full_messages.each do |msg|
+          c_errores += msg + ". "
+        end
+        
+        flash[:error] = c_errores
       end
 
+      @solicitud = @actividad.solicitud
       @asignaciones = usuario_actual.actividades.nocompletadas
       
-      format.html { redirect_to solicitud_path(@actividad.solicitud) }
+      format.html { redirect_to solicitud_path(@solicitud) }
     end    
   end
 

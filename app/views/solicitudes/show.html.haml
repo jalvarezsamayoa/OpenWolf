@@ -3,6 +3,15 @@
 - @forview = "SHOW"
 = render :partial=>"breadcrums"
 %h1.alt= Solicitud.human_name
+
+
+- if @solicitud.errors.any?
+  #errorExplanation
+    %h2= "#{pluralize(@solicitud.errors.count, "error")} han ocurrido:"
+    %ul
+      - @solicitud.errors.full_messages.each do |msg|
+        %li= msg
+
 %fieldset
   %legend
     = image_tag("infoabout22.png")

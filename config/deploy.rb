@@ -86,8 +86,10 @@ task :backupdb, :roles => :db, :only => { :primary => true } do
      cd #{backup_dir} &&
      rm *.bz2
   CMD
-  
-   filename = "#{application}.dump.#{Time.now.to_f}.sql.bz2"
+
+  timestamp = Time.now.to_f
+  filename = "#{application}.dump.#{timestamp}.sql.bz2"
+  clean_filename = "#{application}.dump.#{timestamp}.sql"
    file_path = "#{backup_dir}/" + filename
    text = capture "cat #{deploy_to}/current/config/database.yml"
    yaml = YAML::load(text)
@@ -102,6 +104,10 @@ task :backupdb, :roles => :db, :only => { :primary => true } do
 
   puts "Downloading file..."
   download(file_path, "/home/javier/Backup/#{filename}")
+
+  puts "Extracting file"
+  system("bunzip2 /home/javier/Backup/#{filename}")
+  system("psql -h localhost -p 5432 -U openwolf -W -d openwolf_development < /home/javier/Backup/#{clean_filename}")
 
   
 end

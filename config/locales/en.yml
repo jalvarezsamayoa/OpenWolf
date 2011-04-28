@@ -157,7 +157,7 @@ en:
         solicitante_nombre: "Solicitante"
         solicitante_identificacion: "Identificación"
         solicitante_direccion: "Dirección Postal"
-        solicitante_telefonos: "Teléfonos"
+        solicitante_telefonos: "Teléfonos Solicitante"
         solicitante_institucion: "Institucion"
         departamento_id: "Departamento"
         municipio_id: "Municipio"

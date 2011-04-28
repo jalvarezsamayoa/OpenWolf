@@ -33,10 +33,13 @@ class Actividad < ActiveRecord::Base
     #marcamos actividad como terminada
     self.estado_id = ESTADO_COMPLETADA
     self.fecha_resolucion = fecha
-    self.save!
+    if self.save
 
     #actualizamos el estado de la solicitud
-    self.solicitud.actividad_terminada(fecha)
+      self.solicitud.actividad_terminada(fecha)
+    else
+      return false
+    end
   end
   
   private

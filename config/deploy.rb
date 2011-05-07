@@ -80,7 +80,7 @@ namespace :solr do
   end
 end
 
-task :backupdb, :roles => :db, :only => { :primary => true } do
+task :backup, :roles => :db, :only => { :primary => true } do
   puts "Remove old backups"
   run <<-CMD
      cd #{backup_dir} &&

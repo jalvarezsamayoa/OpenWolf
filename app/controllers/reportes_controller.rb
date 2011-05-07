@@ -60,16 +60,16 @@ class ReportesController < ApplicationController
                 l(s.fecha_creacion).to_s,
                 (s.via.nil? ? '' : s.via.nombre),
                 s.tipo_resolucion,
-                l(s.fecha_resolucion).to_s,
+                (l(s.fecha_resolucion).to_s unless s.fecha_resolucion.nil?),
                 s.razon_nopositiva,
                 s.dias_transcurridos.to_s,
                 s.hay_prorroga,
-                l(s.fecha_notificacion_prorroga).to_s,
+                (l(s.fecha_notificacion_prorroga).to_s unless s.fecha_notificacion_prorroga.nil?),
                 s.razon_prorroga,
                 s.tiempo_ampliacion.to_s,
                 s.hay_revision,
-                l(s.fecha_revision).to_s,
-                l(s.fecha_notificacion_revision).to_s,
+                (l(s.fecha_revision).to_s unless s.fecha_revision.nil?),
+                (l(s.fecha_notificacion_revision).to_s unless s.fecha_notificacion_revision.nil?),
                 s.razon_resolucion]
       end
     end

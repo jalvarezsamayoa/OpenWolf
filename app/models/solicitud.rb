@@ -257,6 +257,7 @@ class Solicitud < ActiveRecord::Base
   end
 
   def es_pertinente?(u)
+    return false if u.nil? #TODO verificar porque no recibe usuario
     return false if u.institucion.nil? or self.institucion.nil?
     
     l_ok = false
@@ -344,7 +345,7 @@ class Solicitud < ActiveRecord::Base
 
   def fecha_notificacion_prorroga
     p = self.resoluciones.prorrogas.last
-    fecha = p.nil? ? Date.new : p.created_at.to_date
+    fecha = p.nil? ? nil : p.created_at.to_date
     return fecha
   end
   
@@ -355,19 +356,19 @@ class Solicitud < ActiveRecord::Base
 
   def fecha_revision
     r = self.recursosrevision.last
-    fecha = r.nil? ? '' : r.fecha_presentacion
+    fecha = r.nil? ? nil : r.fecha_presentacion
     return fecha
   end
 
   def fecha_notificacion_revision
     r = self.recursosrevision.last
-    fecha = r.nil? ? '' : r.fecha_notificacion
+    fecha = r.nil? ? nil : r.fecha_notificacion
     return fecha
   end
 
   def fecha_ultima_resolucion
     r = self.resoluciones.last
-    fecha = r.nil? ? '' : r.created_at.to_date
+    fecha = r.nil? ? nil : r.created_at.to_date
     return fecha
   end
 

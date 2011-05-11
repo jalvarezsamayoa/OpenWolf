@@ -64,7 +64,7 @@ class Resolucion < ActiveRecord::Base
     end
 
     self.solicitud.estado_id = self.tiporesolucion.estado_id
-    self.solicitud.fecha_resolucion = self.created_at.to_date
+    self.solicitud.fecha_resolucion = self.fecha
 
     # si estado es final pero no debe entregar
     # actualizamos fecha de entrega

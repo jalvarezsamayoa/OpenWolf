@@ -27,21 +27,39 @@
 #Solicitud.update_all(:anulada => false)
 
 #actualizar tiempos de respuesta
-Solicitud.update_all(:tiempo_respuesta => 0, :tiempo_respuesta_calendario => 0)
-solicitudes = Solicitud.conresolucionfinal
-for s in solicitudes
-  unless s.fecha_completada.nil?
-    dias = (s.fecha_completada - s.fecha_creacion)
-    dias = 1 if dias == 0
-    s.tiempo_respuesta_calendario = dias
-    s.tiempo_respuesta = dias - Feriado.calcular_dias_no_laborales(:fecha => s.fecha_creacion, :dias => dias.to_i)
-  else
-    s.tiempo_respuesta = 0
-    s.tiempo_respuesta_calendario = 0
-  end
-  s.save(false)
+# Solicitud.update_all(:tiempo_respuesta => 0, :tiempo_respuesta_calendario => 0)
+# solicitudes = Solicitud.conresolucionfinal
+# for s in solicitudes
+#   unless s.fecha_completada.nil?
+#     dias = (s.fecha_completada - s.fecha_creacion)
+#     dias = 1 if dias == 0
+#     s.tiempo_respuesta_calendario = dias
+#     s.tiempo_respuesta = dias - Feriado.calcular_dias_no_laborales(:fecha => s.fecha_creacion, :dias => dias.to_i)
+#   else
+#     s.tiempo_respuesta = 0
+#     s.tiempo_respuesta_calendario = 0
+#   end
+#   s.save(false)
+# end
+
+
+#limpiar fecha resoluciones
+puts "eliminando"
+Resolucion.all.each do |r|
+  r.delete if r.solicitud.nil?
 end
-              
+puts 'ok'
+
+n = Resolucion.count
+i = 0
+Resolucion.all.each do |resolucion|
+  puts "Procesando #{i} de #{n}, id: #{resolucion.id}"
+  resolucion.solicitud.fecha_resolucion = resolucion.fecha
+  resolucion.save(false)
+  i += 1
+end
+puts 'Ok'
+
 
 
 # puts "Limpiar data..."

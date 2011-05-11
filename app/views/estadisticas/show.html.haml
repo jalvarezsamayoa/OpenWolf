@@ -30,22 +30,34 @@
         #por-ano
           %h3 Solicitudes por Año
           %table.minimalist-b{:width => "100%"}
-            %colgroup.show-table-header
             %colgroup.show-table-data
-            - for solicitud in @institucion.solicitudes_por_ano
+            %colgroup.show-table-data
+            %colgroup.show-table-data
               %tr
-                %th= "#{solicitud.ano}"
+                %th= "Año"
+                %th= "Solicitudes"
+                %th= "Promedio dias respuesta"
+            - for solicitud in @institucion.solicitudes_por_ano              
+              %tr
+                %td= solicitud.ano
                 %td= solicitud.total_solicitudes
+                %td= solicitud.promedio_dias_respuesta.to_f.round()
 
         #por-mes-ano
           %h3 Solicitudes por Mes y Año
           %table.minimalist-b{:width => "100%"}
-            %colgroup.show-table-header
             %colgroup.show-table-data
+            %colgroup.show-table-data
+            %colgroup.show-table-data
+              %tr
+                %th= "Año / Mes"
+                %th= "Solicitudes"
+                %th= "Promedio dias respuesta"
             - for solicitud in @institucion.solicitudes_por_mes_ano
               %tr
                 %th= "#{solicitud.mes} / #{solicitud.ano}"
                 %td= solicitud.total_solicitudes
+                %td= solicitud.promedio_dias_respuesta.to_f.round()
 
   #navigation
   = render :partial => "portal/news_links"

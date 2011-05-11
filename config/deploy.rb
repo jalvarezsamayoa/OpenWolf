@@ -41,9 +41,11 @@ after "deploy:symlink", "solr:symlink"
 after "solr:symlink", "solr:start"
 #after "solr:start", "solr:reindex"
 
-after "deploy:stop",    "delayed_job:stop"
-after "deploy:start",   "delayed_job:start"
-after "deploy:restart", "delayed_job:restart"
+before "deploy:restart", "delayed_job:stop"
+after  "deploy:restart", "delayed_job:start"
+
+after "deploy:stop",  "delayed_job:stop"
+after "deploy:start", "delayed_job:start"
 
 namespace :solr do
   desc "Link in solr directory"
@@ -111,40 +113,6 @@ task :backup, :roles => :db, :only => { :primary => true } do
 
   
 end
-
-
-# task :init_prawn_submodules do
-# #  run "cd #{release_path} && git submodule add https://github.com/sandal/prawn.git vendor/prawn"
-#   run "cd #{release_path}/vendor/prawn && git submodule init"
-#   run "cd #{release_path}/vendor/prawn && git checkout origin/stable && git checkout -b stable"
-#   run "cd #{release_path}/vendor/prawn && git submodule update --init"
-# end
-
-#after "deploy:update_code", :init_prawn_submodules
-
-
-# set :application, "openwolf"
-# set :repository,  "set your repository location here"
-
-# set :scm, :subversion
-# # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
-
-# role :web, "your web-server here"                          # Your HTTP server, Apache/etc
-# role :app, "your app-server here"                          # This may be the same as your `Web` server
-# role :db,  "your primary db-server here", :primary => true # This is where Rails migrations will run
-# role :db,  "your slave db-server here"
-
-# If you are using Passenger mod_rails uncomment this:
-# if you're still using the script/reapear helper you will need
-# these http://github.com/rails/irs_process_scripts
-
-# namespace :deploy do
-#   task :start do ; end
-#   task :stop do ; end
-#   task :restart, :roles => :app, :except => { :no_release => true } do
-#     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
-#   end
-# end
 
 
 Dir[File.join(File.dirname(__FILE__), '..', 'vendor', 'gems', 'hoptoad_notifier-*')].each do |vendored_notifier|

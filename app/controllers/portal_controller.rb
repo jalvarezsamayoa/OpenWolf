@@ -32,6 +32,8 @@ class PortalController < ApplicationController
 
     @restringir_seguimientos_privados = true
     
+    mostrar_datos_solicitante()
+
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @solicitud.to_xml(:include => @solicitud.xml_options ) }
@@ -42,6 +44,9 @@ class PortalController < ApplicationController
     @solicitud = Solicitud.find(params[:id])
     @actividades = @solicitud.actividades
     @documentos = @solicitud.adjuntos
+
+    mostrar_datos_solicitante()
+    
     respond_to do |format|
       format.html {render 'solicitud', :layout => 'print'}
     end
@@ -123,6 +128,20 @@ class PortalController < ApplicationController
     :filename=>"resultados_busqueda.csv",
     :disposition => 'attachment'
     
+  end
+
+  private
+
+  def mostrar_datos_solicitante
+    if usuario_actual
+      @es_pertinente_a_usuario = @solicitud.es_pertinente?(usuario_actual)
+      @usuario_es_supervisor =  nivel_seguridad(usuario_actual,'encargadoudip')
+      @usuario_es_udip = nivel_seguridad(usuario_actual,'personaludip')
+
+      @mostrar_datos_solicitante = (@es_pertinente_a_usuario and (@usuario_es_supervisor or @usuario_es_udip))
+    else
+      @mostrar_datos_solicitante = false
+    end    
   end
   
 end

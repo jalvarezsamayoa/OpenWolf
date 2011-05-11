@@ -40,3 +40,4 @@ solr
 solr/*
 lib/generators/haml
 lib/generators/haml/*
+/public/javascripts/portal.js

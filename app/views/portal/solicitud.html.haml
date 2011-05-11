@@ -41,7 +41,7 @@
             La solicitud no ha sido asignada.
           #asignaciones
             = render :partial => 'asignaciones'
-          =# render :partial => "datos_solicitante" 
+          = render :partial => "datos_solicitante" if @mostrar_datos_solicitante
           %h4 Datos Solicitud
           %table
             %tr

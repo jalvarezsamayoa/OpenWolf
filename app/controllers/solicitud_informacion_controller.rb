@@ -1,16 +1,15 @@
 class SolicitudInformacionController < ApplicationController
   layout 'portal'
-#   before_filter :get_institucion
+  #   before_filter :get_institucion
   before_filter :get_data
 
-  
   def index
     render :new
   end
 
-  def new   
+  def new
     @solicitud = Solicitud.new
-    @solicitud.solicitante_nombre = ""    
+    @solicitud.solicitante_nombre = ""
 
     respond_to do |format|
       format.html # new.html.erb
@@ -20,7 +19,7 @@ class SolicitudInformacionController < ApplicationController
   def create
     @solicitud = Solicitud.new(params[:solicitud])
     @solicitud.origen_id = Solicitud::ORIGEN_PORTAL
-           
+
     respond_to do |format|
       if @solicitud.save
         flash[:notice] = 'Solicitud creada con exito.'
@@ -31,28 +30,28 @@ class SolicitudInformacionController < ApplicationController
       end
     end
   end
-  
+
   def show
 
     @solicitud = Solicitud.find(params[:id])
     @actividades = @solicitud.actividades
     @documentos = @solicitud.documentos
-    
+
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @solicitud }
     end
   end
-  
+
 
   private
 
-  def get_institucion    
+  def get_institucion
     @institucion = usuario_actual.institucion
   end
 
   def get_data
- #   @vias = Via.all
-#    @municipios = Departamento.first.municipios.all(:order => "municipios.nombre")
+    #   @vias = Via.all
+    #    @municipios = Departamento.first.municipios.all(:order => "municipios.nombre")
   end
 end

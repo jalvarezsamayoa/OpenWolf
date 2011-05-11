@@ -15,7 +15,7 @@
             %td= link_to solicitud.codigo, institucion_solicitud_path(solicitud.institucion_id, solicitud)
             %td= solicitud.institucion.nombre
             %td= l(solicitud.fecha_creacion)
-            %td= solicitud.estado.nombre
+            %td= "Anulada"
       %tfoot
         %td{:colspan => "10"}
           *Solicitudes anuladas

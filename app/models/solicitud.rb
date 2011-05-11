@@ -145,6 +145,8 @@ class Solicitud < ActiveRecord::Base
   scope :recientes, :order => "fecha_creacion desc"
   scope :correlativo, :order => "ano desc, numero desc"
 
+  scope :creadas_en_ano, lambda {|ano| where("date_part('year',fecha_creacion) = ?",ano)}
+  
   scope :tiempoejecucion, lambda { |tiempo_desde, tiempo_hasta| {
       :conditions => ["(((fecha_programada - ?)*100)/10) between ? and ?",Date.today, tiempo_desde, tiempo_hasta]
     }}

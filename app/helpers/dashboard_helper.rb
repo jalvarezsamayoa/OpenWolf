@@ -84,23 +84,34 @@ module DashboardHelper
     data = ['','','']
     
     if user.nil?
+      logger.debug { "Soilcitudes sin usuario" }
       solicitudes = Solicitud.count(:all,  :conditions => "date_part('year',fecha_creacion) = #{ano}", :group => "estado_id")
-      n = Solicitud.count
+      n = Solicitud.creadas_en_ano(ano).count
     else
+      logger.debug { "Solicitudes con usuario" }
       solicitudes = user.institucion.solicitudes.count(:all,  :conditions => "date_part('year',fecha_creacion) = #{ano}", :group => "estado_id")
-      n = user.institucion.solicitudes.count
+      n = user.institucion.solicitudes.creadas_en_ano(ano).count
     end
+
+    logger.debug { "N: #{n}" }
+    logger.debug { "#{solicitudes.inspect}" }
 
     solicitudes.each do |key, value|
       estado = Estado.find(key).nombre
       cnt = value
 
+      logger.debug { "value: #{value}" }
       p = ((value*100.0)/n)
+      logger.debug { "p: #{p}" }
       p = p.round(2).to_s
+      logger.debug { "p: #{p}" }
       
       data[0] +=  p + ','
       data[1] +=  p + '|'
       data[2] += estado.tr(' ','+') + '|'
+
+      logger.debug { "data: #{data.inspect}" }
+      logger.debug { "========================" }
     end
 
     data[0] = data[0].chop

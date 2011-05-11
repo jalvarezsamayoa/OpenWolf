@@ -55,9 +55,24 @@
                 %th= "Promedio dias respuesta"
             - for solicitud in @institucion.solicitudes_por_mes_ano
               %tr
-                %th= "#{solicitud.mes} / #{solicitud.ano}"
+                %td= "#{solicitud.mes} / #{solicitud.ano}"
                 %td= solicitud.total_solicitudes
                 %td= solicitud.promedio_dias_respuesta.to_f.round()
+        #por-genero
+          %h3 Solicitudes por Genero y Año
+          %table.minimalist-b{:width => "50%"}
+            %colgroup.show-table-data
+            %colgroup.show-table-data
+            %colgroup.show-table-data
+              %tr
+                %th= "Año"
+                %th= "Genero"
+                %th= "Solicitudes"
+            - for solicitud in @institucion.solicitudes_por_genero_ano
+              %tr
+                %td= "#{solicitud.ano}"
+                %td= ( solicitud.genero_id.nil? ? "No Disponible" : (solicitud.genero_id == 1 ? 'Masculino' : 'Femenino') )
+                %td= solicitud.total_solicitudes
 
   #navigation
   = render :partial => "portal/news_links"

@@ -108,6 +108,10 @@ class Institucion < ActiveRecord::Base
     tiempo = Solicitud.find_by_sql("select avg(solicitudes.tiempo_respuesta) as promedio from solicitudes where solicitudes.institucion_id = #{self.id} and anulada = #{false} and solicitudes.fecha_completada is not null")    
     return tiempo[0].promedio.to_f.ceil
   end
+
+  def solicitudes_por_genero_ano
+    solicitudes = Solicitud.find_by_sql("select genero_id, extract(year from fecha_creacion) as ano,  count(solicitudes.id) as total_solicitudes from solicitudes where institucion_id = #{self.id} and anulada = #{false}  group by genero_id, extract(year from fecha_creacion)  order by genero_id, extract(year from fecha_creacion) desc")
+  end
  
 
   private

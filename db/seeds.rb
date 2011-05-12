@@ -43,22 +43,37 @@
 # end
 
 
-#limpiar fecha resoluciones
-puts "eliminando"
-Resolucion.all.each do |r|
-  r.delete if r.solicitud.nil?
-end
-puts 'ok'
+# #limpiar fecha resoluciones
+# puts "eliminando"
+# Resolucion.all.each do |r|
+#   r.delete if r.solicitud.nil?
+# end
+# puts 'ok'
 
-n = Resolucion.count
-i = 0
-Resolucion.all.each do |resolucion|
-  puts "Procesando #{i} de #{n}, id: #{resolucion.id}"
-  resolucion.solicitud.fecha_resolucion = resolucion.fecha
-  resolucion.save(false)
+# n = Resolucion.count
+# i = 0
+# Resolucion.all.each do |resolucion|
+#   puts "Procesando #{i} de #{n}, id: #{resolucion.id}"
+#   resolucion.solicitud.fecha_resolucion = resolucion.fecha
+#   resolucion.save(false)
+#   i += 1
+# end
+# puts 'Ok'
+
+#limpiar estados de resoluciones
+n = Solicitud.conresolucion.count
+i = 1
+Solicitud.conresolucion.each do |solicitud|
+  puts "Procesando #{i} de #{n}, id: #{solicitud.id}"
+  #ultima resolucion
+  resolucion = solicitud.resoluciones.last
+  if solicitud.estado_id != resolucion.tiporesolucion.estado_id
+    solicitud.estado_id = resolucion.tiporesolucion.estado_id
+    solicitud.fecha_resolucion = resolucion.fecha
+    solicitud.save(false)
+  end
   i += 1
 end
-puts 'Ok'
 
 
 

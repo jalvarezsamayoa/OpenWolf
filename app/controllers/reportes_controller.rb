@@ -70,7 +70,7 @@ class ReportesController < ApplicationController
                 s.hay_revision,
                 (l(s.fecha_revision).to_s unless s.fecha_revision.nil?),
                 (l(s.fecha_notificacion_revision).to_s unless s.fecha_notificacion_revision.nil?),
-                s.razon_resolucion]
+                s.razon_revision]
       end
     end
     send_data csv_string, :type => "text/plain", 

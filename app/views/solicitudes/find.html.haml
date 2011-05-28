@@ -40,4 +40,4 @@
     - else
       No se han encontrado solicitudes.
 #filtro.popup{:style => "display: none; height: 500px; width: 650px;"}
-  = render :partial => 'filtro'
+  = render :partial => 'solicitudes/filtro', :locals => {:url => buscar_url}

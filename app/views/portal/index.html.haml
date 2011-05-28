@@ -23,4 +23,4 @@
   / end - main_search
 / end - center_box
 #filtro.popup{:style => "display: none; height: 500px; width: 650px;"}
-  = render :partial => 'solicitudes/filtro'
+  = render :partial => 'solicitudes/filtro', :locals => {:url => buscar_portal_index_url}

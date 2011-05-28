@@ -34,45 +34,7 @@ class ReportesController < ApplicationController
   end
 
   def solicitudes_csv
-    @solicitudes = Solicitud.find(:all, :conditions => ["solicitudes.institucion_id = ? and solicitudes.anulada = ?", usuario_actual.institucion_id, false], :order => :numero)
-    
-    csv_string = FasterCSV.generate do |csv| 
-      csv <<  [Solicitud.human_attribute_name(:rpt_correlativo),
-               Solicitud.human_attribute_name(:rpt_solicitud),
-               Solicitud.human_attribute_name(:rpt_fechasolicitud),
-               Solicitud.human_attribute_name(:rpt_tipodesolicitud),
-               Solicitud.human_attribute_name(:rpt_tipoderesolucion),
-               Solicitud.human_attribute_name(:rpt_fecharesolucion),
-               Solicitud.human_attribute_name(:rpt_razonnopositiva),               
-               Solicitud.human_attribute_name(:rpt_tiempoderespuesta),
-               Solicitud.human_attribute_name(:rpt_sehasolicitadoampliacion),
-               Solicitud.human_attribute_name(:rpt_fechanotificacionampliacion),
-               Solicitud.human_attribute_name(:rpt_razonampliacion),
-               Solicitud.human_attribute_name(:rpt_tiemposolicitadoampliacion),
-               Solicitud.human_attribute_name(:rpt_recursorevision),
-               Solicitud.human_attribute_name(:rpt_fechapresentacionrecursorevision),
-               Solicitud.human_attribute_name(:rpt_fechanotificacionrecursorevision),
-               Solicitud.human_attribute_name(:rpt_sentidoresolucion)]
-
-      @solicitudes.each do |s|
-        csv << [s.codigo,
-                s.textosolicitud,
-                l(s.fecha_creacion).to_s,
-                (s.via.nil? ? '' : s.via.nombre),
-                s.tipo_resolucion,
-                (l(s.fecha_resolucion).to_s unless s.fecha_resolucion.nil?),
-                s.razon_nopositiva,
-                s.dias_transcurridos.to_s,
-                s.hay_prorroga,
-                (l(s.fecha_notificacion_prorroga).to_s unless s.fecha_notificacion_prorroga.nil?),
-                s.razon_prorroga,
-                s.tiempo_ampliacion.to_s,
-                s.hay_revision,
-                (l(s.fecha_revision).to_s unless s.fecha_revision.nil?),
-                (l(s.fecha_notificacion_revision).to_s unless s.fecha_notificacion_revision.nil?),
-                s.razon_revision]
-      end
-    end
+    csv_string = Solicitud.export_to_csv(:institucion_id => usuario_actual.institucion_id)
     send_data csv_string, :type => "text/plain", 
     :filename=>"reporte_solicitudes.csv",
     :disposition => 'attachment'

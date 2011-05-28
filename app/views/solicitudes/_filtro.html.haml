@@ -2,7 +2,7 @@
   - @desde =  (Date.today - Date.today.yday + 1)
   - @hasta = Date.today
 - if usuario_actual.nil?
-  - @url = usuario_actual.nil? ? buscar_portal_index_url : buscar_url
+  - @url = url
   - @method = usuario_actual.nil? ? :get : :post
 / Inicia formas de filtro
 .mantform
@@ -11,7 +11,7 @@
       %ul
         %li= link_to "Solicitudes de Información Pública", "#tab-solicitudes"
         %li= link_to "Documentos", "#tab-documentos"
-    #tab-solicitudes
+    #tab-solcicitudes
       %h2 Filtrar Solicitudes
       = form_tag @url, :method => @method do
         %table{:border => "0", :cellpadding => "0", :cellspacing => "0", :width => "100%"}
@@ -31,7 +31,7 @@
               = text_field_tag :fecha_hasta, l(@hasta)
           %tr
             %th Palabras clave
-            %td= text_field_tag :search, '', :size => 60   
+            %td= text_field_tag :search, '', :size => 60
           %tr
             %th Vía Solicitud
             %td= select_tag :solicitud_via, options_for_select(Via.all.collect {|c| [c.nombre, c.id] }.insert(0, 'Todos'))

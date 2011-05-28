@@ -658,6 +658,75 @@ class Solicitud < ActiveRecord::Base
   end
 
 
+  def self.get_csv_records(csv, solicitudes)
+    if solicitudes.respond_to?(:each)
+      solicitudes.each do |s|
+        csv << self.get_csv_record(s)
+      end
+    else
+      solicitudes.each_hit_with_result do |hit, s|
+        csv << self.get_csv_record(s)
+      end
+    end
+  end
+
+  def self.get_csv_record(s)
+    [s.institucion.nombre,
+     s.codigo,
+     s.textosolicitud,
+     I18n.l(s.fecha_creacion).to_s,
+     (s.via.nil? ? '' : s.via.nombre),
+     s.tipo_resolucion,
+     (I18n.l(s.fecha_resolucion).to_s unless s.fecha_resolucion.nil?),
+     s.razon_nopositiva,
+     s.dias_transcurridos.to_s,
+     s.hay_prorroga,
+     (I18n.l(s.fecha_notificacion_prorroga).to_s unless s.fecha_notificacion_prorroga.nil?),
+     s.razon_prorroga,
+     s.tiempo_ampliacion.to_s,
+     s.hay_revision,
+     (I18n.l(s.fecha_revision).to_s unless s.fecha_revision.nil?),
+     (I18n.l(s.fecha_notificacion_revision).to_s unless s.fecha_notificacion_revision.nil?),
+     s.razon_revision]
+  end
+
+
+  def self.export_to_csv(opts = {})
+
+    if opts[:solicitudes]
+      solicitudes = opts[:solicitudes]
+    else
+      if opts[:institucion_id]
+        i_institucion_id = opts[:institucion_id] #  usuario_actual.institucion_id
+        solicitudes = Solicitud.find(:all, :conditions => ["solicitudes.institucion_id = ? and solicitudes.anulada = ?", i_institucion_id, false], :order => :numero)
+      end
+    end
+
+    csv_string = FasterCSV.generate do |csv|
+      csv <<  [Solicitud.human_attribute_name(:rpt_institucion),
+               Solicitud.human_attribute_name(:rpt_correlativo),
+               Solicitud.human_attribute_name(:rpt_solicitud),
+               Solicitud.human_attribute_name(:rpt_fechasolicitud),
+               Solicitud.human_attribute_name(:rpt_tipodesolicitud),
+               Solicitud.human_attribute_name(:rpt_tipoderesolucion),
+               Solicitud.human_attribute_name(:rpt_fecharesolucion),
+               Solicitud.human_attribute_name(:rpt_razonnopositiva),
+               Solicitud.human_attribute_name(:rpt_tiempoderespuesta),
+               Solicitud.human_attribute_name(:rpt_sehasolicitadoampliacion),
+               Solicitud.human_attribute_name(:rpt_fechanotificacionampliacion),
+               Solicitud.human_attribute_name(:rpt_razonampliacion),
+               Solicitud.human_attribute_name(:rpt_tiemposolicitadoampliacion),
+               Solicitud.human_attribute_name(:rpt_recursorevision),
+               Solicitud.human_attribute_name(:rpt_fechapresentacionrecursorevision),
+               Solicitud.human_attribute_name(:rpt_fechanotificacionrecursorevision),
+               Solicitud.human_attribute_name(:rpt_sentidoresolucion)]
+
+      self.get_csv_records(csv, solicitudes)
+    end
+    return csv_string
+  end
+
+
   ################################
   # Metodos de Instancia Privados
   # http://apidock.com/ruby/Module/private

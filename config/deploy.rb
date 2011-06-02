@@ -36,7 +36,7 @@ namespace :deploy do
   end
 end
 
-before "deploy:update_code", "solr:stop"
+#before "deploy:update_code", "solr:stop"
 after "deploy:symlink", "solr:symlink"
 after "solr:symlink", "solr:start"
 #after "solr:start", "solr:reindex"
@@ -69,7 +69,7 @@ namespace :solr do
   task :start, :roles => :solr do
     run <<-CMD
       cd #{current_path} &&
-      nohup rake sunspot:solr:start RAILS_ENV=production --trace > #{shared_path}/log/solr.log 2> #{shared_path}/log/solr.err.log
+      nohup rake sunspot:solr:start RAILS_ENV=production > #{shared_path}/log/solr.log 2> #{shared_path}/log/solr.err.log
     CMD
   end
 

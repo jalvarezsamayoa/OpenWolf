@@ -673,7 +673,7 @@ class Solicitud < ActiveRecord::Base
   def self.get_csv_record(s)
     [s.institucion.nombre,
      s.codigo,
-     s.textosolicitud,
+     s.textosolicitud.tr('"','\''),
      I18n.l(s.fecha_creacion).to_s,
      (s.via.nil? ? '' : s.via.nombre),
      s.tipo_resolucion,

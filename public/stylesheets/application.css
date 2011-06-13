@@ -371,6 +371,16 @@ body{
 
 .listing { float: left;
          width: 100%;}
+
+.listing tr.inactive td {
+    text-decoration: line-through;
+    color: #666;
+}
+
+.listing tr.inactive td a {
+    color: #666;
+}
+
 .listing #options { float: left; 
                   width: 100%; }
 .listing #options #buttons { float: left; }

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110421201519) do
+ActiveRecord::Schema.define(:version => 20110613181238) do
 
   create_table "actividades", :force => true do |t|
     t.integer  "institucion_id",                  :null => false
@@ -571,7 +571,7 @@ ActiveRecord::Schema.define(:version => 20110421201519) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "actualiza_fecha_notificacion", :default => false
-    t.boolean  "positiva",                     :default => true
+    t.boolean  "positiva",                     :default => false
     t.string   "aliaspdh"
   end
 
@@ -609,6 +609,7 @@ ActiveRecord::Schema.define(:version => 20110421201519) do
     t.datetime "remember_created_at"
     t.string   "unlock_token"
     t.datetime "locked_at"
+    t.boolean  "activo",               :default => true
   end
 
   add_index "usuarios", ["confirmation_token"], :name => "index_usuarios_on_confirmation_token", :unique => true

@@ -13,7 +13,7 @@ en:
       invalid: 'Correo electrónico o contraseña no son validos.'
       invalid_token: 'Token de autenticación es inválido.'
       timeout: 'Su sesión ha expirado, por favor autentíquese de nuevo para poder continuar.'
-      inactive: 'Su cuenta no ha sido activada aún.'
+      inactive: 'Su cuenta no está activa.'
     sessions:
       signed_in: 'Sesión iniciada con éxito.'
       signed_out: 'Sesión cerrada con éxito.'

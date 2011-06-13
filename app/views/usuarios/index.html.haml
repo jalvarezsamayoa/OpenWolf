@@ -7,15 +7,19 @@
   %table.minimalist-b
     %thead
       %tr
+        %th= 'Id'
         %th= Usuario.human_attribute_name(:username)
         %th= Usuario.human_attribute_name(:nombre)
         %th= Usuario.human_attribute_name(:cargo)
         %th= Usuario.human_attribute_name(:institucion_id)
+        %th= Usuario.human_attribute_name(:activo)
     %tbody
       - for usuario in @usuarios  do
-        %tr
+        %tr{:class => "#{ 'inactive' unless usuario.activo? }"}
+          %td= usuario.id
           %td= link_to usuario.username, usuario_path(usuario)
           %td= usuario.nombre
           %td= usuario.cargo
           %td= usuario.institucion.nombre
+          %td= si_no(usuario.activo)
   = will_paginate @usuarios

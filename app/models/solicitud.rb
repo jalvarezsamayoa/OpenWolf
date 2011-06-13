@@ -673,21 +673,21 @@ class Solicitud < ActiveRecord::Base
   def self.get_csv_record(s)
     [s.institucion.nombre,
      s.codigo,
-     s.textosolicitud.tr('"','\''),
+     s.textosolicitud.tr('"','\'').gsub(/\n/,"").gsub(/\r/,""),
      I18n.l(s.fecha_creacion).to_s,
      (s.via.nil? ? '' : s.via.nombre),
      s.tipo_resolucion,
      (I18n.l(s.fecha_resolucion).to_s unless s.fecha_resolucion.nil?),
-     s.razon_nopositiva,
+     s.razon_nopositiva.gsub(/\n/,"").gsub(/\r/,""),
      s.dias_transcurridos.to_s,
      s.hay_prorroga,
      (I18n.l(s.fecha_notificacion_prorroga).to_s unless s.fecha_notificacion_prorroga.nil?),
-     s.razon_prorroga,
+     s.razon_prorroga.gsub(/\n/,"").gsub(/\r/,""),
      s.tiempo_ampliacion.to_s,
      s.hay_revision,
      (I18n.l(s.fecha_revision).to_s unless s.fecha_revision.nil?),
      (I18n.l(s.fecha_notificacion_revision).to_s unless s.fecha_notificacion_revision.nil?),
-     s.razon_revision]
+     s.razon_revision.gsub(/\n/,"").gsub(/\r/,"")]
   end
 
 

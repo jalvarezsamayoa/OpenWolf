@@ -3,6 +3,7 @@
   = form.input :username, :required => true, :input_html => {:size => 60}
   = form.input :password
   = form.input :password_confirmation
+  = form.input :activo, :hint => "Usuario esta activo."  
   = form.input :nombre, :input_html => {:size => 60}
   = form.input :cargo, :input_html => {:size => 60}
   - if @usuario_es_superadmin

@@ -10,7 +10,7 @@ class Usuario < ActiveRecord::Base
   devise :database_authenticatable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :nombre, :cargo, :departamento_id, :areadocumento_id, :puesto_id, :institucion_id, :essupervisorarea, :username, :role_ids, :login
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :nombre, :cargo, :departamento_id, :areadocumento_id, :puesto_id, :institucion_id, :essupervisorarea, :username, :role_ids, :login, :activo
 
   # atributo virtual necesario para que plugin Devise
   # pueda utilizar campo login en lugar de email
@@ -48,16 +48,19 @@ class Usuario < ActiveRecord::Base
     check_for_children({:actividades => "Actividades", :solicitudes => "Solicitudes", :documentos => "Documentos"})
   end
 
+
+  
   #################
   # Filtros
   #################
 
-  default_scope :include => :institucion, :order => "instituciones.nombre asc, usuarios.nombre asc"
+  default_scope :include => :institucion, :order => "activo desc, instituciones.nombre asc, usuarios.nombre asc"
   
   scope :udip, :joins => :roles, :conditions => "roles.name = 'userudip' or roles.name = 'superudip'"
   scope :supervisores, :joins => :roles, :conditions => "roles.name = 'superudip'"
   scope :enlaces, :joins => :roles, :conditions => "roles.name = 'userudip' or roles.name = 'superudip' or roles.name = 'enlace'"
   scope :ciudadanos, :joins => :roles, :conditions => "roles.name = 'ciudadano'"
+  scope :activos, where("usuarios.activo = ?",true)
 
   scope :nombre_like, lambda { |nombre|
     unless nombre.nil? || nombre.empty? || nombre.first.nil?

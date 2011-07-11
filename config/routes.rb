@@ -133,6 +133,13 @@ OpenwolfV3::Application.routes.draw do
 
   match 'buscar', :to => "solicitudes#find", :as => "buscar"
 
+
+  resources :reportes, :only => [:index] do
+    collection do
+      get 'instituciones_activas'
+    end
+  end
+  
   match 'reportes/solicitudes',
   :to => "reportes#solicitudes", :as =>"reporte_solicitudes"
     
@@ -141,6 +148,8 @@ OpenwolfV3::Application.routes.draw do
 
   match 'reportes/solicitudes_xml',
   :to => "reportes#solicitudes_xml",  :as => "reporte_solicitudes_xml"
+
+ 
 
  
   # The priority is based upon order of creation:

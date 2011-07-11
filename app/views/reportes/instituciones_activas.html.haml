@@ -1,0 +1,19 @@
+.listing
+  %h2= "Instituciones Activas"
+  %table.minimalist-b
+    %thead
+      %tr
+        %th= Institucion.human_attribute_name(:nombre)
+        %th= 'Encargado UDIP'
+        %th= 'Email'
+        %th= 'Telefono'
+    %tbody
+      - for institucion in @instituciones
+        %tr
+          %td= institucion.nombre
+          %td= institucion.encargado_udip.nombre
+          %td= institucion.encargado_udip.email
+          %td= institucion.telefono
+  = will_paginate @instituciones
+
+

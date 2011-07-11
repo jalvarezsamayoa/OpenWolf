@@ -40,4 +40,8 @@ class ReportesController < ApplicationController
     :disposition => 'attachment'
   end
 
+  def instituciones_activas
+    @instituciones = Institucion.activas.paginate(:page => params[:page])
+  end
+
 end

@@ -114,6 +114,12 @@ class Institucion < ActiveRecord::Base
   end
  
 
+  def encargado_udip
+    return nil if self.usuarios.nil?
+    return self.usuarios.supervisores.first
+  end
+
+  
   private
 
   def cleanup

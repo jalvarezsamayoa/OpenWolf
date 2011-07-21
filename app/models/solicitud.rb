@@ -31,9 +31,6 @@ class Solicitud < ActiveRecord::Base
 
   versioned :if => :guardar_version?
 
-  #  acts_as_solr :fields => [:codigo, :solicitante_nombre,
-  #  :textosolicitud, :observaciones, :fecha_creacion]
-
   #######################
   # Configuracion Solr
   ######################
@@ -836,13 +833,21 @@ class Solicitud < ActiveRecord::Base
       self.ano = self.fecha_creacion.year
       self.tiposolicitud_id = TIPO_INFORMACION
       self.documentoclasificacion_id = Documentoclasificacion.find_by_codigo(Documentoclasificacion::SOLICITUDINFOPUBLICA).id
-      self.numero = Solicitud.maximum(:numero, :conditions => ["solicitudes.institucion_id = ? and solicitudes.ano = ?",self.institucion_id, self.ano]).to_i + 1
-      self.codigo = institucion.codigo + '-'+Documentoclasificacion::SOLICITUDINFOPUBLICA+'-' +  self.ano.to_s + '-' + self.numero.to_s.rjust(6,'0')
+      self.numero = proximo_numero_solicitud
+      self.codigo = generar_codigo()
       self.forma_entrega = 'No Disponible' if self.forma_entrega.nil?
       self.idioma_id = IDIOMA_DEFAULT if self.idioma_id.nil?
 
     end # institucion.nil?
 
+  end
+
+  def proximo_numero_solicitud
+    Solicitud.maximum(:numero, :conditions => ["solicitudes.institucion_id = ? and solicitudes.ano = ?",self.institucion_id, self.ano]).to_i + 1
+  end
+
+  def generar_codigo
+    self.institucion.codigo + '-'+Documentoclasificacion::SOLICITUDINFOPUBLICA+'-' +  self.ano.to_s + '-' + self.numero.to_s.rjust(6,'0')
   end
 
   #limpia la informacion de la solicitud

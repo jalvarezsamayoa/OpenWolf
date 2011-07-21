@@ -1,48 +1,27 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
-describe Actividad do
+describe Actividad, :solr => true do
+
+  fixtures :documentoclasificaciones
   
   before(:each) do
-    @actividad = Factory(:actividad)
+    @actividad = Factory.build(:actividad)
   end
 
-  it { should validate_presence_of(:usuario_id) }
-  it { should validate_presence_of(:institucion_id) }
-  it { should validate_presence_of(:textoactividad) }
-
-  it { should belong_to(:solicitud) }
-  it { should belong_to(:usuario) }
-  it { should belong_to(:institucion) }
-  it { should belong_to(:estado) }
-
-  it { should have_many(:seguimientos, :dependent => :destroy) }
-    
   it "debe ser valido" do
     @actividad.should be_valid
   end
-  
-  describe '#marcar_como_terminada' do    
-    it 'debe hacer algo' do
-      pending
-    end    
+
+  describe '#marcar_como_terminada' do
+    it 'cambiar el estado de actividad a TERMINADA' do
+      @actividad.stub!(:save).and_return(true)
+      @actividad.stub_chain(:solicitud, :actividad_terminada).and_return(true)
+      
+      @actividad.marcar_como_terminada()
+
+      @actividad.estado_id.should == Actividad::ESTADO_COMPLETADA
+      @actividad.fecha_resolucion.should == Date.today
+    end
   end
 
-  describe '#notificar_asignacion' do    
-    it 'debe enviar email' do
-      pending
-    end    
-  end
-
-  describe '#actualizar_solicitud' do    
-    it 'actualiza estado de solicitud padre ' do
-      pending
-    end    
-  end
-
-  describe '#completar_infomracion' do    
-    it 'completa informacion predeterminada al crear una nueva actividad' do
-      pending
-    end    
-  end
-  
 end

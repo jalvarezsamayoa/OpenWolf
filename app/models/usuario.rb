@@ -44,10 +44,13 @@ class Usuario < ActiveRecord::Base
   validates_presence_of :nombre, :email, :cargo, :institucion_id, :username
   validates_uniqueness_of :nombre, :email, :username
 
-  def before_destroy
+  before_destroy :puede_borrar?
+
+  def puede_borrar?
     check_for_children({:actividades => "Actividades", :solicitudes => "Solicitudes", :documentos => "Documentos"})
   end
 
+  
 
   
   #################

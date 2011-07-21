@@ -7,6 +7,7 @@ ActiveSupport::Inflector.inflections do |inflect|
   #   inflect.singular /^(ox)en/i, '\1'
   #   inflect.irregular 'person', 'people'
   #   inflect.uncountable %w( fish sheep )
+  inflect.irregular 'via', 'vias'
   inflect.irregular 'institucion', 'instituciones'
   inflect.irregular 'solicitud', 'solicitudes'
   inflect.irregular 'actividad', 'actividades'
@@ -22,5 +23,6 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular 'recursorevision', 'recursosrevision'
   inflect.irregular 'sentidoresolucion', 'sentidosresolucion'
   inflect.irregular 'mensaje', 'mensajes'
+  inflect.irregular 'documentocategoria', 'documentocategorias'
   inflect.uncountable %w( portal solicitud_informacion importar)
 end

@@ -1,0 +1,17 @@
+require "test_notifier/runner/autotest"
+
+Autotest.add_hook :initialize do |at|
+  at.add_exception(%r{^\./\.git})
+  at.add_exception(%r{^\./db})
+  at.add_exception(%r{^\./log})
+  at.add_exception(%r{^\./tmp})
+  at.add_exception(%r{^\./vendor})
+  at.add_exception(%r{^\./doc})
+  at.add_exception(%r{^\./db})
+  at.add_exception(%r{^\./public})
+  at.add_exception(%r{^\./coverage})
+ # at.add_exception(%r{^\./rerun\.txt})
+  at.add_exception(%r{^\./Gemfile\.lock})
+  at.add_exception(%r{(.*/)?\#[^/]*\#$})
+  at.add_exception(%r{^\./\*~})
+end

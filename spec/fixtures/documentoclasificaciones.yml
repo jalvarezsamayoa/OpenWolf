@@ -1,0 +1,145 @@
+--- 
+documentoclasificacion_00003: 
+  created_at: 2010-11-17 19:05:42.597561 Z
+  nombre: Carta
+  updated_at: 2010-11-17 19:05:42.597561 Z
+  id: 3
+  codigo: "07"
+  plantilla: 
+  documentocategoria_id: 3
+documentoclasificacion_00014: 
+  created_at: 2010-11-17 19:05:42.705293 Z
+  nombre: Ley
+  updated_at: 2010-11-17 19:05:42.705293 Z
+  id: 14
+  codigo: "18"
+  plantilla: 
+  documentocategoria_id: 4
+documentoclasificacion_00015: 
+  created_at: 2010-11-17 19:05:42.709123 Z
+  nombre: Recorte de Prensa
+  updated_at: 2010-11-17 19:05:42.709123 Z
+  id: 15
+  codigo: "19"
+  plantilla: 
+  documentocategoria_id: 4
+documentoclasificacion_00004: 
+  created_at: 2010-11-17 19:05:42.601282 Z
+  nombre: Memorando
+  updated_at: 2010-11-17 19:05:42.601282 Z
+  id: 4
+  codigo: 08
+  plantilla: 
+  documentocategoria_id: 3
+documentoclasificacion_00016: 
+  created_at: 2011-01-23 04:21:06.409972 Z
+  nombre: "Solicitud de Informaci\xC3\xB3n P\xC3\xBAblica"
+  updated_at: 2011-01-23 04:21:06.409972 Z
+  id: 16
+  codigo: "9001"
+  plantilla: ""
+  documentocategoria_id: 3
+documentoclasificacion_00005: 
+  created_at: 2010-11-17 19:05:42.604953 Z
+  nombre: Circular
+  updated_at: 2010-11-17 19:05:42.604953 Z
+  id: 5
+  codigo: 09
+  plantilla: 
+  documentocategoria_id: 3
+documentoclasificacion_00017: 
+  created_at: 2011-01-23 04:21:17.995469 Z
+  nombre: "Resoluci\xC3\xB3n Solicitud de Informaci\xC3\xB3n P\xC3\xBAblica"
+  updated_at: 2011-01-23 04:21:17.995469 Z
+  id: 17
+  codigo: "9002"
+  plantilla: ""
+  documentocategoria_id: 3
+documentoclasificacion_00006: 
+  created_at: 2010-11-17 19:05:42.608584 Z
+  nombre: Acta
+  updated_at: 2010-11-17 19:05:42.608584 Z
+  id: 6
+  codigo: "10"
+  plantilla: 
+  documentocategoria_id: 3
+documentoclasificacion_00007: 
+  created_at: 2010-11-17 19:05:42.612315 Z
+  nombre: Acuerdo
+  updated_at: 2010-11-17 19:05:42.612315 Z
+  id: 7
+  codigo: "11"
+  plantilla: 
+  documentocategoria_id: 3
+documentoclasificacion_00018: 
+  created_at: 2011-01-24 14:37:35.857838 Z
+  nombre: "Recurso Revision Solicitud Informaci\xC3\xB3n P\xC3\xBAblica"
+  updated_at: 2011-01-24 14:37:35.857838 Z
+  id: 18
+  codigo: "9003"
+  plantilla: ""
+  documentocategoria_id: 3
+documentoclasificacion_00008: 
+  created_at: 2010-11-17 19:05:42.615943 Z
+  nombre: Contrato
+  updated_at: 2010-11-17 19:05:42.615943 Z
+  id: 8
+  codigo: "12"
+  plantilla: 
+  documentocategoria_id: 3
+documentoclasificacion_00009: 
+  created_at: 2010-11-17 19:05:42.619568 Z
+  nombre: Convenio
+  updated_at: 2010-11-17 19:05:42.619568 Z
+  id: 9
+  codigo: "13"
+  plantilla: 
+  documentocategoria_id: 3
+documentoclasificacion_00010: 
+  created_at: 2010-11-17 19:05:42.623186 Z
+  nombre: Informe
+  updated_at: 2010-11-17 19:05:42.623186 Z
+  id: 10
+  codigo: "14"
+  plantilla: 
+  documentocategoria_id: 3
+documentoclasificacion_00011: 
+  created_at: 2010-11-17 19:05:42.626817 Z
+  nombre: Agenda de Actividades
+  updated_at: 2010-11-17 19:05:42.626817 Z
+  id: 11
+  codigo: "15"
+  plantilla: 
+  documentocategoria_id: 3
+documentoclasificacion_00001: 
+  created_at: 2010-11-17 19:05:42.587907 Z
+  nombre: Oficio
+  updated_at: 2010-11-17 19:05:42.587907 Z
+  id: 1
+  codigo: "05"
+  plantilla: 
+  documentocategoria_id: 3
+documentoclasificacion_00012: 
+  created_at: 2010-11-17 19:05:42.697550 Z
+  nombre: Proyecto
+  updated_at: 2010-11-17 19:05:42.697550 Z
+  id: 12
+  codigo: "16"
+  plantilla: 
+  documentocategoria_id: 3
+documentoclasificacion_00002: 
+  created_at: 2010-11-17 19:05:42.593876 Z
+  nombre: Providencia
+  updated_at: 2010-11-17 19:05:42.593876 Z
+  id: 2
+  codigo: "06"
+  plantilla: 
+  documentocategoria_id: 3
+documentoclasificacion_00013: 
+  created_at: 2010-11-17 19:05:42.701554 Z
+  nombre: Revista
+  updated_at: 2010-11-17 19:05:42.701554 Z
+  id: 13
+  codigo: "17"
+  plantilla: 
+  documentocategoria_id: 4

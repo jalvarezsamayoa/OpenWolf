@@ -1,8 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rake', '~> 0.8.7'
-
-gem 'rails', '3.0.3'
+gem 'rails', '3.0.9'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -26,7 +24,7 @@ gem 'formtastic' # genera formularios semanticos
 gem 'validation_reflection' # obtiene datos de campos a validar, para uso con formtastic
 gem 'sunspot_rails' #indexamiento y busqueda (fulltext) via solr
 gem 'paperclip' # modulo para hacer upload a archivos
-gem 'tiny_mce' # editor html 
+gem 'tiny_mce' # editor html
 gem 'pdfkit', "0.4.6" # generacion de pdf's
 gem 'will_paginate' # pagineo de resultados
 gem 'jquery-rails', '>= 0.2.6' #jquery para rails, remplaza prototype y scriptaculous
@@ -43,27 +41,50 @@ gem 'dalli' # interfaz con servicio de almacenamiento de cache de objetos Memcac
 gem 'backup' #libreria para generar backups de aplicacion
 
 # MONITOREO
-gem 'newrelic_rpm' # monitoreo de performance http://newrelic.com
+#gem 'newrelic_rpm' # monitoreo de performance http://newrelic.com
 gem 'hoptoad_notifier' #notificacion de errores via http://hoptoadapp.com/
 
 # Bundle gems for the local environment. Make sure to
 # put test-only gems in this group so their generators
 # and rake tasks are available in development mode:
-# group :development, :test do
-#   gem 'webrat'
-# end
+group :development, :test do
+
+  gem 'webrat'
+  gem 'silent-postgres' #elimina la salida de el log de postgresql
+  gem 'faker' # herramienta para generacion de datos de prueba
+
+end
 
 # TESTING
-group :development, :test do
-   gem 'silent-postgres' #elimina la salida de el log de postgresql 
-   gem 'faker' # herramienta para generacion de datos de prueba
-   gem "rspec-rails", ">=2.0.1" # http://relishapp.com/rspec/rspec-rails
-   gem 'remarkable', '>=4.0.0.alpha2'
-   gem 'remarkable_activemodel', '>=4.0.0.alpha2'
-   gem 'remarkable_activerecord', '>=4.0.0.alpha2'   
-   gem "autotest"
-   gem "capybara"
-   gem "factory_girl_rails" # https://github.com/thoughtbot/factory_girl_rails
-   gem "cucumber-rails"
-   gem "hirb"
+
+group  :test do
+  gem 'simplecov', '>=0.3.8', :require => false
+
+
+  gem "rspec-rails",        :git => "git://github.com/rspec/rspec-rails.git"
+  gem "rspec",              :git => "git://github.com/rspec/rspec.git"
+  gem "rspec-core",         :git => "git://github.com/rspec/rspec-core.git"
+  gem "rspec-expectations", :git => "git://github.com/rspec/rspec-expectations.git"
+  gem "rspec-mocks",        :git => "git://github.com/rspec/rspec-mocks.git"
+
+
+  gem 'remarkable', '>=4.0.0.alpha2'
+  gem 'remarkable_activemodel', '>=4.0.0.alpha2'
+  gem 'remarkable_activerecord', '>=4.0.0.alpha2'
+
+  gem "capybara"
+  gem "factory_girl_rails" # https://github.com/thoughtbot/factory_girl_rails
+  gem "launchy"
+
+  gem 'rb-inotify'
+  gem 'libnotify'
+  gem 'test_notifier'
+
+  gem 'ZenTest', "~>4.4.2"
+
+  gem "spork", "0.9.0.rc9"
+
+  gem 'email_spec'
+
+  gem "hirb"
 end

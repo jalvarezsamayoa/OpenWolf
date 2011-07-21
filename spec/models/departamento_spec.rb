@@ -2,7 +2,7 @@ require File.dirname(__FILE__) + '/../spec_helper'
 
 describe Departamento do
   before(:each) do
-    @depto = Factory.create(:departamento)
+    @depto = Factory(:departamento)
   end
   
   it { should validate_presence_of(:nombre) }

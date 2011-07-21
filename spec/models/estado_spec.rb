@@ -2,11 +2,11 @@ require File.dirname(__FILE__) + '/../spec_helper'
 
 describe Estado do
   before(:each) do
-    @estado = Factory.create(:estado)
+    @estado = Factory.build(:estado)
   end
   
   it { should validate_presence_of(:nombre) }
-  it { should validate_uniqueness_of(:nombre)  }
+  it { @estado.save; should validate_uniqueness_of(:nombre)  }
    
   it "es valido" do
     @estado.should be_valid

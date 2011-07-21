@@ -135,23 +135,24 @@ class Feriado < ActiveRecord::Base
 
       dia = (fecha + i)
       # es fin de semana
-      if (6..7) === dia.wday
+      if (dia.wday == 0 or dia.wday == 6)
         dias_no_laborales += 1
       else
         
         # es feriado global
-        if Feriado.hay_feriado?(:fecha => fecha,
+        if Feriado.hay_feriado?(:fecha => dia,
                                 :institucion_id => Institucion::ESTADO_GUATEMALA)
           dias_no_laborales += 1
         end
 
         # es feriado local
         unless opts[:institucion_id].nil?        
-          if Feriado.hay_feriado?(:fecha => fecha,
+          if Feriado.hay_feriado?(:fecha => dia,
                                   :institucion_id => opts[:institucion_id])
             dias_no_laborales += 1
           end
         end
+        
       end #(6..7)      
     end #dias.times
 

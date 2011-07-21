@@ -237,3 +237,12 @@ Factory.define :actividad do |actividad|
   actividad.association :solicitud
   actividad.textoactividad 'No Disponible'
 end
+
+Factory.define :feriado do |f|
+  f.sequence(:nombre) {|f| "feriado_#{Factory.next(:count)}"}
+  f.dia 1
+  f.mes 1
+  f.institucion_id Institucion::ESTADO_GUATEMALA
+  f.tipoferiado_id Feriado::TIPO_NACIONAL
+  f.fecha Date.new(Date.today.year,1,1)
+end

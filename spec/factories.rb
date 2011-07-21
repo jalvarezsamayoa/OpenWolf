@@ -177,6 +177,7 @@ Factory.define :adjunto do |adjunto|
   adjunto.association :usuario
   adjunto.association :proceso, :factory => :solicitud
   adjunto.informacion_publica true
+  adjunto.archivo File.open(Rails.root + 'spec/fixtures/documentos/documento.doc')
 end
 
 Factory.define :fuente do |fuente|

@@ -10,10 +10,4 @@ describe Motivonegativa do
     @motivonegativa.should be_valid
   end
   
-  describe '#metodo' do    
-    it 'debe hacer algo' do
-      pending
-    end    
-  end
-  
 end

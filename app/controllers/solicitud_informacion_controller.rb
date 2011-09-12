@@ -21,7 +21,7 @@ class SolicitudInformacionController < ApplicationController
     @solicitud.origen_id = Solicitud::ORIGEN_PORTAL
 
     respond_to do |format|
-      if @solicitud.save
+      if verify_recaptcha(:model => @solicitud, :message => "Las palabras de seguridad no coinciden. Por favor trate de nuevo.") && @solicitud.save
         flash[:notice] = 'Solicitud creada con exito.'
         format.html { redirect_to solicitud_portal_path(@solicitud) }
       else

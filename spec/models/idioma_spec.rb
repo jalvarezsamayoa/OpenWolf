@@ -1,5 +1,13 @@
-require 'spec_helper'
+require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe Idioma do
-  pending "add some examples to (or delete) #{__FILE__}"
+  before(:each) do
+    @idioma = Factory.build(:idioma)
+  end
+  
+  it "debe ser valido" do
+    @idioma.should be_valid    
+  end
+  
 end
+

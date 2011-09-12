@@ -9,3 +9,5 @@
   = form.input :forma_entrega, :hint => "Forma o medio como el solicitante requiere la solicitud.", :input_html => {:size => 60}
   = form.input :solicitante_identificacion, :input_html => {:size => 60, :maxsize => 254}, :hint => '(opcional) Número de Cédula, DPI, Pasaporte, etc..'
   = form.input :idioma, :include_blank => false, :hint => "(opcional) Preferencia sociolingustica del solicitante"
+  = recaptcha_tags
+  

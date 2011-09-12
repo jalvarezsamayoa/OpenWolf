@@ -246,3 +246,7 @@ Factory.define :feriado do |f|
   f.tipoferiado_id Feriado::TIPO_NACIONAL
   f.fecha Date.new(Date.today.year,1,1)
 end
+
+Factory.define :idioma do |i|
+  i.sequence(:nombre) {|i| "idioma_#{Factory.next(:count)}"}
+end

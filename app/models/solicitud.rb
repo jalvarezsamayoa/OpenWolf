@@ -24,6 +24,7 @@ class Solicitud < ActiveRecord::Base
   IDIOMA_DEFAULT = 12 #ladino
 
   attr_accessor :dont_send_email
+  attr_accessor :dont_set_estado
 
   #####################
   # Modulos y Plugins
@@ -825,7 +826,11 @@ class Solicitud < ActiveRecord::Base
         self.fecha_programada = calcular_fecha_entrega()
 
         self.departamento_id = municipio.departamento_id unless municipio.nil?
-        self.estado_id = ESTADO_NORMAL
+
+        if self.dont_set_estado.nil?
+          self.estado_id = ESTADO_NORMAL if self.estado_id.nil?
+        end
+        
         self.asignada = false
         self.solicitante_identificacion = 'No Disponible'
       end

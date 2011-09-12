@@ -1,0 +1,57 @@
+--- 
+estado_00006: 
+  created_at: 2010-11-17 19:05:42 Z
+  nombre: Desechada
+  final: true
+  updated_at: 2011-01-24 15:44:02.254008 Z
+  puede_entregar: false
+  id: 6
+  modulo_id: 1
+estado_00007: 
+  created_at: 2010-11-17 19:05:42 Z
+  nombre: No Recogida
+  final: true
+  updated_at: 2010-11-17 19:05:42 Z
+  puede_entregar: true
+  id: 7
+  modulo_id: 1
+estado_00001: 
+  created_at: 2010-11-17 19:05:42 Z
+  nombre: "En tr\xC3\xA1mite"
+  final: false
+  updated_at: 2010-11-17 19:05:42 Z
+  puede_entregar: false
+  id: 1
+  modulo_id: 1
+estado_00002: 
+  created_at: 2010-11-17 19:05:42 Z
+  nombre: "Pr\xC3\xB3rroga"
+  final: false
+  updated_at: 2010-11-17 19:05:42 Z
+  puede_entregar: true
+  id: 2
+  modulo_id: 1
+estado_00003: 
+  created_at: 2010-11-17 19:05:42 Z
+  nombre: Entregada
+  final: true
+  updated_at: 2011-02-21 04:42:07.568601 Z
+  puede_entregar: true
+  id: 3
+  modulo_id: 1
+estado_00004: 
+  created_at: 2010-11-17 19:05:42 Z
+  nombre: Entregada Parcial
+  final: true
+  updated_at: 2010-11-17 19:05:42 Z
+  puede_entregar: true
+  id: 4
+  modulo_id: 1
+estado_00005: 
+  created_at: 2010-11-17 19:05:42 Z
+  nombre: Denegada
+  final: true
+  updated_at: 2011-02-21 04:42:19.379730 Z
+  puede_entregar: false
+  id: 5
+  modulo_id: 1

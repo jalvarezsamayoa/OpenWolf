@@ -366,3 +366,11 @@ div#search {
 .estadisticas colgroup.show-table-header {
     width: 30%;
 }
+
+/*--------------------------------------------*/
+/* Solicitud Informacion publica */
+/*--------------------------------------------*/
+
+#recaptcha_area {
+    padding-left: 25%;
+}

@@ -1,3 +1,4 @@
+# -*- coding: undecided -*-
 source 'http://rubygems.org'
 
 gem 'rails', '3.0.9'
@@ -28,6 +29,7 @@ gem 'tiny_mce' # editor html
 gem 'pdfkit', "0.4.6" # generacion de pdf's
 gem 'will_paginate' # pagineo de resultados
 gem 'jquery-rails', '>= 0.2.6' #jquery para rails, remplaza prototype y scriptaculous
+gem "recaptcha", :require => "recaptcha/rails" #plugin para añadir recaptcha a formularios
 
 # HERRAMIENTAS
 gem 'admin_data', :git => "git://github.com/neerajdotname/admin_data.git" # modulo para administracion de base de datos

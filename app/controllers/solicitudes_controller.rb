@@ -233,6 +233,8 @@ class SolicitudesController < ApplicationController
       @filtros = nil
     end
 
+    params[:anuladas] = true
+    
     @solicitudes = Solicitud.buscar(params)
 
     @desde = ( params[:fecha_desde] ? Date.strptime(params[:fecha_desde], "%d/%m/%Y") : Date.today - Date.today.yday + 1 )

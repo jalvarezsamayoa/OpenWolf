@@ -1,4 +1,4 @@
-- form.inputs do
+= form.inputs do
   %h2 Información Obligatoria
   = form.input :institucion, :collection => Institucion.activas, :hint => "Institucion a la que se requiere informacion", :prompt => "Seleccione una Institucion"
   = form.input :solicitante_nombre, :input_html => {:size => 60, :maxsize => 254}, :hint => "Nombre, siglas o sinónimo como se identifica el solicitante."

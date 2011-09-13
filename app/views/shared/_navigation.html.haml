@@ -8,8 +8,8 @@
     %p= link_to "Búsqueda Solicitudes", buscar_path
   %h3= link_to "Reportes", "#"
   %div
-    %p= link_to "Generar Reporte PDH", reporte_solicitudes_csv_url, :popup => true, :title => "Reporte en formato de la PDH en formato texto CSV."
-    %p= link_to "Exportar Solicitudes", reporte_solicitudes_xml_url(:format => 'xml'), :popup => true, :confirm => "Este proceso puede tomar algunos minutos en completar. ¿Desea continuar?", :title => "Generar archivo de respaldo de la base de datos en XML"
+    %p= link_to "Generar Reporte PDH", reporte_solicitudes_csv_url, :title => "Reporte en formato de la PDH en formato texto CSV."
+    %p= link_to "Exportar Solicitudes", reporte_solicitudes_xml_url(:format => 'xml'), :confirm => "Este proceso puede tomar algunos minutos en completar. ¿Desea continuar?", :title => "Generar archivo de respaldo de la base de datos en XML"
     - if nivel_seguridad(usuario_actual, 'superadmin')
       %p= link_to "Instituciones activas", instituciones_activas_reportes_url, :title => "Instituciones activas"
   - if nivel_seguridad(usuario_actual,'administrador')

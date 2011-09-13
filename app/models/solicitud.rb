@@ -53,6 +53,7 @@ class Solicitud < ActiveRecord::Base
     integer :clasificacion_id, :references => Clasificacion
     integer :documentoclasificacion_id, :references => Documentoclasificacion
     integer :idioma_id, :references => Idioma
+    boolean :anulada
     text :lowcase_solicitante_nombre do
       clean_string(solicitante_nombre.downcase)
     end
@@ -186,6 +187,9 @@ class Solicitud < ActiveRecord::Base
     end
 
     logger.debug { "filters" }
+    
+    l_excluir_anuladas = ((params[:anuladas].nil? or params[:anuladas] != true) ? true : false )
+    
     l_filtrar_instituciones = (params[:institucion_id] && params[:institucion_id] != 'ALL')
     l_filtrar_vias = (params[:solicitud_via] && params[:solicitud_via] != 'Todos')
     l_filtrar_estados = (params[:solicitud_estado] && params[:solicitud_estado] != 'Todos')
@@ -240,6 +244,7 @@ class Solicitud < ActiveRecord::Base
       with :estado_id, i_estado_id if l_filtrar_estados
       with(:fecha_creacion).between(d_fechadesde..d_fechahasta) if d_fechadesde
       with(:fecha_programada).between(d_fechaprogdesde..d_fechaproghasta) if l_filtrar_tiempo_restante
+      with :anulada, false if l_excluir_anuladas
       paginate(:page => (params[:page] ||= 1), :per_page => (params[:per_page] ||= 20))
       order_by(:fecha_creacion, :desc)
     end
@@ -447,6 +452,7 @@ class Solicitud < ActiveRecord::Base
   end
 
   def estado_actual
+    return 'ANULADA' if self.anulada?
     return estado.nombre
   end
 

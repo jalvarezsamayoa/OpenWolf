@@ -1,12 +1,12 @@
 - content_for :head do
   = javascript_include_tag 'filtro_solicitudes', 'jquery.ui.datepicker-es.js'
 .listing
-  %h2= Solicitud.human_name.pluralize
+  %h2= Solicitud.model_name.human.pluralize
   #options
     #buttons
       = link_to image_tag('filesearch16.png')+' Filtrar', '#', :class => "button filtro"
     #findbox
-      - form_tag buscar_path, :method=>:get do
+      = form_tag buscar_path, :method=>:get do
         = image_tag("find16.png")
         = text_field_tag 'search', '', :id=>'search'
         = submit_tag 'Buscar'
@@ -28,7 +28,7 @@
             %th= Solicitud.human_attribute_name(:textosolicitud)
         %tbody      
         - @solicitudes.each_hit_with_result do |hit, solicitud|
-          %tr
+          %tr{:class => "#{  solicitud.anulada? ? 'notice' : '' }"}
             %td= link_to solicitud.codigo, solicitud_path(solicitud)
             %td= l(solicitud.fecha_creacion)
             %td= solicitud.institucion.abreviatura

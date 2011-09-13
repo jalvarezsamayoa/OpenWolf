@@ -14,14 +14,14 @@
       = javascript_include_tag :defaults, 'jquery-ui.min.js', 'jquery.ui.datepicker-es.js', 'sdmenu.js', 'main.js'
       = yield :head
   %body
-    #container
+    .header.bluebar      
       = render :partial => 'shared/header'
-      #wraper
-        #content
-          = render :partial => 'shared/flash_messages'
+    .colmask.leftmenu
+      .colleft
+        .col1
+          = render :partial => 'shared/flash_messages'      
           = yield
-        / end - content
-      / end - wraper
-      = render :partial => 'shared/navigation'
-      #footer Plataforma Virtual para la Transparencia
+        .col2
+          = render :partial => 'shared/navigation'
+    #footer Plataforma Virtual para la Transparencia
     %iframe#upload_frame{:name => "upload_frame", :src => "about:blank", :style => "width:1px;height:1px;border:0px"}

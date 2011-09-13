@@ -3,6 +3,63 @@ body{
           background-color: #064176;
            }
 
+
+
+/*--------------------------------------------*/
+/* Frames globales */
+/*--------------------------------------------*/
+
+.header {
+    clear:both;
+    float:left;
+    width:100%;
+}
+
+/* column container */
+.colmask {
+    position:relative;	/* This fixes the IE7 overflow hidden bug */
+    clear:both;
+    float:left;
+    width:100%;			/* width of whole page */
+    overflow:hidden;		/* This chops off any overhanging divs */
+}
+/* common column settings */
+.colright,
+.colmid,
+.colleft {
+    float:left;
+    width:100%;
+    position:relative;
+}
+.col1,
+.col2,
+.col3 {
+    float:left;
+    position:relative;
+    padding:0 0 1em 0;
+    overflow:hidden;
+}
+/* 2 Column (left menu) settings */
+.leftmenu {
+    background:#fff;		/* right column background colour */
+}
+.leftmenu .colleft {
+    right:85%;			/* right column width */
+    /* background:#f4f4f4;	 */
+    background:#1d68ac;/* left column background colour */
+}
+.leftmenu .col1 {
+    width:85%;			/* right column content width */
+    left:101%;			/* 100% plus left column left padding */
+}
+.leftmenu .col2 {
+    width:15%;			/* left column content width (column width minus left and right padding) */
+    left:0%;			/* (right column left and right padding) plus (left column left padding) */
+}
+
+
+
+
 .alt { font-family: 'Josefin Sans', arial, serif; }
 
 #loginlogo {
@@ -201,8 +258,8 @@ body{
 
 #navigation {
            float: left;
-           width: 200px;          
-           border: medium solid #1d68ac;
+           /* width: 200px;           */
+           /* border: medium solid #1d68ac; */
            background-color: #1d68ac;
            }
 

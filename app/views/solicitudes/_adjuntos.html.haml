@@ -2,8 +2,9 @@
 %table#minimalist-a
   %thead
     %tr
-      %th{:scope => "col"} Numero Adjunto
+      %th{:scope => "col"} Número Ref. Adjunto
       %th{:scope => "col"} Comentario
+      %th{:scope => "col"} Usuario
       %th{:scope => "col"} &nbsp;
   %tbody
     = render :partial => 'solicitudes/adjunto', :collection => @adjuntos

@@ -250,6 +250,12 @@ class Solicitud < ActiveRecord::Base
   # Metodos de Instancia Publicos
   ###############################
 
+  def puede_mostrar_informacion?
+    return false unless self.informacion_publica?
+    return false if (self.reserva_temporal? and !self.con_resolucion_final?)
+    return true
+  end
+
   # marca solicitud como anulada
   def anular
     self.anulada = true
@@ -326,7 +332,7 @@ class Solicitud < ActiveRecord::Base
   def tipo_resolucion(r = nil)
     r = self.resoluciones.last if r.nil?
     if r.nil?
-      c_razon = ''
+      c_razon = 'Pendiente'
     else
       c_razon = r.tiporesolucion.aliaspdh
     end
@@ -422,7 +428,7 @@ class Solicitud < ActiveRecord::Base
 
   def texto_solicitud(user = nil)
     c_texto = self.textosolicitud
-    if self.informacion_publica == false
+    unless self.puede_mostrar_informacion?
       if user.nil? or !user.has_role?(:superudip)
         c_texto ='Información no es pública'
       end
@@ -432,7 +438,7 @@ class Solicitud < ActiveRecord::Base
 
   def extracto(user = nil)
     c_texto = self.textosolicitud[0..100] + '...'
-    if self.informacion_publica == false
+    unless self.puede_mostrar_informacion?
       if user.nil? or !user.has_role?(:superudip)
         c_texto ='Información no es pública'
       end
@@ -573,8 +579,8 @@ class Solicitud < ActiveRecord::Base
     }
 
     #ciudadano si hay correo
-    unless self.email.empty? and l_incluir_ciudadano
-      correos << self.email
+    if l_incluir_ciudadano
+      correos << self.email unless self.email.empty?
     end
 
     #enlaces
@@ -731,7 +737,11 @@ class Solicitud < ActiveRecord::Base
   ################################
 
   def notificar_creacion
-    Notificaciones.delay.nueva_solicitud(self) unless (self.dont_send_email == true)
+    unless (self.email.nil? or self.email.blank?)
+      Notificaciones.delay.nueva_solicitud(self, Time.now, true) unless (self.dont_send_email == true)
+    end
+    
+    Notificaciones.delay.nueva_solicitud(self, Time.now, false) unless (self.dont_send_email == true)
   end
 
   def calcular_fecha_entrega

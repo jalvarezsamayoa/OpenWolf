@@ -11,23 +11,8 @@
     = stylesheet_link_tag 'reset.css', 'tablas.css', 'buttons.css', 'formtastic_changes.css', 'redmond/jquery-ui-1.8.4.custom.css','portal.css'
 
     %link{:href => "http://fonts.googleapis.com/css?family=Josefin+Sans&subset=latin", :rel => "stylesheet", :type => "text/css"}
-
-    = csrf_meta_tag
-
-    = javascript_include_tag :defaults, 'jquery-ui.min.js', 'jquery.ui.datepicker-es.js', 'combobox.js'
-
+ 
     = yield :head
-    :javascript
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-19786792-1']);
-      _gaq.push(['_trackPageview']);
-
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
-
   %body
     #options
       #modules-menu.hlist
@@ -46,7 +31,6 @@
               %b
                 = usuario_actual.nombre_institucion
                 |
-          %li= link_to 'Configuracion', '#'
           - if usuario_signed_in?
             %li= link_to 'Cerrar Sesion', logout_path
           - else
@@ -65,5 +49,17 @@
       = link_to "Licenciamiento", "http://openwolf.org/gplv3/"
       |
       = link_to "Portal Estatal", main_index_url
-      #poweredby{:style => "text-align: center; margin-top: 20px; width: 100%; float: left;"}
-        = link_to image_tag('logopenwolf.png',:alt => 'Powered by OpenWolf v0.1a',:width=>'100px'), 'http://openwolf.org', :title => "Powered by OpenWolf"
+    #poweredby{:style => "text-align: center; margin-top: 20px; width: 100%; float: left;"}
+      = link_to image_tag('logopenwolf.png',:alt => 'Powered by OpenWolf v0.1a',:width=>'100px'), 'http://openwolf.org', :title => "Powered by OpenWolf"
+    = csrf_meta_tag
+    = javascript_include_tag :defaults, 'jquery-ui.min.js', 'jquery.ui.datepicker-es.js', 'combobox.js'
+    :javascript
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-19786792-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();

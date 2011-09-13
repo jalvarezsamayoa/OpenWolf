@@ -1,16 +1,16 @@
 - if !current_page?(:action => 'print')
   = render :partial => "find_box"
   .document-options
+    .option
+      #{link_to "Imprimir", print_portal_url(@solicitud, :format => 'pdf'), :popup => true}
     #share.option
       = add_this
-    .option
-      | #{link_to "Imprimir", print_portal_url(@solicitud, :format => 'pdf'), :popup => true}
 .view-document
   .content
     .page-pane
       .document
         %h1#title Solicitud de Información Pública
-        - if @solicitud.informacion_publica == false
+        - unless @informacion_publica
           %h3#info-not-public
             = image_tag('lock24.png')
             La información de esta solicitud no es pública.
@@ -72,15 +72,15 @@
           %hr.space/
           %h4= "Seguimientos de enlances"
           #seguimientos
-            = render :partial => 'seguimientos'
+            = render :partial => 'seguimientos' if @informacion_publica
           %h4= Resolucion.human_name.pluralize
           #resoluciones
-            = render :partial => 'resoluciones'
+            = render :partial => 'resoluciones' if @informacion_publica
           %h4= t("activerecord.models.recursosrevision")
           #recursosrevision
-            = render :partial => 'solicitudes/recursosrevision'
+            = render :partial => 'solicitudes/recursosrevision' if @informacion_publica
           %h4= t("activerecord.models.nota")
           #notasseguimiento
-            = render :partial => 'solicitudes/notas_seguimiento'
+            = render :partial => 'solicitudes/notas_seguimiento' if @informacion_publica
           #adjuntos
-            = render :partial => 'adjuntos'            
+            = render :partial => 'adjuntos' if @informacion_publica

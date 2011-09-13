@@ -31,6 +31,9 @@ class PortalController < ApplicationController
     @q = @solicitud.codigo
 
     @restringir_seguimientos_privados = true
+
+    @informacion_publica = @solicitud.puede_mostrar_informacion?
+    
     
     mostrar_datos_solicitante()
 

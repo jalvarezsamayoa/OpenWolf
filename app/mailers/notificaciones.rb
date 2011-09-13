@@ -8,19 +8,38 @@ class Notificaciones < ActionMailer::Base
   else
     default_url_options[:host] = "transparencia.gob.gt"
   end
-  
+
   # envia correo cuando se genera una nueva solicitud
-  # para = [personaludip, ciudadano] 
-  def nueva_solicitud(solicitud,  sent_at = Time.now)
+  # para = [personaludip, ciudadano]
+  def nueva_solicitud(solicitud = nil,  sent_at = Time.now, a_ciudadano = true)
     @solicitud = solicitud
     @url_solicitud = solicitud_portal_url(solicitud.id)
 
-    email = solicitud.institucion.email
-    correo_institucional = ( email.nil? ? '' : ', ' + email)
-    
-    mail(:to => solicitud.correos_interesados.join(", ") + correo_institucional,
-         :reply_to => correo_institucional,
-         :subject => "openwolf - Confirmación nueva solicitud de información - #{solicitud.codigo}.")           
+
+    email_ciudadano = solicitud.email
+    correo_institucional = solicitud.institucion.email
+    correos_interesados = solicitud.correos_interesados(false).join(", ")
+    subject = "openwolf - Confirmación nueva solicitud de información - #{solicitud.codigo}."
+
+
+    if a_ciudadano == true
+      @nombre_destinatario = solicitud.solicitante_nombre
+
+      mail(:to => email_ciudadano,
+           :bcc => correo_institucional,
+           :reply_to => correo_institucional,
+           :subject => subject)
+
+    else
+      @nombre_destinatario = @solicitud.institucion.encargado_udip.nombre
+
+      mail(:to => correos_interesados,
+           :bcc => correo_institucional,
+           :reply_to => correo_institucional,
+           :subject => subject)
+    end
+
+
   end
 
 
@@ -30,10 +49,11 @@ class Notificaciones < ActionMailer::Base
 
     email = actividad.institucion.email
     correo_institucional = ( email.nil? ? '' : ', ' + email)
-    
-    mail(:to => actividad.usuario.email + correo_institucional,
+
+    mail(:to => actividad.usuario.email,
+         :bcc => correo_institucional,
          :reply_to => correo_institucional,
-         :subject => "openwolf - Nueva Asignación - Solicitud #{actividad.solicitud.codigo}")    
+         :subject => "openwolf - Nueva Asignación - Solicitud #{actividad.solicitud.codigo}")
   end
 
 
@@ -44,12 +64,13 @@ class Notificaciones < ActionMailer::Base
 
     email = @solicitud.institucion.email
     correo_institucional = ( email.nil? ? '' : ', ' + email)
-    
 
-    mail(:to => resolucion.solicitud.email + correo_institucional ,
+
+    mail(:to => resolucion.solicitud.email,
+         :bcc => correo_institucional,
          :reply_to => correo_institucional,
          :subject => "openwolf - Aviso emisión de resolución - #{resolucion.numero}.")
-    
+
   end
 
 
@@ -58,13 +79,24 @@ class Notificaciones < ActionMailer::Base
     @solicitud = nota.proceso
     @url_solicitud = solicitud_portal_url(@solicitud.id)
 
-    email = @solicitud.institucion.email
-    correo_institucional = ( email.nil? ? '' : ', ' + email)
-    
-    
-    mail(:to => @solicitud.correos_interesados.join(", ") + correo_institucional,
-         :reply_to => correo_institucional,
-         :subject => "openwolf - Nueva nota seguimiento - Solicitud #{@solicitud.codigo}.")           
+
+    email_ciudadano = solicitud.email
+    correo_institucional = solicitud.institucion.email
+    correos_interesados = solicitud.correos_interesados(false).join(", ")
+    subject = "openwolf - Nueva nota seguimiento - Solicitud #{@solicitud.codigo}."
+
+    if (email_ciudadano.nil? or email_ciudadano.empty?)
+      mail(:to => correos_interesados,
+           :bcc => correo_institucional,
+           :reply_to => correo_institucional,
+           :subject => subject)
+    else
+      mail(:to => email_ciudadano,
+           :bcc => correos_interesados + ', ' + correo_institucional,
+           :reply_to => correo_institucional,
+           :subject => subject)
+    end
+
   end
 
 
@@ -74,7 +106,7 @@ class Notificaciones < ActionMailer::Base
     #correo institucional
     email = institucion.email
     correo_institucional = ( email.nil? ? '' : ', ' + email)
-    
+
     #correos superudip
     correos = []
     usuarios = institucion.usuarios.supervisores
@@ -84,8 +116,8 @@ class Notificaciones < ActionMailer::Base
     destinatarios = correos.join(", ") + correo_institucional
 
     mail(:to => destinatarios,
-      :reply_to => correo_institucional,
-      :subject => "[openwolf] Reporte de Solicitudes por vencer.")           
+         :reply_to => correo_institucional,
+         :subject => "[openwolf] Reporte de Solicitudes por vencer.")
   end
 
 end

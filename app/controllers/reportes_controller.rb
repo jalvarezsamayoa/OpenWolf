@@ -34,9 +34,10 @@ class ReportesController < ApplicationController
   end
 
   def solicitudes_csv
+    institucion_nombre = usuario_actual.institucion.abreviatura
     csv_string = Solicitud.export_to_csv(:institucion_id => usuario_actual.institucion_id)
     send_data csv_string, :type => "text/plain", 
-    :filename=>"reporte_solicitudes.csv",
+    :filename=>"reporte_solicitudes_#{institucion_nombre}_#{Time.now.to_i}.csv",
     :disposition => 'attachment'
   end
 

@@ -1,6 +1,7 @@
 %tr
   %td= link_to adjunto.numero, adjunto.archivo.url
   %td= adjunto.observaciones
+  %td= adjunto.usuario.nombre
   %td
     = image_tag('delete16.png')
     - if nivel_seguridad(usuario_actual,'encargadoudip')

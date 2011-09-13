@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110613181238) do
+ActiveRecord::Schema.define(:version => 20110912215344) do
 
   create_table "actividades", :force => true do |t|
     t.integer  "institucion_id",                  :null => false
@@ -525,6 +525,7 @@ ActiveRecord::Schema.define(:version => 20110613181238) do
     t.boolean  "anulada",                     :default => false
     t.integer  "tiempo_respuesta",            :default => 0
     t.integer  "tiempo_respuesta_calendario", :default => 0
+    t.boolean  "reserva_temporal",            :default => false
   end
 
   add_index "solicitudes", ["ano"], :name => "index_solicitudes_on_ano"
@@ -550,6 +551,7 @@ ActiveRecord::Schema.define(:version => 20110613181238) do
   add_index "solicitudes", ["numero"], :name => "index_solicitudes_on_numero"
   add_index "solicitudes", ["origen_id"], :name => "index_solicitudes_on_origen_id"
   add_index "solicitudes", ["rangoedad_id"], :name => "index_solicitudes_on_rangoedad_id"
+  add_index "solicitudes", ["reserva_temporal"], :name => "index_solicitudes_on_reserva_temporal"
   add_index "solicitudes", ["solicitante_institucion"], :name => "index_solicitudes_on_solicitante_institucion"
   add_index "solicitudes", ["solicitante_nombre"], :name => "index_solicitudes_on_solicitante_nombre"
   add_index "solicitudes", ["tiempo_respuesta"], :name => "index_solicitudes_on_tiempo_respuesta"

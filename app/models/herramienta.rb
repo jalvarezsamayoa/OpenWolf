@@ -37,7 +37,7 @@ class Herramienta
     
     # agregar enlaces
     # usar por default el usuario jefe de la unidad de informacion
-    @enlace = @institucion.usuarios.supervisores.first
+    @enlace = @institucion.usuarios.activos.supervisores.first
 
     #importamos registros a la tabla   
     importar_registros(options[:file], campos, usuario_id, @institucion, @enlance)   

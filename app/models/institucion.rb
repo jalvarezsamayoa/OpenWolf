@@ -116,7 +116,7 @@ class Institucion < ActiveRecord::Base
 
   def encargado_udip
     return nil if self.usuarios.nil?
-    return self.usuarios.supervisores.first
+    return self.usuarios.activos.supervisores.first
   end
 
   

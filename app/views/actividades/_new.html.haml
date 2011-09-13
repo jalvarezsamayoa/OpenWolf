@@ -1,6 +1,6 @@
 .mantform
   %h2
     = t("actividades.title")
-  - semantic_form_for [@institucion, @solicitud, @actividad], :html=>{:class=>"solicitud"} do |f|
+  = semantic_form_for [@institucion, @solicitud, @actividad], :html=>{:class=>"solicitud"} do |f|
     = f.semantic_errors
     = render :partial=>'form', :locals=>{:f => f, :submittext => t("data.submit_new")}

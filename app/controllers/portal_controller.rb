@@ -1,4 +1,7 @@
+# -*- coding: utf-8 -*-
 class PortalController < ApplicationController
+  before_filter :get_solicitud, :only => [:solicitud, :print]
+
   def index
   end
 
@@ -7,7 +10,7 @@ class PortalController < ApplicationController
 
     @page_title = @documento.institucion.nombre + ' ('+ @documento.institucion.abreviatura + ') - Documento No. ' + @documento.numero
     @q = @documento.numero
-    
+
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @documento }
@@ -23,7 +26,9 @@ class PortalController < ApplicationController
   end
 
   def solicitud
-    @solicitud = Solicitud.find(params[:id])
+
+
+
     @actividades = @solicitud.actividades
     @documentos = @solicitud.adjuntos
 
@@ -33,30 +38,31 @@ class PortalController < ApplicationController
     @restringir_seguimientos_privados = true
 
     @informacion_publica = @solicitud.puede_mostrar_informacion?
-    
-    
+
+
     mostrar_datos_solicitante()
 
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @solicitud.to_xml(:include => @solicitud.xml_options ) }
     end
+
+
   end
 
   def print
-    @solicitud = Solicitud.find(params[:id])
     @actividades = @solicitud.actividades
     @documentos = @solicitud.adjuntos
 
     mostrar_datos_solicitante()
-    
+
     respond_to do |format|
       format.html {render 'solicitud', :layout => 'print'}
     end
   end
-  
+
   def buscar
-    
+
     # guardamos el estado del filtro para agregarlo a la paginacion
     if params[:filtrar]
       @filtros = params
@@ -65,9 +71,9 @@ class PortalController < ApplicationController
     end
 
     session[:last_search] = params
-    
+
     @solicitudes = Solicitud.buscar(params)
-    
+
 
     @desde = ( params[:fecha_desde] ? Date.strptime(params[:fecha_desde], "%d/%m/%Y") : Date.today - Date.today.yday + 1 )
     @hasta = ( params[:fecha_hasta] ? Date.strptime(params[:fecha_hasta], "%d/%m/%Y") : Date.today )
@@ -76,25 +82,34 @@ class PortalController < ApplicationController
   end
 
   def institucion
-    @institucion = Institucion.find(params[:id])    
+    @institucion = Institucion.find(params[:id])
   end
 
   def exportar
     # guardamos el estado del filtro para agregarlo a la paginacion
     params = session[:last_search]
     params[:per_page] = Solicitud.count
-    
+
     @solicitudes = Solicitud.buscar(params)
-    
+
     csv_string = Solicitud.export_to_csv(:solicitudes => @solicitudes)
 
-    send_data csv_string, :type => "text/plain", 
+    send_data csv_string, :type => "text/plain",
     :filename=>"resultados_busqueda.csv",
     :disposition => 'attachment'
-    
+
   end
 
   private
+
+  def get_solicitud
+    @solicitud = Solicitud.find(params[:id])
+
+    if (@solicitud.nil? or @solicitud.anulada?)
+      flash[:notice] = "Lo sentimos la información de la solicitud no esta disponible."
+      redirect_to root_url
+    end
+  end
 
   def mostrar_datos_solicitante
     if usuario_actual
@@ -105,7 +120,7 @@ class PortalController < ApplicationController
       @mostrar_datos_solicitante = (@es_pertinente_a_usuario and (@usuario_es_supervisor or @usuario_es_udip))
     else
       @mostrar_datos_solicitante = false
-    end    
+    end
   end
-  
+
 end

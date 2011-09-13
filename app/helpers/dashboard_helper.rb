@@ -5,7 +5,7 @@ module DashboardHelper
   CHARTSIZE = '&chs=360x300'
 
   #genera un diagrama de pie indicando 
-  def solicitudes_por_estado(user = nil)
+  def solicitudes_por_estado(user = nil, title = 'Solicitudes+por+estado+')
     ano = Date.today.year
     data = get_solicitudes_por_estado(user, ano)
     
@@ -19,7 +19,7 @@ module DashboardHelper
     url += '&chd=t:'+data[0].to_s #porcentajes
     url += '&chdl='+data[1].to_s #labels porcentaje
     url += '&chl='+data[2].to_s  #labels
-    url += '&chtt=Solicitudes+Institución+'+ano.to_s
+    url += '&chtt='+title+ano.to_s
     
    
     # http://chart.apis.google.com/chart
@@ -39,7 +39,7 @@ module DashboardHelper
    
   # genera un diagrama de lineas indicando la cantidad
   # de solicitudes recibidas por mes
-  def solicitudes_por_mes(user = nil)
+  def solicitudes_por_mes(user = nil, title = 'Solicitudes+Recibidas+')
     data_max_range = 0  
     ano = Date.today.year
     data = get_solicitudes_por_mes_en_ano(user, ano, data_max_range)
@@ -56,7 +56,7 @@ module DashboardHelper
     url += '&chg=20,10'
     url += '&chls=1,9,1'
     url += '&chma=0,0,10'
-    url += '&chtt=Historico+Solicitudes+Recibidas+'+ano.to_s
+    url += '&chtt='+title+ano.to_s
     url += '&chds=0,'+data[1].to_s
     url += '&chm=o,80C65A,0,-2,8'
 

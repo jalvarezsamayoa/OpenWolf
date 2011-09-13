@@ -116,9 +116,9 @@ class ActividadesController < ApplicationController
   def actualizar_usuarios
     institucion = Institucion.find(params[:institucion_id])
     if institucion.id == usuario_actual.institucion_id
-      @usuarios = institucion.usuarios.enlaces
+      @usuarios = institucion.usuarios.activos.enlaces
     else
-      @usuarios = institucion.usuarios.supervisores
+      @usuarios = institucion.usuarios.activos.supervisores
     end
     respond_to do |format|
       format.js do
@@ -140,6 +140,6 @@ class ActividadesController < ApplicationController
   def get_data
     @institucion = usuario_actual.institucion
     @solicitud = Solicitud.find(params[:solicitud_id])
-    @usuarios = @institucion.usuarios.enlaces
+    @usuarios = @institucion.usuarios.activos.enlaces
   end
 end

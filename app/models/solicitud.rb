@@ -579,7 +579,7 @@ class Solicitud < ActiveRecord::Base
     correos = []
 
     #usuarios unidad informacion
-    usuarios_udip = self.institucion.usuarios.udip
+    usuarios_udip = self.institucion.usuarios.activos.udip
     usuarios_udip.each { |u|
       correos << u.email unless u.email.empty?
     }
@@ -819,7 +819,7 @@ class Solicitud < ActiveRecord::Base
 
       #verificamos si hay institucion
       unless self.institucion_id.nil?
-        ciudadano = self.institucion.usuarios.ciudadanos.first
+        ciudadano = self.institucion.usuarios.activos.ciudadanos.first
         self.usuario_id = ciudadano.id
       end
 
@@ -827,7 +827,7 @@ class Solicitud < ActiveRecord::Base
       self.via_id = 4 #internet
     else
       # si es migracion usamos al primer usario de UDIP
-      superudip = self.institucion.usuarios.supervisores.first
+      superudip = self.institucion.usuarios.activos.supervisores.first
       self.usuario_id = superudip.id
     end
 

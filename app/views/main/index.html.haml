@@ -7,8 +7,10 @@
 %hr/
 %table{:border => "0", :cellpadding => "10", :cellspacing => "10", :width => "100%"}
   %tr
-    %th Datos Globales
-    %th Datos Institucion
+    %th{:style => "text-align: center;"}
+      %h2.alt Todas las Instituciones
+    %th{:style => "text-align: center;"}
+      %h2.alt Institución Actual
   %tr
     %td{:width => "50%"}= image_tag(solicitudes_por_mes())
     %td= image_tag(solicitudes_por_mes(usuario_actual))

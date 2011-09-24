@@ -1,4 +1,4 @@
-# -*- coding: undecided -*-
+# -*- coding: utf-8 -*-
 source 'http://rubygems.org'
 
 gem 'rails', '3.0.9'
@@ -32,7 +32,7 @@ gem 'jquery-rails', '>= 0.2.6' #jquery para rails, remplaza prototype y scriptac
 gem "recaptcha", :require => "recaptcha/rails" #plugin para añadir recaptcha a formularios
 
 # HERRAMIENTAS
-gem 'admin_data', :git => "git://github.com/neerajdotname/admin_data.git" # modulo para administracion de base de datos
+gem 'admin_data', :git => 'git://github.com/bigbinary/admin_data.git' # modulo para administracion de base de datos
 gem 'whenever' # manejo de cronjobs
 gem 'activerecord-import', '>= 0.2.0' # herramienta para importacion de data
 gem 'serenity-odt' #generacion de templates ODT

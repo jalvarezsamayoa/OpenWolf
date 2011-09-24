@@ -7,8 +7,8 @@ GIT
       activesupport (>= 3.0.0)
 
 GIT
-  remote: git://github.com/neerajdotname/admin_data.git
-  revision: 6b32624e183ab77619090f11e41e7882041518b5
+  remote: git://github.com/bigbinary/admin_data.git
+  revision: 4a69c1affada254393a20d655e82ccfca4579143
   specs:
     admin_data (1.1.13)
       will_paginate (>= 3.0.0)

@@ -37,15 +37,15 @@ namespace :deploy do
 end
 
 #before "deploy:update_code", "solr:stop"
-after "deploy:symlink", "solr:symlink"
-after "solr:symlink", "solr:start"
+#after "deploy:symlink", "solr:symlink"
+#after "solr:symlink", "solr:start"
 #after "solr:start", "solr:reindex"
 
-before "deploy:restart", "delayed_job:stop"
-after  "deploy:restart", "delayed_job:start"
+#before "deploy:restart", "delayed_job:stop"
+#after  "deploy:restart", "delayed_job:start"
 
-after "deploy:stop",  "delayed_job:stop"
-after "deploy:start", "delayed_job:start"
+#after "deploy:stop",  "delayed_job:stop"
+#after "deploy:start", "delayed_job:start"
 
 namespace :solr do
   desc "Link in solr directory"
@@ -119,5 +119,5 @@ Dir[File.join(File.dirname(__FILE__), '..', 'vendor', 'gems', 'hoptoad_notifier-
   $: << File.join(vendored_notifier, 'lib')
 end
 
-require 'config/boot'
+# require 'config/boot'
 require 'hoptoad_notifier/capistrano'

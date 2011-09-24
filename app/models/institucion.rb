@@ -23,6 +23,7 @@ class Institucion < ActiveRecord::Base
   has_many :documentos, :dependent => :destroy
   has_many :archivos, :dependent => :destroy
   has_many :seguimientos, :dependent => :destroy
+  has_many :tmp_assets, :dependent => :destroy
   
   validates_presence_of :nombre, :message=>"Campo Nombre no puede estar vacio."
   validates_uniqueness_of :nombre, :scope => :parent_id, :message=>"Nombre ya esta en uso."
@@ -84,12 +85,12 @@ class Institucion < ActiveRecord::Base
   # Metodos para estadisticas
   #####################################
 
-  def total_solicitudes
-    self.solicitudes.activas.count
+  def total_solicitudes(ano = Date.today.year)
+    self.solicitudes.activas.creadas_en_ano(ano).count
   end
 
-  def solicitudes_por_estado
-    estados = Estado.select('estados.nombre, count(solicitudes.estado_id) as total_solicitudes').joins(:solicitudes).where("solicitudes.anulada = ? and solicitudes.institucion_id = ?",false,self.id).group('estados.nombre')
+  def solicitudes_por_estado(ano = Date.today.year)
+    estados = Estado.select('estados.nombre, count(solicitudes.estado_id) as total_solicitudes').joins(:solicitudes).where("solicitudes.anulada = ? and solicitudes.institucion_id = ? and extract(year from fecha_creacion) = ?",false,self.id,ano).group('estados.nombre')
     return estados
   end
 
@@ -104,8 +105,8 @@ class Institucion < ActiveRecord::Base
     return solicitudes
   end
 
-  def tiempo_respuesta_promedio
-    tiempo = Solicitud.find_by_sql("select avg(solicitudes.tiempo_respuesta) as promedio from solicitudes where solicitudes.institucion_id = #{self.id} and anulada = #{false} and solicitudes.fecha_completada is not null")    
+  def tiempo_respuesta_promedio(ano = Date.today.year)
+    tiempo = Solicitud.find_by_sql("select avg(solicitudes.tiempo_respuesta) as promedio from solicitudes where solicitudes.institucion_id = #{self.id} and anulada = #{false} and solicitudes.fecha_completada is not null and extract(year from fecha_creacion) = #{ano}")    
     return tiempo[0].promedio.to_f.round()
   end
 

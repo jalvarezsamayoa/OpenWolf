@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  status: MyText
+  process_id: 1
+  last_error: MyText
+
+two:
+  status: MyText
+  process_id: 1
+  last_error: MyText

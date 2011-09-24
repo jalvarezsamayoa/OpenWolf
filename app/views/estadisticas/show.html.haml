@@ -7,7 +7,7 @@
 
         %br/
         #generales
-          %h3 Solicitudes de información pública
+          %h3= "Solicitudes de información pública recibidas año #{Date.today.year}"
           %table.minimalist-b{:width => "100%"}
             %colgroup.show-table-header
             %colgroup.show-table-data
@@ -18,7 +18,7 @@
               %th= 'Promedio dias respuesta'
               %td= @institucion.tiempo_respuesta_promedio
         #por-estado
-          %h3 Solicitudes por Estado
+          %h3= "Solicitudes por Estado recibidas año #{Date.today.year}"
           %table.minimalist-b{:width => "100%"}
             %colgroup.show-table-header
             %colgroup.show-table-data
@@ -28,7 +28,7 @@
                 %td= estado.total_solicitudes
 
         #por-ano
-          %h3 Solicitudes por Año
+          %h3 Solicitudes completadas por Año
           %table.minimalist-b{:width => "100%"}
             %colgroup.show-table-data
             %colgroup.show-table-data
@@ -44,7 +44,7 @@
                 %td= solicitud.promedio_dias_respuesta.to_f.round()
 
         #por-mes-ano
-          %h3 Solicitudes por Mes y Año
+          %h3 Solicitudes completadas por Mes y Año
           %table.minimalist-b{:width => "100%"}
             %colgroup.show-table-data
             %colgroup.show-table-data
@@ -59,7 +59,7 @@
                 %td= solicitud.total_solicitudes
                 %td= solicitud.promedio_dias_respuesta.to_f.round()
         #por-genero
-          %h3 Solicitudes por Genero y Año
+          %h3 Solicitudes recibidas por Genero y Año
           %table.minimalist-b{:width => "50%"}
             %colgroup.show-table-data
             %colgroup.show-table-data

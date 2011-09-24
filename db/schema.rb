@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110912215344) do
+ActiveRecord::Schema.define(:version => 20110920200624) do
 
   create_table "actividades", :force => true do |t|
     t.integer  "institucion_id",                  :null => false
@@ -560,6 +560,18 @@ ActiveRecord::Schema.define(:version => 20110912215344) do
   add_index "solicitudes", ["usuario_id"], :name => "index_solicitudes_on_usuario_id"
   add_index "solicitudes", ["via_id"], :name => "index_solicitudes_on_via_id"
 
+  create_table "temp_assets", :force => true do |t|
+    t.integer  "institucion_id"
+    t.integer  "usuario_id"
+    t.text     "options"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "archivo_file_name"
+    t.string   "archivo_content_type"
+    t.integer  "archivo_file_size"
+    t.datetime "archivo_updated_at"
+  end
+
   create_table "tipomensajes", :force => true do |t|
     t.string   "nombre",     :null => false
     t.datetime "created_at"
@@ -646,6 +658,14 @@ ActiveRecord::Schema.define(:version => 20110912215344) do
 
   create_table "vias", :force => true do |t|
     t.string   "nombre",     :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "worker_logs", :force => true do |t|
+    t.text     "status"
+    t.integer  "process_id"
+    t.text     "last_error"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

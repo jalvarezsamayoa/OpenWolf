@@ -62,16 +62,30 @@ class Resolucion < ActiveRecord::Base
         self.solicitud.fecha_programada = self.nueva_fecha
       end      
     end
-
+        
     self.solicitud.estado_id = self.tiporesolucion.estado_id
     self.solicitud.fecha_resolucion = self.fecha
 
+    
     # si estado es final pero no debe entregar
     # actualizamos fecha de entrega
     # esto funciona en casos como una negativa
     if self.tiporesolucion.estado.final == true and self.tiporesolucion.estado.puede_entregar == false
       self.solicitud.fecha_entregada = Date.today
     end
+
+    if self.tiporesolucion.estado.final == true
+      # si esta es la primera resolucion final
+      #actualizamos los tiempos de entrega
+      dias = (self.fecha - self.solicitud.fecha_creacion).to_i
+      dias = 1 if dias == 0
+
+      self.solicitud.tiempo_respuesta_calendario = dias
+      self.solicitud.tiempo_respuesta = (dias - Feriado.calcular_dias_no_laborales(:fecha => self.solicitud.fecha_creacion,
+                                                                         :dias => dias,
+                                                                         :institucion_id => self.solicitud.institucion_id))
+    end
+   
     
     self.solicitud.save
   end

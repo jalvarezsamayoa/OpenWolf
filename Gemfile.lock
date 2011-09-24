@@ -8,10 +8,10 @@ GIT
 
 GIT
   remote: git://github.com/neerajdotname/admin_data.git
-  revision: 0b72c44a3706591572d6e3b18b1bb94b723e450c
+  revision: 6b32624e183ab77619090f11e41e7882041518b5
   specs:
     admin_data (1.1.13)
-      will_paginate (= 3.0.pre2)
+      will_paginate (>= 3.0.0)
 
 GIT
   remote: git://github.com/rspec/rspec-core.git
@@ -34,7 +34,7 @@ GIT
 
 GIT
   remote: git://github.com/rspec/rspec-rails.git
-  revision: 9a92b752f40dd2d14ae33c6e7345f16b20ec14fb
+  revision: 1b8c8862f262d8951ce6e437cba4dbdbd796e0d3
   specs:
     rspec-rails (2.6.1)
       actionpack (~> 3.0)
@@ -54,6 +54,7 @@ GIT
 GEM
   remote: http://rubygems.org/
   specs:
+    Platform (0.4.0)
     ZenTest (4.4.2)
     abstract (1.0.0)
     acl9 (0.12.0)
@@ -88,9 +89,10 @@ GEM
     activesupport (3.0.9)
     addressable (2.2.6)
     arel (2.0.10)
-    backup (3.0.17)
+    backup (3.0.18)
+      popen4 (~> 0.1.2)
       thor (~> 0.14.6)
-    bcrypt-ruby (3.0.0)
+    bcrypt-ruby (3.0.1)
     builder (2.1.2)
     capistrano (2.8.0)
       highline
@@ -114,7 +116,7 @@ GEM
     delayed_job (2.1.4)
       activesupport (~> 3.0)
       daemons
-    devise (1.4.5)
+    devise (1.4.7)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.0.3)
       warden (~> 1.0.3)
@@ -125,7 +127,8 @@ GEM
     erubis (2.6.6)
       abstract (>= 1.0.0)
     escape (0.0.4)
-    factory_girl (2.1.0)
+    factory_girl (2.1.2)
+      activesupport
     factory_girl_rails (1.2.0)
       factory_girl (~> 2.1.0)
       railties (>= 3.0.0)
@@ -133,10 +136,8 @@ GEM
       i18n (~> 0.4)
     fastercsv (1.5.4)
     ffi (1.0.9)
-    formtastic (1.2.4)
-      actionpack (>= 2.3.7)
-      activesupport (>= 2.3.7)
-      i18n (~> 0.4)
+    formtastic (2.0.0)
+      rails (~> 3.0)
     haml (3.1.3)
     highline (1.6.2)
     hirb (0.5.0)
@@ -148,8 +149,7 @@ GEM
     jquery-rails (1.0.14)
       railties (~> 3.0)
       thor (~> 0.14)
-    json_pure (1.5.4)
-      spruz (~> 0.2.8)
+    json_pure (1.6.1)
     launchy (2.0.5)
       addressable (~> 2.2.6)
     libnotify (0.5.7)
@@ -169,8 +169,9 @@ GEM
       net-ssh (>= 1.99.1)
     nokogiri (1.5.0)
     notifier (0.1.3)
+    open4 (1.1.0)
     orm_adapter (0.0.5)
-    paperclip (2.4.1)
+    paperclip (2.4.2)
       activerecord (>= 2.3.0)
       activesupport (>= 2.3.2)
       cocaine (>= 0.0.2)
@@ -178,8 +179,11 @@ GEM
     pdfkit (0.4.6)
     pg (0.11.0)
     polyglot (0.3.2)
+    popen4 (0.1.2)
+      Platform (>= 0.4.0)
+      open4 (>= 0.4.0)
     pr_geohash (1.0.0)
-    rack (1.2.3)
+    rack (1.2.4)
     rack-mount (0.6.14)
       rack (>= 1.0.0)
     rack-test (0.5.7)
@@ -214,24 +218,23 @@ GEM
       rspec (>= 2.0.0.alpha11)
     rsolr (0.12.1)
       builder (>= 2.1.2)
-    ruby_parser (2.3.0)
+    ruby_parser (2.3.1)
       sexp_processor (~> 3.0)
     rubyzip (0.9.4)
-    selenium-webdriver (2.5.0)
+    selenium-webdriver (2.7.0)
       childprocess (>= 0.2.1)
       ffi (>= 1.0.7)
       json_pure
       rubyzip
     serenity-odt (0.2.1)
       rubyzip (>= 0.9.1)
-    sexp_processor (3.0.6)
+    sexp_processor (3.0.7)
     silent-postgres (0.1.1)
-    simplecov (0.5.2)
+    simplecov (0.5.3)
       multi_json (~> 1.0.3)
-      simplecov-html (~> 0.5.0)
-    simplecov-html (0.5.0)
+      simplecov-html (~> 0.5.3)
+    simplecov-html (0.5.3)
     spork (0.9.0.rc9)
-    spruz (0.2.13)
     sunspot (1.2.1)
       escape (= 0.0.4)
       pr_geohash (~> 1.0)
@@ -242,7 +245,7 @@ GEM
     test_notifier (0.4.0)
       notifier
     thor (0.14.6)
-    tiny_mce (0.1.4)
+    tiny_mce (0.1.7)
     treetop (1.4.10)
       polyglot
       polyglot (>= 0.3.1)
@@ -257,7 +260,7 @@ GEM
     whenever (0.7.0)
       activesupport (>= 2.3.4)
       chronic (~> 0.6.3)
-    will_paginate (3.0.pre2)
+    will_paginate (3.0.1)
     xpath (0.1.4)
       nokogiri (~> 1.3)
 

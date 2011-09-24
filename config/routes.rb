@@ -9,7 +9,11 @@ OpenwolfV3::Application.routes.draw do
   resources :idiomas
 
   resources :main
-  resources :importar  
+  resources :importar do
+    member do
+      get :status
+    end
+  end
   resources :documentocategorias
   resources :documentoclasificaciones
   resources :sentidosresolucion

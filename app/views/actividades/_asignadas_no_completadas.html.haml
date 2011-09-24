@@ -19,14 +19,20 @@
           %th
             = label_tag t("solicitudes.label_dias_restantes")
           %td= solicitud.dias_restantes
-      = label_tag t("solicitudes.label_forma_entrega")
-      %br/
-      = solicitud.forma_entrega
-      %br/
-      = label_tag t("actividades.label_textoactividad")
-      %br/
-      = actividad.textoactividad
-      %br/
+        %tr
+          %th
+            = label_tag t("solicitudes.label_forma_entrega")
+          %td  
+            = solicitud.forma_entrega
+      %p
+        = label_tag t("solicitudes.label_textosolicitud")
+        %br     
+        = solicitud.texto_solicitud
+      %p
+        = label_tag t("actividades.label_textoactividad")
+        %br
+        = actividad.textoactividad
+      %br
     %hr.space/
     %div{:id => "seguimientos_actividad_#{actividad.id}"}
       = render :partial => 'actividades/actividad_seguimientos', :locals => {:actividad => actividad}  

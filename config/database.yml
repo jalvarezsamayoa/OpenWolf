@@ -49,6 +49,16 @@ test: &test
 production:
   adapter: postgresql
   encoding: unicode
+  database: openwolf_staging
+  pool: 5
+  username: openwolf
+  password: Bless777
+  host: localhost
+  port: 5432
+
+production:
+  adapter: postgresql
+  encoding: unicode
   database: openwolf
   pool: 5
   username: openwolf

@@ -351,7 +351,7 @@ class Solicitud < ActiveRecord::Base
 
   def razon_prorroga
     p = self.resoluciones.prorrogas.last
-    razon = p.nil? ? '' : p.descripcion
+    razon = p.nil? ? '' : p.razontiporesolucion.nombre
     return razon
   end
 
@@ -396,18 +396,15 @@ class Solicitud < ActiveRecord::Base
   end
 
   def tiempo_ampliacion
-    i_tiempo = 0
-
-    unless self.fecha_prorroga.nil?
-      i_tiempo = (self.fecha_prorroga - (self.fecha_creacion + 10))
-    end
-
-    return i_tiempo
+    p = self.resoluciones.prorrogas.last
+    return 0 if p.nil?
+    return 0 if p.nueva_fecha.nil?
+    return (p.nueva_fecha - p.fecha).to_i if p.fecha_notificacion.nil?
+    return (p.nueva_fecha - p.fecha_notificacion).to_i
   end
 
   def dias_transcurridos
     i_tiempo = 0
-
     if self.fecha_completada.nil?
       i_tiempo = (Date.today - self.fecha_creacion)
     else
@@ -530,18 +527,6 @@ class Solicitud < ActiveRecord::Base
   # marca solicitud como terminada
   def marcar_como_terminada(fecha = Date.today)
     self.fecha_completada = fecha if ( self.actividades.count == self.actividades.completadas.count)
-
-    unless self.fecha_completada.nil?
-      #actualizamos los tiempos de entrega
-      dias = (self.fecha_completada - self.fecha_creacion).to_i
-      dias = 1 if dias == 0
-
-      self.tiempo_respuesta_calendario = dias
-      self.tiempo_respuesta = (dias - Feriado.calcular_dias_no_laborales(:fecha => self.fecha_creacion,
-                                                                         :dias => dias,
-                                                                         :institucion_id => self.institucion_id))
-
-    end
   end
 
 

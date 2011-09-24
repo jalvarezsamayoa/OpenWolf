@@ -1,32 +1,32 @@
+set :stages, %w(production staging)
+set :default_stage, "staging"
+
 require 'bundler/capistrano'
 require 'delayed/recipes'
+require 'capistrano/ext/multistage'
+
+set :rails_root, "#{File.dirname(__FILE__)}/.."
+require "#{rails_root}/config/capistrano_database_yml.rb"
 
 set :whenever_command, "bundle exec whenever"
 require "whenever/capistrano"
 
 default_run_options[:pty] = true
 
-set :rails_env, "production"
-
 set :application, "openwolf"
-set :applicationdir, "/home/transparencia/public_html/#{application}"
-role :web, "transparencia.gob.gt"
-role :db,  "transparencia.gob.gt", :primary => true
-role :app, "transparencia.gob.gt"
-role :solr, 'transparencia.gob.gt'
-
 set :user, "transparencia"
-set :deploy_to, "/home/transparencia/public_html/#{application}"
-set :deploy_via, :remote_cache
-#set :deploy_via, :copy
-set :use_sudo, false
-set :backup_dir, "#{deploy_to}/bk_database"
 
 set :scm, "git"
-#set :repository, "git@gitorious.org:openwolf/openwolf.git"
 set :repository, "git://gitorious.org/openwolf/openwolf_v3.git"
-set :branch, "master"
-set :git_enable_submodules, 1
+set :deploy_via, :remote_cache
+set :use_sudo, false
+
+#set :git_enable_submodules, 1
+
+task :uname do
+  run "uname -a"
+end
+
 
 namespace :deploy do
   task :start do ; end

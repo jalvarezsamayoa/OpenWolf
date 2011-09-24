@@ -27,20 +27,22 @@
 #Solicitud.update_all(:anulada => false)
 
 #actualizar tiempos de respuesta
-# Solicitud.update_all(:tiempo_respuesta => 0, :tiempo_respuesta_calendario => 0)
-# solicitudes = Solicitud.conresolucionfinal
-# for s in solicitudes
-#   unless s.fecha_completada.nil?
-#     dias = (s.fecha_completada - s.fecha_creacion)
-#     dias = 1 if dias == 0
-#     s.tiempo_respuesta_calendario = dias
-#     s.tiempo_respuesta = dias - Feriado.calcular_dias_no_laborales(:fecha => s.fecha_creacion, :dias => dias.to_i)
-#   else
-#     s.tiempo_respuesta = 0
-#     s.tiempo_respuesta_calendario = 0
-#   end
-#   s.save(false)
-# end
+Solicitud.update_all(:tiempo_respuesta => 0, :tiempo_respuesta_calendario => 0)
+solicitudes = Solicitud.conresolucionfinal
+for s in solicitudes
+  unless s.fecha_resolucion.nil?
+    dias = (s.fecha_resolucion - s.fecha_creacion).to_i
+    dias = 1 if dias == 0
+    s.tiempo_respuesta_calendario = dias
+    s.tiempo_respuesta = dias - Feriado.calcular_dias_no_laborales(:fecha => s.fecha_creacion,
+                                                                   :dias => dias.to_i,
+                                                                   :institucion_id => s.institucion_id)
+  else
+    s.tiempo_respuesta = 0
+    s.tiempo_respuesta_calendario = 0
+  end
+  s.save(false)
+end
 
 
 # #limpiar fecha resoluciones
@@ -61,19 +63,19 @@
 # puts 'Ok'
 
 #limpiar estados de resoluciones
-n = Solicitud.conresolucion.count
-i = 1
-Solicitud.conresolucion.each do |solicitud|
-  puts "Procesando #{i} de #{n}, id: #{solicitud.id}"
-  #ultima resolucion
-  resolucion = solicitud.resoluciones.last
-  if solicitud.estado_id != resolucion.tiporesolucion.estado_id
-    solicitud.estado_id = resolucion.tiporesolucion.estado_id
-    solicitud.fecha_resolucion = resolucion.fecha
-    solicitud.save(false)
-  end
-  i += 1
-end
+# n = Solicitud.conresolucion.count
+# i = 1
+# Solicitud.conresolucion.each do |solicitud|
+#   puts "Procesando #{i} de #{n}, id: #{solicitud.id}"
+#   #ultima resolucion
+#   resolucion = solicitud.resoluciones.last
+#   if solicitud.estado_id != resolucion.tiporesolucion.estado_id
+#     solicitud.estado_id = resolucion.tiporesolucion.estado_id
+#     solicitud.fecha_resolucion = resolucion.fecha
+#     solicitud.save(false)
+#   end
+#   i += 1
+# end
 
 
 

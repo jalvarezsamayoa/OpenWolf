@@ -1,29 +1,14 @@
 .listing
   %h2
-    Solicitudes Importadas: #{@institucion.nombre}
+    Estado de proceso
   %table.minimalist-b
     %thead
-      %tr
-        %th= Solicitud.human_attribute_name(:codigo)
-        %th= Solicitud.human_attribute_name(:fecha_creacion)
-        %th= Solicitud.human_attribute_name(:institucion)
-        %th= Solicitud.human_attribute_name(:solicitante_nombre)
-        %th= Solicitud.human_attribute_name(:estado)
-        %th= Solicitud.human_attribute_name(:dias)
-        %th= Solicitud.human_attribute_name(:avance)
-        %th= Solicitud.human_attribute_name(:textosolicitud)
+      %th= 'Estado Actual'
+      %th= 'Ultimo Error'
+      %th= 'Actualizado'
     %tbody
-      - if @solicitudes
-        - for solicitud in @solicitudes  do
-          %tr
-            %td
-              = link_to solicitud.codigo, solicitud_path(solicitud)
-            %td
-              = l(solicitud.fecha_creacion)
-            %td= solicitud.institucion.abreviatura
-            %td
-              = solicitud.solicitante_nombre
-            %td= solicitud.estado_actual
-            %td= solicitud.dias_restantes
-            %td= solicitud.avance
-            %td= solicitud.extracto(usuario_actual)
+      - @log.each do |log|
+        %tr
+          %td= log.status
+          %td= log.last_error
+          %td= l(log.created_at)

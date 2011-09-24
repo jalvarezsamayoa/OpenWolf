@@ -1,0 +1,20 @@
+- content_for :head do
+  %meta{"http-equiv"=>"refresh", :content => "3"}
+
+.listing
+  %h2
+    Estado de proceso
+  %table.minimalist-b
+    %thead
+      %th= 'ID'
+      %th= 'Estado Actual'
+      %th= 'Ultimo Error'
+      %th= 'Actualizado'
+    %tbody
+      - unless @log.blank?
+        - @log.each do |log|
+          %tr
+            %td= log.id
+            %td= log.status
+            %td= log.last_error
+            %td= l(log.created_at)

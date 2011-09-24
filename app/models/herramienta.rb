@@ -18,11 +18,13 @@ class Herramienta
 
   RESOLUCION_PRORROGA = true
 
+  attr_accessor :institucion, :enlace, :clasificacion, :clasificacion_resolucion
+  
   def initialize
-    @institucion = nil
-    @enlace = nil
-    @clasificacion = Documentoclasificacion.find_by_codigo(Documentoclasificacion::SOLICITUDINFOPUBLICA).id
-    @clasificacion_resolucion = Documentoclasificacion.find_by_codigo(Documentoclasificacion::RESOLUCION).id
+    self.institucion = nil
+    self.enlace = nil
+    self.clasificacion = Documentoclasificacion.find_by_codigo(Documentoclasificacion::SOLICITUDINFOPUBLICA).id
+    self.clasificacion_resolucion = Documentoclasificacion.find_by_codigo(Documentoclasificacion::RESOLUCION).id
   end
 
   # :path Archivo csv con la informacion
@@ -30,39 +32,46 @@ class Herramienta
   # :usuario_id Id de usuario que importa datos
   def importar_solicitudes(options)
     file = options[:file]
-    campos = options[:campos]   
+    campos = options[:campos]
     usuario_id = options[:usuario_id]
-    
-    @institucion = preparar_institucion(options[:institucion_id])
-    
-    # agregar enlaces
-    # usar por default el usuario jefe de la unidad de informacion
-    @enlace = @institucion.usuarios.activos.supervisores.first
 
-    #importamos registros a la tabla   
-    importar_registros(options[:file], campos, usuario_id, @institucion, @enlance)   
-    
-  end
+    WorkerLog.clear
 
-  
-  #importa los registros enviados
-  def importar_registros(file, campos, usuario_id, institucion, enlace)
-
-    linea = 0
-    logger.debug { "Importando..." }
+    #importamos registros a la tabla
+    WorkerLog.log("Leyendo archivo CSV...")
 
     #obtenemos documento
-    csv_doc = FasterCSV.new(file.read, {:headers => true, :encoding => 'utf8', :skip_blanks => true})
-    #barremos lineas de documento 
+    csv_doc = FasterCSV.new(options[:file].read, {:headers => true, :encoding => 'utf8', :skip_blanks => true})
+    WorkerLog.log("Importando informacion archivo CSV...")
+
+    self.institucion = preparar_institucion(options[:institucion_id])
+  
+    # agregar enlaces
+    # usar por default el usuario jefe de la unidad de informacion
+    self.enlace = institucion.usuarios.activos.supervisores.first
+
+    self.importar_registros(csv_doc, campos, usuario_id, self.institucion, self.enlace)
+
+  end
+
+
+  #importa los registros enviados
+  def importar_registros(csv_doc, campos, usuario_id, institucion, enlace)
+
+    linea = 0
+
+    WorkerLog.log("Leyendo CSV...")
+
+    #barremos lineas de documento
     csv_doc.each do |row|
       linea += 1
-      logger.debug { "Linea #{linea}" }
+      WorkerLog.log("Importando Linea #{linea}")
 
       unless importar_solicitud(row, campos, usuario_id, institucion, enlace)
-        logger.debug { "Error!!! Linea #{linea}" }
+        WorkerLog.error("Error al importar linea #{linea}")
         break
       end
-      
+
     end #csv_doc.each
     csv_doc.close
 
@@ -70,18 +79,18 @@ class Herramienta
 
   #busca institucion y borra todas sus solicitudes relacionadas
   def preparar_institucion(institucion_id)
-    logger.debug { "Buscando Institucion #{institucion_id}" }
+    WorkerLog.log("Buscando Institucion #{institucion_id}")
     institucion = Institucion.find(institucion_id)
-    logger.debug { "Borrar Solicitudes" }
+    WorkerLog.log("Borrar Solicitudes")
     institucion.solicitudes.clear
-    
+
     return institucion
   end
 
-  
+
   # genera una solicitud a partir de un row del archivo csv
   def importar_solicitud(row, campos, usuario_id, institucion, enlace)
-    logger.debug { "Importando solicititud" }
+    WorkerLog.log("Importando solicitud")
     lok = false
 
     return false unless tiene_informacion_minima?(row, campos)
@@ -93,7 +102,7 @@ class Herramienta
 
     case estado_solicitud
     when ESTADO_ENTRAMITE
-      lok = crear_solicitud_en_tramite(row, campos, estado_solicitud, institucion, enlace)      
+      lok = crear_solicitud_en_tramite(row, campos, estado_solicitud, institucion, enlace)
     when ESTADO_PRORROGA
       lok = crear_solicitud_con_prorroga(row, campos, estado_solicitud, institucion, enlace)
     when ESTADO_ENTREGA_TOTAL
@@ -106,24 +115,24 @@ class Herramienta
       lok = crear_solicitud_desechada(row, campos, estado_solicitud, institucion, enlace)
     when ESTADO_NO_RECOGIDA
       lok = crear_solicitud_no_recogida(row, campos, estado_solicitud, institucion, enlace)
-    end   
+    end
 
     return lok
   end #importar_solicitud
 
-  
+
   def tiene_informacion_minima?(row, campos)
-    logger.debug { "Tiene informacion minima" }
+    WorkerLog.log("Informacion minima?")
     # no tomamos en cuenta solicitudes sin texto
     return false if row[campos['solicitud']].nil? or row[campos['solicitud']].empty?
-
+    WorkerLog.log("Informacion minima... Ok")
     return true
   end
 
   #obtiene y verifica el estado de la solicitud a importar
   def obtener_estado_solicitud(row, campos)
-    logger.debug { "Obtenidiendo estado solicitud" }
-    
+    WorkerLog.log("Obteniendo estado solicitud...")
+
     #limpiamos el texto del campo
     c_estatus = row[campos['estatus']]
 
@@ -137,51 +146,56 @@ class Herramienta
     c_estatus = c_estatus.tr_s('í','Í')
     c_estatus = c_estatus.tr_s('ó','Ó')
     c_estatus = c_estatus.tr_s('ú','Ú')
-    
+
     c_estatus = c_estatus.upcase
 
     #buscamos el código del estado
     estado = Estado.where("upper(nombre) = ?", c_estatus).first
 
-    logger.debug { estado.nil? ? "Estado no encontrato" : "Estado: #{estado.nombre}" }
+    if estado.nil?
+      WorkerLog.error("Estado no encontrado: #{c_estatus}")
+    else
+      WorkerLog.log("Estado: #{estado.nombre}")
+    end
 
     return ESTADO_NOEXISTE if estado.nil?
 
-    return estado.id      
+    return estado.id
   end
 
   def crear_solicitud_en_tramite(row, campos, estado_solicitud, institucion, enlace)
-    logger.debug { "Creado solicitud en tramite." }
+    WorkerLog.log("Creando solicitud en tramite.")
+
     valores = extraer_valores(row,campos)
     solicitud = crear_solicitud(valores,ESTADO_ENTRAMITE)
 
     return false unless solicitud
-    
-    asignar_a_enlace(solicitud, ESTADO_ACTIVIDAD_EN_TRAMITE)      
+
+    asignar_a_enlace(solicitud, ESTADO_ACTIVIDAD_EN_TRAMITE)
   end
 
   def crear_solicitud_entregada_total(row, campos, estado_solicitud, institucion, enlace)
     logger.debug { "Creado solicitud entregada total." }
-    crear_solicitud_entregada(row,campos,ESTADO_ENTREGA_TOTAL)        
+    crear_solicitud_entregada(row,campos,ESTADO_ENTREGA_TOTAL)
     return true
   end
 
   def crear_solicitud_entregada_parcial(row, campos, estado_solicitud, institucion, enlace)
     logger.debug { "Creado solicitud entregada parcial." }
-    crear_solicitud_entregada(row,campos,ESTADO_ENTREGA_PARCIAL)            
+    crear_solicitud_entregada(row,campos,ESTADO_ENTREGA_PARCIAL)
     return true
   end
 
   def crear_solicitud_denegada(row, campos, estado_solicitud, institucion, enlace)
-    logger.debug { "Creado solicitud en denegada." }
-    crear_solicitud_entregada(row,campos,ESTADO_DENEGADA)            
+    logger.debug { "Creado solicitud denegada." }
+    crear_solicitud_entregada(row,campos,ESTADO_DENEGADA)
     return true
   end
 
   def crear_solicitud_entregada(row,campos,estado_solicitud)
     valores = extraer_valores(row,campos)
     solicitud = crear_solicitud(valores,estado_solicitud)
-    return false unless solicitud    
+    return false unless solicitud
     actividad = asignar_a_enlace(solicitud, ESTADO_ACTIVIDAD_TERMINADA)
     agregar_seguimiento(solicitud, actividad)
     agregar_resolucion(solicitud)
@@ -192,7 +206,7 @@ class Herramienta
     logger.debug { "Creado solicitud con prorroga." }
     valores = extraer_valores(row,campos)
     solicitud = crear_solicitud(valores,estado_solicitud)
-    return false unless solicitud    
+    return false unless solicitud
     actividad = asignar_a_enlace(solicitud, ESTADO_ACTIVIDAD_TERMINADA)
     agregar_seguimiento(solicitud, actividad)
     agregar_resolucion(solicitud, RESOLUCION_PRORROGA)
@@ -201,7 +215,7 @@ class Herramienta
 
   def crear_solicitud_desechada(row, campos, estado_solicitud, institucion, enlace)
     logger.debug { "Creado solicitud en desechada." }
-     crear_solicitud_entregada(row,campos,ESTADO_DESECHADA)
+    crear_solicitud_entregada(row,campos,ESTADO_DESECHADA)
     return true
   end
 
@@ -215,7 +229,7 @@ class Herramienta
 
     e = Estado.find(estado_id)
     valores[:estado_id] = e.id
-    
+
     # la fecha programada de entrega SIEMPRE SON 10 DIAS POR LEY
     # solo se modifica si hay prorroga
     valores[:fecha_programada] = valores[:fecha_creacion] + 14
@@ -225,20 +239,20 @@ class Herramienta
       valores[:fecha_entregada] = nil
       valores[:fecha_completada] = nil
     end
-    
+
     s = Solicitud.new(valores)
     s.save!
     return s
-    
+
   end
 
   def asignar_a_enlace(solicitud, actividad_estado_id = 1)
     logger.debug { "Asignando a enlace" }
-    
+
     #assigar enalces / actividades
     actividad = Actividad.new(:solicitud_id => solicitud.id,
-                              :institucion_id => @institucion.id,
-                              :usuario_id => @enlace.id,
+                              :institucion_id => self.institucion.id,
+                              :usuario_id => self.enlace.id,
                               :fecha_asignacion => solicitud.fecha_creacion,
                               :textoactividad => solicitud.textosolicitud,
                               :estado_id => actividad_estado_id,
@@ -252,16 +266,16 @@ class Herramienta
   def agregar_seguimiento(solicitud, actividad)
 
     logger.debug { "Agregando Seguiimiento" }
-    
-    actividad.seguimientos << Seguimiento.new(:institucion_id => @institucion.id,
-                                              :usuario_id  => @enlace.id,
+
+    actividad.seguimientos << Seguimiento.new(:institucion_id => self.institucion.id,
+                                              :usuario_id  => self.enlace.id,
                                               :fecha_creacion => solicitud.fecha_entregada,
                                               :textoseguimiento => 'Seguimiento generado automáticamente por proceso de migración de datos.',
                                               :informacion_publica => true)
 
     logger.debug { "Marcando actividad como terminada." }
     actividad.marcar_como_terminada(solicitud.fecha_entregada)
-    
+
   end
 
   def agregar_resolucion(solicitud, es_prorroga = false)
@@ -273,20 +287,20 @@ class Herramienta
 
     #verificamos si es prorroga
     nueva_fecha = ( es_prorroga ? solicitud.fecha_prorroga : nil )
-    
-    solicitud.resoluciones << Resolucion.new(:usuario_id => @enlace.id,
-                                             :institucion_id => @institucion.id,
+
+    solicitud.resoluciones << Resolucion.new(:usuario_id => self.enlace.id,
+                                             :institucion_id => self.institucion.id,
                                              :descripcion => 'Resolución generada automáticamente por proceso de migración de datos.',
                                              :tiporesolucion_id => tr.id,
                                              :razontiporesolucion_id => rtr.id,
                                              :informacion_publica => true,
-                                             :documentoclasificacion_id => @clasificacion_resolucion,
+                                             :documentoclasificacion_id => self.clasificacion_resolucion,
                                              :dont_send_email => true,
                                              :nueva_fecha => nueva_fecha)
     solicitud.fecha_prorroga = nueva_fecha
     solicitud.save!
   end
-  
+
   def extraer_valores(row, campos)
     logger.debug { "Extrayendo valores de row" }
     valores = {}
@@ -303,10 +317,10 @@ class Herramienta
     solicitante_direccion = row[campos['direccion']]
     solicitante_telefonos = row[campos['telefono']]
     solicitante_institucion = '' #TODO
-    
+
     departamento_id = nil
     municipio_id = nil
-    
+
     email = '' # TODO
     forma_entrega = ''
     observaciones = ''
@@ -326,16 +340,16 @@ class Herramienta
     resoluciones = row[campos['numero_resoluciones']] #TODO
     informacion_publica = true
     origen_id = Solicitud::ORIGEN_MIGRACION
-    documentoclasificacion_id = @clasificacion
+    documentoclasificacion_id = self.clasificacion
 
-    valores[:usuario_id] = @enlace.id
+    valores[:usuario_id] = self.enlace.id
     valores[:codigo] = nil
-    valores[:institucion_id] = @institucion.id    
-    valores[:tiposolicitud_id] = Solicitud::TIPO_INFORMACION   
+    valores[:institucion_id] = self.institucion.id
+    valores[:tiposolicitud_id] = Solicitud::TIPO_INFORMACION
     valores[:via_id] = via_id
     valores[:fecha_creacion] = fecha_creacion
     valores[:fecha_programada] = fecha_programada
-    valores[:fecha_entregada] = fecha_entregada    
+    valores[:fecha_entregada] = fecha_entregada
     valores[:fecha_prorroga] = fecha_prorroga
     valores[:fecha_completada] = fecha_completada
     valores[:solicitante_nombre] = solicitante_nombre
@@ -369,8 +383,8 @@ class Herramienta
     valores[:dont_send_email] = true
 
     logger.debug { "Valores obtenidos. #{valores.inspect}" }
-    
-    return valores    
+
+    return valores
   end
 
   def obtener_estado(estado_nombre, d_creacion, d_programada, d_entregada, d_completada, d_prorroga)
@@ -436,5 +450,5 @@ class Herramienta
     RAILS_DEFAULT_LOGGER
   end
 
-  
+
 end

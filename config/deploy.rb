@@ -61,7 +61,7 @@ namespace :solr do
   task :stop, :roles => :solr do
     run <<-CMD
       cd #{current_path} &&
-      rake sunspot:solr:stop RAILS_ENV=production
+      rake sunspot:solr:stop RAILS_ENV=#{rails_env} > /dev/null 2> /dev/null
     CMD
   end
 
@@ -69,7 +69,7 @@ namespace :solr do
   task :start, :roles => :solr do
     run <<-CMD
       cd #{current_path} &&
-      nohup rake sunspot:solr:start RAILS_ENV=production > #{shared_path}/log/solr.log 2> #{shared_path}/log/solr.err.log
+      nohup rake sunspot:solr:start RAILS_ENV=#{rails_env} > #{shared_path}/log/solr.log 2> #{shared_path}/log/solr.err.log
     CMD
   end
 
@@ -77,7 +77,7 @@ namespace :solr do
   task :reindex, :roles => :solr do
     run <<-CMD
       cd #{current_path} &&
-      rake sunspot:solr:reindex RAILS_ENV=production
+      rake sunspot:solr:reindex RAILS_ENV=#{rails_env}
     CMD
   end
 end

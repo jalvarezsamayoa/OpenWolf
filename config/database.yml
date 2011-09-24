@@ -46,7 +46,7 @@ test: &test
   host: localhost
   port: 5432
 
-production:
+staging:
   adapter: postgresql
   encoding: unicode
   database: openwolf_staging

@@ -5,6 +5,12 @@ require 'bundler/capistrano'
 require 'delayed/recipes'
 require 'capistrano/ext/multistage'
 
+$:.unshift(File.expand_path('./lib', ENV['rvm_path']))
+require 'rvm/capistrano'
+set :rvm_ruby_string, '1.8.7'
+
+set :rvm_bin_path, "/usr/local/bin"
+
 set :rails_root, "#{File.dirname(__FILE__)}/.."
 require "#{rails_root}/config/capistrano_database_yml.rb"
 

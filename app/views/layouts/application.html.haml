@@ -5,8 +5,8 @@
     %link{:href => "/favicon.ico", :rel => "icon", :type => "image/ico"}/
     %link{:href => "/favicon.ico", :rel => "shortcut icon", :type => "image/ico"}/
     %title
-      OpenWolf 0.1 - #{@page_title || "Plataforma Virtual para la Transparencia"}
-    = formtastic_stylesheet_link_tag
+      OpenWolf 0.1 - #{@page_title || "Plataforma Virtual para la Transparencia"}    
+    = stylesheet_link_tag 'formtastic', 'formtastic_changes'
     = stylesheet_link_tag 'reset.css', 'application.css', 'tablas.css', 'sdmenu.css', 'buttons.css', 'formtastic_changes.css', 'redmond/jquery-ui-1.8.4.custom.css'
     %link{:href => "http://fonts.googleapis.com/css?family=Josefin+Sans&subset=latin", :rel => "stylesheet", :type => "text/css"}
       = include_tiny_mce_if_needed

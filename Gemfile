@@ -21,7 +21,7 @@ gem 'haml' # sistema para generacion de templates
 gem 'nokogiri'
 gem 'hpricot'
 gem 'ruby_parser'
-gem 'formtastic' # genera formularios semanticos
+gem 'formtastic', '2.0.0.rc1' # genera formularios semanticos
 gem 'validation_reflection' # obtiene datos de campos a validar, para uso con formtastic
 gem 'sunspot_rails' #indexamiento y busqueda (fulltext) via solr
 gem 'paperclip' # modulo para hacer upload a archivos

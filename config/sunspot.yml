@@ -15,7 +15,7 @@ staging:
   solr:
     hostname: localhost
     port: 8984
-    path: /home/transparencia/public_html/staging/openwolf/currrent/solr/data/index
+    path: /solr
     log_level: WARNING
     solr_home: /home/transparencia/public_html/staging/openwolf/current/solr
   auto_commit_after_request: true
@@ -24,7 +24,7 @@ production:
   solr:
     hostname: localhost
     port: 8983
-    path: /home/transparencia/public_html/openwolf/currrent/solr/data/index
+    path: /solr
     log_level: WARNING
     solr_home: /home/transparencia/public_html/openwolf/current/solr
   auto_commit_after_request: true

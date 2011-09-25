@@ -1,4 +1,3 @@
-
 *.DS_Store
 *.swp
 *.swo
@@ -40,3 +39,4 @@ solr
 solr/*
 lib/generators/haml
 lib/generators/haml/*
+.rvmrc

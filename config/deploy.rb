@@ -36,6 +36,8 @@ namespace :deploy do
   end
 end
 
+after "deploy:update_code", :symlink_gems
+
 #before "deploy:update_code", "solr:stop"
 #after "deploy:symlink", "solr:symlink"
 #after "solr:symlink", "solr:start"
@@ -46,6 +48,17 @@ end
 
 #after "deploy:stop",  "delayed_job:stop"
 #after "deploy:start", "delayed_job:start"
+
+
+desc "Vincular directorio de gems"
+task :symlink_gems, :roles => :app do
+  puts "\n\n=== Vinculando Gems ===\n\n"
+  run <<-CMD
+    cd #{release_path} &&
+    ln -nfs #{shared_path}/vendor/bundle #{current_path}/vendor/bundle &&
+    bundle install --path vendor/bundle
+  CMD
+end
 
 namespace :solr do
   desc "Link in solr directory"
@@ -119,5 +132,5 @@ Dir[File.join(File.dirname(__FILE__), '..', 'vendor', 'gems', 'hoptoad_notifier-
   $: << File.join(vendored_notifier, 'lib')
 end
 
-# require 'config/boot'
+require 'config/boot'
 require 'hoptoad_notifier/capistrano'

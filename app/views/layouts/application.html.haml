@@ -14,6 +14,8 @@
       = javascript_include_tag :defaults, 'jquery-ui.min.js', 'jquery.ui.datepicker-es.js', 'sdmenu.js', 'main.js'
       = yield :head
   %body
+    - if Rails.env == 'staging'
+      .notice MODO DE PRUEBAS
     .header.bluebar      
       = render :partial => 'shared/header'
     .colmask.leftmenu

@@ -43,8 +43,8 @@ end
 
 after "deploy:symlink", :symlink_gems
 
-before "deploy:update_code", "solr:stop"
-fter "deploy:symlink", "solr:symlink"
+#before "deploy:update_code", "solr:stop"
+after "deploy:symlink", "solr:symlink"
 after "solr:symlink", "solr:start"
 #after "solr:start", "solr:reindex"
 

@@ -43,7 +43,7 @@ end
 
 after "deploy:symlink", :symlink_gems
 
-#before "deploy:update_code", "solr:stop"
+before "deploy:update_code", "solr:stop"
 after "deploy:symlink", "solr:symlink"
 after "solr:symlink", "solr:start"
 #after "solr:start", "solr:reindex"
@@ -60,8 +60,8 @@ task :symlink_gems, :roles => :app do
   puts "\n\n=== Vinculando Gems ===\n\n"
   run <<-CMD
     cd #{release_path} &&
-    ln -nfs #{shared_path}/bundle #{current_path}/vendor/bundle &&
-    bundle install --path vendor/bundle
+    ln -nfs #{shared_path}/bundle #{current_path}/vendor/gems &&
+    bundle install --path vendor/gems
   CMD
 end
 

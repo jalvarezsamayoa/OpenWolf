@@ -23,7 +23,7 @@ set :user, "transparencia"
 
 set :scm, "git"
 set :repository, "git://gitorious.org/openwolf/openwolf_v3.git"
-#set :deploy_via, :remote_cache
+set :deploy_via, :remote_cache
 set :use_sudo, false
 
 #set :git_enable_submodules, 1
@@ -41,7 +41,7 @@ namespace :deploy do
   end
 end
 
-#after "deploy:update_code", :symlink_gems
+after "deploy:update_code", :symlink_gems
 
 #before "deploy:update_code", "solr:stop"
 #after "deploy:symlink", "solr:symlink"

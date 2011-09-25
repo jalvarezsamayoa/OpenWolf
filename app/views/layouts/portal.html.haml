@@ -14,6 +14,8 @@
  
     = yield :head
   %body
+    - if Rails.env == 'staging'
+      .notice MODO DE PRUEBAS
     #options
       #modules-menu.hlist
         %ul

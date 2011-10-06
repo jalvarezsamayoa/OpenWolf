@@ -48,11 +48,11 @@ after "deploy:symlink", "solr:symlink"
 after "solr:symlink", "solr:start"
 #after "solr:start", "solr:reindex"
 
-#before "deploy:restart", "delayed_job:stop"
-#after  "deploy:restart", "delayed_job:start"
+before "deploy:restart", "delayed_job:stop"
+after  "deploy:restart", "delayed_job:start"
 
-#after "deploy:stop",  "delayed_job:stop"
-#after "deploy:start", "delayed_job:start"
+after "deploy:stop",  "delayed_job:stop"
+after "deploy:start", "delayed_job:start"
 
 
 desc "Vincular directorio de gems"

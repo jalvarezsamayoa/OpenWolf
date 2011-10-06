@@ -8,8 +8,11 @@ class SolicitudInformacionController < ApplicationController
   end
 
   def new
+    institucion_id = ( params[:institucion_id] ||= nil )
+      
     @solicitud = Solicitud.new
     @solicitud.solicitante_nombre = ""
+    @solicitud.institucion_id = institucion_id
 
     respond_to do |format|
       format.html # new.html.erb

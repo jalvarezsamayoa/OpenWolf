@@ -23,6 +23,7 @@ class Resolucion < ActiveRecord::Base
   scope :prorrogas, :conditions => ["resoluciones.tiporesolucion_id = 4"]
   scope :tipo_positiva, where("tiposresoluciones.positiva = ?",true).includes(:tiporesolucion)
   scope :tipo_negativa, where("tiposresoluciones.positiva = ?",false).includes(:tiporesolucion)
+  scope :finales, where("estados.final = ?",true).includes(:tiporesolucion => :estado)
 
   
   def nuevo_numero
@@ -71,7 +72,7 @@ class Resolucion < ActiveRecord::Base
     # actualizamos fecha de entrega
     # esto funciona en casos como una negativa
     if self.tiporesolucion.estado.final == true and self.tiporesolucion.estado.puede_entregar == false
-      self.solicitud.fecha_entregada = Date.today
+      self.solicitud.fecha_entregada = self.fecha
     end
 
     if self.tiporesolucion.estado.final == true

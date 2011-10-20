@@ -1,6 +1,6 @@
 class CreateTempAssets < ActiveRecord::Migration
   def self.up
-    create_table :temp_assets do |t|
+    create_table :temp_assets, :force => true do |t|
       t.integer :institucion_id
       t.integer :usuario_id
       t.text :options

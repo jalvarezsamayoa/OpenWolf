@@ -668,7 +668,7 @@ class Solicitud < ActiveRecord::Base
   def self.get_csv_record(s)
     [s.institucion.nombre,
      s.codigo,
-     s.textosolicitud.tr('"','\'').gsub(/\n/,"").gsub(/\r/,""),
+     s.textosolicitud.tr('"','\'').gsub(/\n/,"").gsub(/\r/,"").gsub(/\t/,""),
      I18n.l(s.fecha_creacion).to_s,
      (s.via.nil? ? '' : s.via.nombre),
      s.tipo_resolucion,
@@ -693,7 +693,8 @@ class Solicitud < ActiveRecord::Base
     else
       if opts[:institucion_id]
         i_institucion_id = opts[:institucion_id] #  usuario_actual.institucion_id
-        solicitudes = Solicitud.find(:all, :conditions => ["solicitudes.institucion_id = ? and solicitudes.anulada = ?", i_institucion_id, false], :order => :numero)
+        ano = (opts[:ano] ||= Date.today.year)
+        solicitudes = Solicitud.find(:all, :conditions => ["solicitudes.institucion_id = ? and solicitudes.anulada = ? and extract(YEAR from solicitudes.fecha_creacion) = ?", i_institucion_id, false, ano], :order => :numero)
       end
     end
 
@@ -714,7 +715,8 @@ class Solicitud < ActiveRecord::Base
                Solicitud.human_attribute_name(:rpt_recursorevision),
                Solicitud.human_attribute_name(:rpt_fechapresentacionrecursorevision),
                Solicitud.human_attribute_name(:rpt_fechanotificacionrecursorevision),
-               Solicitud.human_attribute_name(:rpt_sentidoresolucion)]
+               Solicitud.human_attribute_name(:rpt_sentidoresolucion)            
+              ]
 
       self.get_csv_records(csv, solicitudes)
     end

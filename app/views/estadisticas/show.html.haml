@@ -29,6 +29,10 @@
 
         #por-ano
           %h3 Solicitudes completadas por Año
+
+          - solicitudes = @institucion.solicitudes_por_ano
+          = image_tag( estadisticas_solicitudes_completadas_por_ano(solicitudes) )
+
           %table.minimalist-b{:width => "100%"}
             %colgroup.show-table-data
             %colgroup.show-table-data
@@ -37,7 +41,7 @@
                 %th= "Año"
                 %th= "Solicitudes"
                 %th= "Promedio dias respuesta"
-            - for solicitud in @institucion.solicitudes_por_ano              
+            - for solicitud in solicitudes
               %tr
                 %td= solicitud.ano
                 %td= solicitud.total_solicitudes
@@ -45,6 +49,10 @@
 
         #por-mes-ano
           %h3 Solicitudes completadas por Mes y Año
+
+          - solicitudes = @institucion.solicitudes_por_mes_ano
+          = image_tag( estadisticas_solicitudes_completadas_por_mes_ano(solicitudes) )
+
           %table.minimalist-b{:width => "100%"}
             %colgroup.show-table-data
             %colgroup.show-table-data
@@ -53,7 +61,7 @@
                 %th= "Año / Mes"
                 %th= "Solicitudes"
                 %th= "Promedio dias respuesta"
-            - for solicitud in @institucion.solicitudes_por_mes_ano
+            - for solicitud in solicitudes
               %tr
                 %td= "#{solicitud.mes} / #{solicitud.ano}"
                 %td= solicitud.total_solicitudes

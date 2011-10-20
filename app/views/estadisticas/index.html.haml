@@ -14,14 +14,12 @@
               %tr
                 %th= 'No.'
                 %th= Institucion.human_name
-                %th= "Solicitudes #{Date.today.year}"
-                %th= "Solicitudes Total"
+                %th= "Solicitudes"
             %tbody
             - @instituciones.each_with_index do |institucion, i|
               %tr
                 %td= i + 1
                 %td= link_to institucion.nombre, portal_estadistica_path(1,institucion.id), :title => "Estadisticas para #{institucion.nombre}"
-                %td= institucion.total_solicitudes
                 %td= institucion.solicitudes.activas.count
 
               

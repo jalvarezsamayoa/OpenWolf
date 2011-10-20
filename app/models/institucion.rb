@@ -95,13 +95,13 @@ class Institucion < ActiveRecord::Base
   end
 
   def solicitudes_por_ano
-    solicitudes =  Solicitud.find_by_sql("select extract(year from fecha_creacion) as ano,  count(solicitudes.id) as total_solicitudes, avg(solicitudes.tiempo_respuesta) as promedio_dias_respuesta  from solicitudes where institucion_id = #{self.id} and anulada = #{false} and solicitudes.fecha_completada is not null group by extract(year from fecha_creacion) order by extract(year from fecha_creacion) desc")
+    solicitudes =  Solicitud.find_by_sql("select extract(year from fecha_creacion) as ano,  count(solicitudes.id) as total_solicitudes, avg(solicitudes.tiempo_respuesta) as promedio_dias_respuesta  from solicitudes where institucion_id = #{self.id} and anulada = #{false} and solicitudes.fecha_completada is not null group by extract(year from fecha_creacion) order by extract(year from fecha_creacion) asc")
 
     return solicitudes
   end
   
   def solicitudes_por_mes_ano
-    solicitudes =  Solicitud.find_by_sql("select extract(year from fecha_creacion) as ano, extract(month from fecha_creacion) as mes,  count(solicitudes.id) as total_solicitudes, avg(solicitudes.tiempo_respuesta) as promedio_dias_respuesta from solicitudes where institucion_id = #{self.id} and anulada = #{false} and solicitudes.fecha_completada is not null group by extract(year from fecha_creacion), extract(month from fecha_creacion) order by extract(year from fecha_creacion) desc, extract(month from fecha_creacion) desc")   
+    solicitudes =  Solicitud.find_by_sql("select extract(year from fecha_creacion) as ano, extract(month from fecha_creacion) as mes,  count(solicitudes.id) as total_solicitudes, avg(solicitudes.tiempo_respuesta) as promedio_dias_respuesta from solicitudes where institucion_id = #{self.id} and anulada = #{false} and solicitudes.fecha_completada is not null group by extract(year from fecha_creacion), extract(month from fecha_creacion) order by extract(year from fecha_creacion) asc, extract(month from fecha_creacion) asc")   
     return solicitudes
   end
 

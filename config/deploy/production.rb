@@ -14,3 +14,5 @@ set :branch, "master"
 
 set :deploy_env, 'production'
 set :rails_env, "production"
+
+set :bundle_exec, "bundle exec "

@@ -50,7 +50,9 @@ gem 'hoptoad_notifier' #notificacion de errores via http://hoptoadapp.com/
 # put test-only gems in this group so their generators
 # and rake tasks are available in development mode:
 group :development, :test do
-
+  gem 'highline'
+  gem 'hirb'
+  gem 'pry'
   gem 'webrat'
   gem 'silent-postgres' #elimina la salida de el log de postgresql
   gem 'faker' # herramienta para generacion de datos de prueba

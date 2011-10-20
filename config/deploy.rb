@@ -48,10 +48,16 @@ after "deploy:symlink", "solr:symlink"
 after "solr:symlink", "solr:start"
 #after "solr:start", "solr:reindex"
 
+before "deploy:restart", "solr:stop"
 before "deploy:restart", "delayed_job:stop"
-after  "deploy:restart", "delayed_job:start"
 
+after "deploy:restart", "solr:start"
+after "deploy:restart", "delayed_job:start"
+
+after "deploy:stop", "solr:stop"
 after "deploy:stop",  "delayed_job:stop"
+
+after "deploy:start", "solr:start"
 after "deploy:start", "delayed_job:start"
 
 
@@ -71,23 +77,26 @@ namespace :solr do
     run <<-CMD
       cd #{release_path} &&
       ln -nfs #{shared_path}/solr #{release_path}/solr
-
     CMD
   end
 
   desc "Before update_code you want to stop SOLR in a specific environment"
   task :stop, :roles => :solr do
+
+    
     run <<-CMD
       cd #{current_path} &&
-      rake sunspot:solr:stop RAILS_ENV=#{rails_env} > /dev/null 2> /dev/null
+      #{bundle_exec} rake sunspot:solr:stop RAILS_ENV=#{rails_env} ; true
     CMD
+
+    
   end
 
   desc "After update_code you want to restart SOLR in a specific environment"
   task :start, :roles => :solr do
     run <<-CMD
       cd #{current_path} &&
-      nohup rake sunspot:solr:start RAILS_ENV=#{rails_env} > #{shared_path}/log/solr.log 2> #{shared_path}/log/solr.err.log
+      nohup #{bundle_exec} rake sunspot:solr:start RAILS_ENV=#{rails_env} > #{shared_path}/log/solr.log 2> #{shared_path}/log/solr.err.log
     CMD
   end
 
@@ -95,41 +104,86 @@ namespace :solr do
   task :reindex, :roles => :solr do
     run <<-CMD
       cd #{current_path} &&
-      rake sunspot:solr:reindex RAILS_ENV=#{rails_env}
+      #{bundle_exec} rake sunspot:solr:reindex RAILS_ENV=#{rails_env}
     CMD
   end
 end
 
-task :backup, :roles => :db, :only => { :primary => true } do
-  puts "Remove old backups"
-  run <<-CMD
+
+namespace :openwolf do
+  namespace :db do
+
+    desc "Genera un backup del servidor de produccion y lo restaura en local"
+    task :backup, :roles => :db, :only => { :primary => true } do
+      puts "Remove old backups"
+      run <<-CMD
      cd #{backup_dir} &&
-     rm *.bz2
+     rm *.bz2; true
   CMD
 
-  timestamp = Time.now.to_f
-  filename = "#{application}.dump.#{timestamp}.sql.bz2"
-  clean_filename = "#{application}.dump.#{timestamp}.sql"
-   file_path = "#{backup_dir}/" + filename
-   text = capture "cat #{deploy_to}/current/config/database.yml"
-   yaml = YAML::load(text)
- 
-  on_rollback { run "rm #{file_path}" }
+      timestamp = Time.now.to_f
+      filename = "#{application}.dump.#{timestamp}.sql.bz2"
+      clean_filename = "#{application}.dump.#{timestamp}.sql"
+      file_path = "#{backup_dir}/" + filename
+      text = capture "cat #{deploy_to}/current/config/database.yml"
+      yaml = YAML::load(text)
 
-  puts "Backup database..."
-  run "pg_dump --clean --no-owner --no-privileges -U#{yaml['production']['username']} -h#{yaml['production']['host']} #{yaml['production']['database']} | bzip2 > #{file_path}" do |ch, stream, out|
-    ch.send_data "#{yaml['production']['password']}\n" if out =~ /^Password:/
-    puts out
+      on_rollback { run "rm #{file_path}" }
+
+      puts "Backup database..."
+      run "pg_dump --clean --no-owner --no-privileges -U#{yaml['production']['username']} -h#{yaml['production']['host']} #{yaml['production']['database']} | bzip2 > #{file_path}" do |ch, stream, out|
+        ch.send_data "#{yaml['production']['password']}\n" if out =~ /^Password:/
+        puts out
+      end
+
+      puts "Downloading file..."
+      download(file_path, "/home/javier/Backup/#{filename}")
+
+      puts "Extracting file"
+      system("bunzip2 /home/javier/Backup/#{filename}")
+      system("psql -h localhost -p 5432 -U openwolf -W -d openwolf_development < /home/javier/Backup/#{clean_filename}")
+
+    end
+
+    desc "Restaura backup de base de datos a servidor de produccion o staging"
+    task :restore, :roles => :db, :only => { :primary => true } do
+
+      timestamp = Time.now.to_f
+      filename = "#{application}.dump.#{timestamp}.sql.bz2"
+      clean_filename = "#{application}.dump.#{timestamp}.sql"
+      file_path = "#{File.dirname(__FILE__)}/../tmp/" + filename
+#      text = capture "cat ../config/database.yml"
+      text = File.open("#{File.dirname(__FILE__)}/../config/database.yml",'r')
+      yaml = YAML::load(text.read)
+      text.close
+
+      puts "Backup database..."
+      system "pg_dump --clean --no-owner --no-privileges -U#{yaml['development']['username']} -h#{yaml['development']['host']} #{yaml['development']['database']} | bzip2 > #{file_path}" do |ch, stream, out|
+        ch.send_data "#{yaml['development']['password']}\n" if out =~ /^Password:/
+        puts out
+      end
+
+      backup_file = "#{backup_dir}/#{filename}"
+        
+      puts "Uploading file: #{file_path} to #{backup_file}" 
+      system("scp -C #{file_path} transparencia@transparencia.gob.gt://#{backup_file}")
+
+      puts "Extracting file #{backup_file}"
+      run "bunzip2 #{backup_file}"
+
+      puts "Restoring Backup"
+      user_name = yaml[rails_env]['username']
+      db_name = yaml[rails_env]['database']
+      pwd = yaml[rails_env]['password']
+      
+      run "psql -h localhost -p 5432 -U #{user_name} -W -d #{db_name} < #{backup_dir}/#{clean_filename}" do |ch, stream, out|
+        ch.send_data "#{pwd}\n" if out =~ /^Password for user #{user_name}:/
+        puts out
+      end 
+
+    end
+
   end
-
-  puts "Downloading file..."
-  download(file_path, "/home/javier/Backup/#{filename}")
-
-  puts "Extracting file"
-  system("bunzip2 /home/javier/Backup/#{filename}")
-  system("psql -h localhost -p 5432 -U openwolf -W -d openwolf_development < /home/javier/Backup/#{clean_filename}")
-
-  
 end
 
 

@@ -13,3 +13,5 @@ set :branch, "master"
 
 set :deploy_env, 'staging'
 set :rails_env, "staging"
+
+set :bundle_exec, ""

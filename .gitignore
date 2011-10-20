@@ -12,6 +12,7 @@ log/*.lck
 log/profile.txt
 tmp/**/*
 tmp/*.json
+tmp/*.bz2
 coverage*
 config/database.yml
 db/sphinx

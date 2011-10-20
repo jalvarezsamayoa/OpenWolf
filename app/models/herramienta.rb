@@ -288,6 +288,9 @@ class Herramienta
     #verificamos si es prorroga
     nueva_fecha = ( es_prorroga ? solicitud.fecha_prorroga : nil )
 
+    #utilizamos la fecha de entrega como fecha de resolucion
+    fecha_resolucion = ( es_prorroga ? solicitud.fecha_prorroga : solicitud.fecha_entregada)
+
     solicitud.resoluciones << Resolucion.new(:usuario_id => self.enlace.id,
                                              :institucion_id => self.institucion.id,
                                              :descripcion => 'Resolución generada automáticamente por proceso de migración de datos.',
@@ -296,7 +299,9 @@ class Herramienta
                                              :informacion_publica => true,
                                              :documentoclasificacion_id => self.clasificacion_resolucion,
                                              :dont_send_email => true,
-                                             :nueva_fecha => nueva_fecha)
+                                             :nueva_fecha => nueva_fecha,
+                                             :fecha => fecha_resolucion,
+                                             :fecha_notificacion => fecha_resolucion)
     solicitud.fecha_prorroga = nueva_fecha
     solicitud.save!
   end

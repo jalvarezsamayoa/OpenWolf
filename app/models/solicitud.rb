@@ -187,9 +187,9 @@ class Solicitud < ActiveRecord::Base
     end
 
     logger.debug { "filters" }
-    
+
     l_excluir_anuladas = ((params[:anuladas].nil? or params[:anuladas] != true) ? true : false )
-    
+
     l_filtrar_instituciones = (params[:institucion_id] && params[:institucion_id] != 'ALL')
     l_filtrar_vias = (params[:solicitud_via] && params[:solicitud_via] != 'Todos')
     l_filtrar_estados = (params[:solicitud_estado] && params[:solicitud_estado] != 'Todos')
@@ -397,10 +397,29 @@ class Solicitud < ActiveRecord::Base
 
   def tiempo_ampliacion
     p = self.resoluciones.prorrogas.last
+
     return 0 if p.nil?
-    return 0 if p.nueva_fecha.nil?
-    return (p.nueva_fecha - p.fecha).to_i if p.fecha_notificacion.nil?
-    return (p.nueva_fecha - p.fecha_notificacion).to_i
+    return 0 unless self.tiempo_respuesta > 0
+
+    tiempo = (self.tiempo_respuesta - 10)
+
+    return 0 if tiempo < 0    
+    return tiempo
+    
+    #resolucion_final = self.resoluciones.finales.last
+
+  
+     # si no hay resolucion final
+     # tiempo de amplicacion es a partir de nueva fecha
+    # if resolucion_final.nil?
+#       return (p.nueva_fecha - self.fecha_programada).to_i
+    # end
+    
+     #si hay resolucion final
+    # tiempo = (resolucion_final.fecha - self.fecha_programada).to_i
+    # tiempo = 0 if tiempo < 0
+
+   # return tiempo
   end
 
   def dias_transcurridos
@@ -715,7 +734,7 @@ class Solicitud < ActiveRecord::Base
                Solicitud.human_attribute_name(:rpt_recursorevision),
                Solicitud.human_attribute_name(:rpt_fechapresentacionrecursorevision),
                Solicitud.human_attribute_name(:rpt_fechanotificacionrecursorevision),
-               Solicitud.human_attribute_name(:rpt_sentidoresolucion)            
+               Solicitud.human_attribute_name(:rpt_sentidoresolucion)
               ]
 
       self.get_csv_records(csv, solicitudes)
@@ -733,7 +752,7 @@ class Solicitud < ActiveRecord::Base
     unless (self.email.nil? or self.email.blank?)
       Notificaciones.delay.nueva_solicitud(self, Time.now, true) unless (self.dont_send_email == true)
     end
-    
+
     Notificaciones.delay.nueva_solicitud(self, Time.now, false) unless (self.dont_send_email == true)
   end
 
@@ -833,7 +852,7 @@ class Solicitud < ActiveRecord::Base
         if self.dont_set_estado.nil?
           self.estado_id = ESTADO_NORMAL if self.estado_id.nil?
         end
-        
+
         self.asignada = false
         self.solicitante_identificacion = 'No Disponible'
       end

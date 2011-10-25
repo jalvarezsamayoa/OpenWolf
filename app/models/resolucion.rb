@@ -71,7 +71,8 @@ class Resolucion < ActiveRecord::Base
     # si estado es final pero no debe entregar
     # actualizamos fecha de entrega
     # esto funciona en casos como una negativa
-    if self.tiporesolucion.estado.final == true and self.tiporesolucion.estado.puede_entregar == false
+    if self.tiporesolucion.estado.final == true \
+      and self.tiporesolucion.estado.puede_entregar == false
       self.solicitud.fecha_entregada = self.fecha
     end
 
@@ -86,11 +87,12 @@ class Resolucion < ActiveRecord::Base
       if dias == 1
         self.solicitud.tiempo_respuesta = dias
       else
-        self.solicitud.tiempo_respuesta = (dias - Feriado.calcular_dias_no_laborales(:fecha => self.solicitud.fecha_creacion,
-                                                                                     :dias => dias,
-                                                                                     :institucion_id => self.solicitud.institucion_id))
+        dias_no_laborales = Feriado.calcular_dias_no_laborales(:fecha => self.solicitud.fecha_creacion,
+                                                               :dias => dias,
+                                                               :institucion_id => self.solicitud.institucion_id)
+        self.solicitud.tiempo_respuesta = (dias - dias_no_laborales)
       end
-      
+
     end
 
 

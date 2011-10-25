@@ -14,7 +14,8 @@ end
 
 def recalcular_tiempos_entrega(institucion)
   #actualizar tiempos de respuesta
-  Solicitud.where("institucion_id = ?", institucion.id).update_all(:tiempo_respuesta => 0, :tiempo_respuesta_calendario => 0 )
+  Solicitud.where("institucion_id = ?", institucion.id) \
+    .update_all(:tiempo_respuesta => 0, :tiempo_respuesta_calendario => 0 )
 
   resoluciones = Resolucion.where("institucion_id = ?",institucion.id).finales
   n = resoluciones.count
@@ -31,13 +32,18 @@ end
 
 namespace :openwolf do
 
-  namespace :tiempos do
+ 
+
+  namespace :cleanup do
+
+     namespace :tiempos do
 
     desc "Recalcular tiempos de respuesta"
     task :all => :environment do
 
       #actualizar tiempos de respuesta
-      Solicitud.update_all(:tiempo_respuesta => 0, :tiempo_respuesta_calendario => 0)
+        Solicitud.update_all(:tiempo_respuesta => 0,
+                             :tiempo_respuesta_calendario => 0)
 
       resoluciones = Resolucion.finales
       n = resoluciones.count
@@ -61,7 +67,8 @@ namespace :openwolf do
       if ok == 'y'
 
         #actualizar tiempos de respuesta
-        Solicitud.where("institucion_id = ?", institucion.id).update_all(:tiempo_respuesta => 0, :tiempo_respuesta_calendario => 0 )
+        Solicitud.where("institucion_id = ?", institucion.id) \
+          .update_all(:tiempo_respuesta => 0, :tiempo_respuesta_calendario => 0 )
 
         resoluciones = Resolucion.where("institucion_id = ?",institucion.id).finales
         n = resoluciones.count
@@ -80,8 +87,6 @@ namespace :openwolf do
 
   end
 
-  namespace :cleanup do
-
     desc "Limpiar fecha de resoluciones"
     task :resoluciones => :environment do
       ui = HighLine.new
@@ -91,8 +96,8 @@ namespace :openwolf do
         fecha_importacion = ui.ask("Ingrese fecha de importacion (yyyy-mm-dd): ")
 
         query = "update resoluciones
-set fecha = solicitudes.fecha_entregada
-, fecha_notificacion = solicitudes.fecha_entregada
+set fecha = solicitudes.fecha_completada
+, fecha_notificacion = solicitudes.fecha_completada
 from solicitudes
 where resoluciones.institucion_id = #{institucion.id}
 and resoluciones.fecha = '#{fecha_importacion}'
@@ -141,8 +146,8 @@ and resoluciones.solicitud_id = solicitudes.id"
         institucion = Institucion.find(institucion_id)
 
         query = "update resoluciones
-set fecha = solicitudes.fecha_entregada
-, fecha_notificacion = solicitudes.fecha_entregada
+set fecha = solicitudes.fecha_completada
+, fecha_notificacion = solicitudes.fecha_completada
 from solicitudes
 where resoluciones.institucion_id = #{institucion.id}
 and resoluciones.fecha = '#{fecha_importacion}'

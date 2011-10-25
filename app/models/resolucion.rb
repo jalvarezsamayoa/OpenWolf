@@ -1,8 +1,8 @@
 class Resolucion < ActiveRecord::Base
   versioned
-  
+
   TIPO_ENTREGA = 1
-  
+
   validates_presence_of :numero, :descripcion
   validates_uniqueness_of :numero
 
@@ -25,17 +25,17 @@ class Resolucion < ActiveRecord::Base
   scope :tipo_negativa, where("tiposresoluciones.positiva = ?",false).includes(:tiporesolucion)
   scope :finales, where("estados.final = ?",true).includes(:tiporesolucion => :estado)
 
-  
+
   def nuevo_numero
     i = Resolucion.count(:conditions => ["institucion_id = ? and date_part(\'year\',created_at) = ?", self.institucion_id, Date.today.year ] ).to_i + 1
-    
+
     self.numero = self.institucion.codigo + '-'+ Documentoclasificacion::RESOLUCION + '-' +  Date.today.year.to_s + '-' + i.to_s.rjust(6,'0')
   end
 
   def cleanup
     self.documentoclasificacion_id =  Documentoclasificacion.find_by_codigo(Documentoclasificacion::RESOLUCION).id
     self.numero = self.nuevo_numero if (self.numero.nil? or self.numero.empty?)
-    
+
     unless self.nueva_fecha.nil?
       if self.nueva_fecha < self.solicitud.fecha_programada
         logger.debug { "Nueva fecha no es valida." }
@@ -47,27 +47,27 @@ class Resolucion < ActiveRecord::Base
     self.fecha = Date.today if self.fecha.nil?
     self.fecha_notificacion = Date.today if self.fecha_notificacion.nil?
 
-    
+
     return true
   end
 
   # TODO: mover toda esta logica a modelo Solicitud
   def actualizar_solicitud
     logger.debug { "Resolucion#actualizar_solicitud" }
-    
+
     unless self.nueva_fecha.nil?
       logger.debug { "Actualizando fecha solicitud." }
       logger.debug { "#{self.nueva_fecha}" }
       if self.nueva_fecha > self.solicitud.fecha_programada
         self.solicitud.fecha_prorroga = self.nueva_fecha
         self.solicitud.fecha_programada = self.nueva_fecha
-      end      
+      end
     end
-        
+
     self.solicitud.estado_id = self.tiporesolucion.estado_id
     self.solicitud.fecha_resolucion = self.fecha
 
-    
+
     # si estado es final pero no debe entregar
     # actualizamos fecha de entrega
     # esto funciona en casos como una negativa
@@ -79,15 +79,21 @@ class Resolucion < ActiveRecord::Base
       # si esta es la primera resolucion final
       #actualizamos los tiempos de entrega
       dias = (self.fecha - self.solicitud.fecha_creacion).to_i
-      dias = 1 if dias == 0
+      dias = 1 if dias <= 0
 
       self.solicitud.tiempo_respuesta_calendario = dias
-      self.solicitud.tiempo_respuesta = (dias - Feriado.calcular_dias_no_laborales(:fecha => self.solicitud.fecha_creacion,
-                                                                         :dias => dias,
-                                                                         :institucion_id => self.solicitud.institucion_id))
+
+      if dias == 1
+        self.solicitud.tiempo_respuesta = dias
+      else
+        self.solicitud.tiempo_respuesta = (dias - Feriado.calcular_dias_no_laborales(:fecha => self.solicitud.fecha_creacion,
+                                                                                     :dias => dias,
+                                                                                     :institucion_id => self.solicitud.institucion_id))
+      end
+      
     end
-   
-    
+
+
     self.solicitud.save
   end
 

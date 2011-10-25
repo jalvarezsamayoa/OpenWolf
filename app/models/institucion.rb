@@ -85,6 +85,12 @@ class Institucion < ActiveRecord::Base
   # Metodos para estadisticas
   #####################################
 
+  def ano_minimo
+    fecha_minima = self.solicitudes.minimum("fecha_creacion")
+    i_ano_min = (fecha_minima.nil? ? Date.today.year  : fecha_minima.year)   
+    return i_ano_min
+  end
+  
   def total_solicitudes(ano = Date.today.year)
     self.solicitudes.activas.creadas_en_ano(ano).count
   end
@@ -93,6 +99,13 @@ class Institucion < ActiveRecord::Base
     estados = Estado.select('estados.nombre, count(solicitudes.estado_id) as total_solicitudes').joins(:solicitudes).where("solicitudes.anulada = ? and solicitudes.institucion_id = ? and extract(year from fecha_creacion) = ?",false,self.id,ano).group('estados.nombre')
     return estados
   end
+
+  def solicitudes_por_via_solicitud(ano = Date.today.year)
+    estados = Via.select('vias.nombre, count(solicitudes.via_id) as total_solicitudes').joins(:solicitudes).where("solicitudes.anulada = ? and solicitudes.institucion_id = ? and extract(year from fecha_creacion) = ?",false,self.id,ano).group('vias.nombre')
+    return estados
+  end
+
+  
 
   def solicitudes_por_ano
     solicitudes =  Solicitud.find_by_sql("select extract(year from fecha_creacion) as ano,  count(solicitudes.id) as total_solicitudes, avg(solicitudes.tiempo_respuesta) as promedio_dias_respuesta  from solicitudes where institucion_id = #{self.id} and anulada = #{false} and solicitudes.fecha_completada is not null group by extract(year from fecha_creacion) order by extract(year from fecha_creacion) asc")

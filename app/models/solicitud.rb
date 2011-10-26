@@ -398,7 +398,7 @@ class Solicitud < ActiveRecord::Base
   def tiempo_ampliacion
     p = self.resoluciones.prorrogas.last
 
-    return 0 if p.nil?got
+    return 0 if p.nil?
     return 0 unless self.tiempo_respuesta > 0
 
     tiempo = (self.tiempo_respuesta - 10)

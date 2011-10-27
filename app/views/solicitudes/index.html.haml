@@ -11,7 +11,7 @@
         %li= link_to "En Tramite (#{@entramite.size})", "#en-tramite", :title => "Solicitudes ya asignadas que enlaces deben completar."
         %li= link_to "Pend. Resolución (#{@pendresolucion.size})", "#pendientes-resolucion", :title => "Asignaciones completadas por enlaces pendientes de emitir resolución."
         %li= link_to "Terminadas (#{@terminadas.size})", "#terminadas", :title => "Asignaciones listas para entregar a ciudadano."
-        %li= link_to "Entregadas (#{@entregadas.size})", "#entregadas", :title => "Asignaciones entregadas a ciudadano."
+        %li= link_to "Entregadas (#{@entregadas_cnt})", "#entregadas", :title => "Asignaciones entregadas a ciudadano."
         %li= link_to "Anuladas (#{@anuladas.size})", "#anuladas", :title => "Asignaciones anuladas."
     = render :partial => 'actividades/mis_actividades'
     - if @usuario_es_udip

@@ -18,8 +18,10 @@ class SolicitudesController < ApplicationController
       @terminadas = usuario_actual.institucion.solicitudes.activas.completadas.conresolucionfinal.noentregadas.recientes.correlativo
       
       @pendresolucion = usuario_actual.institucion.solicitudes.activas.completadas.sinresolucionfinal.recientes.correlativo
-      
-      @entregadas = usuario_actual.institucion.solicitudes.activas.entregadas.recientes.correlativo
+
+      @entregadas = usuario_actual.institucion.solicitudes.activas.entregadas.recientes.correlativo.limit(50)
+      @entregadas_cnt = usuario_actual.institucion.solicitudes.activas.entregadas.recientes.correlativo.count
+
 
       @anuladas = usuario_actual.institucion.solicitudes.anuladas
       

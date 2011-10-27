@@ -3,6 +3,7 @@
     %h3
       = image_tag("accept22.png")
       Entregadas a Ciudadano
+    .notice Ultimas 50 solicitudes entregadas
     %table.minimalist-b{:width => "100%"}
       %thead
         %th.col= t("solicitudes.label_codigo")
@@ -11,13 +12,13 @@
         %th.col= t("solicitudes.label_estado_id")
       %tbody
         - for solicitud in @entregadas do
-          <tr #{class_estado_asignacion(solicitud)}>
-          %td= link_to solicitud.codigo, institucion_solicitud_path(solicitud.institucion_id, solicitud)
-          %td= l(solicitud.fecha_creacion)
-          %td= solicitud.institucion.nombre
-          %td
-            = solicitud.estado.nombre
-            = "[COMPLETA]" if solicitud.terminada?
+          %tr
+            %td= link_to solicitud.codigo, institucion_solicitud_path(solicitud.institucion_id, solicitud)
+            %td= l(solicitud.fecha_creacion)
+            %td= solicitud.institucion.nombre
+            %td
+              = solicitud.estado.nombre
+              = "[COMPLETA]" if solicitud.terminada?
       %tfoot
         %td{:colspan => "10"}
           *Solicitudes que han sido entregadas a ciudadanos.

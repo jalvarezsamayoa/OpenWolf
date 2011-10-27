@@ -712,8 +712,11 @@ class Solicitud < ActiveRecord::Base
     else
       if opts[:institucion_id]
         i_institucion_id = opts[:institucion_id] #  usuario_actual.institucion_id
-        ano = (opts[:ano] ||= Date.today.year)
-        solicitudes = Solicitud.find(:all, :conditions => ["solicitudes.institucion_id = ? and solicitudes.anulada = ? and extract(YEAR from solicitudes.fecha_creacion) = ?", i_institucion_id, false, ano], :order => :numero)
+
+        d_desde = Date.new(opts[:desde][2].to_i, opts[:desde][1].to_i, opts[:desde][0].to_i)
+        d_hasta = Date.new(opts[:hasta][2].to_i, opts[:hasta][1].to_i, opts[:hasta][0].to_i)
+        
+        solicitudes = Solicitud.find(:all, :conditions => ["solicitudes.institucion_id = ? and solicitudes.anulada = ? and solicitudes.fecha_creacion between ? and ?", i_institucion_id, false, d_desde, d_hasta], :order => :numero)
       end
     end
 

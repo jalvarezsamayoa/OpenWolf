@@ -83,13 +83,13 @@ namespace :solr do
   desc "Before update_code you want to stop SOLR in a specific environment"
   task :stop, :roles => :solr do
 
-    
+
     run <<-CMD
       cd #{current_path} &&
       #{bundle_exec} rake sunspot:solr:stop RAILS_ENV=#{rails_env} ; true
     CMD
 
-    
+
   end
 
   desc "After update_code you want to restart SOLR in a specific environment"
@@ -152,7 +152,7 @@ namespace :openwolf do
       filename = "#{application}.dump.#{timestamp}.sql.bz2"
       clean_filename = "#{application}.dump.#{timestamp}.sql"
       file_path = "#{File.dirname(__FILE__)}/../tmp/" + filename
-#      text = capture "cat ../config/database.yml"
+      #      text = capture "cat ../config/database.yml"
       text = File.open("#{File.dirname(__FILE__)}/../config/database.yml",'r')
       yaml = YAML::load(text.read)
       text.close
@@ -164,8 +164,8 @@ namespace :openwolf do
       end
 
       backup_file = "#{backup_dir}/#{filename}"
-        
-      puts "Uploading file: #{file_path} to #{backup_file}" 
+
+      puts "Uploading file: #{file_path} to #{backup_file}"
       system("scp -C #{file_path} transparencia@transparencia.gob.gt://#{backup_file}")
 
       puts "Extracting file #{backup_file}"
@@ -175,11 +175,11 @@ namespace :openwolf do
       user_name = yaml[rails_env]['username']
       db_name = yaml[rails_env]['database']
       pwd = yaml[rails_env]['password']
-      
+
       run "psql -h localhost -p 5432 -U #{user_name} -W -d #{db_name} < #{backup_dir}/#{clean_filename}" do |ch, stream, out|
         ch.send_data "#{pwd}\n" if out =~ /^Password for user #{user_name}:/
         puts out
-      end 
+      end
 
     end
 
@@ -191,8 +191,5 @@ Dir[File.join(File.dirname(__FILE__), '..', 'vendor', 'gems', 'hoptoad_notifier-
   $: << File.join(vendored_notifier, 'lib')
 end
 
-require 'config/boot'
-require 'hoptoad_notifier/capistrano'
-
-        require './config/boot'
-        require 'airbrake/capistrano'
+require './config/boot'
+require 'airbrake/capistrano'

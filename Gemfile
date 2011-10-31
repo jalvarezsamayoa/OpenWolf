@@ -44,7 +44,7 @@ gem 'backup' #libreria para generar backups de aplicacion
 
 # MONITOREO
 #gem 'newrelic_rpm' # monitoreo de performance http://newrelic.com
-gem 'hoptoad_notifier' #notificacion de errores via http://hoptoadapp.com/
+gem 'airbrake' #notificacion de errores via http://hoptoadapp.com/
 
 # Bundle gems for the local environment. Make sure to
 # put test-only gems in this group so their generators

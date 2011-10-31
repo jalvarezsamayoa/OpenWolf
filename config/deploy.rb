@@ -23,7 +23,7 @@ set :user, "transparencia"
 
 set :scm, "git"
 set :repository, "git://gitorious.org/openwolf/openwolf_v3.git"
-set :deploy_via, :remote_cache
+#set :deploy_via, :remote_cache
 set :use_sudo, false
 
 #set :git_enable_submodules, 1
@@ -43,22 +43,22 @@ end
 
 after "deploy:symlink", :symlink_gems
 
-before "deploy:update_code", "solr:stop"
+#before "deploy:update_code", "solr:stop"
 after "deploy:symlink", "solr:symlink"
-after "solr:symlink", "solr:start"
-#after "solr:start", "solr:reindex"
+# after "solr:symlink", "solr:start"
 
-before "deploy:restart", "solr:stop"
-before "deploy:restart", "delayed_job:stop"
 
-after "deploy:restart", "solr:start"
-after "deploy:restart", "delayed_job:start"
+# before "deploy:restart", "solr:stop"
+# before "deploy:restart", "delayed_job:stop"
 
-after "deploy:stop", "solr:stop"
-after "deploy:stop",  "delayed_job:stop"
+# after "deploy:restart", "solr:start"
+# after "deploy:restart", "delayed_job:start"
 
-after "deploy:start", "solr:start"
-after "deploy:start", "delayed_job:start"
+# after "deploy:stop", "solr:stop"
+# after "deploy:stop",  "delayed_job:stop"
+
+# after "deploy:start", "solr:start"
+# after "deploy:start", "delayed_job:start"
 
 
 desc "Vincular directorio de gems"
@@ -193,3 +193,6 @@ end
 
 require 'config/boot'
 require 'hoptoad_notifier/capistrano'
+
+        require './config/boot'
+        require 'airbrake/capistrano'

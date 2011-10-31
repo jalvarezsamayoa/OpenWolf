@@ -106,7 +106,7 @@ OpenwolfV3::Application.routes.draw do
     resources :recursosrevision
   end
 
-  resources :adjuntos do
+  resources :adjuntos, :only => [:show] do
     member do
       get :download
     end

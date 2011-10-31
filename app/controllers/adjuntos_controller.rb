@@ -34,14 +34,18 @@ class AdjuntosController < ApplicationController
   end
    
   def destroy
+    
     obtener_proceso    
-    @adjunto = Adjunto.find(params[:id])
+    @adjunto = @proceso.adjuntos.find(params[:id])
     @adjunto.destroy
+    
     @adjuntos = @proceso.adjuntos
 
     flash[:success] = 'Adjunto eliminado con exito.'
-    respond_to do |format|
-      format.js
+
+    respond_to do |wants|
+      wants.html { redirect_to institucion_solicitud_path(@proceso.institucion_id, @proceso.id) }
+      wants.js
     end
   end
 
@@ -57,9 +61,9 @@ class AdjuntosController < ApplicationController
 
   def obtener_proceso
     if params[:solicitud_id]
-      @proceso = Solicitud.find(params[:solicitud_id])
+      @proceso = current_user.institucion.solicitudes.find(params[:solicitud_id])
     elsif params[:seguimiento_id]
-      @proceso = Seguimiento.find(params[:seguimiento_id])
+      @proceso = current_user.institucion.seguimientos.find(params[:seguimiento_id])
     else
       raise 'Se han recibido parametros no validos.'
     end

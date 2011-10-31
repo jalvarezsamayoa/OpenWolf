@@ -9,6 +9,7 @@
         = menu_item("Ver Rutas de Trabajo", root_path, "Ingresar Nueva Solicitud de Informacion", "infoabout32.png")
         = menu_item("Mis Asignaciones", institucion_actividades_path(usuario_actual.institucion), "Mostrar Tareas / Asignaciones", "foldermove32.png")
       = menu_item("Busqueda", root_path, "Filtros de Busqueda", "find32.png")
+      - render :partial => "navigation_documentos"
       - render(:layout => 'shared/menuitem', :locals=>{:text => "Utilitarios", :title => "Opciones Administrativas", :image=>"configure.png"}) do
         = menu_item("Usuarios", usuarios_path, "Administracion de Usuarios.", "groupofusers32.png")
         = menu_item("Instituciones", instituciones_path, "Administacion de Instituciones")

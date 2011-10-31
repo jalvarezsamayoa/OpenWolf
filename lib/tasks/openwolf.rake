@@ -155,7 +155,7 @@ and resoluciones.solicitud_id = solicitudes.id"
 
         Resolucion.connection.execute(query)
 
-        recalcular_tiempos_entrega(institucion)
+     #   recalcular_tiempos_entrega(institucion)
       end
 
     end #resolucioes all

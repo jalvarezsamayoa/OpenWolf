@@ -27,7 +27,7 @@
       %p
         = label_tag t("solicitudes.label_textosolicitud")
         %br     
-        = solicitud.texto_solicitud
+        = solicitud.texto_solicitud(current_user)
       %p
         = label_tag t("actividades.label_textoactividad")
         %br

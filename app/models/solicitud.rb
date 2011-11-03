@@ -451,7 +451,7 @@ class Solicitud < ActiveRecord::Base
     c_texto = self.textosolicitud
     unless self.puede_mostrar_informacion?
       if user.nil? or !user.has_role?(:superudip)
-        c_texto ='Información no es pública'
+        c_texto ='Información bajo reserva.'
       end
     end
     return c_texto
@@ -461,7 +461,7 @@ class Solicitud < ActiveRecord::Base
     c_texto = self.textosolicitud[0..100] + '...'
     unless self.puede_mostrar_informacion?
       if user.nil? or !user.has_role?(:superudip)
-        c_texto ='Información no es pública'
+        c_texto ='Información bajo reserva'
       end
     end
     return c_texto

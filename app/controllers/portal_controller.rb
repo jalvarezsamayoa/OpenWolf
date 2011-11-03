@@ -27,8 +27,6 @@ class PortalController < ApplicationController
 
   def solicitud
 
-
-
     @actividades = @solicitud.actividades
     @documentos = @solicitud.adjuntos
 
@@ -38,7 +36,6 @@ class PortalController < ApplicationController
     @restringir_seguimientos_privados = true
 
     @informacion_publica = @solicitud.puede_mostrar_informacion?
-
 
     mostrar_datos_solicitante()
 

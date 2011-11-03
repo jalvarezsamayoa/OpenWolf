@@ -70,7 +70,7 @@
   %hr/
   %h4
     = t("solicitudes.label_textosolicitud")
-  = @solicitud.texto_solicitud
+  = @solicitud.texto_solicitud(current_user)
   %hr.space/
 
   %h4= "Seguimientos de enlaces"

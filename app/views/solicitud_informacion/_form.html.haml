@@ -7,8 +7,9 @@
   = form.input :textosolicitud, :input_html => {:rows => 5}, :hint => "Descripción de información solicitada"
   = form.input :reserva_temporal, :label => "Requiero que esta solicitud se mantenga bajo reserva hasta el momento de haber sido completada."
   %h2 Información Opcional
-  = form.input :forma_entrega, :hint => "Forma o medio como el solicitante requiere la solicitud.", :input_html => {:size => 60}
-  = form.input :solicitante_identificacion, :input_html => {:size => 60, :maxsize => 254}, :hint => '(opcional) Número de Cédula, DPI, Pasaporte, etc..'
+  = form.input :genero, :include_blank => true, :hint => "Opcional: Género del solicitante"
+  =# form.input :forma_entrega, :hint => "Forma o medio como el solicitante requiere la solicitud.", :input_html => {:size => 60}
+  =# form.input :solicitante_identificacion, :input_html => {:size => 60, :maxsize => 254}, :hint => '(opcional) Número de Cédula, DPI, Pasaporte, etc..'
   = form.input :idioma, :include_blank => false, :hint => "(opcional) Preferencia sociolingustica del solicitante"
   = recaptcha_tags
   

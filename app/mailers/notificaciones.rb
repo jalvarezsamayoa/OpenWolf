@@ -103,6 +103,7 @@ class Notificaciones < ActionMailer::Base
   def solicitudes_por_vencer(institucion, dias_desde = 0, dias_hasta = 3)
     @solicitudes = institucion.solicitudes.noentregadas.tiempo_restante(dias_desde,dias_hasta)
 
+    if @solicitudes.count > 0
     nombre_institucion = institucion.nombre
     
     #correo institucional
@@ -122,6 +123,7 @@ class Notificaciones < ActionMailer::Base
          :bcc => 'deleongironale@gmail.com',
          :reply_to => correo_institucional,
          :subject => "[openwolf] Reporte de Solicitudes por vencer - #{nombre_institucion} - #{Time.now}.")
+   end
   end
 
 end

@@ -23,7 +23,7 @@ set :user, "transparencia"
 
 set :scm, "git"
 set :repository, "git://gitorious.org/openwolf/openwolf_v3.git"
-#set :deploy_via, :remote_cache
+set :deploy_via, :remote_cache
 set :use_sudo, false
 
 #set :git_enable_submodules, 1

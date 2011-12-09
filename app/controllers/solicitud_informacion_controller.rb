@@ -13,6 +13,7 @@ class SolicitudInformacionController < ApplicationController
     @solicitud = Solicitud.new
     @solicitud.solicitante_nombre = ""
     @solicitud.institucion_id = institucion_id
+    @solicitud.genero_id = 1
 
     respond_to do |format|
       format.html # new.html.erb

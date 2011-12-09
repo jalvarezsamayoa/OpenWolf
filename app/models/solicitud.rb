@@ -857,7 +857,7 @@ class Solicitud < ActiveRecord::Base
         end
 
         self.asignada = false
-        self.solicitante_identificacion = 'No Disponible'
+        self.solicitante_identificacion = 'No Disponible' if self.solicitante_identificacion.nil?
       end
 
       self.ano = self.fecha_creacion.year

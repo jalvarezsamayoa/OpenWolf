@@ -4,7 +4,7 @@ namespace :notificaciones do
   task :solicitudes_por_vencer => :environment do
 
   
-    Institucion.activas.each do |institucion|  
+    Institucion.activas.each do |institucion|
       Notificaciones.delay.solicitudes_por_vencer(institucion)
     end
   

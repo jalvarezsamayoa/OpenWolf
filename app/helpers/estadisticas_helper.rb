@@ -176,6 +176,7 @@ module EstadisticasHelper
   end
 
   def generar_rango(datos, campo)
+    return "0,0" if datos.blank?
     max = datos.max_by {|dato| dato.send(campo).to_i }
     rango = "0,#{max.send(campo)}"
     return rango

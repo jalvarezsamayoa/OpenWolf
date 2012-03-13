@@ -33,3 +33,14 @@ describe Municipio do
   
   
 end
+# == Schema Information
+#
+# Table name: municipios
+#
+#  id              :integer         not null, primary key
+#  nombre          :string(255)     not null
+#  departamento_id :integer         not null
+#  created_at      :datetime
+#  updated_at      :datetime
+#
+

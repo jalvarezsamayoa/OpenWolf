@@ -170,3 +170,18 @@ class Feriado < ActiveRecord::Base
   end
   
 end
+# == Schema Information
+#
+# Table name: feriados
+#
+#  id             :integer         not null, primary key
+#  nombre         :string(255)     not null
+#  dia            :integer         default(1), not null
+#  mes            :integer         default(1), not null
+#  institucion_id :integer         default(1), not null
+#  tipoferiado_id :integer         default(1), not null
+#  created_at     :datetime
+#  updated_at     :datetime
+#  fecha          :date
+#
+

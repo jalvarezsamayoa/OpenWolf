@@ -74,3 +74,42 @@ describe Usuario do
   end
 
 end
+# == Schema Information
+#
+# Table name: usuarios
+#
+#  id                   :integer         not null, primary key
+#  username             :string(255)
+#  email                :string(255)
+#  nombre               :string(255)
+#  cargo                :string(255)
+#  puesto_id            :integer
+#  institucion_id       :integer
+#  essupervisorarea     :boolean
+#  encrypted_password   :string(255)
+#  password_salt        :string(255)
+#  sign_in_count        :integer
+#  failed_attempts      :integer
+#  last_request_at      :datetime
+#  current_sign_in_at   :datetime
+#  last_sign_in_at      :datetime
+#  current_sign_in_ip   :string(255)
+#  last_sign_in_ip      :string(255)
+#  created_at           :datetime
+#  updated_at           :datetime
+#  genero               :boolean         default(FALSE)
+#  fecha_nacimiento     :date
+#  direccion            :string(255)     default("No Disponible"), not null
+#  telefonos            :string(255)     default("No Disponible"), not null
+#  openid_identifier    :string(255)
+#  confirmation_token   :string(255)
+#  confirmed_at         :datetime
+#  confirmation_sent_at :datetime
+#  reset_password_token :string(255)
+#  remember_token       :string(255)
+#  remember_created_at  :datetime
+#  unlock_token         :string(255)
+#  locked_at            :datetime
+#  activo               :boolean         default(TRUE)
+#
+

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110920200624) do
+ActiveRecord::Schema.define(:version => 20120313203152) do
 
   create_table "actividades", :force => true do |t|
     t.integer  "institucion_id",                  :null => false
@@ -95,6 +95,7 @@ ActiveRecord::Schema.define(:version => 20110920200624) do
     t.string   "locked_by"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "queue"
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
@@ -479,6 +480,15 @@ ActiveRecord::Schema.define(:version => 20110920200624) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "simple_captcha_data", :force => true do |t|
+    t.string   "key",        :limit => 40
+    t.string   "value",      :limit => 6
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "simple_captcha_data", ["key"], :name => "idx_key"
 
   create_table "solicitudes", :force => true do |t|
     t.integer  "usuario_id",                                                   :null => false

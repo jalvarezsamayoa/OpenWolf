@@ -17,3 +17,22 @@ describe Seguimiento do
   end
   
 end
+# == Schema Information
+#
+# Table name: seguimientos
+#
+#  id                   :integer         not null, primary key
+#  actividad_id         :integer         not null
+#  institucion_id       :integer         not null
+#  usuario_id           :integer         not null
+#  fecha_creacion       :date            not null
+#  textoseguimiento     :text            not null
+#  created_at           :datetime
+#  updated_at           :datetime
+#  archivo_file_name    :string(255)
+#  archivo_content_type :string(255)
+#  archivo_file_size    :integer
+#  archivo_updated_at   :datetime
+#  informacion_publica  :boolean         default(TRUE), not null
+#
+

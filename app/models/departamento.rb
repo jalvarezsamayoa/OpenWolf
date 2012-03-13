@@ -18,3 +18,14 @@ class Departamento < ActiveRecord::Base
     nombre
   end
 end
+# == Schema Information
+#
+# Table name: departamentos
+#
+#  id          :integer         not null, primary key
+#  nombre      :string(255)     not null
+#  abreviatura :string(255)     not null
+#  created_at  :datetime
+#  updated_at  :datetime
+#
+

@@ -50,3 +50,22 @@ describe Adjunto do
   end
 
 end
+# == Schema Information
+#
+# Table name: adjuntos
+#
+#  id                   :integer         not null, primary key
+#  numero               :string(255)     not null
+#  observaciones        :text
+#  usuario_id           :integer         not null
+#  proceso_id           :integer         not null
+#  proceso_type         :string(255)     not null
+#  created_at           :datetime
+#  updated_at           :datetime
+#  archivo_file_name    :string(255)
+#  archivo_content_type :string(255)
+#  archivo_file_size    :integer
+#  archivo_updated_at   :datetime
+#  informacion_publica  :boolean         default(TRUE), not null
+#
+

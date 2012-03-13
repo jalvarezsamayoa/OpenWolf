@@ -393,3 +393,8 @@ en:
     title: "Seguimientos Generales"
     title_new: "Nueva Nota Seguimiento"
     title_edit: "Modificar Nota Segumiento"
+
+  simple_captcha:
+    message:
+      default: "El código no coincidio con la imagen."
+      user: "El código no coincidio con la imagen."

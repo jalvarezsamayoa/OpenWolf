@@ -15,3 +15,16 @@ describe Documentocategoria do
   
   
 end
+# == Schema Information
+#
+# Table name: documentocategorias
+#
+#  id         :integer         not null, primary key
+#  nombre     :string(255)
+#  parent_id  :integer
+#  lft        :integer
+#  rgt        :integer
+#  created_at :datetime
+#  updated_at :datetime
+#
+

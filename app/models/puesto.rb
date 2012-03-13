@@ -12,3 +12,14 @@ class Puesto < ActiveRecord::Base
     return nombre.strip + ' en ' + institucion.nombre.strip
   end
 end
+# == Schema Information
+#
+# Table name: puestos
+#
+#  id             :integer         not null, primary key
+#  nombre         :string(255)     not null
+#  institucion_id :integer         not null
+#  created_at     :datetime
+#  updated_at     :datetime
+#
+

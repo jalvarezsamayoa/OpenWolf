@@ -61,3 +61,19 @@ class Actividad < ActiveRecord::Base
     return self.solicitud.guardar_version?
   end
 end
+# == Schema Information
+#
+# Table name: actividades
+#
+#  id               :integer         not null, primary key
+#  institucion_id   :integer         not null
+#  usuario_id       :integer         not null
+#  fecha_asignacion :date            not null
+#  textoactividad   :text            not null
+#  estado_id        :integer         default(1), not null
+#  fecha_resolucion :date
+#  created_at       :datetime
+#  updated_at       :datetime
+#  solicitud_id     :integer         not null
+#
+

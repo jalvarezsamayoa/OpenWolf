@@ -7,3 +7,13 @@ class Sentidoresolucion < ActiveRecord::Base
     nombre
   end
 end
+# == Schema Information
+#
+# Table name: sentidosresolucion
+#
+#  id         :integer         not null, primary key
+#  nombre     :string(255)
+#  created_at :datetime
+#  updated_at :datetime
+#
+

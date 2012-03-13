@@ -18,3 +18,14 @@ class Archivo < ActiveRecord::Base
   end
   
 end
+# == Schema Information
+#
+# Table name: archivos
+#
+#  id             :integer         not null, primary key
+#  nombre         :string(255)     not null
+#  institucion_id :integer         not null
+#  created_at     :datetime
+#  updated_at     :datetime
+#
+

@@ -6,6 +6,9 @@ class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
 
+  # nuevo captcha simplificado
+  include SimpleCaptcha::ControllerHelpers
+
   rescue_from 'Acl9::AccessDenied', :with => :acceso_denegado
   
   helper_method :usuario_actual, :current_user, :nivel_seguridad, :fix_date, :usuario_autenticado?, :usuario_actual_admin?

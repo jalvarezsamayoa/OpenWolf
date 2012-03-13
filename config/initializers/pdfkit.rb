@@ -1,3 +1,7 @@
 PDFKit.configure do |config|
-  config.wkhtmltopdf = '/usr/local/bin/wkhtmltopdf'
+  if Rails.env.development?
+    config.wkhtmltopdf = '/usr/bin/wkhtmltopdf'
+  else
+    config.wkhtmltopdf = '/usr/local/bin/wkhtmltopdf'   
+  end
 end

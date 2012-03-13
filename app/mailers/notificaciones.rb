@@ -80,9 +80,9 @@ class Notificaciones < ActionMailer::Base
     @url_solicitud = solicitud_portal_url(@solicitud.id)
 
 
-    email_ciudadano = solicitud.email
-    correo_institucional = solicitud.institucion.email
-    correos_interesados = solicitud.correos_interesados(false).join(", ")
+    email_ciudadano = @solicitud.email
+    correo_institucional = @solicitud.institucion.email
+    correos_interesados = @solicitud.correos_interesados(false).join(", ")
     subject = "openwolf - Nueva nota seguimiento - Solicitud #{@solicitud.codigo}."
 
     if (email_ciudadano.nil? or email_ciudadano.empty?)

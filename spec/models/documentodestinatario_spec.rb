@@ -17,3 +17,18 @@ describe Documentodestinatario do
   end
   
 end
+# == Schema Information
+#
+# Table name: documentodestinatarios
+#
+#  id                 :integer         not null, primary key
+#  documento_id       :integer         not null
+#  copia_id           :integer
+#  usuario_id         :integer         not null
+#  original           :boolean         not null
+#  documentoestado_id :integer         default(1), not null
+#  institucion_id     :integer         not null
+#  puesto             :string(255)
+#  departamento       :string(255)
+#
+

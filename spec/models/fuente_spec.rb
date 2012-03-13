@@ -12,3 +12,13 @@ describe Fuente do
   
   
 end
+# == Schema Information
+#
+# Table name: fuentes
+#
+#  id         :integer         not null, primary key
+#  nombre     :string(255)     not null
+#  created_at :datetime
+#  updated_at :datetime
+#
+

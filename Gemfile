@@ -43,7 +43,7 @@ gem 'dalli' # interfaz con servicio de almacenamiento de cache de objetos Memcac
 gem 'backup' #libreria para generar backups de aplicacion
 
 # MONITOREO
-#gem 'newrelic_rpm' # monitoreo de performance http://newrelic.com
+gem 'newrelic_rpm' # monitoreo de performance http://newrelic.com
 gem 'airbrake' #notificacion de errores via http://hoptoadapp.com/
 
 # Bundle gems for the local environment. Make sure to
@@ -57,6 +57,7 @@ group :development, :test do
   gem 'silent-postgres' #elimina la salida de el log de postgresql
   gem 'faker' # herramienta para generacion de datos de prueba
 
+  gem 'ruby-prof'
 end
 
 # TESTING

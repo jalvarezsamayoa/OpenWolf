@@ -259,7 +259,13 @@ class Solicitud < ActiveRecord::Base
 
   def puede_mostrar_informacion?
     return false unless self.informacion_publica?
-    return false unless (self.reserva_temporal? and !self.con_resolucion_final?)
+
+    # si tiene reserva temporal no se puede mostrar
+    #hasta que tenga resolucion final
+    if self.reserva_temporal?
+      return self.con_resolucion_final?
+    end
+        
     return true
   end
 

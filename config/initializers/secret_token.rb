@@ -4,4 +4,4 @@
 # If you change this key, all old signed cookies will become invalid!
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
-OpenwolfV3::Application.config.secret_token = '7b74f998516016b8e58edbed54bbe2dccb5eca1333b3fa0255a8db1ecd69963a6703907d2f89c5ad31cc3bf3e9a7a9803e1000592257d65ca37f7a3bf6288c9a'
+OpenwolfV3::Application.config.secret_token = '9bec2bc4adf2f322b54463704f0c277c1b8e5bd94ab3cb75709ce3d259a6f8dd853d1d0838377928c0f6f6fcba7d8baf7e0cf2807a3e3ef7337e26a0b0e629ef'

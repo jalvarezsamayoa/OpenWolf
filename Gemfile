@@ -43,6 +43,7 @@ gem 'activerecord-import', '>= 0.2.0' # herramienta para importacion de data
 gem 'serenity-odt' #generacion de templates ODT
 gem 'fastercsv' #manejo de archivos CSV
 gem 'vestal_versions', :git => 'git://github.com/adamcooper/vestal_versions' #manejor de versiones de modelos
+gem 'progress_bar' # muestra barra progreso en consola
 
 gem 'daemons'
 gem 'delayed_job_active_record'
@@ -55,6 +56,7 @@ gem 'backup' #libreria para generar backups de aplicacion
 gem 'newrelic_rpm' # monitoreo de performance http://newrelic.com
 gem 'airbrake' #notificacion de errores via http://hoptoadapp.com/
 
+# Generacion de Imagenes
 gem 'rmagick'
 
 # Bundle gems for the local environment. Make sure to
@@ -67,12 +69,8 @@ group :development, :test do
   gem 'webrat'
   gem 'silent-postgres' #elimina la salida de el log de postgresql
   gem 'faker' # herramienta para generacion de datos de prueba
-
   gem 'ruby-prof'
-
-
   gem 'annotate', :git => 'git://github.com/ctran/annotate_models.git'
-
   gem 'foreman'
 end
 

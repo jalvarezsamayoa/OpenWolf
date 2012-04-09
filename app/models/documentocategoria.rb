@@ -1,5 +1,5 @@
 class Documentocategoria < ActiveRecord::Base
-  versioned
+  #versioned
   acts_as_nested_set
 
   validates_presence_of :nombre

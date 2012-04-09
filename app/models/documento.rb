@@ -1,5 +1,5 @@
 class Documento < ActiveRecord::Base
-  versioned
+  #versioned
   acts_as_nested_set
   
   ORIGEN_INTERNO = 1

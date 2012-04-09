@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 class Solicitud < ActiveRecord::Base
+  include PgSearch
+  
   ORIGEN_DEFAULT = 1
   ORIGEN_PORTAL = 2
   ORIGEN_MIGRACION = 3
@@ -26,43 +28,54 @@ class Solicitud < ActiveRecord::Base
   attr_accessor :dont_send_email
   attr_accessor :dont_set_estado
 
+  attr_accessible :solicitante_nombre, :email, :textosolicitud, :reserva_temporal, :genero_id, :idioma_id, :captcha, :origen_id, :institucion_id, :solicitante_telefonos, :captcha_key
+
   #####################
   # Modulos y Plugins
   #####################
 
-  versioned :if => :guardar_version?
+  #versioned :if => :guardar_version?
   
   apply_simple_captcha
 
+
+  #--------------------------------
+  # Configuracion indexamiento pg_search
+  #--------------------------------
+  
+  pg_search_scope(:buscar_solicitud,
+                  :against => [:codigo, :solicitante_nombre, :textosolicitud],
+                  :using => [:tsearch])
+  
   #######################
   # Configuracion Solr
   ######################
 
-  searchable do
-    text :codigo
-    integer :numero
-    text :solicitante_nombre
-    text :textosolicitud, :default_boost => 2
-    text :observaciones
-    date :fecha_creacion
-    date :fecha_programada
-    time :created_at
-    integer :institucion_id, :references => Institucion
-    integer :municipio_id, :references => Municipio
-    integer :departamento_id, :references => Departamento
-    integer :via_id, :references => Via
-    integer :estado_id, :references => Estado
-    integer :clasificacion_id, :references => Clasificacion
-    integer :documentoclasificacion_id, :references => Documentoclasificacion
-    integer :idioma_id, :references => Idioma
-    boolean :anulada
-    text :lowcase_solicitante_nombre do
-      clean_string(solicitante_nombre.downcase)
-    end
-    text :lowcase_textosolicitud do
-      clean_string(textosolicitud.downcase)
-    end
-  end
+  # searchable do
+  #   text :codigo
+  #   integer :numero
+  #   text :solicitante_nombre
+  #   text :textosolicitud, :default_boost => 2
+  #   text :observaciones
+  #   date :fecha_creacion
+  #   date :fecha_programada
+  #   time :created_at
+  #   integer :institucion_id, :references => Institucion
+  #   integer :municipio_id, :references => Municipio
+  #   integer :departamento_id, :references => Departamento
+  #   integer :via_id, :references => Via
+  #   integer :estado_id, :references => Estado
+  #   integer :clasificacion_id, :references => Clasificacion
+  #   integer :documentoclasificacion_id, :references => Documentoclasificacion
+  #   integer :idioma_id, :references => Idioma
+  #   boolean :anulada
+  #   text :lowcase_solicitante_nombre do
+  #     clean_string(solicitante_nombre.downcase)
+  #   end
+  #   text :lowcase_textosolicitud do
+  #     clean_string(textosolicitud.downcase)
+  #   end
+  # end
 
   ##################
   # Callbacks

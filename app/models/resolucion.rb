@@ -1,5 +1,5 @@
 class Resolucion < ActiveRecord::Base
-  versioned
+  #versioned
 
   TIPO_ENTREGA = 1
 

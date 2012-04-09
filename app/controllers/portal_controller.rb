@@ -58,6 +58,10 @@ class PortalController < ApplicationController
     end
   end
 
+  def busqueda
+    @busqueda = Busqueda.new
+  end
+
   def buscar
 
     # guardamos el estado del filtro para agregarlo a la paginacion
@@ -69,7 +73,8 @@ class PortalController < ApplicationController
 
     session[:last_search] = params
 
-    @solicitudes = Solicitud.buscar(params)
+    @solicitudes = Solicitud.buscar_solicitud(params[:q])\
+      .paginate(:page => params[:page])
 
 
     @desde = ( params[:fecha_desde] ? Date.strptime(params[:fecha_desde], "%d/%m/%Y") : Date.today - Date.today.yday + 1 )

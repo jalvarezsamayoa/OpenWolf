@@ -1,15 +1,12 @@
-= render :partial => "find_box"
-#container
-  #wraper
-    #content
-      #results
-        %strong Resultados para busqueda:
-        %strong
-          = params[:search]
-        %br/
-        #listing
-          = render :partial => "solicitudes_encontradas"
-          = render :partial => "documentos_encontrados"
-  #navigation
-  = render :partial => "news_links" 
-/ end - container
+.row
+  .span12
+    = render :partial => "find_box"
+.row
+  .span12
+    #found-results
+      %strong Resultados para busqueda:
+      %strong= params[:q]
+.row
+  .span12
+    #results.rounded-shadow-box
+      = render :partial => "solicitudes_encontradas"

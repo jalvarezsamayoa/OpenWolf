@@ -21,6 +21,7 @@ class SolicitudInformacionController < ApplicationController
   end
 
   def create
+    
     @solicitud = Solicitud.new(params[:solicitud])
     @solicitud.origen_id = Solicitud::ORIGEN_PORTAL
 

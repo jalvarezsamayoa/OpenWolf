@@ -1,5 +1,5 @@
 class Sentidoresolucion < ActiveRecord::Base
-  versioned
+  #versioned
   
   has_many :recursosrevision
 

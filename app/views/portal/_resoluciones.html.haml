@@ -1,4 +1,4 @@
-%table#minimalist-a
+%table.table
   %thead
     %th= Resolucion.human_attribute_name(:numero)
     %th= Resolucion.human_attribute_name(:fecha)
@@ -12,4 +12,3 @@
         %td= resolucion.tiporesolucion.nombre
         %td= resolucion.razontiporesolucion.nombre
 #showresolucion.popup{:style => "display: none; height: 400px;"}
-%hr/

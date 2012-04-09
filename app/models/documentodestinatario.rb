@@ -1,5 +1,5 @@
 class Documentodestinatario < ActiveRecord::Base
-  versioned
+  #versioned
 
   ORIGINAL = 1
   COPIA = 0

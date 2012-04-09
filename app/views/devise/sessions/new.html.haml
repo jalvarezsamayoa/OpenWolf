@@ -11,7 +11,7 @@
     = devise_error_messages!
     #usuario
       = image_tag('iconusuario.gif', :alt => "iconusuario", :height => "35", :width => "35", :class => 'iconoslogin')
-      = f.text_field :login, :class => "textfieldlogin", :title => 'Nombre de Usuario'
+      = f.text_field :email, :class => "textfieldlogin", :title => 'Email Usuario'
     #password
       = image_tag('iconpass.gif', :alt => "iconusuario", :height => "40", :width => "40", :class => 'iconoslogin')
       = f.password_field :password, :class => "textfieldlogin", :title => 'Contraseña'

@@ -1,5 +1,5 @@
 class Via < ActiveRecord::Base
-  versioned
+  #versioned
 
   validates :nombre, :presence => true, :uniqueness => true
   

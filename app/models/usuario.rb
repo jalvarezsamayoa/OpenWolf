@@ -2,15 +2,18 @@
 class Usuario < ActiveRecord::Base
   # configuracion plugin vestal_versions
   # provee log de cambios excepto en los siguientes campos
-  versioned :except => [:password, :last_request_at, :sing_in_count, :failed_attempts,
-                        :current_sing_int_at, :last_sign_in_ip]
+  # versioned :except => [:password, :last_request_at, :sing_in_count,
+  #                       :failed_attempts, :current_sing_int_at,
+  #                       :last_sign_in_ip]
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable, :lockable and :timeoutable
   devise :database_authenticatable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :nombre, :cargo, :departamento_id, :areadocumento_id, :puesto_id, :institucion_id, :essupervisorarea, :username, :role_ids, :login, :activo
+  attr_accessible :email, :password, :password_confirmation, :remember_me, \
+  :nombre, :cargo, :departamento_id, :areadocumento_id, :puesto_id, \
+  :institucion_id, :essupervisorarea, :username, :role_ids, :login, :activo
 
   # atributo virtual necesario para que plugin Devise
   # pueda utilizar campo login en lugar de email

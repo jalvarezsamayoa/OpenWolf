@@ -1,26 +1,12 @@
-- content_for :footer do
-  = javascript_include_tag 'filtro_solicitudes.js'
-.center_box
-  #logo
-    = link_to image_tag('escudogt.jpg', :width => '256px'), portal_index_url
+.row
+  #logo.span6.offset3.center
+    = link_to image_tag('folderlogo.png'), portal_index_url
     %h2 Plataforma Virtual para la Transparencia
-  %br/
-  #main-search
-    = form_tag '/portal/buscar', :name => 'f', :method=>:get do
-      %table{:cellpadding => "0", :cellspacing => "0"}
-        %tbody
-          %tr{:valign => "top"}
-            %td{:width => "25%"} &nbsp;
-            %td{:align => "center"}
-              .ds{:style => "height: 32px; margin: 4px 0"}
-                = text_field_tag 'search','', :title=>'Buscar Documentos, Solicitudes de Información, etc.', :size => 57, :style=>"background:#fff;border:1px solid #ccc;border-bottom-color:#999;border-right-color:#999;color:#000;font:18px arial,sans-serif bold;height:25px;margin:0;padding:5px 8px 0 6px;vertical-align:top"
-              %br{:style => "line-height:0"}/
-              %div{:style => "text-align: center;"}
-                = submit_tag "Buscar en OpenWolf"
-            %td{:align => "left", :width => "25%"}
-              = link_to 'Opciones de Búsqueda', '#', :class => "filtro", :title => "Opciones avanzadas de búsqueda."
-              %br/
-  / end - main_search
-/ end - center_box
-#filtro.popup{:style => "display: none; height: 500px; width: 650px;"}
-  = render :partial => 'solicitudes/filtro', :locals => {:url => buscar_portal_index_url}
+.row
+  #main-search.span6.offset3.center
+    = form_tag buscar_portal_index_path, :name => 'f', :method => 'get' do
+      = text_field_tag 'q','', :placeholder => 'Buscar Documentos, Solicitudes de Información, etc.', :title=>'Buscar Documentos, Solicitudes de Información, etc.', :class => "span6"
+      %br
+      = submit_tag "Buscar en OpenWolf", :class => "btn btn-large"
+      %br
+      = link_to 'Búsqueda Avanzada', busqueda_portal_index_path, :class => "filtro", :title => "Opciones avanzadas de búsqueda."

@@ -1,80 +1,66 @@
 GIT
-  remote: git://github.com/adamcooper/vestal_versions
-  revision: 6273df533f85014062e346cb1807b0531a809ee2
-  specs:
-    vestal_versions (1.2.2)
-      activerecord (>= 3.0.0)
-      activesupport (>= 3.0.0)
-
-GIT
   remote: git://github.com/bigbinary/admin_data.git
-  revision: 1496b4bc3febfd8cebe56735e26d63e43968569e
+  revision: e1d37f2791671400eafabac1d92f39fe97806b8a
   specs:
-    admin_data (1.1.16)
+    admin_data (1.2.0)
+      rails (~> 3.1)
       will_paginate (>= 3.0.0)
 
 GIT
   remote: git://github.com/ctran/annotate_models.git
-  revision: a43c08f0eb4d69a48c6830630ebb60e35ccb2d2d
+  revision: ff1131daee8c03dbcc4966b7914b77a7e3a62f02
   specs:
     annotate (2.4.1.beta1)
 
 GIT
   remote: git://github.com/galetahub/simple-captcha.git
-  revision: 926268e07b4f010bfaf70c8d34ec0ca57ec3fc8e
+  revision: 5cdfe83b04387ac49173c3ade86bd4ebdaf4cd60
   specs:
     galetahub-simple_captcha (0.1.3)
 
 GIT
-  remote: git://github.com/justinfrench/formtastic.git
-  revision: 363d51e8910ecf8640add799586166f40c0894cd
-  specs:
-    formtastic (2.1.1)
-      actionpack (~> 3.0)
-
-GIT
   remote: git://github.com/rspec/rspec-core.git
-  revision: a4607d5a21d69041204ec2073c202c71da26c56d
+  revision: ba9b62d07a4a1f0e194012ee9a06107d569a11a4
   specs:
-    rspec-core (2.9.0.rc2)
+    rspec-core (2.9.0)
 
 GIT
   remote: git://github.com/rspec/rspec-expectations.git
-  revision: a60766bce99aa86c44bf1ce5eb45da779f44ce22
+  revision: 40cbc305eecd98f428df8f925f9ac2a2337cfde0
   specs:
-    rspec-expectations (2.9.0.rc2)
+    rspec-expectations (2.9.1)
       diff-lcs (~> 1.1.3)
 
 GIT
   remote: git://github.com/rspec/rspec-mocks.git
-  revision: 06ce1ab0971eec814d874a36016448485a2730e6
+  revision: 2478a16cdbee481bee733eab2652dbcf0a8e505b
   specs:
-    rspec-mocks (2.9.0.rc2)
+    rspec-mocks (2.9.0)
 
 GIT
   remote: git://github.com/rspec/rspec-rails.git
-  revision: 48509732f501d9d6489fef327ac5e8bd72586fe6
+  revision: dbcdcf746bb627ff87236f159a776a8721ee8aff
   specs:
-    rspec-rails (2.9.0.rc2)
+    rspec-rails (2.9.0)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       railties (>= 3.0)
-      rspec (= 2.9.0.rc2)
+      rspec (~> 2.9.0)
 
 GIT
   remote: git://github.com/rspec/rspec.git
-  revision: 08996782bc9e67e9b4eefd714c1cca3752da3a38
+  revision: c4c9d9808a8ec5c7f5e988578dce867a53a7b0dd
   specs:
-    rspec (2.9.0.rc2)
-      rspec-core (= 2.9.0.rc2)
-      rspec-expectations (= 2.9.0.rc2)
-      rspec-mocks (= 2.9.0.rc2)
+    rspec (2.9.0)
+      rspec-core (~> 2.9.0)
+      rspec-expectations (~> 2.9.0)
+      rspec-mocks (~> 2.9.0)
 
 GIT
   remote: git://github.com/seyhunak/twitter-bootstrap-rails.git
-  revision: b169c3afa0bc57bd93e9bad0e7912ef211184e51
+  revision: ea411bb37a7f46ce2cb4667c4daf5a57a323954f
   specs:
-    twitter-bootstrap-rails (2.0.4)
+    twitter-bootstrap-rails (2.0.6)
       actionpack (>= 3.1)
       less-rails (~> 2.2.0)
       railties (>= 3.1)
@@ -86,7 +72,7 @@ GEM
       Platform (>= 0.4.0)
       open4
     Platform (0.4.0)
-    ZenTest (4.4.2)
+    ZenTest (4.7.0)
     acl9 (0.12.0)
     actionmailer (3.2.3)
       actionpack (= 3.2.3)
@@ -123,6 +109,8 @@ GEM
       activesupport
       builder
     arel (3.0.2)
+    awesome_nested_set (2.1.2)
+      activerecord (>= 3.0.0)
     backup (3.0.23)
       POpen4 (~> 0.1.4)
       thor (~> 0.14.6)
@@ -145,7 +133,7 @@ GEM
       ffi (~> 1.0.6)
     chronic (0.6.7)
     cocaine (0.2.1)
-    coderay (1.0.5)
+    coderay (1.0.6)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -155,16 +143,17 @@ GEM
     coffee-script-source (1.2.0)
     commonjs (0.2.5)
     daemons (1.1.8)
-    dalli (1.1.5)
-    delayed_job (3.0.1)
+    dalli (2.0.2)
+    delayed_job (3.0.2)
       activesupport (~> 3.0)
     delayed_job_active_record (0.3.2)
       activerecord (> 2.1.0)
       delayed_job (~> 3.0.0)
-    devise (1.5.3)
+    devise (2.0.4)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.0.3)
-      warden (~> 1.1)
+      railties (~> 3.1)
+      warden (~> 1.1.1)
     diff-lcs (1.1.3)
     em-websocket (0.3.6)
       addressable (>= 2.1.1)
@@ -177,18 +166,17 @@ GEM
     eventmachine (0.12.10)
     execjs (1.3.0)
       multi_json (~> 1.0)
-    factory_girl (2.6.3)
-      activesupport (>= 2.3.9)
-    factory_girl_rails (1.7.0)
-      factory_girl (~> 2.6.0)
+    factory_girl (3.1.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (3.1.0)
+      factory_girl (~> 3.1.0)
       railties (>= 3.0.0)
     faker (1.0.1)
       i18n (~> 0.4)
     fastercsv (1.5.4)
     fattr (2.2.1)
     ffi (1.0.11)
-    foreman (0.40.0)
-      term-ansicolor (~> 1.0.7)
+    foreman (0.41.0)
       thor (>= 0.13.6)
     guard (1.0.1)
       ffi (>= 0.5.0)
@@ -200,15 +188,14 @@ GEM
     haml (3.1.4)
     highline (1.6.11)
     hike (1.2.1)
-    hirb (0.6.1)
     hpricot (0.8.6)
     i18n (0.6.0)
     journey (1.0.3)
-    jquery-rails (1.0.19)
-      railties (~> 3.0)
+    jquery-rails (2.0.2)
+      railties (>= 3.2.0, < 5.0)
       thor (~> 0.14)
     json (1.6.6)
-    launchy (2.0.5)
+    launchy (2.1.0)
       addressable (~> 2.2.6)
     less (2.1.0)
       commonjs (~> 0.2.0)
@@ -224,7 +211,7 @@ GEM
       treetop (~> 1.4.8)
     method_source (0.7.1)
     mime-types (1.18)
-    multi_json (1.1.0)
+    multi_json (1.2.0)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
     net-sftp (2.0.5)
@@ -232,20 +219,24 @@ GEM
     net-ssh (2.3.0)
     net-ssh-gateway (1.1.0)
       net-ssh (>= 1.99.1)
-    newrelic_rpm (3.3.2)
+    newrelic_rpm (3.3.3)
     nokogiri (1.5.2)
     notifier (0.1.4)
     open4 (1.3.0)
     options (2.3.0)
       fattr
-    orm_adapter (0.0.6)
-    paperclip (2.7.0)
-      activerecord (>= 2.3.0)
-      activesupport (>= 2.3.2)
+    orm_adapter (0.0.7)
+    paperclip (3.0.1)
+      activemodel (>= 3.0.0)
+      activerecord (>= 3.0.0)
+      activesupport (>= 3.0.0)
       cocaine (>= 0.0.2)
       mime-types
     pdfkit (0.4.6)
     pg (0.13.2)
+    pg_search (0.4.1)
+      activerecord (>= 3)
+      activesupport (>= 3)
     polyglot (0.3.3)
     pr_geohash (1.0.0)
     progress_bar (0.4.0)
@@ -282,15 +273,6 @@ GEM
       ffi (>= 0.5.0)
     rdoc (3.12)
       json (~> 1.4)
-    remarkable (4.0.0.alpha4)
-      rspec (>= 2.0.0.alpha11)
-    remarkable_activemodel (4.0.0.alpha4)
-      remarkable (~> 4.0.0.alpha4)
-      rspec (>= 2.0.0.alpha11)
-    remarkable_activerecord (4.0.0.alpha4)
-      remarkable (~> 4.0.0.alpha4)
-      remarkable_activemodel (~> 4.0.0.alpha4)
-      rspec (>= 2.0.0.alpha11)
     rmagick (2.13.1)
     rsolr (1.0.7)
       builder (>= 2.1.2)
@@ -312,30 +294,32 @@ GEM
       rubyzip (>= 0.9.1)
     sexp_processor (3.1.0)
     silent-postgres (0.1.1)
-    simplecov (0.6.1)
-      multi_json (~> 1.0)
-      simplecov-html (~> 0.5.3)
-    simplecov-html (0.5.3)
+    simple_form (2.0.1)
+      actionpack (~> 3.0)
+      activemodel (~> 3.0)
     slop (2.4.4)
-    spork (0.9.0.rc9)
+    spork (0.9.0)
     sprockets (2.1.2)
       hike (~> 1.2)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
-    sunspot (1.3.0)
+    sunspot (1.3.1)
       escape (~> 0.0.4)
       pr_geohash (~> 1.0)
-      rsolr (~> 1.0.6)
-    sunspot_rails (1.3.0)
+      rsolr (~> 1.0.7)
+    sunspot_rails (1.3.1)
       nokogiri
-      sunspot (= 1.3.0)
-    sunspot_solr (1.3.0)
+      sunspot (= 1.3.1)
+    sunspot_solr (1.3.1)
       escape (~> 0.0.4)
-    term-ansicolor (1.0.7)
     test_notifier (1.0.0)
       notifier
     therubyracer (0.10.1)
       libv8 (~> 3.3.10)
+    thin (1.3.1)
+      daemons (>= 1.0.9)
+      eventmachine (>= 0.12.6)
+      rack (>= 1.0.0)
     thor (0.14.6)
     tilt (1.3.3)
     tiny_mce (0.1.8)
@@ -346,13 +330,8 @@ GEM
     uglifier (1.2.4)
       execjs (>= 0.3.0)
       multi_json (>= 1.0.2)
-    validation_reflection (1.0.0)
     warden (1.1.1)
       rack (>= 1.0)
-    webrat (0.7.3)
-      nokogiri (>= 1.2.0)
-      rack (>= 1.0)
-      rack-test (>= 0.5.3)
     whenever (0.7.3)
       activesupport (>= 2.3.4)
       chronic (~> 0.6.3)
@@ -364,12 +343,13 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  ZenTest (~> 4.4.2)
+  ZenTest
   acl9
-  activerecord-import (>= 0.2.0)
+  activerecord-import (~> 0.2.9)
   admin_data!
   airbrake
   annotate!
+  awesome_nested_set
   backup
   capistrano
   capybara
@@ -384,13 +364,11 @@ DEPENDENCIES
   faker
   fastercsv
   foreman
-  formtastic!
   galetahub-simple_captcha!
   guard
   guard-livereload
   haml
   highline
-  hirb
   hpricot
   jquery-rails
   launchy
@@ -400,13 +378,11 @@ DEPENDENCIES
   paperclip
   pdfkit (= 0.4.6)
   pg
+  pg_search
   progress_bar
   pry
   rails (= 3.2.3)
   rb-inotify
-  remarkable (>= 4.0.0.alpha2)
-  remarkable_activemodel (>= 4.0.0.alpha2)
-  remarkable_activerecord (>= 4.0.0.alpha2)
   rmagick
   rspec!
   rspec-core!
@@ -418,16 +394,14 @@ DEPENDENCIES
   sass-rails (~> 3.2.3)
   serenity-odt
   silent-postgres
-  simplecov (>= 0.3.8)
-  spork (= 0.9.0.rc9)
+  simple_form
+  spork
   sunspot_rails
   sunspot_solr
   test_notifier
+  thin
   tiny_mce
   twitter-bootstrap-rails!
   uglifier (>= 1.0.3)
-  validation_reflection
-  vestal_versions!
-  webrat
   whenever
   will_paginate

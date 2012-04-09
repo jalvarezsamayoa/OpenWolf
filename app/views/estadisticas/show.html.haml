@@ -1,106 +1,104 @@
-- content_for :footer do
-  = javascript_include_tag 'estadisticas.js'
+.row
+  .span12
+    = render :partial => "portal/find_box"
+.row
+  .span12
+    #container
+      #wraper
+        #content
+          %h2.center= "Estadísticas"
+          %h3.center= @institucion.nombre
+          #results
+            %ul.nav.nav-tabs{:id =>'estadisticas-tabs'}
+              - Date.today.year.downto(@institucion.ano_minimo) do |ano|
+                %li{:class => "#{'active' if ano == Date.today.year} "}
+                  %a{:href => "#tab-ano-#{ano}", "data-toggle"=>"tab"}= "Año #{ano}"
+            .tab-content
+              - Date.today.year.downto(@institucion.ano_minimo) do |ano|
+                .tab-pane{:id => "tab-ano-#{ano}", :class => "#{'active' if ano == Date.today.year}"}
+                  .generales
+                    %h3= "Solicitudes de información pública recibidas año #{ano}"
+                    %table.table.table-bordered
+                      %tbody
+                        %tr
+                          %th= 'Total de Solicitudes'
+                          %td= @institucion.total_solicitudes(ano)
+                        %tr
+                          %th= 'Promedio dias respuesta'
+                          %td= @institucion.tiempo_respuesta_promedio(ano)
+                  .por-estado
+                    %h3= "Solicitudes por Estado recibidas año #{ano}"
+                    %table.table.table-bordered
+                      %colgroup.show-table-header
+                      %colgroup.show-table-data
+                      - for estado in @institucion.solicitudes_por_estado(ano)
+                        %tr
+                          %th= estado.nombre
+                          %td= estado.total_solicitudes
+                  .por-via
+                    %h3= "Solicitudes por Via recibidas año #{ano}"
+                    %table.table.table-bordered
+                      %colgroup.show-table-header
+                      %colgroup.show-table-data
+                      - for estado in @institucion.solicitudes_por_via_solicitud(ano)
+                        %tr
+                          %th= estado.nombre
+                          %td= estado.total_solicitudes
 
-= render :partial => "portal/find_box"
-#container
-  #wraper
-    #content
-      %h2= "Estadísticas - #{@institucion.nombre}"
-      #results.estadisticas
-        #estadisticas-tabs
-          %ul
-            - Date.today.year.downto(@institucion.ano_minimo) do |ano|
-              %li
-                %a{:href => "#tab-ano-#{ano}"}= "Año #{ano}"
-          - Date.today.year.downto(@institucion.ano_minimo) do |ano|
-            %div{:id => "tab-ano-#{ano}"}
-              .generales
-                %h3= "Solicitudes de información pública recibidas año #{ano}"
-                %table.minimalist-b{:width => "100%"}
-                  %colgroup.show-table-header
-                  %colgroup.show-table-data
+
+            %hr
+
+            #por-ano
+              %h3 Solicitudes completadas por Año
+
+              - solicitudes = @institucion.solicitudes_por_ano
+              = image_tag( estadisticas_solicitudes_completadas_por_ano(solicitudes) )
+
+              %table.table{:width => "100%"}
+                %colgroup.show-table-data
+                %colgroup.show-table-data
+                %colgroup.show-table-data
                   %tr
-                    %th= 'Total de Solicitudes'
-                    %td= @institucion.total_solicitudes(ano)
+                    %th= "Año"
+                    %th= "Solicitudes"
+                    %th= "Promedio dias respuesta"
+                - for solicitud in solicitudes
                   %tr
-                    %th= 'Promedio dias respuesta'
-                    %td= @institucion.tiempo_respuesta_promedio(ano)
-              .por-estado
-                %h3= "Solicitudes por Estado recibidas año #{ano}"
-                %table.minimalist-b{:width => "100%"}
-                  %colgroup.show-table-header
-                  %colgroup.show-table-data
-                  - for estado in @institucion.solicitudes_por_estado(ano)
-                    %tr
-                      %th= estado.nombre
-                      %td= estado.total_solicitudes
-              .por-via
-                %h3= "Solicitudes por Via recibidas año #{ano}"
-                %table.minimalist-b{:width => "100%"}
-                  %colgroup.show-table-header
-                  %colgroup.show-table-data
-                  - for estado in @institucion.solicitudes_por_via_solicitud(ano)
-                    %tr
-                      %th= estado.nombre
-                      %td= estado.total_solicitudes
+                    %td= solicitud.ano
+                    %td= solicitud.total_solicitudes
+                    %td= solicitud.promedio_dias_respuesta.to_f.round()
 
+            #por-mes-ano
+              %h3 Solicitudes completadas por Mes y Año
 
+              - solicitudes = @institucion.solicitudes_por_mes_ano
+              = image_tag( estadisticas_solicitudes_completadas_por_mes_ano(solicitudes) )
 
-
-        #por-ano
-          %h3 Solicitudes completadas por Año
-
-          - solicitudes = @institucion.solicitudes_por_ano
-          = image_tag( estadisticas_solicitudes_completadas_por_ano(solicitudes) )
-
-          %table.minimalist-b{:width => "100%"}
-            %colgroup.show-table-data
-            %colgroup.show-table-data
-            %colgroup.show-table-data
-              %tr
-                %th= "Año"
-                %th= "Solicitudes"
-                %th= "Promedio dias respuesta"
-            - for solicitud in solicitudes
-              %tr
-                %td= solicitud.ano
-                %td= solicitud.total_solicitudes
-                %td= solicitud.promedio_dias_respuesta.to_f.round()
-
-        #por-mes-ano
-          %h3 Solicitudes completadas por Mes y Año
-
-          - solicitudes = @institucion.solicitudes_por_mes_ano
-          = image_tag( estadisticas_solicitudes_completadas_por_mes_ano(solicitudes) )
-
-          %table.minimalist-b{:width => "100%"}
-            %colgroup.show-table-data
-            %colgroup.show-table-data
-            %colgroup.show-table-data
-              %tr
-                %th= "Año / Mes"
-                %th= "Solicitudes"
-                %th= "Promedio dias respuesta"
-            - for solicitud in solicitudes
-              %tr
-                %td= "#{solicitud.mes} / #{solicitud.ano}"
-                %td= solicitud.total_solicitudes
-                %td= solicitud.promedio_dias_respuesta.to_f.round()
-        #por-genero
-          %h3 Solicitudes recibidas por Genero y Año
-          %table.minimalist-b{:width => "50%"}
-            %colgroup.show-table-data
-            %colgroup.show-table-data
-            %colgroup.show-table-data
-              %tr
-                %th= "Año"
-                %th= "Genero"
-                %th= "Solicitudes"
-            - for solicitud in @institucion.solicitudes_por_genero_ano
-              %tr
-                %td= "#{solicitud.ano}"
-                %td= ( solicitud.genero_id.nil? ? "No Disponible" : (solicitud.genero_id == 1 ? 'Masculino' : 'Femenino') )
-                %td= solicitud.total_solicitudes
-
-  #navigation
-  = render :partial => "portal/news_links"
+              %table.table{:width => "100%"}
+                %colgroup.show-table-data
+                %colgroup.show-table-data
+                %colgroup.show-table-data
+                  %tr
+                    %th= "Año / Mes"
+                    %th= "Solicitudes"
+                    %th= "Promedio dias respuesta"
+                - for solicitud in solicitudes
+                  %tr
+                    %td= "#{solicitud.mes} / #{solicitud.ano}"
+                    %td= solicitud.total_solicitudes
+                    %td= solicitud.promedio_dias_respuesta.to_f.round()
+            #por-genero
+              %h3 Solicitudes recibidas por Genero y Año
+              %table.table{:width => "50%"}
+                %colgroup.show-table-data
+                %colgroup.show-table-data
+                %colgroup.show-table-data
+                  %tr
+                    %th= "Año"
+                    %th= "Genero"
+                    %th= "Solicitudes"
+                - for solicitud in @institucion.solicitudes_por_genero_ano
+                  %tr
+                    %td= "#{solicitud.ano}"
+                    %td= ( solicitud.genero_id.nil? ? "No Disponible" : (solicitud.genero_id == 1 ? 'Masculino' : 'Femenino') )
+                    %td= solicitud.total_solicitudes

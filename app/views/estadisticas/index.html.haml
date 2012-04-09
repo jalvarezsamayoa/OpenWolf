@@ -1,29 +1,25 @@
-= render :partial => "portal/find_box"
-#container
-  #wraper
-    #content
-      %h1 Estadísticas       
-      #results
-        .notice
-          Seleccione una institución para ver su información relacionada.
-        %br/
-        #listing
-          %h3 Instituciones
-          %table.minimalist-b{:width => "100%"}
-            %thead
-              %tr
-                %th= 'No.'
-                %th= Institucion.human_name
-                %th= "Solicitudes"
-            %tbody
-            - @instituciones.each_with_index do |institucion, i|
-              - n = institucion.solicitudes.activas.count
-              %tr
-                %td= i + 1
-                %td= link_to_if n > 0, institucion.nombre, portal_estadistica_path(1,institucion.id), :title => "Estadisticas para #{institucion.nombre}"
-                %td= n
-
-              
-  #navigation
-  = render :partial => "portal/news_links" 
-/ end - container
+.row
+  .span12
+    = render :partial => "portal/find_box"
+.row
+  .span12
+    %h1.center Estadísticas
+    #results
+      %em
+        Seleccione una institución para ver su información relacionada.
+      %br/
+      #listing
+        %h3 Instituciones
+        %table.table-striped
+          %thead
+            %tr
+              %th= 'No.'
+              %th= Institucion.model_name.human
+              %th= "Solicitudes"
+          %tbody
+          - @instituciones.each_with_index do |institucion, i|
+            - n = institucion.solicitudes.activas.count
+            %tr
+              %td= i + 1
+              %td= link_to_if n > 0, institucion.nombre, portal_estadistica_path(1,institucion.id), :title => "Estadisticas para #{institucion.nombre}"
+              %td= n

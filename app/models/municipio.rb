@@ -1,5 +1,5 @@
 class Municipio < ActiveRecord::Base
-  versioned
+  #versioned
   
   belongs_to :departamento
   

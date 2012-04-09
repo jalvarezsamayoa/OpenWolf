@@ -44,11 +44,13 @@ OpenwolfV3::Application.routes.draw do
       get :institucion
     end
     collection do
+      get :busqueda
       get :buscar
-      get :exportar
+      get :exportar      
     end
     resources :estadisticas, :only => [:index, :show]
   end
+  
 
   resources :resoluciones do
     collection do

@@ -1,5 +1,5 @@
 class Institucion < ActiveRecord::Base
-  versioned
+  #versioned
   acts_as_nested_set
 
   ESTADO_GUATEMALA = 1

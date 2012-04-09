@@ -1,10 +1,14 @@
 - unless @solicitudes.nil?
   %h3
-    = @solicitudes.total
+    = @solicitudes.count
     Solicitudes Encontradas
   #export-data
     = button_link(exportar_portal_index_path(), "Exportar resultados (CSV)", "Exportar resultados de busqueda a CSV",'textfile16.png')
-  %table.minimalist-b{:width => "100%"}
+
+  .center
+    = will_paginate @solicitudes
+    
+  %table.table-striped.table
     %thead
       %tr
         %th= Solicitud.human_attribute_name(:codigo)
@@ -15,7 +19,7 @@
         %th= Solicitud.human_attribute_name(:textosolicitud)
         %th= Solicitud.human_attribute_name(:institucion_id)
     %tbody
-      - @solicitudes.each_hit_with_result do |hit, solicitud|
+      - @solicitudes.each do |solicitud|
         %tr
           %td= link_to_solicitud_portal(solicitud) 
           %td= l(solicitud.fecha_creacion)
@@ -25,7 +29,8 @@
           %td= solicitud.extracto
           %td= link_to(solicitud.institucion.abreviatura, institucion_portal_path(solicitud.institucion), :title => solicitud.institucion.nombre)
   %br/
-  = will_paginate @solicitudes.results
+  .center
+    = will_paginate @solicitudes
   %br/
   %br/
 - else

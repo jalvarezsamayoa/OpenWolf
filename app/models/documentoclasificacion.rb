@@ -1,5 +1,5 @@
 class Documentoclasificacion < ActiveRecord::Base
-  versioned
+  #versioned
   
   SOLICITUDINFOPUBLICA = '9001'
   RESOLUCION = '9002'

@@ -1,5 +1,5 @@
 class Actividad < ActiveRecord::Base
-  versioned :if => :guardar_version?
+  #versioned :if => :guardar_version?
 
   ESTADO_ACTIVA = 1
   ESTADO_COMPLETADA = 3

@@ -4,52 +4,33 @@
 - if usuario_actual.nil?
   - @url = url
   - @method = usuario_actual.nil? ? :get : :post
-/ Inicia formas de filtro
-.mantform
-  #filtros
-    #tabs-filtros
-      %ul
-        %li= link_to "Solicitudes de Información Pública", "#tab-solicitudes"
-        %li= link_to "Documentos", "#tab-documentos"
-    #tab-solcicitudes
-      %h2 Filtrar Solicitudes
-      = form_tag @url, :method => @method do
-        %table{:border => "0", :cellpadding => "0", :cellspacing => "0", :width => "100%"}
-          %tr
-            %th Instituciones
-            %td
-              - if usuario_actual.nil?
-                = select_tag :institucion_id, options_from_collection_for_select(Institucion.asignables.activas,'id','nombre'), :style => "width: 450px;", :class => "combobox"
-              - else
-                = select_tag :institucion_id, options_for_select([[usuario_actual.institucion.nombre,usuario_actual.institucion_id], |
-                  ['Todas','ALL']]), :html => {:style => "width: 450px", :class => "combobox"}                                                             |
-          %tr
-            %th{:width => "30%"} Fechas:
-            %td
-              = text_field_tag :fecha_desde, l(@desde)
-              al
-              = text_field_tag :fecha_hasta, l(@hasta)
-          %tr
-            %th Palabras clave
-            %td= text_field_tag :search, '', :size => 60
-          %tr
-            %th Vía Solicitud
-            %td= select_tag :solicitud_via, options_for_select(Via.all.collect {|c| [c.nombre, c.id] }.insert(0, 'Todos'))
-          %tr
-            %th Estado
-            %td= select_tag :solicitud_estado, options_for_select(Estado.all.collect {|c| [c.nombre, c.id]}.insert(0,'Todos'))
-          %tr
-            %th Dias Restantes
-            %td= select_tag :solicitud_tiempo, options_for_select(Solicitud::TIEMPOS)
-          %tr
-            %th &nbsp;
-            %td
-              = submit_popup('Filtrar Solicitudes')
-              = close_popup('filtro')
-        = hidden_field_tag 'filtrar', true
-    / end - tab-solicitudes
-    #tab-documentos
-      %h2 Fitrar Documentos
-    / end - tab-documentos
-  / end - filtros
-/ end - mantform
+  
+
+#filtros.rounded-shadow-box
+  %h2.center Filtrar Solicitudes
+  = simple_form_for @busqueda, :url => @url, :method => @method  do |f|
+    - if usuario_actual.nil?
+      = f.input :institucion_id, :collection => Institucion.asignables.activas, :input_html => {:class => "span5"}, :prompt => "Todas las instituciones"
+    - else
+      = f.input :institucion_id, :collection => ([[usuario_actual.institucion.nombre,usuario_actual.institucion_id], |
+        ['Todas','ALL']]), :class => "span5"
+        
+    %fieldset
+      %legend Rango Fechas
+      = f.input :fecha_desde, :as => :date, :input_html => {:class => "span2"}
+      = f.input :fecha_hasta, :as => :date, :input_html => {:class => "span2"}
+
+    %fieldset
+      %legend Otros Filtros
+      
+      = f.input :q, :label => "Palabras Clave", :input_html => {:class => "span5"}
+
+      = f.input :solicitud_via, :collection => Via.all, :prompt => "Todas las vias", :input_html => {:class => "span5"}
+
+      = f.input :solicitud_estado, :collection => Estado.all, :prompt => "Todos los estados", :input_html => {:class => "span5"}
+
+      = f.input :solicitud_tiempo, :collection => Solicitud::TIEMPOS, :prompt => "Todos los tiempos", :input_html => {:class => "span5"}
+    .center
+      = f.submit 'Filtrar Solicitudes', class: "btn btn-large btn-primary"
+    = f.hidden_field :filtrar
+

@@ -1,5 +1,5 @@
 class Recursorevision < ActiveRecord::Base
-  versioned
+  #versioned
   
   belongs_to :solicitud
   belongs_to :usuario

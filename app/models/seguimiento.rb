@@ -1,5 +1,5 @@
 class Seguimiento < ActiveRecord::Base
-  versioned
+  #versioned
   
   before_create :completar_informacion
   

@@ -1,5 +1,5 @@
 class Estado < ActiveRecord::Base
-  versioned
+  #versioned
   
   MODULOS = [['LAIP',1],['MENSAJES',2]]
   MODULO_LAIP = 1

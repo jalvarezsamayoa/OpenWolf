@@ -1,8 +1,9 @@
 class EstadisticasController < ApplicationController
   layout 'portal'
-  
+   before_filter :inicializar_busqueda
+
   def index
-    @instituciones = Institucion.activas.order(:nombre) 
+    @instituciones = Institucion.activas.order(:nombre)
   end
 
   def show
@@ -13,5 +14,8 @@ class EstadisticasController < ApplicationController
       redirect_to :action => 'index'
     end
   end
-  
+
+  def inicializar_busqueda
+     @busqueda = Busqueda.new
+  end
 end

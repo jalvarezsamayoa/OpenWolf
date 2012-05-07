@@ -4,9 +4,12 @@
     %h2 Plataforma Virtual para la Transparencia
 .row
   #main-search.span6.offset3.center
-    = form_tag buscar_portal_index_path, :name => 'f', :method => 'get' do
-      = text_field_tag 'q','', :placeholder => 'Buscar Documentos, Solicitudes de Información, etc.', :title=>'Buscar Documentos, Solicitudes de Información, etc.', :class => "span6"
+    = simple_form_for @busqueda, { :url => buscar_portal_index_path, |
+    :method => :get } do |f|
+  
+      = f.input :q, :label => "Palabras clave", :placeholder => 'Buscar Documentos, Solicitudes de Información, etc.', :title=>'Buscar Documentos, Solicitudes de Información, etc.', :input_html => {:class => "span6"}
+        
       %br
-      = submit_tag "Buscar en OpenWolf", :class => "btn btn-large"
+      = f.submit "Buscar Solicitudes", :class => "btn btn-large"
       %br
       = link_to 'Búsqueda Avanzada', busqueda_portal_index_path, :class => "filtro", :title => "Opciones avanzadas de búsqueda."

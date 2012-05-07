@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 class PortalController < ApplicationController
   before_filter :get_solicitud, :only => [:solicitud, :print]
+  before_filter :inicializar_busqueda, :except => [:buscar]
 
   def index
   end
@@ -59,7 +60,6 @@ class PortalController < ApplicationController
   end
 
   def busqueda
-    @busqueda = Busqueda.new
   end
 
   def buscar
@@ -73,14 +73,13 @@ class PortalController < ApplicationController
 
     session[:last_search] = params
 
-    @solicitudes = Solicitud.buscar_solicitud(params[:q])\
-      .paginate(:page => params[:page])
+    @busqueda = Busqueda.new(params)
+    @solicitudes = @busqueda.solicitudes
 
+    @desde = @busqueda.fecha_desde
+    @hasta = @busqueda.fecha_hasta
 
-    @desde = ( params[:fecha_desde] ? Date.strptime(params[:fecha_desde], "%d/%m/%Y") : Date.today - Date.today.yday + 1 )
-    @hasta = ( params[:fecha_hasta] ? Date.strptime(params[:fecha_hasta], "%d/%m/%Y") : Date.today )
-
-    @q = params[:search]
+    @q = @busqueda.q
   end
 
   def institucion
@@ -123,6 +122,10 @@ class PortalController < ApplicationController
     else
       @mostrar_datos_solicitante = false
     end
+  end
+
+  def inicializar_busqueda
+     @busqueda = Busqueda.new
   end
 
 end

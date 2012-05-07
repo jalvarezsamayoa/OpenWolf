@@ -1,6 +1,6 @@
 - content_for :head do
   = javascript_include_tag 'jquery-blockui.js', 'portal.js'
-  
+
 .row
   .span12
     = render :partial => 'portal/find_box'
@@ -14,7 +14,7 @@
 -#           %li= msg
 .row
   .span12
-    .documento.rounded-shadow-box.well
+    .documento.rounded-shadow-box.glow-border
       %h2.center
         Nueva Solicitud de Información Pública
       = simple_form_for @solicitud, :url => solicitud_informacion_url, :html => { :class => "form-horizontal" }  do |form|

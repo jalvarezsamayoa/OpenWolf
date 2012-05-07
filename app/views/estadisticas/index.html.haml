@@ -3,23 +3,24 @@
     = render :partial => "portal/find_box"
 .row
   .span12
-    %h1.center Estadísticas
-    #results
-      %em
-        Seleccione una institución para ver su información relacionada.
-      %br/
-      #listing
-        %h3 Instituciones
-        %table.table-striped
-          %thead
-            %tr
-              %th= 'No.'
-              %th= Institucion.model_name.human
-              %th= "Solicitudes"
-          %tbody
-          - @instituciones.each_with_index do |institucion, i|
-            - n = institucion.solicitudes.activas.count
-            %tr
-              %td= i + 1
-              %td= link_to_if n > 0, institucion.nombre, portal_estadistica_path(1,institucion.id), :title => "Estadisticas para #{institucion.nombre}"
-              %td= n
+    .estadisticas.rounded-shadow-box.glow-border
+      %h1.center Estadísticas
+      #results
+        %em
+          Seleccione una institución para ver su información relacionada.
+        %br/
+        #listing
+          %h3 Instituciones
+          %table.table
+            %thead
+              %tr
+                %th= 'No.'
+                %th= Institucion.model_name.human
+                %th= "Solicitudes"
+            %tbody
+            - @instituciones.each_with_index do |institucion, i|
+              - n = institucion.solicitudes.activas.count
+              %tr
+                %td= i + 1
+                %td= link_to_if n > 0, institucion.nombre, portal_estadistica_path(1,institucion.id), :title => "Estadisticas para #{institucion.nombre}"
+                %td= n

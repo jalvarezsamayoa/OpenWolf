@@ -2,6 +2,7 @@ class SolicitudInformacionController < ApplicationController
   layout 'portal'
   #   before_filter :get_institucion
   before_filter :get_data
+  before_filter :inicializar_busqueda
 
   def index
     render :new
@@ -21,7 +22,7 @@ class SolicitudInformacionController < ApplicationController
   end
 
   def create
-    
+
     @solicitud = Solicitud.new(params[:solicitud])
     @solicitud.origen_id = Solicitud::ORIGEN_PORTAL
 
@@ -60,5 +61,9 @@ class SolicitudInformacionController < ApplicationController
   def get_data
     #   @vias = Via.all
     #    @municipios = Departamento.first.municipios.all(:order => "municipios.nombre")
+  end
+
+  def inicializar_busqueda
+     @busqueda = Busqueda.new
   end
 end

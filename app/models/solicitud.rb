@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 class Solicitud < ActiveRecord::Base
   include PgSearch
-  
+
   ORIGEN_DEFAULT = 1
   ORIGEN_PORTAL = 2
   ORIGEN_MIGRACION = 3
@@ -28,25 +28,27 @@ class Solicitud < ActiveRecord::Base
   attr_accessor :dont_send_email
   attr_accessor :dont_set_estado
 
-  attr_accessible :solicitante_nombre, :email, :textosolicitud, :reserva_temporal, :genero_id, :idioma_id, :captcha, :origen_id, :institucion_id, :solicitante_telefonos, :captcha_key
+  attr_accessible :solicitante_nombre, :email, :textosolicitud, :reserva_temporal, \
+  :genero_id, :idioma_id, :captcha, :origen_id, :institucion_id, \
+  :solicitante_telefonos, :captcha_key
 
   #####################
   # Modulos y Plugins
   #####################
 
   #versioned :if => :guardar_version?
-  
+
   apply_simple_captcha
 
 
   #--------------------------------
   # Configuracion indexamiento pg_search
   #--------------------------------
-  
-  pg_search_scope(:buscar_solicitud,
+
+  pg_search_scope(:text_search,
                   :against => [:codigo, :solicitante_nombre, :textosolicitud],
                   :using => [:tsearch])
-  
+
   #######################
   # Configuracion Solr
   ######################
@@ -173,98 +175,6 @@ class Solicitud < ActiveRecord::Base
       :conditions => ["(fecha_programada - current_date) between ? and ?",tiempo_desde, tiempo_hasta]
     }}
 
-  ########################################
-  # Metodos de búsqueda que utilizarn Solr
-  #########################################
-
-  # busca registros utilizando servidor solr
-  #
-  #
-  # @param [String] params[:q] Termino a buscar
-  # @param [Integer] params[:page] Pagina a obtener
-  # @param [Integer] params[:per_page] Resultados por pagina
-  # @param [Integer] params[:institucion] Id de Institucion
-  # @return [Sunspot::Search]
-  # @example
-  #   @solicitudes = Solicitud.buscar(:q => "Contrato",
-  #                    :institucion => 25,
-  #                    :page => 2,
-  #                    :per_page => 25)
-
-  def self.buscar(params = nil)
-    logger.debug { "#{params.inspect}" }
-    logger.debug { "params.nil?" }
-    return nil if params.nil? or params.empty?
-
-    logger.debug { "search.empty?" }
-    if params[:filtrar].nil?
-      return nil if params[:search] && params[:search].empty?
-    end
-
-    logger.debug { "filters" }
-
-    l_excluir_anuladas = ((params[:anuladas].nil? or params[:anuladas] != true) ? true : false )
-
-    l_filtrar_instituciones = (params[:institucion_id] && params[:institucion_id] != 'ALL')
-    l_filtrar_vias = (params[:solicitud_via] && params[:solicitud_via] != 'Todos')
-    l_filtrar_estados = (params[:solicitud_estado] && params[:solicitud_estado] != 'Todos')
-    l_filtrar_tiempo_restante = (params[:solicitud_tiempo] && params[:solicitud_tiempo] != 'ALL')
-
-    i_institucion_id = (params[:institucion_id] ? params[:institucion_id] : nil)
-    i_via_id = (params[:solicitud_via] ? params[:solicitud_via] : nil )
-    i_estado_id = (params[:solicitud_estado] ? params[:solicitud_estado] : nil )
-
-    d_fechadesde = (params[:fecha_desde] ? Date.strptime(params[:fecha_desde], "%d/%m/%Y") : nil)
-    d_fechahasta = (params[:fecha_hasta] ? Date.strptime(params[:fecha_hasta], "%d/%m/%Y") : nil)
-
-
-    #veficar si usuario intento enviar un solo entero
-    # que seria el correlativo de la solicitud
-    i_numero = nil
-    if params[:search]
-      unless params[:search].include?('-')
-        i_numero = params[:search].to_i
-        params[:search] = '' if i_numero > 0
-      end
-    end
-
-    if l_filtrar_tiempo_restante
-      case params[:solicitud_tiempo]
-      when '0a3'
-        desde = 0
-        hasta = 3
-      when '4a6'
-        desde = 4
-        hasta = 6
-      when '7a9'
-        desde = 7
-        hasta = 9
-      when '10'
-        desde = 10
-        hasta = 10
-      when 'LATE'
-        hasta = 11
-        desde = 100000
-      end
-
-      d_fechaprogdesde = Date.today + desde
-      d_fechaproghasta = Date.today + hasta
-    end
-
-    self.search do
-      keywords(params[:search]) unless (params[:search].nil? or params[:search].empty?)
-      with :numero, i_numero unless (i_numero.nil? or i_numero == 0)
-      with :institucion_id, i_institucion_id if l_filtrar_instituciones
-      with :via_id, i_via_id if l_filtrar_vias
-      with :estado_id, i_estado_id if l_filtrar_estados
-      with(:fecha_creacion).between(d_fechadesde..d_fechahasta) if d_fechadesde
-      with(:fecha_programada).between(d_fechaprogdesde..d_fechaproghasta) if l_filtrar_tiempo_restante
-      with :anulada, false if l_excluir_anuladas
-      paginate(:page => (params[:page] ||= 1), :per_page => (params[:per_page] ||= 20))
-      order_by(:fecha_creacion, :desc)
-    end
-  end
-
 
   ################################
   # Metodos de Instancia Publicos
@@ -278,7 +188,7 @@ class Solicitud < ActiveRecord::Base
     if self.reserva_temporal?
       return self.con_resolucion_final?
     end
-        
+
     return true
   end
 
@@ -424,23 +334,23 @@ class Solicitud < ActiveRecord::Base
 
     tiempo = (self.tiempo_respuesta - 10)
 
-    return 0 if tiempo < 0    
+    return 0 if tiempo < 0
     return tiempo
-    
+
     #resolucion_final = self.resoluciones.finales.last
 
-  
-     # si no hay resolucion final
-     # tiempo de amplicacion es a partir de nueva fecha
+
+    # si no hay resolucion final
+    # tiempo de amplicacion es a partir de nueva fecha
     # if resolucion_final.nil?
-#       return (p.nueva_fecha - self.fecha_programada).to_i
+    #       return (p.nueva_fecha - self.fecha_programada).to_i
     # end
-    
-     #si hay resolucion final
+
+    #si hay resolucion final
     # tiempo = (resolucion_final.fecha - self.fecha_programada).to_i
     # tiempo = 0 if tiempo < 0
 
-   # return tiempo
+    # return tiempo
   end
 
   def dias_transcurridos
@@ -736,7 +646,7 @@ class Solicitud < ActiveRecord::Base
 
         d_desde = Date.new(opts[:desde][2].to_i, opts[:desde][1].to_i, opts[:desde][0].to_i)
         d_hasta = Date.new(opts[:hasta][2].to_i, opts[:hasta][1].to_i, opts[:hasta][0].to_i)
-        
+
         solicitudes = Solicitud.find(:all, :conditions => ["solicitudes.institucion_id = ? and solicitudes.anulada = ? and solicitudes.fecha_creacion between ? and ?", i_institucion_id, false, d_desde, d_hasta], :order => :numero)
       end
     end
@@ -980,4 +890,3 @@ end
 #  tiempo_respuesta_calendario :integer         default(0)
 #  reserva_temporal            :boolean         default(FALSE)
 #
-

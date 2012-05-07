@@ -95,6 +95,7 @@ group :development, :test do
   gem 'guard-livereload'
   gem 'rb-inotify'
   gem 'libnotify'
+  gem 'debugger'
 end
 
 

@@ -6,7 +6,7 @@
   - @method = usuario_actual.nil? ? :get : :post
   
 
-#filtros.rounded-shadow-box
+#filtros.rounded-shadow-box.glow-border
   %h2.center Filtrar Solicitudes
   = simple_form_for @busqueda, :url => @url, :method => @method  do |f|
     - if usuario_actual.nil?

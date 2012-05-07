@@ -1,0 +1,816 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"text",
+				"text-align"
+			],
+			[
+				"padding",
+				"padding-left"
+			],
+			[
+				"light",
+				"light-blue"
+			],
+			[
+				"margin",
+				"margin-top"
+			],
+			[
+				"do",
+				"dob	Insert do |variable| … end"
+			],
+			[
+				"service",
+				"service_images"
+			],
+			[
+				"curren",
+				"current_region"
+			],
+			[
+				"cu",
+				"current_category"
+			],
+			[
+				"cur",
+				"current_region"
+			],
+			[
+				"in_ca",
+				"in_category_region"
+			],
+			[
+				"region",
+				"region_id"
+			],
+			[
+				"categor",
+				"category_id"
+			],
+			[
+				"cla",
+				"cla	class .. end"
+			],
+			[
+				"intens",
+				"intensity-levels"
+			],
+			[
+				"font",
+				"font-size"
+			],
+			[
+				"b",
+				"b	border: all"
+			],
+			[
+				"home",
+				"homepage"
+			],
+			[
+				"base",
+				"base-green"
+			],
+			[
+				"sc",
+				"scroll"
+			],
+			[
+				"servi",
+				"service_image"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "app/controllers/portal_controller.rb",
+			"settings":
+			{
+				"buffer_size": 3184,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"selected_items":
+		[
+			[
+				"bea",
+				"BeautifyRuby"
+			],
+			[
+				"dele",
+				"Trailing Spaces: Delete Trailing Spaces"
+			],
+			[
+				"delete",
+				"Trailing Spaces: Delete Trailing Spaces"
+			],
+			[
+				"rein",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"de",
+				"Trailing Spaces: Delete Trailing Spaces"
+			],
+			[
+				"beau",
+				"BeautifyRuby"
+			],
+			[
+				"del",
+				"Trailing Spaces: Delete Trailing Spaces"
+			],
+			[
+				"bra",
+				"Bracket Highlighter: Match Brackets"
+			],
+			[
+				"TRA",
+				"Trailing Spaces: Delete Trailing Spaces"
+			],
+			[
+				"DEL",
+				"Trailing Spaces: Delete Trailing Spaces"
+			],
+			[
+				"rei",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"REIN",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"be",
+				"BeautifyRuby"
+			],
+			[
+				"beu",
+				"BeautifyRuby"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"disco",
+				"Package Control: Discover Packages"
+			],
+			[
+				"upd",
+				"Package Control: Upgrade/Overwrite All Packages"
+			],
+			[
+				"refres",
+				"Preferences: Browse Packages"
+			],
+			[
+				"sass",
+				"Set Syntax: CSS"
+			],
+			[
+				"rails",
+				"Package Control: Upgrade/Overwrite All Packages"
+			],
+			[
+				"pac",
+				"Package Control: Install Package"
+			],
+			[
+				"tra",
+				"Trailing Spaces: Delete Trailing Spaces"
+			],
+			[
+				"scss",
+				"Set Syntax: SCSS"
+			],
+			[
+				"pack",
+				"Package Control: Install Package"
+			],
+			[
+				"paca",
+				"Package Control: Remove Package"
+			],
+			[
+				"b",
+				"BeautifyRuby"
+			]
+		],
+		"width": 593.0
+	},
+	"console":
+	{
+		"height": 125.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/home/javier/Documents/Projects/OpenWolf/openwolf_v3/app/models/busqueda.rb",
+		"/home/javier/Documents/Projects/SourceTour/sourcetour.com/Gemfile",
+		"/home/javier/Documents/Projects/SourceTour/sourcetour.com/app/assets/stylesheets/tour.css.scss",
+		"/home/javier/Documents/Projects/SourceTour/sourcetour.com/config/locales/en.yml",
+		"/home/javier/Documents/Projects/SourceTour/sourcetour.com/config/locales/es.yml",
+		"/home/javier/Documents/Projects/SourceTour/sourcetour.com/app/controllers/tours_controller.rb",
+		"/home/javier/Documents/Projects/SourceTour/sourcetour.com/app/views/tours/_recomendations.html.haml",
+		"/home/javier/Documents/Projects/SourceTour/sourcetour.com/app/views/tours/_recomended_tours.html.haml",
+		"/home/javier/Documents/Projects/SourceTour/sourcetour.com/app/views/home/_top_destinations.html.haml",
+		"/home/javier/Documents/Projects/SourceTour/sourcetour.com/app/views/home/_top_destination.html.haml",
+		"/home/javier/Documents/Projects/SourceTour/sourcetour.com/app/decorators/service_decorator.rb",
+		"/home/javier/Documents/Projects/SourceTour/sourcetour.com/app/views/tours/show.html.haml",
+		"/home/javier/Documents/Projects/SourceTour/sourcetour.com/app/controllers/application_controller.rb",
+		"/home/javier/Documents/Projects/SourceTour/sourcetour.com/spec/decorators/application_decorator_spec.rb",
+		"/home/javier/Documents/Projects/SourceTour/sourcetour.com/app/views/tours/_tour_slides.html.haml",
+		"/home/javier/Documents/Projects/SourceTour/sourcetour.com/app/views/tours/_tour_purchase.html.haml",
+		"/home/javier/Documents/Projects/SourceTour/sourcetour.com/vendor/assets/stylesheets/flexslider.css",
+		"/home/javier/Documents/Projects/SourceTour/sourcetour.com/app/assets/stylesheets/sourcetour.css.scss",
+		"/home/javier/Documents/Projects/SourceTour/sourcetour.com/app/assets/stylesheets/tours.css.scss",
+		"/home/javier/Documents/Projects/SourceTour/sourcetour.com/app/assets/stylesheets/application.css",
+		"/home/javier/Documents/Projects/SourceTour/sourcetour.com/app/assets/javascripts/tours.js.coffee",
+		"/home/javier/Documents/Projects/SourceTour/sourcetour.com/app/views/home/_aboutus.html.haml",
+		"/home/javier/Documents/Projects/SourceTour/sourcetour.com/app/controllers/home_controller.rb",
+		"/home/javier/Documents/Projects/OpenWolf/openwolf_v3/app/views/portal/index.html.haml",
+		"/home/javier/Documents/Projects/SourceTour/sourcetour.com/app/models/search.rb",
+		"/home/javier/Documents/Projects/SourceTour/sourcetour.com/app/models/service.rb",
+		"/home/javier/Documents/Projects/SourceTour/sourcetour.com/app/views/layouts/application.html.haml",
+		"/home/javier/Documents/Projects/SourceTour/sourcetour.com/app/views/shared/_header.html.haml",
+		"/home/javier/Documents/Projects/SourceTour/sourcetour.com/app/controllers/regions_controller.rb",
+		"/home/javier/Documents/Projects/SourceTour/sourcetour.com/app/views/home/_slides.html.haml",
+		"/home/javier/Documents/Projects/SourceTour/sourcetour.com/app/views/shared/_filter.html.haml",
+		"/home/javier/Documents/Projects/SourceTour/sourcetour.com/app/views/home/_destinations.html.haml",
+		"/home/javier/Documents/Projects/SourceTour/sourcetour.com/app/assets/stylesheets/locations.css.scss",
+		"/home/javier/Documents/Projects/SourceTour/sourcetour.com/app/views/shared/_top_nav.html.haml",
+		"/home/javier/Documents/Projects/SourceTour/sourcetour.com/app/controllers/locations_controller.rb",
+		"/home/javier/Documents/Projects/SourceTour/sourcetour.com/app/views/tours/_tour_tabs.html.haml",
+		"/home/javier/Documents/Projects/SourceTour/sourcetour.com/app/views/home/_slider.html.haml",
+		"/home/javier/Documents/Projects/SourceTour/sourcetour.com/db/fixtures/locations.csv",
+		"/home/javier/Documents/Projects/SourceTour/sourcetour.com/app/views/tours/index.html.haml",
+		"/home/javier/Documents/Projects/SourceTour/sourcetour.com/app/views/tours/_tour.html.haml",
+		"/home/javier/Documents/Projects/SourceTour/sourcetour.com/app/views/shared/_breadcrumbs.html.haml",
+		"/home/javier/Documents/Projects/OpenWolf/openwolf_v3/app/controllers/main_controller.rb",
+		"/home/javier/Documents/Projects/OpenWolf/openwolf_v3/app/controllers/portal_controller.rb",
+		"/home/javier/Documents/Projects/SourceTour/sourcetour.com/app/assets/stylesheets/bootstrap_and_overrides.css.less",
+		"/home/javier/Documents/Projects/SourceTour/sourcetour.com/app/views/home/aboutus.html.haml",
+		"/home/javier/Documents/Projects/SourceTour/sourcetour.com/app/views/shared/_footer.html.haml",
+		"/home/javier/Documents/Projects/SourceTour/sourcetour.com/config/routes.rb",
+		"/home/javier/Documents/Projects/SourceTour/sourcetour.com/config/initializers/quiet_assets.rb",
+		"/home/javier/.config/sublime-text-2/Packages/User/flag.sublime-snippet",
+		"/home/javier/Documents/Projects/SourceTour/sourcetour.com/app/assets/stylesheets/color.css.scss",
+		"/home/javier/Documents/Projects/SourceTour/sourcetour.com/app/views/home/index.html.haml",
+		"/home/javier/Documents/Projects/SourceTour/sourcetour.com/app/assets/stylesheets/sourcetour.css.css",
+		"/home/javier/Documents/Projects/SourceTour/sourcetour.com/app/views/locations/show.html.haml",
+		"/home/javier/Documents/Projects/SourceTour/sourcetour.com/app/views/home/_links.html.haml",
+		"/home/javier/Documents/Projects/SourceTour/sourcetour.com/app/models/category.rb",
+		"/home/javier/Documents/Projects/SourceTour/sourcetour.com/app/assets/stylesheets/regions.css.scss",
+		"/home/javier/Documents/Projects/SourceTour/sourcetour.com/config/database.yml",
+		"/home/javier/.config/sublime-text-2/Packages/User/Preferences.sublime-settings",
+		"/home/javier/.config/sublime-text-2/Packages/Default/Preferences.sublime-settings",
+		"/home/javier/.config/sublime-text-2/Packages/User/Default (Linux).sublime-keymap",
+		"/home/javier/Documents/Projects/SourceTour/sourcetour.com/app/views/home/static_page.html.haml",
+		"/home/javier/Documents/Projects/SourceTour/sourcetour.com/app/views/home/securitypolicy.html.haml",
+		"/home/javier/Documents/Projects/SourceTour/sourcetour.com/app/models/service_image.rb",
+		"/home/javier/Documents/Projects/SourceTour/sourcetour.com/config/s3.yml"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"linked_ima",
+			"    ",
+			"basic",
+			"read",
+			"recomen",
+			"redomended",
+			"minimum",
+			"minium",
+			"basicinfo",
+			"basic",
+			"tour-in",
+			".tour",
+			"tours",
+			" \"",
+			"tours",
+			"aboutus_path",
+			"about",
+			"bread",
+			"base-green",
+			"base-blue",
+			"bright-blue",
+			"header",
+			"hover",
+			"recomen",
+			".places",
+			"recom",
+			"base-blue",
+			"recomen",
+			"for_de",
+			"about",
+			"static",
+			"(' ",
+			"Terminos",
+			"about",
+			"static",
+			"link"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"green",
+			"light-blue",
+			"blue"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "app/controllers/portal_controller.rb",
+					"settings":
+					{
+						"buffer_size": 3184,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								648,
+								648
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Ruby/Ruby.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"replace":
+	{
+		"height": 64.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"deco",
+				"app/decorators/service_decorator.rb"
+			],
+			[
+				"recom",
+				"app/views/tours/_recomended_tours.html.haml"
+			],
+			[
+				"tour.c",
+				"app/assets/stylesheets/tour.css.scss"
+			],
+			[
+				"sourcetour.c",
+				"app/assets/stylesheets/sourcetour.css.scss"
+			],
+			[
+				"tours.cs",
+				"app/assets/stylesheets/tours.css.scss"
+			],
+			[
+				"index",
+				"app/views/tours/index.html.haml"
+			],
+			[
+				"gem",
+				"Gemfile"
+			],
+			[
+				"service.",
+				"app/models/service.rb"
+			],
+			[
+				"searc",
+				"app/models/search.rb"
+			],
+			[
+				"tourcon",
+				"app/controllers/tours_controller.rb"
+			],
+			[
+				"show",
+				"app/views/tours/show.html.haml"
+			],
+			[
+				"en.",
+				"config/locales/en.yml"
+			],
+			[
+				"decora",
+				"app/decorators/service_decorator.rb"
+			],
+			[
+				"top_de",
+				"app/views/home/_top_destination.html.haml"
+			],
+			[
+				"applica",
+				"app/controllers/application_controller.rb"
+			],
+			[
+				"top",
+				"app/views/home/_top_destinations.html.haml"
+			],
+			[
+				"",
+				"app/views/home/_top_destination.html.haml"
+			],
+			[
+				"reco",
+				"app/views/tours/_recomended_tours.html.haml"
+			],
+			[
+				"top_des",
+				"app/views/home/_top_destination.html.haml"
+			],
+			[
+				"tour_con",
+				"app/controllers/tours_controller.rb"
+			],
+			[
+				"recomended",
+				"app/views/tours/_recomended_tours.html.haml"
+			],
+			[
+				"sho",
+				"app/views/tours/show.html.haml"
+			],
+			[
+				"es.y",
+				"config/locales/es.yml"
+			],
+			[
+				"en.y",
+				"config/locales/en.yml"
+			],
+			[
+				"purch",
+				"app/views/tours/_tour_purchase.html.haml"
+			],
+			[
+				"flex",
+				"vendor/assets/stylesheets/flexslider.css"
+			],
+			[
+				"tour.css",
+				"app/assets/stylesheets/tour.css.scss"
+			],
+			[
+				"tour.cs",
+				"app/assets/stylesheets/sourcetour.css.scss"
+			],
+			[
+				"application.c",
+				"app/assets/stylesheets/application.css"
+			],
+			[
+				"tours.c",
+				"app/assets/stylesheets/tours.css.scss"
+			],
+			[
+				"tour_sli",
+				"app/views/tours/_tour_slides.html.haml"
+			],
+			[
+				"search",
+				"app/models/search.rb"
+			],
+			[
+				"se",
+				"app/models/service.rb"
+			],
+			[
+				"home",
+				"app/controllers/home_controller.rb"
+			],
+			[
+				"tabs",
+				"app/views/tours/_tour_tabs.html.haml"
+			],
+			[
+				"tours.s",
+				"app/assets/stylesheets/tours.css.scss"
+			],
+			[
+				"sourc",
+				"app/assets/stylesheets/sourcetour.css.scss"
+			],
+			[
+				"slide",
+				"app/views/home/_slider.html.haml"
+			],
+			[
+				"sear",
+				"app/models/search.rb"
+			],
+			[
+				"tours",
+				"app/controllers/tours_controller.rb"
+			],
+			[
+				"sea",
+				"app/models/search.rb"
+			],
+			[
+				"tour",
+				"app/controllers/tours_controller.rb"
+			],
+			[
+				"location_co",
+				"app/controllers/locations_controller.rb"
+			],
+			[
+				"regions",
+				"app/controllers/regions_controller.rb"
+			],
+			[
+				"filter",
+				"app/views/shared/_filter.html.haml"
+			],
+			[
+				"fil",
+				"db/fixtures/locations.csv"
+			],
+			[
+				"header",
+				"app/views/shared/_header.html.haml"
+			],
+			[
+				"appli",
+				"app/views/layouts/application.html.haml"
+			],
+			[
+				"servi",
+				"app/models/service.rb"
+			],
+			[
+				"service.r",
+				"app/models/service.rb"
+			],
+			[
+				"sourcetour.cs",
+				"app/assets/stylesheets/sourcetour.css.scss"
+			],
+			[
+				"less",
+				"app/assets/stylesheets/bootstrap_and_overrides.css.less"
+			],
+			[
+				"_tour",
+				"app/views/tours/_tour.html.haml"
+			],
+			[
+				"es.",
+				"config/locales/es.yml"
+			],
+			[
+				"source",
+				"app/assets/stylesheets/sourcetour.css.scss"
+			],
+			[
+				"foo",
+				"app/views/shared/_footer.html.haml"
+			],
+			[
+				"_abou",
+				"app/views/home/_aboutus.html.haml"
+			],
+			[
+				"abou",
+				"app/views/home/aboutus.html.haml"
+			],
+			[
+				"route",
+				"config/routes.rb"
+			],
+			[
+				"g",
+				"Gemfile"
+			],
+			[
+				"qui",
+				"config/initializers/quiet_assets.rb"
+			],
+			[
+				"app",
+				"app/controllers/application_controller.rb"
+			],
+			[
+				"brea",
+				"app/views/shared/_breadcrumbs.html.haml"
+			],
+			[
+				"hea",
+				"app/views/shared/_header.html.haml"
+			],
+			[
+				"sourcetour",
+				"app/assets/stylesheets/sourcetour.css.scss"
+			],
+			[
+				"locations.c",
+				"app/assets/stylesheets/locations.css.scss"
+			],
+			[
+				"color",
+				"app/assets/stylesheets/color.css.scss"
+			],
+			[
+				"destination",
+				"app/views/home/_destinations.html.haml"
+			],
+			[
+				"destina",
+				"app/views/home/_top_destination.html.haml"
+			],
+			[
+				"source.cs",
+				"app/assets/stylesheets/sourcetour.css.css"
+			],
+			[
+				"inde",
+				"app/views/home/index.html.haml"
+			],
+			[
+				"links",
+				"app/views/home/_links.html.haml"
+			],
+			[
+				"homecon",
+				"app/controllers/home_controller.rb"
+			],
+			[
+				"contro",
+				"app/controllers/home_controller.rb"
+			],
+			[
+				"scss",
+				"app/assets/stylesheets/sourcetour.css.scss"
+			],
+			[
+				"cate",
+				"app/models/category.rb"
+			],
+			[
+				"service",
+				"app/models/service.rb"
+			],
+			[
+				"sourcetour.css",
+				"app/assets/stylesheets/sourcetour.css.scss"
+			],
+			[
+				"home/top",
+				"app/views/home/_top_destinations.html.haml"
+			],
+			[
+				"locations.cs",
+				"app/assets/stylesheets/locations.css.scss"
+			],
+			[
+				"tours_cono",
+				"app/controllers/tours_controller.rb"
+			],
+			[
+				"data",
+				"config/database.yml"
+			],
+			[
+				"_a",
+				"app/views/home/_aboutus.html.haml"
+			],
+			[
+				"sour",
+				"app/assets/stylesheets/sourcetour.css.scss"
+			],
+			[
+				"foote",
+				"app/views/shared/_footer.html.haml"
+			],
+			[
+				"rou",
+				"config/routes.rb"
+			],
+			[
+				"stati",
+				"app/views/home/static_page.html.haml"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+			[
+				"",
+				"/home/javier/Projects/Urtak/urtak.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"show_minimap": false,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 215.0,
+	"status_bar_visible": true
+}

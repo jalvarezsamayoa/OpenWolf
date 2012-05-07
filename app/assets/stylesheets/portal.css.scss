@@ -4,6 +4,8 @@
 
 $portal-deep-blue-bg: #081832;
 $portal-deep-blue-navbar: #081832;
+$portal-light-gray: #eee;
+$portal-dark-gray: #222;
 
 /*--------------------------------------------*/
 /* General                                         */
@@ -32,7 +34,9 @@ $portal-deep-blue-navbar: #081832;
 body.portal,
 body.solicitud_informacion,
 body.estadisticas {
-  @include portal-background;
+  background-image: none;
+  background-color: $portal-light-gray;
+  color: $portal-dark-gray;
 }
 
 
@@ -43,6 +47,7 @@ body.estadisticas {
 
 body.portal {
   &#portal-index {
+    @include portal-background;
     h2 {  @include font-georgia; }
   }
 }
@@ -68,9 +73,20 @@ body.portal,
 body.solicitud_informacion,
 body.estadisticas {
   footer {
-    color:white;
+    margin-top: 2em;
+
+    color: $portal-dark-gray;
     a {
-      color:white;
+      color: $portal-dark-gray;
+    }
+  }
+}
+
+body.portal {
+  &#portal-index {
+    footer {
+      color: white;
+    a { color: white; }
     }
   }
 }
@@ -103,18 +119,20 @@ body.estadisticas {
 body.portal {
 
   &#portal-busqueda {
-    h2 {  
-        @include font-georgia; 
+    h2 {
+        @include font-georgia;
+        color: $portal-dark-gray;
        }
-    #filtros { 
-      @include main-window;  
+    #filtros {
+      @include main-window;
       h2 { color: #555;}
     }
   }
 
   &#portal-buscar {
+
     #found-results {
-      color: white;
+      color: $portal-dark-gray;
     }
 
     #results {
@@ -177,11 +195,49 @@ body.solicitud_informacion {
 /*--------------------------------------------*/
 
 body.estadisticas {
+
+  &#estadisticas-index {
+    .estadisticas {
+      @include main-window;
+
+      table {
+        width: 100%;
+      }
+    }
+  }
+
   &#estadisticas-show {
+
+
+  .estadisticas {
+      @include main-window;
+    }
 
     .generales, .por-estado, .por-via {
       table th { width: 20%;}
     }
 
   }
+}
+
+/* -------------------------- */
+/* Portal iFrame */
+/* -------------------------- */
+
+body.portal {
+  &#portal-institucion {
+    color: $portal-dark-gray;
+
+    h2 { color: $portal-dark-gray;}
+  }
+}
+
+/* -------------------------- */
+/* Widget busqueda */
+/* -------------------------- */
+
+#widget-find-box {
+
+  label { font-size: 0;}
+  label, input {float: left;}
 }

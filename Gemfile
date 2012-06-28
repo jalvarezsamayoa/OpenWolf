@@ -72,6 +72,7 @@ group :development, :test do
   gem 'ruby-prof'
   gem 'annotate', :git => 'git://github.com/ctran/annotate_models.git'
   gem 'foreman'
+  gem 'rvm-capistrano'
 end
 
 # TESTING

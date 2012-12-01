@@ -10,7 +10,7 @@ class CreateDocumentodestinatarios < ActiveRecord::Migration
       t.string :puesto
       t.string :departamento
 
-      t.timestampsy
+      t.timestamp
     end
 
     add_index :documentodestinatarios, :documento_id

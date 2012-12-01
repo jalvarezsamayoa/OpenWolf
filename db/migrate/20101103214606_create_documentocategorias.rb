@@ -6,7 +6,7 @@ class CreateDocumentocategorias < ActiveRecord::Migration
       t.integer :lft
       t.integer :rgt
 
-      t.timestamps
+      t.timestamp
     end
 
     add_index :documentocategorias, :parent_id

@@ -1,0 +1,19 @@
+%table#table
+  %thead
+    %th.col= t("actividades.label_numero")
+    %th.col= t("actividades.label_usuario_id")
+    %th.col= t("actividades.label_cargo")
+    %th.col= t("actividades.label_institucion")
+    %th.col= t("actividades.label_fecha_asignacion")
+    %th.col= t("actividades.label_estado")
+  %tbody
+    - for actividad in @solicitud.actividades do
+      %tr
+        %td= actividad.id
+        %td= actividad.usuario.nombre
+        %td= actividad.usuario.cargo
+        %td= actividad.usuario.institucion.abreviatura
+        %td= l(actividad.fecha_asignacion)
+        %td= actividad.estado.nombre
+#showactividad.popup{:style => "display: none; height: 400px;"}
+%hr/

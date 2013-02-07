@@ -1,0 +1,7 @@
+.row
+  #logo.span6.offset3.center
+    = link_to image_tag('folderlogo.png'), portal_index_url
+    %h2 Plataforma Virtual para la Transparencia
+.row
+  #main-search.span6.offset3
+    = render :partial => "solicitudes/filtro", :locals => {:url => buscar_portal_index_path}

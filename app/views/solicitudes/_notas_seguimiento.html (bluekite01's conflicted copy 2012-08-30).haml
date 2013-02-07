@@ -1,0 +1,12 @@
+%table.table
+  %thead
+    %th= Nota.human_attribute_name(:created_at)
+    %th= Nota.human_attribute_name(:usuario_id)
+    %th= Nota.human_attribute_name(:texto)
+  %tbody
+    - for nota in @solicitud.notas.restringir(@restringir_seguimientos_privados)
+      %tr
+        %td= l(nota.created_at.to_date)
+        %td= nota.usuario.nombre
+        %td= nota.texto
+%hr/

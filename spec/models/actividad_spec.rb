@@ -3,7 +3,7 @@ require File.dirname(__FILE__) + '/../spec_helper'
 describe Actividad, :solr => true do
 
   fixtures :documentoclasificaciones
-  
+
   before(:each) do
     @actividad = Factory.build(:actividad)
   end
@@ -16,7 +16,7 @@ describe Actividad, :solr => true do
     it 'cambiar el estado de actividad a TERMINADA' do
       @actividad.stub!(:save).and_return(true)
       @actividad.stub_chain(:solicitud, :actividad_terminada).and_return(true)
-      
+
       @actividad.marcar_como_terminada()
 
       @actividad.estado_id.should == Actividad::ESTADO_COMPLETADA

@@ -1,0 +1,513 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+en:
+  hello: "Hello world"
+
+  number:
+    percentage:
+      format:
+        delimiter: ","
+    currency:
+      format:
+        format: "%u%n"
+        unit: "$"
+        separator: "."
+        delimiter: ","
+        precision: 2
+        significant: false
+        strip_insignificant_zeros: false
+    format:
+      delimiter: ","
+      precision: 2
+      significant: false
+      strip_insignificant_zeros: false
+      separator: "."
+    human:
+      format:
+        delimiter: ","
+        precision: 3
+        significant: true
+        strip_insignificant_zeros: true
+      storage_units:
+        format: "%n %u"
+        units:
+          byte:
+            one: "Byte"
+            other: "Bytes"
+          kb: "KB"
+          mb: "MB"
+          gb: "GB"
+          tb: "TB"
+      decimal_units:
+        format: "%n %u"
+        units:
+          unit: ""
+          thousand: "mil"
+          million: "millón"
+          billion: "mil millones"
+          trillion: "billón"
+          quadrillion: "mil billones"
+    precision:
+      format:
+        delimiter: ","
+
+  date:
+    order:
+      - :day
+      - :month
+      - :year
+    abbr_day_names:
+      - dom
+      - lun
+      - mar
+      - mié
+      - jue
+      - vie
+      - sáb
+    abbr_month_names:
+      - ~
+      - ene
+      - feb
+      - mar
+      - abr
+      - may
+      - jun
+      - jul
+      - ago
+      - sep
+      - oct
+      - nov
+      - dic
+    day_names:
+      - domingo
+      - lunes
+      - martes
+      - miércoles
+      - jueves
+      - viernes
+      - sábado
+    month_names:
+      - ~
+      - enero
+      - febrero
+      - marzo
+      - abril
+      - mayo
+      - junio
+      - julio
+      - agosto
+      - septiembre
+      - octubre
+      - noviembre
+      - diciembre
+    formats:
+      short: "%d de %b"
+      default: "%d/%m/%Y"
+      long: "%A, %d de %B de %Y"
+      schedule: "%d-%m-%Y"
+  time:
+    formats:
+      short: "%d de %b a las %H:%M hrs"
+      default: "%a, %d de %b de %Y a las %H:%M:%S %Z"
+      long: "%A, %d de %B de %Y a las %I:%M %p"
+      schedule: "%H:%M hrs"
+    am: "am"
+    pm: "pm"
+
+  support:
+    array:
+      words_connector: ", "
+      two_words_connector: " y "
+      last_word_connector: " y "
+
+    select:
+      prompt: "Por favor selecciona"
+
+  datetime:
+    distance_in_words:
+      half_a_minute: "medio minuto"
+      less_than_x_seconds:
+        one: "menos de 1 segundo"
+        other: "menos de %{count} segundos"
+      x_seconds:
+        one: "1 segundo"
+        other: "%{count} segundos"
+      less_than_x_minutes:
+        one: "menos de 1 minuto"
+        other: "menos de %{count} minutos"
+      x_minutes:
+        one: "1 minuto"
+        other: "%{count} minutos"
+      about_x_hours:
+        one: "cerca de 1 hora"
+        other: "cerca de %{count} horas"
+      x_days:
+        one: "1 día"
+        other: "%{count} días"
+      about_x_months:
+        one: "cerca de 1 mes"
+        other: "cerca de %{count} meses"
+      x_months:
+        one: "1 mes"
+        other: "%{count} meses"
+      about_x_years:
+        other: "cerca de %{count} años"
+        one: "cerca de 1 año"
+      over_x_years:
+        one: "más de 1 año"
+        other: "más de %{count} años"
+      almost_x_years:
+        one: "casi 1 año"
+        other: "casi %{count} años"
+    prompts:
+      year: 'Año'
+      month: 'Mes'
+      day: 'Día'
+      hour: 'Hora'
+      minute: 'Minuto'
+      second: 'Segundos'
+
+  helpers:
+    select:
+      prompt: "Por favor selecciona"
+
+    submit:
+      create: 'Crear %{model}'
+      update: 'Actualizar %{model}'
+      submit: 'Guardar %{model}'
+
+  errors:
+      format: "%{attribute} %{message}"
+
+      messages: &errors_messages
+        inclusion: "no está incluído en la lista"
+        exclusion: "está reservado"
+        invalid: "es inválido"
+        confirmation: "no coincide con la confirmación"
+        blank: "no puede estar en blanco"
+        empty: "no puede estar vacío"
+        not_a_number: "no es un número"
+        not_an_integer: "debe ser un entero"
+        less_than: "debe ser menor que %{count}"
+        less_than_or_equal_to: "debe ser menor o igual que %{count}"
+        greater_than: "debe ser mayor que %{count}"
+        greater_than_or_equal_to: "debe ser mayor o igual que %{count}"
+        too_short:
+          one: "es demasiado corto (mínimo 1 caracter)"
+          other: "es demasiado corto (mínimo %{count} caracteres)"
+        too_long:
+          one: "es demasiado largo (máximo 1 caracter)"
+          other: "es demasiado largo (máximo %{count} caracteres)"
+        equal_to: "debe ser igual a %{count}"
+        wrong_length:
+          one: "longitud errónea (debe ser de 1 caracter)"
+          other: "longitud errónea (debe ser de %{count} caracteres)"
+        accepted: "debe ser aceptado"
+        even: "debe ser un número par"
+        odd: "debe ser un número non"
+
+  activerecord:
+    errors:
+      template:
+        header:
+          one: "%{model} no pudo guardarse debido a 1 error"
+          other: "%{model} no pudo guardarse debido a %{count} errores"
+        body: "Revise que los siguientes campos sean válidos:"
+
+      messages:
+        taken: "ya ha sido tomado"
+        record_invalid: "La validación falló: %{errors}"
+        <<: *errors_messages
+
+      full_messages:
+        format: "%{attribute} %{message}"
+
+    models:
+      # NOTE: Duplicate keys without "_" due to rails 2.3.4 error_messages_for bug,
+      # see http://i18n.lighthouseapp.com/projects/14948-rails-i18n/tickets/22
+      usuario: "Usuario"
+      via: "Via de Solicitud"
+      tiporesolucion: "Tipo de Resolucion"
+      razontiporesolucion: "Razon Resolucion"
+      resolucion: "Resolucion"
+      recursorevision: "Recurso revisión"
+      recursosrevision: "Recursos revisión"
+      sentidoresolucion: "Sentido Resolucion"      
+      actividad: "Asignación"
+      tipomensaje: "Tipo Mensaje"
+      documentoclasificacion: "Clasificación Documental"
+      documentocategoria: "Categoría Documental"
+      documento: "Documento"
+      nota: "Seguimiento General"
+    attributes:
+      usuario:
+        email: "Correo electrónico"
+        username: "Usuario"
+        nombre: "Nombre Completo"
+        password: "Contraseña"
+        password_confirmation: "Confirme su contraseña"   
+      institucion:
+        nombre: "Nombre Institucion"
+        parent_id: "Dependencia de"
+        tipoinstitucion_id: "Tipo Institucion"
+        usasolicitudesprivadas: "Ciudadano puede hacer solicitudes 'privadas'"
+        email: "Correo Institucional"
+      solicitud:
+        usuario_id: "Usuario"
+        codigo: "Código"
+        institucion_id: "Institución"
+        tiposolicitud_id: "Tipo Solicitud"
+        via: "Vía de Solicitud"
+        fecha_creacion: "Fecha"
+        fecha_programada: "Fecha límite de entrega"
+        fecha_entregada: "Fecha que se entregó"
+        fecha_resolucion: "Fecha de última resolución"
+        fecha_prorroga: "Fecha de prorroga"
+        solicitante_nombre: "Solicitante"
+        solicitante_identificacion: "Identificación"
+        solicitante_direccion: "Dirección Postal"
+        solicitante_telefonos: "Teléfonos Solicitante"
+        solicitante_institucion: "Institucion"
+        departamento_id: "Departamento"
+        municipio_id: "Municipio"
+        email: "Correo Electrónico"
+        forma_entrega: "Forma Entrega"
+        observaciones: "Observaciones"
+        ubicacion_url: "Ubicacion"
+        estado: "Estatus"
+        created_at: "Creada"
+        updated_at: "Actualizada"
+        textosolicitud: "Solicitud"
+        asignada: "Asignada"
+        ano: "Año"
+        numero: "Número"
+        motivonegativa: "Motivo de negativa"
+        motivoprorroga: "Motivo de prorroga"
+        rangoedad: "Rango Edad"
+        clasificacion: "Clasificación Solicitante"
+        avance: "%"
+        informacion_publica: "Información es pública"
+        razon_negativa: "Razón por la que haya tenido una resolución negativa"
+        tiempo_respuesta: "Dias Respuesta"
+        dias: "Dias Restantes"
+        rpt_institucion: "Institucion"
+        rpt_correlativo: "No. correlativo"
+        rpt_solicitud: "Motivo de la solicitud o información solicitada"
+        rpt_fechasolicitud: "Fecha de solicitud"
+        rpt_tipodesolicitud: "Tipo de solicitud"
+        rpt_tipoderesolucion: "Tipo de resolución"
+        rpt_fecharesolucion: "Fecha de resolución"
+        rpt_razonnopositiva: "Razón por la que se resolvió de forma negativa, o por la cual la resolución se encuentra pendiente, o por la cual se ha desechado la solicitud."
+        rpt_tiempoderespuesta: "Tiempo de respuesta"
+        rpt_sehasolicitadoampliacion: "¿Se ha solicitado ampliación de plazo?"
+        rpt_fechanotificacionampliacion: "Fecha en que se notificó la resolución de ampliación de plazo"
+        rpt_razonampliacion: "Razón por la que se ha solicitado la ampliación"
+        rpt_tiemposolicitadoampliacion: "Tiempo que se solicitó de ampliación (en días)"
+        rpt_recursorevision: "¿Se ha impuesto recurso de revisión?"
+        rpt_fechapresentacionrecursorevision: "Fecha de presentación del recurso de revisión"
+        rpt_fechanotificacionrecursorevision: "Fecha en la que se notificó el recurso de revisión"
+        rpt_sentidoresolucion: "Sentido de la resolución caida al recurso"
+        notas: "Seguimientos Generales"
+        enlaces: "Personal asignado"
+        idioma: "Pertenencia sociolinguistica"
+      tiporesolucion:
+        nombre: "Descripcion"
+        actualiza_fecha: "Modifica fecha entrega"
+        actualiza_fecha_notificacion: "Modifica fecha notificacion"
+        estado_id: "Actualiza a estado"
+        positiva: "Resolución Positiva"
+        aliaspdh: "Desplegar como en reporte PDH"
+      razontiporesolucion:
+        nombre: "Descripcion"
+        tiporesolucion_id: "Tipo de Resolucion"
+        informacion_publica: "Información es pública"
+      resolucion:
+        numero: "Número de resolución"
+        solicitud_id: "Solicitud"
+        usuario_id: "Usuario"
+        institucion_id: "Institución"
+        descripcion: "Descripción"
+        tiporesolucion_id: "Tipo de resolución"
+        tiporesolucion: "Tipo de Resolución"
+        tiporazonresolucion_id: "Razón de la resolución"
+        tiporazonresolucion: "Razón resolución"
+        nueva_fecha: "Nueva fecha de entrega"
+        informacion_publica: "Información es pública"
+        created_at: "Fecha de creación"
+        fecha: "Fecha de resolución"
+        razontiporesolucion: "Justificación"
+      recursorevison:
+        numero: "Número recurso"
+        usuario_id: "Usuario"
+        institucion_id: "Institución"
+        descripcion: "Solicitud"
+        fecha_presentacion: "Fecha Presentacion"
+        fecha_notificacion: "Fecha Notificacion"
+        fecha_resolucion: "Fecha Resolucion"
+        sentidoresolucion: "Sentido resolucion"
+        sentidoresolucion_id: "Sentido resolucion"
+      actividad:
+        institucion_id: "Institución"
+        usuario_id: "Usuario"
+        fecha_asignacion: "Fecha Asignación"
+        textoactividad: "Descripción Asignación" 
+        estado_id: "Estado"
+        fecha_resolucion: "Fecha Resolución"
+        solicitud_id: "Solicitud"
+      adjunto:
+        numero: "Número/Nombre adjunto"
+        observaciones: "Observaciones"
+        usuario_id: "Usuario"
+        informacion_publica: "Información es pública"
+      mensaje:
+        numero: "Numero Adjunto"
+        tipomensaje_id: "Tipo Adjunto"
+        tipomensaje: "Tipo Adjunto"
+        fecha_recepcion: "Fecha Recepcion"
+        fuente_id: "Fuente"
+        direccion: "Dirección"
+        telefonos: "Telefonos"
+        remitente: "De"
+        asunto: "Descripción / Asunto"
+        fecha_adjunto: "Fecha Adjunto"
+        observaciones: "Observaciones"
+      documento:
+        numero: "# Documento"
+        origen_id: "Origen Documento"
+        documentoclasificacion_id: "Clasificación Documental"
+        documentocategoria_id: "Categoría Documental"
+        fecha_documento: "Fecha Documento"
+        autor_id: "Autor"
+        asunto: "Asunto"
+        texto: "Texto Documento"
+        fecha_recepcion: "Fecha Recepcion (Doc.Ext.)"
+        remitente_nombre: "Nombre Remitente (Doc.Ext.)"
+        remitente_direccion: "Dirección Remitente (Doc.Ext.)"
+        remitente_telefonos: "Telefonos Remitente (Doc.Ext.)"
+        remitente_email: "Email Remitente (Doc.Ext)"
+        estado_envio_id: "Estatus"
+        original: "¿Es original?"
+        usuario_id: "Usuario"
+        institucion_id: "Institucion"
+        parent_id: "Documento Origen"
+      documentoclasificacion:
+        nombre: "Nombre Clasificacion"
+        documentocategoria_id: "Categoria Documental"
+      documentocategoria:
+        nombre: "Nombre Categoria"
+      nota:
+        texto: "Mensaje seguimiento"
+        usuario_id: "Usuario"
+        created_at: "Fecha"
+        informacion_publica: "Información es pública"
+      seguimiento:
+        fecha_creacion: "Fecha de Creación"
+        textoseguimiento: "Texto de Seguimiento"
+
+  breadcrums:
+    homepage: "Pagina de Inicio"
+    usuarios: "Usuarios"
+    instituciones: "Instituciones"
+    puestos: "Puestos"
+    departamentos: "Departamentos"
+    vias: "Vias de Solicitud"
+    solicitudes: "Solicitudes"
+    actividades: "Asignaciones"
+    mensajes: "Documentos"
+
+  data:
+    edit: "Editar"
+    delete: "Eliminar"
+    new: "Nuevo"
+    cancel: "Cancelar"
+    back: "Regresar"
+    print: "Imprimir"
+    rusure: "¿Esta seguro de desea continuar?"
+    linktitle_new: "Agregar Nuevo Registro"
+    submit_new: "Grabar Nuevo"
+    submit_edit: "Grabar Cambios"
+    label_options: "Opciones:"
+    title_new: "Nuevo Registro"
+    title_edit: "Editar Registro"
+    title_show: "Visualizar Registro"
+
+  solicitudes:
+    title_new: "Nueva Solicitud"
+    title_edit: "Editar Solicitud"
+    title_show: "Solicitud"
+    title: "Solicitudes"
+    label_via: "Via de Solicitud:"
+    label_solicitante_nombre: "Nombre Solicitante:"
+    label_solicitante_identificacion: "Identificacion Solicitante:"
+    label_solicitante_direccion: "Direccion Solicitante:"
+    label_solicitante_telefonos: "Telefonos Solicitante:"
+    label_solicitante_institucion: "Institucion Solicitante:"
+    label_municipio_id: "Municipio Origen Solicitud:"
+    label_email: "Correo Electronico:"
+    label_forma_entrega: "Forma de Entrega:"
+    label_observaciones: "Observaciones:"
+    label_textosolicitud: "Texto de la solicitud:"
+    label_usuario_id: "Ingresada por:"
+    label_codigo: "Numero Solicitud:"
+    label_institucion_id: "Institucion Origen:"
+    label_fecha_creacion: "Ingresada el:"
+    label_departamento_municipio: "Departamento / Municipio:"
+    label_estado_id: "Estado Solicitud:"
+    label_fecha_programada: "Fecha programada de entrega:"
+    label_fecha_entregada: "Fecha que se entregó:"
+    label_fecha_resolucion: "Fecha última resolución:"
+    label_fecha_prorroga: "Fecha de prorroga:"
+    label_dias_restantes: "Dias Restantes:"
+    label_cambiar_estado: "Cambiar Estado"
+    label_avance: "% Avance"
+    label_adjuntaradjunto: "Adjuntar Doc."    
+    label_accion: "Acccion"
+    label_entregar: "Entregar"
+    label_nuevo_estado: "Nuevo Estado"
+    label_estado_id: "Estado"
+    label_cargo: "Cargo"
+    label_resoluciones: "Resoluciones"
+    label_recursosrevision: "Recursos Revision"
+
+    
+  actividades:
+    label_numero: "No."
+    label_usuario_id: "Nombre Empleado"
+    label_puesto: "Puesto"
+    label_depto: "Departamento"
+    label_estado: "Estado Actividad"
+    label_textoactividad: "Asignacion:"
+    label_fecha_asignacion: "Fecha Asignacion:"
+    label_fecha_resolucion: "Fecha Resolucion:"
+    label_institucion: "Institución"
+    title: "Asignaciones"
+    title_new: "Asignar"
+    label_mistareas: "Mis Asignaciones"
+    label_cargo: "Cargo"
+
+  seguimientos:
+    label_fecha_creacion: "Fecha Creacion:"
+    label_textoseguimiento: "Descripcion:"
+    title: "Seguimiento"
+    title_new: "Agregar Seguimiento"
+    title_edit: "Modificar Seguimiento"    
+
+  adjuntos:
+    title: "Adjunto"
+    title_new: "Información del Documento"
+    title_edit: "Modificar Adjunto Adjunto"
+    label_numero: "Referencia"
+    label_observaciones: "Descripcion"
+    label_adjunto: "Archivo Adjunto"
+    label_archivo: "Archivo Adjunto"
+
+  notas:
+    title: "Seguimientos Generales"
+    title_new: "Nueva Nota Seguimiento"
+    title_edit: "Modificar Nota Segumiento"
+
+  simple_captcha:
+    message:
+      default: "El código no coincidio con la imagen."
+      user: "El código no coincidio con la imagen."

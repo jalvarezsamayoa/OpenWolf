@@ -1,0 +1,37 @@
+- unless @solicitudes.nil?
+  %h3
+    = @solicitudes.count
+    Solicitudes Encontradas
+  #export-data
+    = button_link(exportar_portal_index_path(), "Exportar resultados (CSV)", "Exportar resultados de busqueda a CSV",'textfile16.png')
+
+  .center
+    = will_paginate @solicitudes
+    
+  %table.table-striped.table
+    %thead
+      %tr
+        %th= Solicitud.human_attribute_name(:codigo)
+        %th= Solicitud.human_attribute_name(:fecha_creacion)
+        %th= Solicitud.human_attribute_name(:estado)
+        %th= Solicitud.human_attribute_name(:avance)
+        %th= Solicitud.human_attribute_name(:tiempo_respuesta)
+        %th= Solicitud.human_attribute_name(:textosolicitud)
+        %th= Solicitud.human_attribute_name(:institucion_id)
+    %tbody
+      - @solicitudes.each do |solicitud|
+        %tr
+          %td= link_to_solicitud_portal(solicitud) 
+          %td= l(solicitud.fecha_creacion)
+          %td= solicitud.estado_actual
+          %td= solicitud.avance
+          %td= solicitud.tiempo_respuesta rescue nil
+          %td= solicitud.extracto
+          %td= link_to(solicitud.institucion.abreviatura, institucion_portal_path(solicitud.institucion), :title => solicitud.institucion.nombre)
+  %br/
+  .center
+    = will_paginate @solicitudes
+  %br/
+  %br/
+- else
+  .notice No se encotraron Solicitudes de Información Pública que concidan son sus palabras clave.

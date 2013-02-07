@@ -1,0 +1,12 @@
+%h3 Información Obligatoria
+= form.association :institucion, :collection => Institucion.activas, :hint => "Institucion a la que se requiere informacion", :prompt => "Seleccione una Institucion"
+= form.input :solicitante_nombre, :input_html => {:class => 'span6', :maxsize => 254}, :hint => "Nombre, siglas o sinónimo como se identifica el solicitante."
+= form.input :email, :input_html => {:class => 'span6', :maxsize => 254}, :hint => "Correo electrónico del solicitante. Para seguimiento y notificaciones.", :required => true
+= form.input :solicitante_telefonos, :input_html => {:class => 'span6', :maxsize => 254}, :hint => "Teléfonos para contactar a solicitante en caso de aclaración o seguimiento.", :required => true
+= form.input :textosolicitud, :input_html => {:rows => 20, :class => 'span10'}, :hint => "Descripción de información solicitada"
+= form.input :reserva_temporal, :label => "Requiero que esta solicitud se mantenga bajo reserva hasta el momento de haber sido completada."
+%hr
+%h3 Información Opcional
+= form.association :genero, :include_blank => true, :hint => "Opcional: Género del solicitante", :prompt => "Seleccione Uno"
+= form.association :idioma,  :include_blank => true, :hint => "(opcional) Preferencia sociolingustica del solicitante", :prompt => "Seleccione Uno"
+= form.simple_captcha :label => "Ingrese los números requeridos..."

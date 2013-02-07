@@ -1,0 +1,96 @@
+/*--------------------------------------------*/
+/* Colors                                         */
+/*--------------------------------------------*/
+/*--------------------------------------------*/
+/* General                                         */
+/*--------------------------------------------*/
+body.portal,
+body.solicitud_informacion,
+body.estadisticas {
+  background-image: url("portalbg.png");
+  background-repeat: repeat-x;
+  background-color: #081832; }
+
+/*--------------------------------------------*/
+/* Homepage                                         */
+/*--------------------------------------------*/
+body.portal#portal-index h2 {
+  font-family: Georgia, "Times New Roman", Times, serif !important; }
+
+/*--------------------------------------------*/
+/* Navbar                                         */
+/*--------------------------------------------*/
+body.portal .navbar,
+body.solicitud_informacion .navbar,
+body.estadisticas .navbar {
+  background-color: #081832; }
+
+body.portal h2 {
+  color: white; }
+
+body.portal footer,
+body.solicitud_informacion footer,
+body.estadisticas footer {
+  color: white; }
+  body.portal footer a,
+  body.solicitud_informacion footer a,
+  body.estadisticas footer a {
+    color: white; }
+
+/*--------------------------------------------*/
+/* Find Box                                         */
+/*--------------------------------------------*/
+body.portal #find-box,
+body.solicitud_informacion #find-box,
+body.estadisticas #find-box {
+  line-height: 65px;
+  height: 65px; }
+
+/*--------------------------------------------*/
+/* Filtros de Busqueda                                         */
+/*--------------------------------------------*/
+/*--------------------------------------------*/
+/* Busqueda de solicitudes */
+/*--------------------------------------------*/
+body.portal#portal-busqueda h2 {
+  font-family: Georgia, "Times New Roman", Times, serif !important; }
+body.portal#portal-busqueda #filtros {
+  padding: 20px;
+  background-color: white; }
+  body.portal#portal-busqueda #filtros h2 {
+    color: #555; }
+body.portal#portal-buscar #found-results {
+  color: white; }
+body.portal#portal-buscar #results {
+  padding: 20px;
+  background-color: white; }
+
+/*--------------------------------------------*/
+/* Solicitud Individual      */
+/*--------------------------------------------*/
+body.portal#portal-solicitud .documento {
+  padding: 20px;
+  background-color: white; }
+  body.portal#portal-solicitud .documento h1 {
+    font-family: Georgia, "Times New Roman", Times, serif !important;
+    border-bottom: 1px solid #999; }
+  body.portal#portal-solicitud .documento fieldset {
+    margin-bottom: 20px; }
+    body.portal#portal-solicitud .documento fieldset legend {
+      background-color: #DDD;
+      font-family: Georgia, "Times New Roman", Times, serif !important;
+      font-style: italic; }
+  body.portal#portal-solicitud .documento table {
+    width: 100%; }
+
+body.solicitud_informacion .documento {
+  padding: 20px;
+  background-color: white; }
+body.solicitud_informacion#solicitud_informacion-new .simple_captcha, body.solicitud_informacion#solicitud_informacion-create .simple_captcha {
+  margin-left: 140px; }
+
+/*--------------------------------------------*/
+/* Estadisticas                */
+/*--------------------------------------------*/
+body.estadisticas#estadisticas-show .generales table th, body.estadisticas#estadisticas-show .por-estado table th, body.estadisticas#estadisticas-show .por-via table th {
+  width: 20%; }

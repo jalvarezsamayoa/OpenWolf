@@ -1,0 +1,15 @@
+%table.table
+  %thead
+    %th= Actividad.human_attribute_name(:id)
+    %th= Actividad.human_attribute_name(:fecha_asignacion)
+    %th= Actividad.human_attribute_name(:usuario_id)
+    %th= Seguimiento.human_attribute_name(:fecha_creacion)
+    %th= Seguimiento.human_attribute_name(:textoseguimiento)
+  %tbody
+    - for seguimiento in @solicitud.seguimientos do
+      %tr
+        %td= seguimiento.actividad_id
+        %td= l(seguimiento.actividad.fecha_asignacion)
+        %td= seguimiento.actividad.usuario.nombre
+        %td= l(seguimiento.fecha_creacion)
+        %td= seguimiento.textoseguimiento

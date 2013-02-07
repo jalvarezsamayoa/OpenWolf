@@ -1,0 +1,15 @@
+.row
+  #logo.span6.offset3.center
+    = link_to image_tag('folderlogo.png'), portal_index_url
+    %h2 Plataforma Virtual para la Transparencia
+.row
+  #main-search.span6.offset3.center
+    = simple_form_for @busqueda, { :url => buscar_portal_index_path, |
+    :method => :get } do |f|
+  
+      = f.input :q, :label => "Palabras clave", :placeholder => 'Buscar Documentos, Solicitudes de Información, etc.', :title=>'Buscar Documentos, Solicitudes de Información, etc.', :input_html => {:class => "span6"}
+        
+      %br
+      = f.submit "Buscar Solicitudes", :class => "btn btn-large"
+      %br
+      = link_to 'Búsqueda Avanzada', busqueda_portal_index_path, :class => "filtro", :title => "Opciones avanzadas de búsqueda."

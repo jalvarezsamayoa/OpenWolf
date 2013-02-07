@@ -1,0 +1,12 @@
+.row
+  .span12
+    = render :partial => "find_box"
+.row
+  .span12
+    #found-results
+      %strong Resultados para busqueda:
+      %strong= params[:q]
+.row
+  .span12
+    #results.rounded-shadow-box.glow-border
+      = render :partial => "solicitudes_encontradas"

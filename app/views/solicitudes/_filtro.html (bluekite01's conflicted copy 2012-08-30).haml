@@ -1,0 +1,36 @@
+- if @desde.nil? or @hasta.nil?
+  - @desde =  (Date.today - Date.today.yday + 1)
+  - @hasta = Date.today
+- if usuario_actual.nil?
+  - @url = url
+  - @method = usuario_actual.nil? ? :get : :post
+  
+
+#filtros.rounded-shadow-box.glow-border
+  %h2.center Filtrar Solicitudes
+  = simple_form_for @busqueda, :url => @url, :method => @method  do |f|
+    - if usuario_actual.nil?
+      = f.input :institucion_id, :collection => Institucion.asignables.activas, :input_html => {:class => "span5"}, :prompt => "Todas las instituciones"
+    - else
+      = f.input :institucion_id, :collection => ([[usuario_actual.institucion.nombre,usuario_actual.institucion_id], |
+        ['Todas','ALL']]), :class => "span5"
+        
+    %fieldset
+      %legend Rango Fechas
+      = f.input :fecha_desde, :as => :date, :input_html => {:class => "span2"}
+      = f.input :fecha_hasta, :as => :date, :input_html => {:class => "span2"}
+
+    %fieldset
+      %legend Otros Filtros
+      
+      = f.input :q, :label => "Palabras Clave", :input_html => {:class => "span5"}
+
+      = f.input :solicitud_via, :collection => Via.all, :prompt => "Todas las vias", :input_html => {:class => "span5"}
+
+      = f.input :solicitud_estado, :collection => Estado.all, :prompt => "Todos los estados", :input_html => {:class => "span5"}
+
+      = f.input :solicitud_tiempo, :collection => Solicitud::TIEMPOS, :prompt => "Todos los tiempos", :input_html => {:class => "span5"}
+    .center
+      = f.submit 'Filtrar Solicitudes', class: "btn btn-large btn-primary"
+    = f.hidden_field :filtrar
+

@@ -9,7 +9,7 @@ class AgregarCamposToUsuarios < ActiveRecord::Migration
 
     remove_column :usuarios, :departamento_id
     remove_column :usuarios, :areadocumento_id
-    remove_column :essupervisorarea
+    remove_column :usuarios, :essupervisorarea
             
   end
 

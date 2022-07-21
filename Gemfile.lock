@@ -104,7 +104,6 @@ GEM
       tzinfo (~> 0.3.23)
     activerecord-import (0.2.9)
       activerecord (~> 3.0)
-      activerecord (~> 3.0)
     activeresource (3.0.9)
       activemodel (= 3.0.9)
       activesupport (= 3.0.9)
@@ -292,7 +291,7 @@ GEM
     treetop (1.4.10)
       polyglot
       polyglot (>= 0.3.1)
-    tzinfo (0.3.32)
+    tzinfo (0.3.61)
     validation_reflection (1.0.0)
     warden (1.1.1)
       rack (>= 1.0)

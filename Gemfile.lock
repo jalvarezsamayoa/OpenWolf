@@ -104,7 +104,6 @@ GEM
       tzinfo (~> 0.3.23)
     activerecord-import (0.2.9)
       activerecord (~> 3.0)
-      activerecord (~> 3.0)
     activeresource (3.0.9)
       activemodel (= 3.0.9)
       activesupport (= 3.0.9)
@@ -207,7 +206,7 @@ GEM
       activesupport (>= 2.3.2)
       cocaine (>= 0.0.2)
       mime-types
-    pdfkit (0.4.6)
+    pdfkit (0.8.7)
     pg (0.13.2)
     polyglot (0.3.3)
     pr_geohash (1.0.0)
@@ -342,7 +341,7 @@ DEPENDENCIES
   newrelic_rpm
   nokogiri
   paperclip
-  pdfkit (= 0.4.6)
+  pdfkit (= 0.8.7)
   pg
   progress_bar
   pry

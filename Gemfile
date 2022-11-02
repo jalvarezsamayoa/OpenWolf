@@ -29,7 +29,7 @@ gem 'sunspot_rails' #indexamiento y busqueda (fulltext) via solr
 
 gem 'paperclip' # modulo para hacer upload a archivos
 gem 'tiny_mce' # editor html
-gem 'pdfkit', "0.4.6" # generacion de pdf's
+gem 'pdfkit', "0.8.7.2" # generacion de pdf's
 gem 'will_paginate' # pagineo de resultados
 gem 'jquery-rails', '>= 0.2.6' #jquery para rails, remplaza prototype y scriptaculous
 
